@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jadwal Belajar LMNas (Senin–Sabtu)</title>
+<style>
+:root{--bg:#f5f7f4;--card:#fff;--ink:#1d2b2a;--mute:#5d6e6c;--line:#d5dedb;--acc:#0b6e66;--acc2:#e8f3f1;--warn:#b4531a}
+@media (prefers-color-scheme:dark){:root{--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
+main{max-width:840px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:1.7rem;margin:.2em 0}
+.sub{color:var(--mute);margin:0 0 14px}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+nav button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 12px;border-radius:6px;cursor:pointer}
+nav button[aria-selected="true"]{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+nav button.today{border:2px solid var(--acc)}
+.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;margin:14px 0}
+h2{margin:.1em 0 .3em;font-size:1.3rem}
+h3{margin:1em 0 .3em;font-size:1.05rem;color:var(--acc)}
+ul{padding-left:20px;margin:.3em 0}li{margin:.35em 0}
+.why{background:var(--acc2);border-left:4px solid var(--acc);padding:8px 12px;border-radius:4px;margin:.5em 0}
+.task{display:flex;gap:10px;align-items:flex-start;margin:.5em 0}
+.task input{margin-top:.4em;width:18px;height:18px}
+.task.done .tb{color:var(--mute)}
+.tb a{color:var(--acc)}
+code{font-family:Consolas,monospace;font-size:.9em;background:var(--acc2);padding:1px 5px;border-radius:3px}
+.note{color:var(--warn)}
+.fr{display:grid;grid-template-columns:minmax(120px,1.3fr) 2fr;gap:4px 10px;align-items:center;margin:.7em 0;font-size:.95rem}
+.fr .b{height:14px;background:var(--line);border-radius:4px;overflow:hidden}
+.fr .b i{display:block;height:100%;background:var(--acc)}
+.fr small{grid-column:1/-1;color:var(--mute)}
+.fr.hot strong{color:var(--warn)}
+details summary{cursor:pointer;font-weight:bold}
+footer{color:var(--mute);font-size:.85rem;margin-top:24px}
+button.reset{font:inherit;background:none;border:1px solid var(--line);color:var(--mute);padding:6px 10px;border-radius:6px;cursor:pointer}
+</style>
+</head>
+<body>
+<main>
+<h1>Jadwal Belajar LMNas</h1>
+<p class="sub">Disusun dari soal LMNas 33, 34, dan 35 (UGM, SMA, Penyisihan). Satu topik per hari, Senin sampai Sabtu.</p>
+<div class="bar" aria-label="Kemajuan belajar"><i id="bar"></i></div>
+<p class="sub" id="pct"></p>
+
+<details class="card" open>
+<summary>Peta soal: topik apa yang paling sering keluar?</summary>
+<p class="sub">Dihitung dari 90 soal (75 pilihan ganda + 15 isian singkat). Angka kira-kira, satu soal bisa masuk dua topik. Topik Sigma (Σ dan σ) ditandai oranye.</p>
+<div id="freq"></div>
+</details>
+
+<nav id="tabs" role="tablist"></nav>
+<div id="view"></div>
+<p><button class="reset" id="reset">Hapus semua progres</button></p>
+<footer>Arti label: PG4 = pilihan ganda nomor 4, IS2 = isian singkat nomor 2. LMNas 33 = file Soal_LMNas33_UGM_SMA_2022, LMNas 34 = file ..._2023, LMNas 35 = file ..._2024. Klik teks YouTube untuk langsung mencari. Tanda centang tersimpan di browser perangkat ini saja.</footer>
+</main>
+<script>
+// ===== EDIT DI SINI: data frekuensi =====
+var FREQ=[
+{n:"Sisa bagi, digit terakhir, modulo",c:15,h:0,day:"Senin",l:"33-PG10,13,14,15 · 33-IS1,4 · 34-PG6,9,17,18,25 · 35-PG14,18 · 35-IS2,5"},
+{n:"Persamaan bulat, keterbagian, FPB/KPK, prima",c:11,h:0,day:"Selasa",l:"33-PG2,6,18,22 · 34-PG2,10,22 · 35-PG2,6,10,22"},
+{n:"Penjumlahan Σ, deret, jumlah tak hingga",c:13,h:1,day:"Rabu",l:"33-PG17,25 · 33-IS2 · 34-PG6,9,25 · 35-PG9,17,21,25 · 35-IS4 · 33-IS1 · 34-IS5"},
+{n:"Fungsi aritmetika σ, φ, μ",c:3,h:1,day:"Rabu",l:"33-IS1 (φ) · 34-PG14 (σ) · 34-IS5 (μ dan σ)"},
+{n:"Aljabar: polinomial, barisan, persamaan fungsi, min/max",c:23,h:0,day:"Kamis",l:"33-PG1,5,9,13,14 · 34-PG1,5,13,19,21 · 34-IS1,2 · 35-PG1,5,13 · 33-PG8"},
+{n:"Geometri",c:21,h:0,day:"Jumat",l:"Selalu di PG4, 8, 12, 16, 24 pada ketiga tahun, ditambah beberapa isian singkat"},
+{n:"Kombinatorika dan peluang",c:22,h:0,day:"Sabtu",l:"Selalu di PG3, 7, 11, 15, 23 pada ketiga tahun, ditambah PG19 dan isian singkat"}
+];
+// ===== EDIT DI SINI: jadwal harian =====
+var DAYS=[
+{d:1,name:"Senin",title:"Teori Bilangan I: sisa bagi dan dua digit terakhir",
+why:"Topik paling sering keluar (sekitar 15 soal dari 90). Hampir tiap tahun ada soal sisa bagi atau dua digit terakhir dari bilangan yang sangat besar.",
+how:"Kata kunci di soal: sisa bagi, dua digit terakhir, habis dibagi, pangkat sangat besar seperti 2022^2022.",
+learn:["a ≡ b (mod n) artinya a dan b memiliki sisa yang sama jika dibagi n. Boleh dijumlah, dikurang, dikali, dan dipangkatkan.","Dua digit terakhir = sisa bagi 100. Cari sisa mod 4 dan mod 25, lalu gabungkan (Teorema Sisa Cina).","Fermat: jika p prima dan p tidak membagi a, maka a^(p−1) ≡ 1 (mod p). Euler: a^φ(n) ≡ 1 (mod n) jika FPB(a,n)=1.","Pangkat besar: cari siklusnya. Contoh 7^4 = 2401 ≡ 1 (mod 100), jadi eksponen cukup dilihat mod 4.","Wilson: (p−1)! ≡ −1 (mod p). Untuk mod p, bilangan 1 sampai p−1 bisa dipasangkan k dengan p−k.","Barisan seperti Fibonacci selalu berulang (periodik) jika dimodulo."],
+tasks:[
+{b:"Modulo dan dua digit terakhir (pangkat besar)",s:"LMNas 33: PG10, PG14, PG15 · LMNas 34: PG9",y:["sisa bagi pangkat besar OSN matematika","last two digits modular arithmetic olympiad"]},
+{b:"Teorema Fermat, Euler, dan Wilson",s:"LMNas 34: PG6, PG17, PG18 · LMNas 33: IS4",y:["teorema Fermat Euler olimpiade matematika","Wilson theorem olympiad number theory"]},
+{b:"Sisa bagi dengan modulus komposit (Teorema Sisa Cina) dan basis",s:"LMNas 35: PG14, PG18, IS2, IS5 · LMNas 33: PG13, IS1",y:["Chinese remainder theorem olimpiade","bilangan basis digit terakhir olimpiade"]}
+]},
+{d:2,name:"Selasa",title:"Teori Bilangan II: persamaan bulat, keterbagian, FPB/KPK",
+why:"Topik kedua terbanyak (sekitar 11 soal). Biasanya soal meminta nilai terkecil, banyak pasangan, atau semua solusi bilangan bulat atau prima.",
+how:"Kata kunci: bilangan prima, FPB, KPK, banyak pasangan (a,b), n+2 membagi ..., persamaan dengan bilangan asli.",
+learn:["FPB(a,b) × KPK(a,b) = a × b. Contoh 35-PG2: karena FPB × KPK = n × 2024, hitung n = 99176 ÷ 2024.","Trik faktorisasi: xy + ax + by = (x+a)(y+b) − ab, lalu cari pasangan faktor.","Uji modulo: kuadrat sempurna bersisa 0 atau 1 jika dibagi 3 atau 4, dan 0, 1, atau 4 jika dibagi 8. Dipakai untuk membuktikan tidak ada solusi.","Keterbagian: n+k membagi f(n) berarti n+k membagi f(−k). Contoh 35-PG10: n+2 membagi (−2)^4 + 2024.","Banyak faktor positif n = p1^e1 ... pk^ek adalah (e1+1)(e2+1)...(ek+1).","Soal prima: coba p = 2 dan p = 3 dulu, lalu pakai mod 3 untuk sisanya."],
+tasks:[
+{b:"FPB dan KPK",s:"LMNas 35: PG2 · LMNas 33: PG22",y:["FPB KPK olimpiade matematika SMA","gcd lcm olympiad problems"]},
+{b:"Persamaan Diophantine dan trik faktorisasi",s:"LMNas 35: PG6 · LMNas 34: PG2 · LMNas 33: PG6",y:["Simon favorite factoring trick","persamaan diophantine olimpiade matematika"]},
+{b:"Keterbagian dan bilangan prima",s:"LMNas 35: PG10, PG22 · LMNas 33: PG2, PG18 · LMNas 34: PG10, PG22",y:["keterbagian bilangan bulat olimpiade","bilangan prima olimpiade matematika"]}
+]},
+{d:3,name:"Rabu",title:"Sigma: penjumlahan Σ dan fungsi σ, φ, μ",
+why:"Sigma muncul sering dalam dua bentuk. Σ (besar) adalah tanda jumlah dan ada di sekitar 13 soal. σ (kecil) adalah jumlah faktor positif dan dipakai di soal teori bilangan tingkat sulit. Keduanya dilatih hari ini.",
+how:"Σ: soal menjumlahkan banyak suku, deret tak hingga, atau jumlah atas semua faktor d | n. σ(n): soal menyebut jumlah semua faktor positif dari n.",
+learn:["Rumus dasar Σ: jumlah 1..n = n(n+1)/2. Jumlah kuadrat = n(n+1)(2n+1)/6. Jumlah kubus = (n(n+1)/2)².","Deret geometri tak hingga: 1 + r + r² + ... = 1/(1−r) jika |r|<1. Jumlah k·r^k dari k=1 = r/(1−r)².","Teleskop: 1/(k(k+1)) = 1/k − 1/(k+1). Suku di tengah saling habis.","Topi hoki: jumlah C(k,r) untuk k=r sampai n sama dengan C(n+1, r+1).","Jumlah pangkat ganjil mod n: pasangkan k dengan n−k. Karena a^m + b^m habis dibagi a+b untuk m ganjil, tiap pasangan habis dibagi n (dipakai di 34-PG6).","σ(n) = jumlah semua faktor positif n. σ(p^k) = 1 + p + ... + p^k = (p^(k+1) − 1)/(p − 1). Jika FPB(m,n)=1 maka σ(mn) = σ(m)σ(n).","Soal seperti 34-PG14: tulis a = 2^k × m dengan m ganjil, maka σ(2a)/σ(a) = (2^(k+2) − 1)/(2^(k+1) − 1). Bandingkan dengan 405000/189000 = 15/7.","φ(n) = n × (1 − 1/p) untuk setiap faktor prima p. Jumlah φ(d) untuk semua faktor d dari n sama dengan n (dipakai di 33-IS1).","Jika f multiplikatif, jumlah f(d) atas semua faktor d dari n = hasil kali (f(1) + f(p) + ... + f(p^e)) untuk tiap p^e yang membagi n.","Awas definisi di soal. Di 34-IS5, μ dihitung dengan (−1)^k untuk prima yang boleh sama, jadi μ(p²) = +1. Ini berbeda dari fungsi Möbius biasa yang bernilai 0. Selalu ikuti definisi soal.","Rumus Euler: jumlah 1/k² = π²/6 dan jumlah 1/k⁴ = π⁴/90. Untuk 35-PG25: jumlah atas pasangan relatif prima (m,n) dari 1/(mn)² sama dengan (π²/6)² dibagi (π⁴/90)."],
+tasks:[
+{b:"Rumus Σ dasar, deret geometri, dan teleskop",s:"LMNas 35: PG9, PG17 · LMNas 33: PG25",y:["deret teleskopik olimpiade matematika","rumus sigma jumlah n bilangan pertama kuadrat kubus"]},
+{b:"Fungsi σ(n): jumlah semua faktor positif",s:"LMNas 34: PG14, IS5",y:["sigma function sum of divisors number theory","fungsi jumlah faktor sigma n teori bilangan"]},
+{b:"Fungsi φ Euler dan fungsi μ",s:"LMNas 33: IS1 · LMNas 34: IS5",y:["Euler totient function olympiad","Mobius function number theory explained"]},
+{b:"Jumlah tak hingga dan rumus Euler (ζ)",s:"LMNas 35: PG21, PG25 · LMNas 33: PG17",y:["Basel problem pi squared over 6","fungsi pembangkit olimpiade matematika"]},
+{b:"Σ dengan binomial dan trigonometri",s:"LMNas 34: PG6, PG9 · LMNas 33: IS2 · LMNas 35: IS4",y:["hockey stick identity binomial","sum of csc squared trigonometric identity"]}
+]},
+{d:4,name:"Kamis",title:"Aljabar: polinomial, barisan, persamaan fungsi, min/max",
+why:"Ini topik terbesar kedua secara jumlah (sekitar 23 soal). Tiap tahun ada akar polinomial, rekurensi, persamaan fungsi, dan soal nilai minimum.",
+how:"Kata kunci: akar polinomial, barisan dengan a_n = ..., f(x+y) = ..., nilai minimum atau maksimum, bilangan real positif.",
+learn:["Vieta: untuk x² + px + q = 0, jumlah akar = −p dan hasil kali akar = q.","Polinomial palindrom (koefisien simetris): bagi dengan pangkat tengah, lalu misalkan t = x + 1/x (dipakai di 33-PG13).","Jika x² = −x + 1, turunkan pangkat tinggi berulang kali (dipakai di 33-PG1).","Rekurensi: hitung 5 suku pertama, tebak pola, atau bentuk teleskop. P(P(x)) − x habis dibagi P(x) − x (35-PG1).","Persamaan fungsi: coba x = 0, y = 0, x = y, dan cari simetri (34-PG1, 34-IS1).","AM-GM: (a+b)/2 ≥ √(ab), sama jika a = b. Pecah suku agar nilainya sama saat sama-dengan (35-PG13, 33-PG5).","Cauchy-Schwarz: (a²+b²)(c²+d²) ≥ (ac+bd)². Cocok untuk soal minimum yang berbentuk jumlah kuadrat."],
+tasks:[
+{b:"Polinomial dan teorema Vieta",s:"LMNas 33: PG1, PG13 · LMNas 35: PG1 · LMNas 34: PG5",y:["teorema Vieta olimpiade matematika","palindromic polynomial olympiad"]},
+{b:"Barisan dan rekurensi",s:"LMNas 33: PG14 · LMNas 35: PG5, PG17 · LMNas 34: PG17",y:["barisan rekurensi olimpiade matematika","recurrence relation olympiad"]},
+{b:"Persamaan fungsi",s:"LMNas 34: PG1, IS1",y:["persamaan fungsi olimpiade matematika","functional equation olympiad for beginners"]},
+{b:"Pertidaksamaan AM-GM dan Cauchy-Schwarz",s:"LMNas 33: PG5, PG9 · LMNas 35: PG13 · LMNas 34: PG13, PG21",y:["AM-GM inequality olympiad","pertidaksamaan olimpiade matematika"]}
+]},
+{d:5,name:"Jumat",title:"Geometri: segitiga, lingkaran, trigonometri, poligon",
+why:"Pada ketiga tahun, geometri selalu ada di nomor PG4, PG8, PG12, PG16, dan PG24. Jadi minimal 5 soal pasti keluar.",
+how:"Kata kunci: titik berat, lingkaran luar atau dalam, garis singgung, segi-n beraturan, kubus, luas, perbandingan panjang.",
+learn:["Titik berat membagi median dengan perbandingan 2:1. Jika buntu, pakai koordinat.","Teorema garis bagi: BD/DC = AB/AC.","Kuasa titik: EA × EB = EC × ED.","Aturan sinus: a/sin A = 2R. Luas = ½ ab sin C.","Heron: segitiga 13-14-15 luasnya 84, jari-jari dalam r = luas / s.","Segi-n beraturan dengan jari-jari R: luas = ½ n R² sin(2π/n).","Kubus: beri koordinat 0 atau 1, lalu pakai hasil kali titik (dot product) untuk sudut."],
+tasks:[
+{b:"Segitiga: titik berat, garis bagi, luas",s:"LMNas 33: PG4, PG12, PG16, PG24 · LMNas 34: PG8",y:["titik berat segitiga geometri olimpiade","angle bisector theorem olympiad"]},
+{b:"Lingkaran: kuasa titik, garis singgung, lingkaran dalam dan luar",s:"LMNas 35: PG8, PG16 · LMNas 34: PG12",y:["power of a point olympiad","tangent line incircle geometry olympiad"]},
+{b:"Poligon beraturan dan trigonometri",s:"LMNas 35: PG4, IS4 · LMNas 34: PG4 · LMNas 33: IS2",y:["regular polygon area olympiad","identitas trigonometri olimpiade"]},
+{b:"Geometri ruang (kubus), heksagon, dan trik pencerminan",s:"LMNas 35: PG12 · LMNas 34: PG24 · LMNas 33: PG8",y:["geometri kubus koordinat olimpiade","reflection trick shortest path olympiad"]}
+]},
+{d:6,name:"Sabtu",title:"Kombinatorika, peluang, dan try out mini",
+why:"Pada ketiga tahun, soal hitung dan peluang selalu ada di PG3, PG7, PG11, PG15, dan PG23. Hari ini ditutup dengan try out agar semua minggu ini terkunci.",
+how:"Kata kunci: banyak cara, peluang, permutasi, kelompok identik atau berbeda, pewarnaan, permainan, langkah acak.",
+learn:["Permutasi dengan huruf berulang: n! / (a! b! ...). Kombinasi C(n,k) = n! / (k!(n−k)!).","Peluang = kejadian yang diinginkan ÷ semua kejadian. Untuk langkah acak, gambar pohon atau tabel keadaan.","Hitung komplemen: hitung kasus yang tidak diinginkan, lalu kurangkan.","Pewarnaan lingkaran n bagian dengan k warna (tetangga beda): a_n = (k−1)^n + (−1)^n (k−1).","Sarang merpati: jika n+1 benda masuk n kotak, ada kotak berisi minimal 2 benda.","Membagi bola berbeda ke kotak identik tanpa ada yang kosong memakai bilangan Stirling jenis kedua.","Teorema Lucas: C(n,k) mod p dihitung digit demi digit dalam basis p (34-PG18)."],
+tasks:[
+{b:"Peluang",s:"LMNas 33: PG3, PG23 · LMNas 34: PG3, PG11",y:["peluang olimpiade matematika","random walk probability olympiad"]},
+{b:"Permutasi, kombinasi, dan pewarnaan",s:"LMNas 35: PG3, PG15, PG23 · LMNas 33: PG19 · LMNas 34: PG15",y:["permutasi kombinasi olimpiade matematika","circular coloring recurrence olympiad"]},
+{b:"Sarang merpati dan inklusi-eksklusi",s:"LMNas 34: PG10 · LMNas 35: PG11 · LMNas 33: PG11",y:["pigeonhole principle olympiad","inklusi eksklusi olimpiade matematika"]},
+{b:"TRY OUT mini",s:"10 soal acak dari ketiga file, 90 menit, tanpa catatan",y:["tips mengerjakan soal olimpiade matematika"]}
+]}
+];
+// ===== akhir data =====
+
+var KEY="lmnas-progress-v1",state={};
+try{state=JSON.parse(localStorage.getItem(KEY)||"{}");}catch(e){state={};}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+var jsDay=new Date().getDay(),todayIdx=jsDay===0?-1:jsDay-1,current=todayIdx<0?0:todayIdx;
+
+(function(){var h="";FREQ.forEach(function(f){h+='<div class="fr'+(f.h?' hot':'')+'"><strong>'+f.n+' ('+f.c+')</strong><div class="b"><i style="width:'+Math.round(f.c/23*100)+'%"></i></div><small>Dipelajari hari '+f.day+'. Contoh: '+f.l+'</small></div>';});document.getElementById("freq").innerHTML=h;})();
+
+function doneCount(i){var n=0;DAYS[i].tasks.forEach(function(t,j){if(state[DAYS[i].d+"-"+j])n++;});return n;}
+function render(){
+  var tabs=document.getElementById("tabs");tabs.innerHTML="";
+  DAYS.forEach(function(day,i){
+    var b=document.createElement("button");
+    b.textContent=day.name+" "+doneCount(i)+"/"+day.tasks.length;
+    b.setAttribute("role","tab");b.setAttribute("aria-selected",i===current);
+    if(i===todayIdx)b.className="today";
+    b.onclick=function(){current=i;render();};tabs.appendChild(b);
+  });
+  var day=DAYS[current],h="";
+  if(todayIdx<0)h+='<p class="note">Hari ini Minggu, waktunya istirahat. Yang tampil adalah jadwal Senin sebagai pratinjau.</p>';
+  h+='<div class="card"><h2>'+day.name+(current===todayIdx?" (hari ini)":"")+": "+day.title+'</h2>';
+  h+='<p class="why"><strong>Kenapa penting:</strong> '+day.why+'</p>';
+  h+='<p><strong>Cara mengenali soalnya:</strong> '+day.how+'</p>';
+  h+='<h3>Yang dipelajari</h3><ul>';day.learn.forEach(function(x){h+="<li>"+x+"</li>";});
+  h+='</ul><h3>Tugas hari ini</h3>';
+  day.tasks.forEach(function(t,j){var id=day.d+"-"+j,on=!!state[id];
+    var yt=t.y.map(function(q){return '<a href="https://www.youtube.com/results?search_query='+encodeURIComponent(q)+'" target="_blank" rel="noopener">'+q+'</a>';}).join(" &middot; ");
+    h+='<div class="task'+(on?' done':'')+'"><input type="checkbox" data-id="'+id+'"'+(on?" checked":"")+' aria-label="Selesai"><div class="tb"><strong>Bab: '+t.b+'</strong><br>Soal: '+t.s+'<br>Cari di YouTube: '+yt+'</div></div>';});
+  h+='</div>';
+  document.getElementById("view").innerHTML=h;
+  document.querySelectorAll("#view input").forEach(function(c){
+    c.onchange=function(){if(c.checked)state[c.dataset.id]=1;else delete state[c.dataset.id];save();render();};});
+  var total=0,done=0;DAYS.forEach(function(d,i){total+=d.tasks.length;done+=doneCount(i);});
+  var p=Math.round(100*done/total);
+  document.getElementById("bar").style.width=p+"%";
+  document.getElementById("pct").textContent=done+" dari "+total+" tugas selesai ("+p+"%)";
+}
+document.getElementById("reset").onclick=function(){if(confirm("Hapus semua progres?")){state={};save();render();}};
+render();
+</script>
+</body>
+</html>
