@@ -2,210 +2,270 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Jadwal Belajar LMNas (Senin–Sabtu)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Roadmap Teknik Mesin: Matematika, Fisika, MEXT</title>
 <style>
-:root{--bg:#f5f7f4;--card:#fff;--ink:#1d2b2a;--mute:#5d6e6c;--line:#d5dedb;--acc:#0b6e66;--acc2:#e8f3f1;--warn:#b4531a}
-@media (prefers-color-scheme:dark){:root{--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b}}
+:root{--bg:#f5f7f4;--card:#fff;--ink:#1d2b2a;--mute:#5d6e6c;--line:#d5dedb;--acc:#0b6e66;--acc2:#e8f3f1;--warn:#b4531a;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
-main{max-width:840px;margin:0 auto;padding:20px 16px 60px}
-h1{font-size:1.7rem;margin:.2em 0}
-.sub{color:var(--mute);margin:0 0 14px}
-nav{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
-nav button,.flt button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 12px;border-radius:6px;cursor:pointer}
-nav button[aria-selected="true"],.flt button[aria-pressed="true"]{background:var(--acc);color:var(--bg);border-color:var(--acc)}
-nav button.today{border:2px solid var(--acc)}
-.flt{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:8px 0}
-.flt button{padding:5px 10px;font-size:.9rem}
-.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+
+/* --- WALLPAPER & DECORATIVE ANIMATIONS --- */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-image: url('https://image.dify.ai/files/2026-10-22/1761121626331-6d1e38b0-9a8a-4374-8a58-3738337c6c1d.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(17, 26, 25, 0.6); /* Dimming overlay so text remains readable */
+  backdrop-filter: blur(3px);
+  z-index: -1;
+}
+
+.deco-cat {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  border: 2px solid rgba(255,255,255,0.2);
+  opacity: 0.85;
+  animation: float 8s ease-in-out infinite;
+}
+
+.cat1 {
+  top: 10%; left: 4%;
+  width: 140px;
+  animation-delay: 0s;
+}
+.cat2 {
+  bottom: 15%; right: 5%;
+  width: 180px;
+  animation-delay: 2s;
+}
+.cat3 {
+  top: 45%; left: 8%;
+  width: 130px;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-25px) rotate(3deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@media (max-width: 900px) {
+  .deco-cat { display: none; } /* Hide on mobile so it doesn't block UI */
+}
+/* ------------------------------------------ */
+
+body{margin:0;background:transparent;color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
+main{max-width:880px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1;background:rgba(245,247,244,0.95);backdrop-filter:blur(10px);border-radius:16px;margin-top:30px;box-shadow:0 20px 40px rgba(0,0,0,0.2)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) main{background:rgba(17,26,25,0.95)}}
+:root[data-theme="dark"] main{background:rgba(17,26,25,0.95)}
+
+h1{font-size:1.7rem;margin:.2em 0}h2{font-size:1.2rem;margin:0 0 6px}
+.sub{color:var(--mute);margin:.2em 0 10px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;margin:14px 0}
-h2{margin:.1em 0 .3em;font-size:1.3rem}
-h3{margin:1em 0 .3em;font-size:1.05rem;color:var(--acc)}
-ul{padding-left:20px;margin:.3em 0}li{margin:.35em 0}
-.why{background:var(--acc2);border-left:4px solid var(--acc);padding:8px 12px;border-radius:4px;margin:.5em 0}
-.task{display:flex;gap:10px;align-items:flex-start;margin:.7em 0}
-.task input{margin-top:.4em;width:18px;height:18px}
-.task.done .tb>strong{color:var(--mute);text-decoration:line-through}
-.tb a{color:var(--acc)}
-.chip{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:2px 9px;margin:3px 4px 3px 0;border-radius:14px;cursor:pointer}
-.chip.ok{background:var(--acc);color:var(--bg);border-color:var(--acc)}
-.chip.dim{opacity:.3}
-.tool{background:var(--acc2);border-radius:6px;padding:8px 10px;margin:.5em 0}
-.tool button{font:inherit;border:1px solid var(--acc);background:none;color:var(--acc);padding:4px 10px;border-radius:6px;cursor:pointer;margin-right:6px}
-#tmv{font-family:Consolas,monospace;font-size:1.2rem}
-.note{color:var(--warn)}
-.fr{display:grid;grid-template-columns:minmax(120px,1.3fr) 2fr;gap:4px 10px;align-items:center;margin:.7em 0;font-size:.95rem;cursor:pointer}
-.fr:hover strong{text-decoration:underline}
-.fr .b{height:14px;background:var(--line);border-radius:4px;overflow:hidden}
-.fr .b i{display:block;height:100%;background:var(--acc)}
-.fr small{grid-column:1/-1;color:var(--mute)}
-.fr.hot strong{color:var(--warn)}
-details summary{cursor:pointer;font-weight:bold}
+.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
+.pr{display:grid;grid-template-columns:minmax(110px,1.2fr) 2fr 44px;gap:8px;align-items:center;margin:.5em 0;font-size:.95rem}
+.pr .b{height:14px;background:var(--line);border-radius:4px;position:relative;overflow:hidden}
+.pr .b i{position:absolute;left:0;top:0;bottom:0;background:var(--acc)}
+.pr .b u{position:absolute;left:0;top:0;bottom:0;border-right:2px solid var(--warn)}
+.pr.low .b i{background:var(--mute)}
+.cut{color:var(--warn);font-size:.9rem;margin:.4em 0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+input,select,textarea{font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);max-width:100%}
+input[type=number]{width:80px}textarea{width:100%;min-height:60px}
+button{font:inherit;background:none;border:1px solid var(--line);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer}
+button.p{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:8px 0}
+.kpi div{background:var(--acc2);border-radius:6px;padding:8px 10px;font-size:.9rem}.kpi b{display:block;font-size:1.3rem}
+.hm{overflow-x:auto;padding-bottom:6px}
+.hg{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,13px);grid-auto-columns:13px;gap:3px;width:max-content}
+.hg i{border-radius:3px;background:var(--line);opacity:.35}
+.hg i.f{opacity:.15}.hg i.z{opacity:.15}
+.hg i.g{background:none;border:1px dashed var(--warn);opacity:1}
+.hg i.l1,.hg i.l2,.hg i.l3,.hg i.l4{background:var(--acc)}
+.hg i.l1{opacity:.3}.hg i.l2{opacity:.55}.hg i.l3{opacity:.8}.hg i.l4{opacity:1}
+.hg i.t{outline:2px solid var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;align-items:start}
+.bars{display:flex;gap:4px;align-items:flex-end;height:110px;position:relative;border-bottom:1px solid var(--line);margin-top:8px}
+.bars div{flex:1;background:var(--acc);border-radius:3px 3px 0 0;min-height:1px;position:relative}
+.bars .tl{position:absolute;left:0;right:0;border-top:2px dashed var(--warn);flex:none;background:none;min-height:0}
+.lab{display:flex;gap:4px;font-size:.65rem;color:var(--mute)}.lab span{flex:1;text-align:center}
+.pie{width:140px;height:140px;border-radius:50%;flex:none}
+.lg{font-size:.85rem}.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
+.nt{border-top:1px solid var(--line);padding:8px 0;display:flex;gap:10px;align-items:flex-start}
+.nt.ok .tx{color:var(--mute);text-decoration:line-through}.nt small{color:var(--mute)}
+details.mod{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:12px 0}
+details.mod>summary{cursor:pointer;padding:12px 16px;font-weight:bold;list-style:none}
+details.mod>summary small{display:block;font-weight:normal;color:var(--mute)}
+details.mod .in{padding:0 16px 12px}
+.wk{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-top:1px solid var(--line)}
+.wk input{margin-top:.4em;width:18px;height:18px;flex:none}
+.wk.now{background:var(--acc2);border-left:4px solid var(--acc);border-radius:4px}
+.wk.done .t{color:var(--mute);text-decoration:line-through}
+.wk .d{color:var(--mute);font-size:.85rem}.wk .r{font-size:.9rem;color:var(--acc)}
+ul{padding-left:20px;margin:.3em 0}
 footer{color:var(--mute);font-size:.85rem;margin-top:24px}
-button.reset{font:inherit;background:none;border:1px solid var(--line);color:var(--mute);padding:6px 10px;border-radius:6px;cursor:pointer}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 </style>
 </head>
 <body>
+
+<!-- Decorative Cat Images -->
+<img src="https://image.dify.ai/files/2026-10-22/1761121627220-294f39f5-0e79-4b42-9e0b-0f5401c79c7a.jpg" class="deco-cat cat1" alt="Decorative Cat 1">
+<img src="https://image.dify.ai/files/2026-10-22/1761121627974-2c8e9c5e-b9c8-4f1a-9216-a3e1a7e9d6c3.jpg" class="deco-cat cat2" alt="Decorative Cat 2">
+<img src="https://image.dify.ai/files/2026-10-22/1761121628649-1a5b4c3e-c5b8-4f1a-9216-a3e1a7e9d6c3.jpg" class="deco-cat cat3" alt="Decorative Cat 3">
+
 <main>
-<h1>Jadwal Belajar LMNas</h1>
-<p class="sub">Disusun dari soal LMNas 33 (2022), 34 (2023), dan 35 (2024), UGM, SMA, Penyisihan. Satu topik per hari, Senin sampai Sabtu.</p>
-<div class="bar" aria-label="Kemajuan belajar"><i id="bar"></i></div>
+<h1>Roadmap Teknik Mesin: Matematika, Fisika, MEXT</h1>
+<p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin, dengan fokus ke fundamental. Matematika Lanjut (kalkulus salah satu targetnya) berjalan bersama Fisika, Kimia, serta bahasa Inggris dan Jepang. Soal lomba dari 8 berkas hanya pendamping.</p>
+<div class="bar"><i id="bar" style="width:0"></i></div>
 <p class="sub" id="pct"></p>
-<p class="sub" id="pq"></p>
 
-<details class="card" open>
-<summary>Peta soal: topik apa yang paling sering keluar?</summary>
-<p class="sub">Dihitung dari 90 soal (75 pilihan ganda + 15 isian singkat). Angka kira-kira, satu soal bisa masuk dua topik. Topik Sigma ditandai oranye. Klik satu topik untuk lompat ke hari belajarnya.</p>
-<div id="freq"></div>
-</details>
+<div class="card">
+<h2>Roadmap MEXT IPA-A (Teknik Mesin): Matematika, Fisika, Kimia</h2>
+<p class="sub">Centang target kalau sudah tercapai. Rincian mingguan tersedia untuk T1 sampai T4 (48 minggu, matematika). T5, T6, dan jalur paralel (P, K, B) disusun lebih rinci setelah minggu ke-48 sesuai hasil.</p>
+<div id="pareto"></div>
+<p class="cut">Fakta dari halaman Kedutaan Jepang di Indonesia (program Gakubu): Teknik Mesin termasuk IPA-A. Halaman 2020 menyebut mata uji IPA-A: bahasa Inggris, Matematika (B), Kimia, Fisika, dan bahasa Jepang, jadi matematika hanya salah satu bagian. Halaman 2025 menyatakan pelamar IPA tidak bisa mendaftar kalau salah satu nilai rapor yang disebutkan kurang dari 84, dan pemberitaan 2027 menyebut Matematika, Inggris, dan Fisika untuk IPA-A. Aturan bisa berubah, jadi cek id.emb-japan.go.jp untuk tahun yang dibidik. Pendaftar adalah siswa tingkat akhir atau lulusan baru, berkas sekitar April sampai Mei dan ujian tulis sekitar Juni. Contoh soal resmi ada di studyinjapan.go.jp. SAT tidak dipakai MEXT, jadi di sini hanya jalur cadangan. Fokus fundamental: pahami konsep dan kerjakan soal buku sekolah dulu. Aturan naik minggu: lanjut hanya kalau cek benar 80%. Kalau belum, ulang minggu itu.</p>
+</div>
 
-<div class="flt" id="flt"></div>
-<nav id="tabs" role="tablist"></nav>
-<div id="view"></div>
-<p><button class="reset" id="reset">Hapus semua progres</button></p>
-<footer>Cara baca label: "2022 No. 21" = soal pilihan ganda nomor 21 di file Soal_LMNas33_UGM_SMA_2022. "2023 Isian 5" = isian singkat nomor 5 di file ..._2023. Tahun 2022 = LMNas 33, 2023 = LMNas 34, 2024 = LMNas 35. Klik label soal untuk menandainya selesai. Klik teks YouTube untuk langsung mencari. Tanda centang tersimpan di browser perangkat ini saja. Pintasan: panah kiri dan kanan untuk ganti hari.</footer>
+<div class="card">
+<h2>Catat belajar hari ini</h2>
+<div class="row"><input type="date" id="ld" aria-label="Tanggal"><input type="number" id="lm" min="1" max="600" placeholder="menit" aria-label="Lama belajar (menit)"><select id="lmod" aria-label="Topik"></select><button class="p" id="addL">Simpan sesi</button></div>
+<div class="row"><label>Target <input type="number" id="tD" min="1" max="7"> hari per minggu</label><label>Target <input type="number" id="tM" min="10" max="600"> menit per hari</label><label>Mulai Senin <input type="date" id="start"></label></div>
+<p class="sub" id="wkst"></p>
+<p class="sub"><b>Pola mingguan yang disarankan (5 sampai 6 hari):</b> Senin dan Rabu Matematika (konsep dan 5 sampai 8 soal). Selasa dan Kamis Fisika mulai Juni 2027 (konsep, lalu soal hitungan); sebelum itu pakai untuk bahasa Jepang dan Inggris. Bahasa Jepang sebaiknya juga 20 sampai 30 menit hampir tiap hari. Jumat Kimia atau bahasa Inggris dan Jepang, bergantian. Sabtu ulang soal yang salah dan cek mingguan. Minggu istirahat (tidak dihitung bolong). Kalau sulit tiap hari, cukup capai target hari per minggu.</p>
+</div>
+
+<div class="card">
+<h2>Statistik belajar</h2>
+<div class="kpi" id="kpi"></div>
+<p class="sub" style="margin-bottom:2px">Peta kebiasaan, tiap kolom satu minggu (Senin di atas). Kotak putus-putus oranye = hari bolong.</p>
+<div class="hm"><div class="hg" id="hm"></div></div>
+<div class="two" style="margin-top:14px">
+<div><b>Menit belajar 14 hari terakhir</b><div class="bars" id="bars"></div><div class="lab" id="blab"></div></div>
+<div><b>Pembagian waktu per topik</b><div class="row"><div class="pie" id="pie"></div><div class="lg" id="lg"></div></div></div>
+</div>
+<p class="sub" style="margin-top:12px"><b>Sesi terakhir</b></p><div id="rec"></div>
+</div>
+
+<div class="card">
+<h2>Catatan kesulitan</h2>
+<div class="row"><select id="nmod" aria-label="Topik catatan"></select><input type="date" id="nd" aria-label="Tanggal"></div>
+<textarea id="nt" placeholder="Contoh: L34 No. 14 bingung kenapa σ(2a) dipecah begitu"></textarea>
+<div class="row"><button class="p" id="addN">Simpan catatan</button><label><input type="checkbox" id="onlyOpen"> tampilkan yang belum paham saja</label></div>
+<div id="notes"></div>
+</div>
+
+<div id="mods"></div>
+<p><button id="reset">Hapus semua data</button></p>
+<footer>Label soal: L33, L34, L35 = LMNas 33 (2022), 34 (2023), 35 (2024), UGM SMA Penyisihan; angka = nomor pilihan ganda, "IS" = isian singkat (misal L33 IS2). KSM21 = KSM 2021, K22 dan K23 = KoSSMI 2022 dan 2023, KSR25 = Kompetisi Sains Ruangguru 2025, OMI = berkas OMI 2026 Matriks. Pengelompokan topik adalah perkiraan, satu soal bisa masuk dua bidang. Soal yang dianulir di L34 (No. 20, 25) dan salah (IS4) sebaiknya dilewati. Soal lomba bersifat opsional dan umumnya lebih sulit dari materi kelas 10; utamakan buku sekolah dan contoh ujian MEXT, dan kerjakan soal lomba hanya setelah cek minggu itu lulus. Berkas tidak berisi kunci jawaban. Data tersimpan di browser perangkat ini saja.</footer>
 </main>
 <script>
-// ===== data frekuensi (format tulisan: 33-PG10,13 · 33-IS1 → otomatis jadi "2022 No. 10, 13") =====
-var FREQ=[
-{n:"Sisa bagi, digit terakhir, modulo",c:15,h:0,day:"Senin",l:"33-PG10,13,14,15 · 33-IS1,4 · 34-PG6,9,17,18,25 · 35-PG14,18 · 35-IS2,5"},
-{n:"Persamaan bulat, keterbagian, FPB/KPK, prima",c:11,h:0,day:"Selasa",l:"33-PG2,6,18,22 · 34-PG2,10,22 · 35-PG2,6,10,22"},
-{n:"Penjumlahan Σ, deret, jumlah tak hingga",c:13,h:1,day:"Rabu",l:"33-PG17,25 · 33-IS2 · 34-PG6,9,25 · 35-PG9,17,21,25 · 35-IS4 · 33-IS1 · 34-IS5"},
-{n:"Fungsi aritmetika σ, φ, μ",c:3,h:1,day:"Rabu",l:"33-IS1 (φ) · 34-PG14 (σ) · 34-IS5 (μ dan σ)"},
-{n:"Aljabar: polinomial, barisan, persamaan fungsi, min/max",c:23,h:0,day:"Kamis",l:"33-PG1,5,9,13,14 · 34-PG1,5,13,19,21 · 34-IS1,2 · 35-PG1,5,13 · 33-PG8"},
-{n:"Geometri",c:21,h:0,day:"Jumat",l:"Selalu di nomor 4, 8, 12, 16, 24 pada ketiga tahun, ditambah beberapa isian singkat"},
-{n:"Kombinatorika dan peluang",c:22,h:0,day:"Sabtu",l:"Selalu di nomor 3, 7, 11, 15, 23 pada ketiga tahun, ditambah nomor 19 dan isian singkat"}
+var T=["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A","Fisika","Kimia","Bahasa Jepang","Bahasa Inggris"];
+var R=[
+["T1 Fondasi","Minggu 1–10 · Okt 2026 sampai Jan 2027","Hitung, bentuk aljabar, persamaan dan pertidaksamaan, kuadrat, fungsi dasar","dasar semua target; nilai rapor Matematika harus naik","benar 25 dari 30 soal tes fondasi tanpa kalkulator"],
+["T2 Aljabar dan Fungsi","Minggu 11–22 · Jan sampai Mar 2027","Eksponen, logaritma, polinomial, barisan, sistem persamaan","Matematika MEXT IPA-A; bahasa matematika untuk fisika dan teknik (SAT opsional)","80% soal bab di buku sekolah (opsional: Bluebook Math sekitar 550)"],
+["T3 Geometri dan Trigonometri","Minggu 23–37 · Mar sampai Jul 2027","Geometri bidang dan ruang, lingkaran, koordinat, seluruh trigonometri","komponen gaya dan vektor di mekanika; Matematika MEXT","80% soal bab; bisa menguraikan gaya miring dengan sin dan cos"],
+["T4 Data dan Pra-kalkulus","Minggu 38–48 · Jul sampai Sep 2027","Statistik, peluang, bilangan kompleks, matriks, vektor, irisan kerucut, limit intuitif","vektor dan matriks dipakai di mekanika dan rekayasa; materi MTL kelas 11","80% soal bab; bisa menghitung hasil kali titik dan determinan"],
+["T5 Kalkulus","Okt 2027 sampai Mar 2028","Limit, turunan, aplikasi turunan (maks, min, laju), integral dan luas daerah","Fisika (kecepatan, usaha, energi) dan teknik mesin tahun pertama","80% soal buku MTL dan soal kalkulus contoh ujian MEXT"],
+["T6 Simulasi MEXT IPA-A","Apr 2028 sampai Mei 2029 (perkiraan)","Simulasi ujian MEXT: Inggris, Matematika, Kimia, Fisika, Jepang; siapkan berkas dan wawancara","pendaftaran MEXT; SAT hanya jalur cadangan","simulasi tiap mata uji lulus 80% dan nilai rapor memenuhi syarat"],
+["P1 Fisika 1: Mekanika dasar","Paralel · mulai Jun 2027 sampai Okt 2027 · 2 hari per minggu","Besaran dan satuan, gerak lurus, hukum Newton, gaya gesek, diagram benda bebas, gerak parabola dan komponen gaya (trigonometri dasar dari T3 sudah dipelajari)","Fisika IPA-A; dasar mekanika teknik","80% soal gerak dan Newton; bisa menggambar diagram benda bebas"],
+["P2 Fisika 2: Energi dan rotasi","Paralel · Nov 2027 sampai Mar 2028","Usaha dan energi, momentum dan tumbukan, gerak melingkar, momen gaya, kesetimbangan benda tegar, gravitasi","inti mekanika teknik mesin","80% soal energi, momentum, dan rotasi"],
+["P3 Fisika 3: Fluida dan termal","Paralel · Apr sampai Sep 2028","Tekanan dan Bernoulli, suhu dan kalor, hukum termodinamika dan siklus, getaran dan gelombang","termodinamika dan mekanika fluida di teknik mesin","80% soal; bisa menjelaskan siklus mesin kalor sederhana"],
+["P4 Fisika 4: Listrik dan modern","Paralel · Okt 2028 sampai Feb 2029","Listrik, rangkaian, magnet, optik, fisika modern; ulang semua dengan contoh ujian MEXT","Fisika IPA-A secara utuh","contoh soal MEXT Fisika benar 80%"],
+["K1 Kimia","Paralel · Okt 2027 sampai Sep 2028 · 1 hari per minggu","Stoikiometri, atom dan ikatan, gas, termokimia, laju dan kesetimbangan, asam basa, redoks, organik dasar","Kimia IPA-A (ikuti pelajaran sekolah, ulang untuk ujian)","contoh soal MEXT Kimia benar 80%"],
+["J1 Bahasa Jepang: target JLPT N2","Sedang berjalan · N2 Des 2027 (peluang sekarang sekitar 60%, perkiraan Anda) · cadangan: sesi JLPT berikutnya","Latihan 20 sampai 30 menit hampir tiap hari: kosakata, kanji, tata bahasa, membaca, menyimak. Cek tengah: mock N2 Jun dan Sep 2027. Kalau mock Sep 2027 di bawah 70%, daftar sesi cadangan","ujian bahasa Jepang MEXT (wajib diikuti) dan kuliah di Jepang","lulus N2 (Des 2027 atau sesi cadangan sebelum pendaftaran MEXT)"],
+["E1 Bahasa Inggris","Paralel · Nov 2026 sampai Mei 2029","Membaca, tata bahasa, menulis esai, kosakata akademik","ujian Inggris MEXT dan nilai rapor Inggris","simulasi Inggris lulus 80% dan nilai rapor memenuhi syarat"]
 ];
-// ===== jadwal harian (di "s" tulis: LMNas 33: PG10, PG14 · LMNas 34: IS2) =====
-var DAYS=[
-{d:1,name:"Senin",title:"Teori Bilangan I: sisa bagi dan dua digit terakhir",
-why:"Topik paling sering keluar (sekitar 15 soal dari 90). Hampir tiap tahun ada soal sisa bagi atau dua digit terakhir dari bilangan yang sangat besar.",
-how:"Kata kunci di soal: sisa bagi, dua digit terakhir, habis dibagi, pangkat sangat besar seperti 2022^2022.",
-learn:["a ≡ b (mod n) artinya a dan b memiliki sisa yang sama jika dibagi n. Boleh dijumlah, dikurang, dikali, dan dipangkatkan.","Dua digit terakhir = sisa bagi 100. Cari sisa mod 4 dan mod 25, lalu gabungkan (Teorema Sisa Cina).","Fermat: jika p prima dan p tidak membagi a, maka a^(p−1) ≡ 1 (mod p). Euler: a^φ(n) ≡ 1 (mod n) jika FPB(a,n)=1.","Pangkat besar: cari siklusnya. Contoh 7^4 = 2401 ≡ 1 (mod 100), jadi eksponen cukup dilihat mod 4.","Wilson: (p−1)! ≡ −1 (mod p). Untuk mod p, bilangan 1 sampai p−1 bisa dipasangkan k dengan p−k.","Barisan seperti Fibonacci selalu berulang (periodik) jika dimodulo."],
-tasks:[
-{b:"Modulo dan dua digit terakhir (pangkat besar)",s:"LMNas 33: PG10, PG14, PG15 · LMNas 34: PG9",y:["sisa bagi pangkat besar OSN matematika","last two digits modular arithmetic olympiad"]},
-{b:"Teorema Fermat, Euler, dan Wilson",s:"LMNas 34: PG6, PG17, PG18 · LMNas 33: IS4",y:["teorema Fermat Euler olimpiade matematika","Wilson theorem olympiad number theory"]},
-{b:"Sisa bagi dengan modulus komposit (Teorema Sisa Cina) dan basis",s:"LMNas 35: PG14, PG18, IS2, IS5 · LMNas 33: PG13, IS1",y:["Chinese remainder theorem olimpiade","bilangan basis digit terakhir olimpiade"]}
-]},
-{d:2,name:"Selasa",title:"Teori Bilangan II: persamaan bulat, keterbagian, FPB/KPK",
-why:"Topik kedua terbanyak (sekitar 11 soal). Biasanya soal meminta nilai terkecil, banyak pasangan, atau semua solusi bilangan bulat atau prima.",
-how:"Kata kunci: bilangan prima, FPB, KPK, banyak pasangan (a,b), n+2 membagi ..., persamaan dengan bilangan asli.",
-learn:["FPB(a,b) × KPK(a,b) = a × b. Contoh 35-PG2: karena FPB × KPK = n × 2024, hitung n = 99176 ÷ 2024.","Trik faktorisasi: xy + ax + by = (x+a)(y+b) − ab, lalu cari pasangan faktor.","Uji modulo: kuadrat sempurna bersisa 0 atau 1 jika dibagi 3 atau 4, dan 0, 1, atau 4 jika dibagi 8. Dipakai untuk membuktikan tidak ada solusi.","Keterbagian: n+k membagi f(n) berarti n+k membagi f(−k). Contoh 35-PG10: n+2 membagi (−2)^4 + 2024.","Banyak faktor positif n = p1^e1 ... pk^ek adalah (e1+1)(e2+1)...(ek+1).","Soal prima: coba p = 2 dan p = 3 dulu, lalu pakai mod 3 untuk sisanya."],
-tasks:[
-{b:"FPB dan KPK",s:"LMNas 35: PG2 · LMNas 33: PG22",y:["FPB KPK olimpiade matematika SMA","gcd lcm olympiad problems"]},
-{b:"Persamaan Diophantine dan trik faktorisasi",s:"LMNas 35: PG6 · LMNas 34: PG2 · LMNas 33: PG6",y:["Simon favorite factoring trick","persamaan diophantine olimpiade matematika"]},
-{b:"Keterbagian dan bilangan prima",s:"LMNas 35: PG10, PG22 · LMNas 33: PG2, PG18 · LMNas 34: PG10, PG22",y:["keterbagian bilangan bulat olimpiade","bilangan prima olimpiade matematika"]}
-]},
-{d:3,name:"Rabu",title:"Sigma: penjumlahan Σ dan fungsi σ, φ, μ",
-why:"Sigma muncul sering dalam dua bentuk. Σ (besar) adalah tanda jumlah dan ada di sekitar 13 soal. σ (kecil) adalah jumlah faktor positif dan dipakai di soal teori bilangan tingkat sulit. Keduanya dilatih hari ini.",
-how:"Σ: soal menjumlahkan banyak suku, deret tak hingga, atau jumlah atas semua faktor d | n. σ(n): soal menyebut jumlah semua faktor positif dari n.",
-learn:["Rumus dasar Σ: jumlah 1..n = n(n+1)/2. Jumlah kuadrat = n(n+1)(2n+1)/6. Jumlah kubus = (n(n+1)/2)².","Deret geometri tak hingga: 1 + r + r² + ... = 1/(1−r) jika |r|<1. Jumlah k·r^k dari k=1 = r/(1−r)².","Teleskop: 1/(k(k+1)) = 1/k − 1/(k+1). Suku di tengah saling habis.","Topi hoki: jumlah C(k,r) untuk k=r sampai n sama dengan C(n+1, r+1).","Jumlah pangkat ganjil mod n: pasangkan k dengan n−k. Karena a^m + b^m habis dibagi a+b untuk m ganjil, tiap pasangan habis dibagi n (dipakai di 34-PG6).","σ(n) = jumlah semua faktor positif n. σ(p^k) = 1 + p + ... + p^k = (p^(k+1) − 1)/(p − 1). Jika FPB(m,n)=1 maka σ(mn) = σ(m)σ(n).","Soal seperti 34-PG14: tulis a = 2^k × m dengan m ganjil, maka σ(2a)/σ(a) = (2^(k+2) − 1)/(2^(k+1) − 1). Bandingkan dengan 405000/189000 = 15/7.","φ(n) = n × (1 − 1/p) untuk setiap faktor prima p. Jumlah φ(d) untuk semua faktor d dari n sama dengan n (dipakai di 33-IS1).","Jika f multiplikatif, jumlah f(d) atas semua faktor d dari n = hasil kali (f(1) + f(p) + ... + f(p^e)) untuk tiap p^e yang membagi n.","Awas definisi di soal. Di 34-IS5, μ dihitung dengan (−1)^k untuk prima yang boleh sama, jadi μ(p²) = +1. Ini berbeda dari fungsi Möbius biasa yang bernilai 0. Selalu ikuti definisi soal.","Rumus Euler: jumlah 1/k² = π²/6 dan jumlah 1/k⁴ = π⁴/90. Untuk 35-PG25: jumlah atas pasangan relatif prima (m,n) dari 1/(mn)² sama dengan (π²/6)² dibagi (π⁴/90)."],
-tasks:[
-{b:"Rumus Σ dasar, deret geometri, dan teleskop",s:"LMNas 35: PG9, PG17 · LMNas 33: PG25",y:["deret teleskopik olimpiade matematika","rumus sigma jumlah n bilangan pertama kuadrat kubus"]},
-{b:"Fungsi σ(n): jumlah semua faktor positif",s:"LMNas 34: PG14, IS5",y:["sigma function sum of divisors number theory","fungsi jumlah faktor sigma n teori bilangan"]},
-{b:"Fungsi φ Euler dan fungsi μ",s:"LMNas 33: IS1 · LMNas 34: IS5",y:["Euler totient function olympiad","Mobius function number theory explained"]},
-{b:"Jumlah tak hingga dan rumus Euler (ζ)",s:"LMNas 35: PG21, PG25 · LMNas 33: PG17",y:["Basel problem pi squared over 6","fungsi pembangkit olimpiade matematika"]},
-{b:"Σ dengan binomial dan trigonometri",s:"LMNas 34: PG6, PG9 · LMNas 33: IS2 · LMNas 35: IS4",y:["hockey stick identity binomial","sum of csc squared trigonometric identity"]}
-]},
-{d:4,name:"Kamis",title:"Aljabar: polinomial, barisan, persamaan fungsi, min/max",
-why:"Ini topik terbesar kedua secara jumlah (sekitar 23 soal). Tiap tahun ada akar polinomial, rekurensi, persamaan fungsi, dan soal nilai minimum.",
-how:"Kata kunci: akar polinomial, barisan dengan a_n = ..., f(x+y) = ..., nilai minimum atau maksimum, bilangan real positif.",
-learn:["Vieta: untuk x² + px + q = 0, jumlah akar = −p dan hasil kali akar = q.","Polinomial palindrom (koefisien simetris): bagi dengan pangkat tengah, lalu misalkan t = x + 1/x (dipakai di 33-PG13).","Jika x² = −x + 1, turunkan pangkat tinggi berulang kali (dipakai di 33-PG1).","Rekurensi: hitung 5 suku pertama, tebak pola, atau bentuk teleskop. P(P(x)) − x habis dibagi P(x) − x (35-PG1).","Persamaan fungsi: coba x = 0, y = 0, x = y, dan cari simetri (34-PG1, 34-IS1).","AM-GM: (a+b)/2 ≥ √(ab), sama jika a = b. Pecah suku agar nilainya sama saat sama-dengan (35-PG13, 33-PG5).","Cauchy-Schwarz: (a²+b²)(c²+d²) ≥ (ac+bd)². Cocok untuk soal minimum yang berbentuk jumlah kuadrat."],
-tasks:[
-{b:"Polinomial dan teorema Vieta",s:"LMNas 33: PG1, PG13 · LMNas 35: PG1 · LMNas 34: PG5",y:["teorema Vieta olimpiade matematika","palindromic polynomial olympiad"]},
-{b:"Barisan dan rekurensi",s:"LMNas 33: PG14 · LMNas 35: PG5, PG17 · LMNas 34: PG17",y:["barisan rekurensi olimpiade matematika","recurrence relation olympiad"]},
-{b:"Persamaan fungsi",s:"LMNas 34: PG1, IS1",y:["persamaan fungsi olimpiade matematika","functional equation olympiad for beginners"]},
-{b:"Pertidaksamaan AM-GM dan Cauchy-Schwarz",s:"LMNas 33: PG5, PG9 · LMNas 35: PG13 · LMNas 34: PG13, PG21",y:["AM-GM inequality olympiad","pertidaksamaan olimpiade matematika"]}
-]},
-{d:5,name:"Jumat",title:"Geometri: segitiga, lingkaran, trigonometri, poligon",
-why:"Pada ketiga tahun, geometri selalu ada di nomor 4, 8, 12, 16, dan 24. Jadi minimal 5 soal pasti keluar.",
-how:"Kata kunci: titik berat, lingkaran luar atau dalam, garis singgung, segi-n beraturan, kubus, luas, perbandingan panjang.",
-learn:["Titik berat membagi median dengan perbandingan 2:1. Jika buntu, pakai koordinat.","Teorema garis bagi: BD/DC = AB/AC.","Kuasa titik: EA × EB = EC × ED.","Aturan sinus: a/sin A = 2R. Luas = ½ ab sin C.","Heron: segitiga 13-14-15 luasnya 84, jari-jari dalam r = luas / s.","Segi-n beraturan dengan jari-jari R: luas = ½ n R² sin(2π/n).","Kubus: beri koordinat 0 atau 1, lalu pakai hasil kali titik (dot product) untuk sudut."],
-tasks:[
-{b:"Segitiga: titik berat, garis bagi, luas",s:"LMNas 33: PG4, PG12, PG16, PG24 · LMNas 34: PG8",y:["titik berat segitiga geometri olimpiade","angle bisector theorem olympiad"]},
-{b:"Lingkaran: kuasa titik, garis singgung, lingkaran dalam dan luar",s:"LMNas 35: PG8, PG16 · LMNas 34: PG12",y:["power of a point olympiad","tangent line incircle geometry olympiad"]},
-{b:"Poligon beraturan dan trigonometri",s:"LMNas 35: PG4, IS4 · LMNas 34: PG4 · LMNas 33: IS2",y:["regular polygon area olympiad","identitas trigonometri olimpiade"]},
-{b:"Geometri ruang (kubus), heksagon, dan trik pencerminan",s:"LMNas 35: PG12 · LMNas 34: PG24 · LMNas 33: PG8",y:["geometri kubus koordinat olimpiade","reflection trick shortest path olympiad"]}
-]},
-{d:6,name:"Sabtu",title:"Kombinatorika, peluang, dan try out mini",
-why:"Pada ketiga tahun, soal hitung dan peluang selalu ada di nomor 3, 7, 11, 15, dan 23. Hari ini ditutup dengan try out agar semua minggu ini terkunci.",
-how:"Kata kunci: banyak cara, peluang, permutasi, kelompok identik atau berbeda, pewarnaan, permainan, langkah acak.",
-learn:["Permutasi dengan huruf berulang: n! / (a! b! ...). Kombinasi C(n,k) = n! / (k!(n−k)!).","Peluang = kejadian yang diinginkan ÷ semua kejadian. Untuk langkah acak, gambar pohon atau tabel keadaan.","Hitung komplemen: hitung kasus yang tidak diinginkan, lalu kurangkan.","Pewarnaan lingkaran n bagian dengan k warna (tetangga beda): a_n = (k−1)^n + (−1)^n (k−1).","Sarang merpati: jika n+1 benda masuk n kotak, ada kotak berisi minimal 2 benda.","Membagi bola berbeda ke kotak identik tanpa ada yang kosong memakai bilangan Stirling jenis kedua.","Teorema Lucas: C(n,k) mod p dihitung digit demi digit dalam basis p (34-PG18)."],
-tasks:[
-{b:"Peluang",s:"LMNas 33: PG3, PG23 · LMNas 34: PG3, PG11",y:["peluang olimpiade matematika","random walk probability olympiad"]},
-{b:"Permutasi, kombinasi, dan pewarnaan",s:"LMNas 35: PG3, PG15, PG23 · LMNas 33: PG19 · LMNas 34: PG15",y:["permutasi kombinasi olimpiade matematika","circular coloring recurrence olympiad"]},
-{b:"Sarang merpati dan inklusi-eksklusi",s:"LMNas 34: PG10 · LMNas 35: PG11 · LMNas 33: PG11",y:["pigeonhole principle olympiad","inklusi eksklusi olimpiade matematika"]},
-{b:"TRY OUT mini",s:"10 soal acak dari ketiga file, 90 menit, tanpa catatan",y:["tips mengerjakan soal olimpiade matematika"],tool:1}
-]}
+var M=[
+["T1 Fondasi",0,["Pecahan, desimal, persen, bilangan negatif|Bisa: 12 soal hitung tanpa kalkulator, benar 10 · Latihan: K22 23, 24","Bentuk aljabar: sederhanakan dan faktorkan|Bisa: (x+3)(x−2) dan x²−9 tanpa ragu · Latihan: K23 1, 3","Persamaan linear dan soal cerita|Bisa: ubah cerita jadi persamaan · Latihan: KSM21 6, 10 · K22 10","Sistem persamaan dua variabel|Bisa: eliminasi dan substitusi · Latihan: K22 3 · KSM21 10","Pertidaksamaan linear dan nilai mutlak dasar|Bisa: gambar garis bilangan · Latihan: KSR25 8 · K23 7","Eksponen dan bentuk akar|Bisa: sederhanakan √50 dan 2³·2⁴ · Latihan: K23 2, 4","Persamaan kuadrat: faktorisasi dan rumus ABC|Bisa: selesaikan 5 persamaan kuadrat · Latihan: K22 6 · K23 5","Diskriminan dan rumus Vieta|Bisa: jumlah dan hasil kali akar · Latihan: K23 5, 30 · OMI-P 2023","Fungsi: nilai fungsi, komposisi, invers|Bisa: hitung f(g(x)) · Latihan: KSR25 2 · K22 9","Tes fondasi 30 soal, 45 menit|Lulus jika benar 25. Ulang soal yang salah"]],
+["T2 Aljabar dan Fungsi",1,["Fungsi kuadrat dan grafik parabola|Bisa: titik puncak dan akar · Latihan: K22 14 · K23 6","Pertidaksamaan kuadrat dan rasional|Bisa: tanda tiap interval · Latihan: KSR25 1 · K23 8","Eksponen dan logaritma|Bisa: log₂8 dan sifat log · Latihan: KSR25 20","Persamaan eksponen dan logaritma|Bisa: samakan basis","Polinomial dan teorema sisa|Bisa: pembagian dan sisa · Latihan: KSR25 5 · KSM21 15","Barisan dan deret aritmetika, geometri|Bisa: Un dan Sn · Latihan: K22 13, 20 · KSR25 13","Deret tak hingga dan sigma dasar|Bisa: jumlah 1+r+r²+… · Latihan: K22 15 · L35 5, 9","Sistem persamaan linear dan kuadrat|Gaya SAT: cari titik potong garis dan parabola","Transformasi grafik fungsi|Bisa: geser, rentang, cermin","Rasio, persen, laju, dan satuan|Gaya SAT: soal cerita data · Latihan: K22 10, 24","Pertumbuhan eksponensial dan soal cerita fungsi|Latihan: K22 23","Review T2 dan Bluebook practice test Math 1|Target sekitar 550. Catat semua soal salah"]],
+["T3 Geometri dan Trigonometri",2,["Geometri bidang: sudut, segitiga, Pythagoras|Bisa: sudut segitiga dan segi-n · Latihan: KSR25 29 · K23 14","Luas dan keliling bangun datar|Bisa: rumus luas dari ingatan · Latihan: K23 18 · KSM21 12","Lingkaran: sudut, busur, persamaan lingkaran|Latihan: KSM21 13 · KSR25 21","Geometri koordinat: garis, jarak, titik tengah|Latihan: K23 9, 15, 17 · KSR25 24","Geometri ruang: volume dan luas permukaan|Latihan: K22 5, 12","Sin, cos, tan di segitiga siku-siku|Bisa: cari sisi yang hilang","Sudut istimewa 30°, 45°, 60°|Bisa: tulis tabel dari ingatan","Radian dan lingkaran satuan|Bisa: ubah derajat ke radian","Kuadran dan sudut berelasi|Bisa: sin(180°−x), cos(90°−x)","Identitas sin²+cos²=1|Bisa: buktikan 3 identitas · Latihan: KSR25 25, 28","Persamaan trigonometri sederhana|Bisa: sin x = ½ pada 0° sampai 360°","Aturan sinus dan kosinus|Bisa: pilih aturan yang tepat · Latihan: K22 17","Luas ½ab sin C dan segi-n beraturan|Latihan: K23 14 · L34 4","Rumus jumlah, selisih, sudut ganda, grafik sin dan cos|Latihan: L35 IS4 (sulit, coba saja)","Review T3 dan Bluebook practice test Math 2|Target sekitar 650"]],
+["T4 Data dan Pra-kalkulus",3,["Statistik: rata-rata, median, simpangan baku|Bisa: bandingkan dua sebaran data · Latihan: K22 2 · KSM21 24","Peluang dasar dan peluang bersyarat|Bisa: tabel dua arah · Latihan: KSM21 5 · K23 22","Aturan hitung, permutasi, kombinasi|Latihan: KSM21 3 · K23 16","Diagram pencar, garis regresi, margin kesalahan|Gaya SAT: baca kemiringan dan titik potong","Bilangan kompleks dasar|Bisa: (a+bi)(c+di) dan modulus","Matriks: operasi, determinan, invers|Latihan: OMI UI 2018, UI 2019 · KSM21 21","Vektor di bidang dan ruang|Bisa: jumlah, panjang, hasil kali titik","Irisan kerucut: lingkaran, elips, parabola|Bisa: dari persamaan ke grafik","Pengantar limit: nilai yang mendekati|Bisa: isi tabel nilai mendekati","Soal campur gaya SAT|Aljabar, data, dan geometri dalam satu set","Review T4 dan Bluebook practice test Math 3|Target sekitar 700. Lanjut ke T5 (Kalkulus)"]]
 ];
-// ===== akhir data =====
-
-var YR={"33":2022,"34":2023,"35":2024},KEY="lmnas-progress-v1",state={},filt="",picks=[],tleft=5400,tint=null;
-try{state=JSON.parse(localStorage.getItem(KEY)||"{}");}catch(e){state={};}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
-var jsDay=new Date().getDay(),todayIdx=jsDay===0?-1:jsDay-1,current=todayIdx<0?0:todayIdx;
-
-function lbl(y,t,n){return YR[y]+(t==="PG"?" No. ":" Isian ")+n;}
-// teks biasa: "33-PG10,13" → "2022 No. 10, 2022 No. 13"
-function plain(s){return s.replace(/(3[345])-(PG|IS)(\d+(?:,\d+)*)/g,function(_,y,t,ns){return ns.split(",").map(function(n){return lbl(y,t,n);}).join(", ");});}
-function chip(y,t,n){var id=y+"-"+t+n;
-  return '<button class="chip'+(state["q"+id]?" ok":"")+(filt&&filt!==y?" dim":"")+'" data-q="'+id+'" title="Soal_LMNas'+y+'_UGM_SMA_'+YR[y]+(t==="IS"?" (isian singkat)":"")+'" aria-pressed="'+(!!state["q"+id])+'">'+lbl(y,t,n)+'</button>';}
-function chips(s){if(s.indexOf("LMNas")<0)return s;
-  return s.replace(/LMNas (3[345]): ([^·]+)/g,function(_,y,rest){return rest.split(",").map(function(t){var m=t.trim().match(/^(PG|IS)(\d+)$/);return m?chip(y,m[1],m[2]):t;}).join("");}).replace(/ · /g," ");}
-
-// daftar unik semua soal di tugas
-var ALL=[];(function(){var seen={};DAYS.forEach(function(d){d.tasks.forEach(function(t){var re=/LMNas (3[345]): ([^·]+)/g,m;while((m=re.exec(t.s))){m[2].split(",").forEach(function(x){var k=x.trim().match(/^(PG|IS)(\d+)$/);if(k){var id=m[1]+"-"+k[1]+k[2];if(!seen[id]){seen[id]=1;ALL.push(id);}}});}});});})();
-
-(function(){var h="";FREQ.forEach(function(f,i){h+='<div class="fr'+(f.h?' hot':'')+'" data-day="'+f.day+'" tabindex="0" role="button"><strong>'+f.n+' ('+f.c+')</strong><div class="b"><i style="width:'+Math.round(f.c/23*100)+'%"></i></div><small>Dipelajari hari '+f.day+'. Contoh: '+plain(f.l)+'</small></div>';});
-  var el=document.getElementById("freq");el.innerHTML=h;
-  el.querySelectorAll(".fr").forEach(function(r){function go(){DAYS.forEach(function(d,i){if(d.name===r.dataset.day)current=i;});render();document.getElementById("tabs").scrollIntoView({behavior:"smooth"});}
-    r.onclick=go;r.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}};});})();
-
-function doneCount(i){var n=0;DAYS[i].tasks.forEach(function(t,j){if(state[DAYS[i].d+"-"+j])n++;});return n;}
-function fmt(s){var m=Math.floor(s/60),x=s%60;return (m<10?"0":"")+m+":"+(x<10?"0":"")+x;}
-
+var HUE=[170,265,25,330,60,0,200,120,300,350];
+var KEY="rencana48-v5",st={start:"",tD:5,tM:60,w:{},rm:{},log:[],notes:[]};
+try{var o=JSON.parse(localStorage.getItem(KEY)||"{}");for(var k in o)st[k]=o[k];}catch(e){}
+function sv(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+function iso(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
+function pd(s){return new Date(s+"T00:00:00");}
+function ad(d,n){var x=new Date(d.getTime());x.setDate(x.getDate()+n);return x;}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function fmt(d){return d.toLocaleDateString("id-ID",{day:"numeric",month:"short"});}
+var now=new Date(),today=iso(now);
+function monOf(d){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x;}
+if(!st.start){var n=monOf(now);if(now.getDay()!==1)n=ad(n,7);st.start=iso(n);}
+function pareto(){var h="";R.forEach(function(r,i){var on=!!st.rm["r"+i];h+='<div class="wk'+(on?' done':'')+'"><input type="checkbox" data-rm="r'+i+'"'+(on?' checked':'')+' aria-label="Target tercapai"><div><div class="t"><b>'+r[0]+'</b> <span class="d">'+r[1]+'</span></div><div>'+r[2]+'</div><div class="d">Dipakai untuk: '+r[3]+'</div><div class="r">Tercapai jika: '+r[4]+'</div></div></div>';});var el=document.getElementById("pareto");el.innerHTML=h;el.querySelectorAll("[data-rm]").forEach(function(c){c.onchange=function(){if(c.checked)st.rm[c.dataset.rm]=1;else delete st.rm[c.dataset.rm];sv();pareto();};});}
+function opts(id){var h="";T.forEach(function(m,i){h+='<option value="'+i+'">'+m+'</option>';});document.getElementById(id).innerHTML=h;}
+function dayMap(){var r={};st.log.forEach(function(l){r[l.d]=(r[l.d]||0)+l.m;});return r;}
 function render(){
-  var f=document.getElementById("flt");
-  f.innerHTML='<span class="sub" style="margin:0">Sorot tahun:</span>';
-  [["","Semua"],["33","2022"],["34","2023"],["35","2024"]].forEach(function(o){var b=document.createElement("button");b.textContent=o[1];b.setAttribute("aria-pressed",filt===o[0]);b.onclick=function(){filt=o[0];render();};f.appendChild(b);});
-  var tabs=document.getElementById("tabs");tabs.innerHTML="";
-  DAYS.forEach(function(day,i){
-    var b=document.createElement("button");
-    b.textContent=day.name+" "+doneCount(i)+"/"+day.tasks.length;
-    b.setAttribute("role","tab");b.setAttribute("aria-selected",i===current);
-    if(i===todayIdx)b.className="today";
-    b.onclick=function(){current=i;render();};tabs.appendChild(b);
-  });
-  var day=DAYS[current],h="";
-  if(todayIdx<0)h+='<p class="note">Hari ini Minggu, waktunya istirahat. Yang tampil adalah jadwal Senin sebagai pratinjau.</p>';
-  h+='<div class="card"><h2>'+day.name+(current===todayIdx?" (hari ini)":"")+": "+day.title+'</h2>';
-  h+='<p class="why"><strong>Kenapa penting:</strong> '+day.why+'</p>';
-  h+='<p><strong>Cara mengenali soalnya:</strong> '+day.how+'</p>';
-  h+='<h3>Yang dipelajari</h3><ul>';day.learn.forEach(function(x){h+="<li>"+plain(x)+"</li>";});
-  h+='</ul><h3>Tugas hari ini</h3>';
-  day.tasks.forEach(function(t,j){var id=day.d+"-"+j,on=!!state[id];
-    var yt=t.y.map(function(q){return '<a href="https://www.youtube.com/results?search_query='+encodeURIComponent(q)+'" target="_blank" rel="noopener">'+q+'</a>';}).join(" &middot; ");
-    h+='<div class="task'+(on?' done':'')+'"><input type="checkbox" data-id="'+id+'"'+(on?" checked":"")+' aria-label="Selesai"><div class="tb"><strong>Bab: '+t.b+'</strong><br>Soal: '+chips(t.s)+'<br>Cari di YouTube: '+yt;
-    if(t.tool)h+='<div class="tool"><button id="rnd">Acak 10 soal</button><button id="tm">'+(tint?"Berhenti":"Mulai 90 menit")+'</button> <span id="tmv">'+fmt(tleft)+'</span><div id="rndout">'+picks.map(function(p){return chip(p.split("-")[0],p.split("-")[1].slice(0,2),p.split("-")[1].slice(2));}).join("")+'</div></div>';
-    h+='</div></div>';});
-  h+='</div>';
-  document.getElementById("view").innerHTML=h;
-  document.querySelectorAll("#view input").forEach(function(c){
-    c.onchange=function(){if(c.checked)state[c.dataset.id]=1;else delete state[c.dataset.id];save();render();};});
-  document.querySelectorAll("#view .chip").forEach(function(c){c.onclick=function(){var k="q"+c.dataset.q;if(state[k])delete state[k];else state[k]=1;save();render();};});
-  var r=document.getElementById("rnd");if(r)r.onclick=function(){var a=ALL.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),x=a[i];a[i]=a[j];a[j]=x;}picks=a.slice(0,10);render();};
-  var tm=document.getElementById("tm");if(tm)tm.onclick=function(){if(tint){clearInterval(tint);tint=null;}else{if(tleft<=0)tleft=5400;tint=setInterval(function(){tleft--;var v=document.getElementById("tmv");if(v)v.textContent=fmt(tleft);if(tleft<=0){clearInterval(tint);tint=null;render();alert("Waktu habis!");}},1000);}render();};
-  var total=0,done=0;DAYS.forEach(function(d,i){total+=d.tasks.length;done+=doneCount(i);});
-  var p=Math.round(100*done/total),q=ALL.filter(function(id){return state["q"+id];}).length;
-  document.getElementById("bar").style.width=p+"%";
-  document.getElementById("pct").textContent=done+" dari "+total+" tugas selesai ("+p+"%)";
-  document.getElementById("pq").textContent=q+" dari "+ALL.length+" soal yang terdaftar sudah kamu tandai selesai";
+  var S=pd(st.start),cw=Math.floor((now-S)/604800000)+1,h="",n=0,done=0,all=0;
+  M.forEach(function(m,mi){var ws=m[2].slice();if(m[3])ws.push(m[3]+"|Ulang soal salah dan catat pola kesalahan");var f=n+1,b="";
+    ws.forEach(function(w){n++;all++;var p=w.split("|"),id="w"+n,on=!!st.w[id];if(on)done++;var d0=ad(S,7*(n-1));
+      b+='<div class="wk'+(on?' done':'')+(n===cw?' now':'')+'"><input type="checkbox" data-id="'+id+'"'+(on?' checked':'')+' aria-label="Selesai minggu '+n+'"><div><div class="t"><b>Minggu '+n+':</b> '+p[0]+'</div><div class="d">'+fmt(d0)+' sampai '+fmt(ad(d0,6))+'</div><div class="r">Cek dan latihan: '+p[1]+'</div></div></div>';});
+    h+='<details class="mod"'+((cw>=f&&cw<=n)||(cw<1&&mi===0)?' open':'')+'><summary>'+m[0]+'<small>Minggu '+f+' sampai '+n+' · jalur '+T[m[1]]+'</small></summary><div class="in">'+b+'</div></details>';});
+  document.getElementById("mods").innerHTML=h;
+  var p=Math.round(100*done/all);document.getElementById("bar").style.width=p+"%";
+  document.getElementById("pct").textContent=done+" dari "+all+" minggu selesai ("+p+"%)"+(cw<1?". Minggu 1 dimulai "+fmt(S)+".":cw>all?". Rencana selesai.":". Sekarang minggu ke-"+cw+".");
+  document.querySelectorAll("#mods input").forEach(function(c){c.onchange=function(){if(c.checked)st.w[c.dataset.id]=1;else delete st.w[c.dataset.id];sv();render();};});
+  stats();notes();
 }
-document.getElementById("reset").onclick=function(){if(confirm("Hapus semua progres?")){state={};save();render();}};
-document.addEventListener("keydown",function(e){if(/INPUT|TEXTAREA/.test(e.target.tagName))return;if(e.key==="ArrowRight"){current=(current+1)%DAYS.length;render();}else if(e.key==="ArrowLeft"){current=(current+DAYS.length-1)%DAYS.length;render();}});
+function stats(){
+  var dm=dayMap(),tot=0,days=0,gaps=0,perMod=[0,0,0,0,0,0,0,0,0,0];
+  st.log.forEach(function(l){tot+=l.m;perMod[l.mod]=(perMod[l.mod]||0)+l.m;});
+  var S=pd(st.start),first=S,keys=Object.keys(dm).sort();if(keys.length&&pd(keys[0])<first)first=pd(keys[0]);
+  for(var d=new Date(first);iso(d)<today;d=ad(d,1)){if(d.getDay()!==0&&!dm[iso(d)])gaps++;}
+  days=keys.length;
+  var stk=0,d2=pd(today);if(!dm[today])d2=ad(d2,-1);
+  while(true){if(d2.getDay()===0){d2=ad(d2,-1);continue;}if(dm[iso(d2)]){stk++;d2=ad(d2,-1);}else break;}
+  var mo=monOf(now),wd=0,wm=0;for(var i=0;i<7;i++){var k=iso(ad(mo,i));if(dm[k]){wd++;wm+=dm[k];}}
+  document.getElementById("wkst").innerHTML='Minggu ini: <b>'+wd+' dari '+st.tD+' hari</b> target, '+wm+' menit. '+(wd>=st.tD?'Target hari tercapai.':'Kurang '+(st.tD-wd)+' hari lagi.');
+  document.getElementById("kpi").innerHTML='<div><b>'+(tot/60).toFixed(1)+' jam</b>total belajar</div><div><b>'+days+'</b>hari belajar</div><div><b>'+(days?Math.round(tot/days):0)+' menit</b>rata-rata per hari belajar</div><div><b>'+stk+' hari</b>beruntun (Minggu dilewati)</div><div><b>'+gaps+'</b>hari bolong</div>';
+  var hm="";for(var c=0;c<48;c++)for(var r=0;r<7;r++){var dt=ad(S,7*c+r),k=iso(dt),m=dm[k],cl="";
+    if(k>today)cl="f";else if(m){var q=m/st.tM;cl=q<.5?"l1":q<1?"l2":q<1.5?"l3":"l4";}else if(r<6&&dt>=first)cl="g";else cl="z";
+    if(k===today)cl+=" t";hm+='<i class="'+cl+'" title="'+fmt(dt)+': '+(m||0)+' menit"></i>';}
+  document.getElementById("hm").innerHTML=hm;
+  var mx=st.tM*1.5,bs="",lb="";for(var i=13;i>=0;i--){var dd=ad(now,-i),v=dm[iso(dd)]||0;if(v>mx)mx=v;}
+  for(i=13;i>=0;i--){dd=ad(now,-i);v=dm[iso(dd)]||0;bs+='<div style="height:'+Math.round(100*v/mx)+'%" title="'+fmt(dd)+': '+v+' menit"></div>';lb+='<span>'+dd.getDate()+'</span>';}
+  document.getElementById("bars").innerHTML=bs+'<div class="tl" style="bottom:'+Math.round(100*st.tM/mx)+'%" title="Target"></div>';
+  document.getElementById("blab").innerHTML=lb;
+  var g=[],a=0,lg="";perMod.forEach(function(v,i){if(!v)return;var b=a+100*v/tot;g.push("hsl("+HUE[i]+" 55% 50%) "+a+"% "+b+"%");a=b;lg+='<div><i style="background:hsl('+HUE[i]+' 55% 50%)"></i>'+T[i]+': '+v+' menit ('+Math.round(100*v/tot)+'%)</div>';});
+  document.getElementById("pie").style.background=tot?"conic-gradient("+g.join(",")+")":"var(--line)";
+  document.getElementById("lg").innerHTML=lg||"Belum ada sesi tercatat.";
+  var rc="";st.log.slice(-5).reverse().forEach(function(l){var ix=st.log.indexOf(l);rc+='<div class="nt"><div class="tx" style="flex:1">'+fmt(pd(l.d))+': '+l.m+' menit, '+esc(T[l.mod])+'</div><button data-del="'+ix+'" aria-label="Hapus sesi">Hapus</button></div>';});
+  document.getElementById("rec").innerHTML=rc||'<span class="sub">Belum ada sesi.</span>';
+  document.querySelectorAll("[data-del]").forEach(function(b){b.onclick=function(){st.log.splice(+b.dataset.del,1);sv();render();};});
+}
+function notes(){var oo=document.getElementById("onlyOpen").checked,h="";
+  st.notes.slice().reverse().forEach(function(x){if(oo&&x.ok)return;h+='<div class="nt'+(x.ok?' ok':'')+'"><input type="checkbox" data-ok="'+x.id+'"'+(x.ok?' checked':'')+' aria-label="Sudah paham"><div style="flex:1"><div class="tx">'+esc(x.t)+'</div><small>'+fmt(pd(x.d))+' · '+esc(T[x.mod])+'</small></div><button data-nd="'+x.id+'">Hapus</button></div>';});
+  document.getElementById("notes").innerHTML=h||'<p class="sub">Belum ada catatan.</p>';
+  document.querySelectorAll("[data-ok]").forEach(function(c){c.onchange=function(){st.notes.forEach(function(x){if(x.id==c.dataset.ok)x.ok=c.checked;});sv();notes();};});
+  document.querySelectorAll("[data-nd]").forEach(function(b){b.onclick=function(){st.notes=st.notes.filter(function(x){return x.id!=b.dataset.nd;});sv();notes();};});
+}
+function $(i){return document.getElementById(i);}
+pareto();opts("lmod");opts("nmod");
+$("ld").value=today;$("nd").value=today;$("tD").value=st.tD;$("tM").value=st.tM;$("start").value=st.start;
+$("addL").onclick=function(){var m=parseInt($("lm").value,10);if(!(m>0)||!$("ld").value){$("lm").focus();return;}st.log.push({d:$("ld").value,m:m,mod:+$("lmod").value});st.log.sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0;});$("lm").value="";sv();render();};
+$("addN").onclick=function(){var t=$("nt").value.trim();if(!t){$("nt").focus();return;}st.notes.push({id:Date.now(),d:$("nd").value||today,mod:+$("nmod").value,t:t,ok:false});$("nt").value="";sv();notes();};
+$("onlyOpen").onchange=notes;
+$("tD").onchange=function(){st.tD=Math.min(7,Math.max(1,+$("tD").value||5));sv();render();};
+$("tM").onchange=function(){st.tM=Math.max(10,+$("tM").value||60);sv();render();};
+$("start").onchange=function(){if($("start").value){st.start=$("start").value;sv();render();}};
+$("reset").onclick=function(){if(confirm("Hapus semua progres, sesi, dan catatan?")){try{localStorage.removeItem(KEY);}catch(e){}location.reload();}};
 render();
 </script>
 </body>
