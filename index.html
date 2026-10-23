@@ -204,7 +204,7 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
     <button class="tab-btn active" data-target="tab-topics">Daftar Bab</button>
     <button class="tab-btn" data-target="tab-referensi">Referensi Teks</button>
     <button class="tab-btn" data-target="tab-statistik">Statistik</button>
-    <button class="tab-btn" data-target="tab-roadmap">Jadwal</button>
+    <button class="tab-btn" data-target="tab-roadmap">Jadwal (JSON)</button>
   </div>
 
   <div class="tab-content active" id="tab-topics">
@@ -258,9 +258,12 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
   </details>
 </div>
 
-<!-- [ROADMAP MINGGUAN] -->
+<!-- ============================================================
+     [HTML ROADMAP MINGGUAN (TAMPIL DI HALAMAN UTAMA)]
+     ============================================================ -->
 <div class="card" id="roadmapPanel">
   <h2>🗓️ Jadwal Belajar Mingguan</h2>
+  <p class="sub">Jadwal ini dihasilkan dari file referensi. Centang jika sudah selesai.</p>
   <div id="mods"></div>
 </div>
 
@@ -808,6 +811,7 @@ $("addN").onclick=function(){var t=$("nt").value.trim();if(!t)return;st.notes.pu
 $("onlyOpen").onchange=notes;
 $("reset").onclick=function(){if(confirm("Hapus semua progres?")){localStorage.clear();location.reload();}};
 
+// TOMBOL MASUK
 $("btnSaveUser").onclick = function() {
   const u = $("cfgUser").value.trim();
   if (!u) return alert("Username tidak boleh kosong!");
@@ -823,6 +827,7 @@ $("btnSaveUser").onclick = function() {
   render();
 };
 
+// TOMBOL SIMPAN MANUAL
 $("btnApplyConfig").onclick = function() {
   if (!currentUser) return alert("Silakan isi Username dan klik 'Masuk' terlebih dahulu.");
 
@@ -847,15 +852,17 @@ $("btnApplyConfig").onclick = function() {
   }
 };
 
+// TOMBOL RESET AKUN
 $("btnResetConfig").onclick = function() {
   if (!currentUser) return alert("Anda belum masuk.");
-  if(confirm(`Hapus data kustom untuk "${currentUser}"?`)) {
+  if(confirm(`Hapus data kustom untuk "${currentUser}" dan kembalikan ke soal MTK dasar?`)) {
     localStorage.removeItem(getStorageKey(currentUser));
     CONFIG = loadConfigForUser(currentUser);
     T = CONFIG.topics;
     initConfigEditor();
     refreshAppFromConfig();
     render();
+    alert("Data berhasil di-reset.");
   }
 };
 
