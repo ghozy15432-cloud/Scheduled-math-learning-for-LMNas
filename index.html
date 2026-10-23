@@ -4,67 +4,43 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DAIGAKU HERE I COME</title>
-
-<!-- [SCRIPT MATHJAX] -->
-<script>
-  window.MathJax = {
-    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true, processEnvironments: true },
-    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], ignoreHtmlClass: 'tex2jax_ignore', processHtmlClass: 'tex2jax_process' },
-    svg: { fontCache: 'global' }
-  };
-</script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-<!-- [CSS UTAMA] -->
+<script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
 <style>
 :root{--bg:#f5f7f4;--card:#fff;--ink:#1d2b2a;--mute:#5d6e6c;--line:#d5dedb;--acc:#0b6e66;--acc2:#e8f3f1;--warn:#b4531a;--ok:#1a8c5a;--err:#c0392b;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;--ok:#4fd1c0;--err:#f0a36b;color-scheme:dark}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;--ok:#4fd1c0;--err:#f0a36b;color-scheme:dark}:root:not([data-theme="light"]) main{background:rgba(17,26,25,.95)}}
 :root[data-theme="dark"]{--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;--ok:#4fd1c0;--err:#f0a36b;color-scheme:dark}
+:root[data-theme="dark"] main{background:rgba(17,26,25,.95)}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-
-/* BACKGROUND & KUCING */
-body::before {content: "";position: fixed;top: 0; left: 0; width: 100vw; height: 100vh;background-image: url('Wallpaper.jpg');background-size: cover;background-position: center;z-index: -2;}
-body::after {content: "";position: fixed;top: 0; left: 0; width: 100vw; height: 100vh;background: rgba(17, 26, 25, 0.6);backdrop-filter: blur(3px);z-index: -1;}
-.deco-cat{position:fixed;z-index:0;pointer-events:none;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.2);opacity:0.85;animation:float 8s ease-in-out infinite;}
-.cat1 { top: 10%; left: 4%; width: 140px; animation-delay: 0s; }
-.cat2 { bottom: 15%; right: 5%; width: 180px; animation-delay: 2s; }
-.cat3 { top: 45%; left: 8%; width: 130px; animation-delay: 4s; }
-@keyframes float {0%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(-25px) rotate(3deg);}100%{transform:translateY(0px) rotate(0deg);}}
-@media (max-width: 900px){.deco-cat{display:none;}}
-
-/* LAYOUT UTAMA */
-body{margin:0;background:transparent;color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
-main{max-width:880px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1;background:rgba(245,247,244,0.95);backdrop-filter:blur(10px);border-radius:16px;margin-top:30px;box-shadow:0 20px 40px rgba(0,0,0,0.2)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) main{background:rgba(17,26,25,0.95)}}
-:root[data-theme="dark"] main{background:rgba(17,26,25,0.95)}
-
+body{margin:0;background:#111a19;color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
+body::before{content:"";position:fixed;inset:0;background:url('Wallpaper.jpg') center/cover;z-index:-2}
+body::after{content:"";position:fixed;inset:0;background:rgba(17,26,25,.6);backdrop-filter:blur(3px);z-index:-1}
+.deco-cat{position:fixed;z-index:0;pointer-events:none;border-radius:12px;border:2px solid rgba(255,255,255,.2);opacity:.85;animation:float 8s ease-in-out infinite}
+.cat1{top:10%;left:4%;width:140px}.cat2{bottom:15%;right:5%;width:180px;animation-delay:2s}.cat3{top:45%;left:8%;width:130px;animation-delay:4s}
+@keyframes float{50%{transform:translateY(-25px) rotate(3deg)}}
+@media(max-width:900px){.deco-cat{display:none}}
+main{max-width:880px;margin:30px auto 0;padding:20px 16px 60px;position:relative;z-index:1;background:rgba(245,247,244,.95);backdrop-filter:blur(10px);border-radius:16px}
 h1{font-size:1.7rem;margin:.2em 0}h2{font-size:1.2rem;margin:0 0 6px}
 .sub{color:var(--mute);margin:.2em 0 10px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;margin:14px 0; animation: fadeInUp 0.5s ease-out forwards; opacity: 0;}
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;margin:14px 0}
+.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
 input,select,textarea{font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);max-width:100%}
 input[type=number]{width:80px}textarea{width:100%;min-height:60px}
-button{font:inherit;background:none;border:1px solid var(--line);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer; transition: transform 0.1s;}
-button:active { transform: scale(0.96); }
-button.p{background:var(--acc);color:var(--bg);border-color:var(--acc)}
-button:disabled{opacity:.5;cursor:not-allowed}
+button{font:inherit;background:none;border:1px solid var(--line);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer}
+button:active{transform:scale(.96)}button.p{background:var(--acc);color:var(--bg);border-color:var(--acc)}button:disabled{opacity:.5;cursor:not-allowed}
 .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:8px 0}
 .kpi div{background:var(--acc2);border-radius:6px;padding:8px 10px;font-size:.9rem}.kpi b{display:block;font-size:1.3rem}
 .hm{overflow-x:auto;padding-bottom:6px}
 .hg{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,13px);grid-auto-columns:13px;gap:3px;width:max-content}
-.hg i{border-radius:3px;background:var(--line);opacity:.35}
-.hg i.f{opacity:.15}.hg i.z{opacity:.15}
+.hg i{border-radius:3px;background:var(--line);opacity:.35}.hg i.f,.hg i.z{opacity:.15}
 .hg i.g{background:none;border:1px dashed var(--warn);opacity:1}
-.hg i.l1,.hg i.l2,.hg i.l3,.hg i.l4{background:var(--acc)}
-.hg i.l1{opacity:.3}.hg i.l2{opacity:.55}.hg i.l3{opacity:.8}.hg i.l4{opacity:1}
+.hg i.l1,.hg i.l2,.hg i.l3,.hg i.l4{background:var(--acc)}.hg i.l1{opacity:.3}.hg i.l2{opacity:.55}.hg i.l3{opacity:.8}.hg i.l4{opacity:1}
 .hg i.t{outline:2px solid var(--ink)}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;align-items:start}
 .bars{display:flex;gap:4px;align-items:flex-end;height:110px;position:relative;border-bottom:1px solid var(--line);margin-top:8px}
-.bars div{flex:1;background:var(--acc);border-radius:3px 3px 0 0;min-height:1px;position:relative}
+.bars div{flex:1;background:var(--acc);border-radius:3px 3px 0 0;min-height:1px}
 .bars .tl{position:absolute;left:0;right:0;border-top:2px dashed var(--warn);flex:none;background:none;min-height:0}
 .lab{display:flex;gap:4px;font-size:.65rem;color:var(--mute)}.lab span{flex:1;text-align:center}
 .pie{width:140px;height:140px;border-radius:50%;flex:none}
@@ -72,904 +48,419 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .nt{border-top:1px solid var(--line);padding:8px 0;display:flex;gap:10px;align-items:flex-start}
 .nt.ok .tx{color:var(--mute);text-decoration:line-through}.nt small{color:var(--mute)}
 details.mod{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:12px 0}
-details.mod>summary{cursor:pointer;padding:12px 16px;font-weight:bold;list-style:none}
+details.mod>summary{cursor:pointer;padding:12px 16px;font-weight:bold}
 details.mod>summary small{display:block;font-weight:normal;color:var(--mute)}
 details.mod .in{padding:0 16px 12px}
 .wk{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-top:1px solid var(--line)}
 .wk input{margin-top:.4em;width:18px;height:18px;flex:none}
 .wk.now{background:var(--acc2);border-left:4px solid var(--acc);border-radius:4px}
-.wk.done .t{color:var(--mute);text-decoration:line-through}
-.wk .d{color:var(--mute);font-size:.85rem}.wk .r{font-size:.9rem;color:var(--acc)}
-ul{padding-left:20px;margin:.3em 0}
+.wk.done .t{color:var(--mute);text-decoration:line-through}.wk .d{color:var(--mute);font-size:.85rem}
 footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-
-/* SEARCH BAR */
-.search-box {width:100%;padding:8px 12px;margin-bottom:12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-size:0.95rem;}
-.search-box:focus {outline:2px solid var(--acc);border-color:var(--acc);}
-
-/* GENERATOR SOAL GEMINI */
-#genResult { margin-top: 16px; }
-.gen-soal { background: var(--acc2); border-left: 4px solid var(--acc); padding: 12px 16px; border-radius: 6px; margin-bottom: 12px; animation: fadeInUp 0.4s ease-out; word-break: break-word; overflow-wrap: anywhere;}
-.gen-soal h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
-.gen-soal p { margin: 6px 0; line-height: 1.6; }
-.gen-soal .label { font-weight: bold; color: var(--acc); }
-.gen-soal .answer { background: var(--bg); padding: 8px; border-radius: 4px; border: 1px dashed var(--line); margin-top: 8px; display: none; }
-.gen-soal .answer.show { display: block; animation: fadeInUp 0.4s ease-out; }
-.gen-options { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
-.gen-opt-btn { text-align: left; padding: 8px 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; cursor: pointer; transition: background 0.2s, border-color 0.2s; word-break: break-word; }
-.gen-opt-btn:hover { background: var(--acc2); }
-.gen-opt-btn.correct { background: var(--ok); color: #fff; border-color: var(--ok); }
-.gen-opt-btn.wrong { background: var(--err); color: #fff; border-color: var(--err); }
-.gen-opt-btn:disabled { cursor: default; opacity: 0.8; }
-.loading { display: none; text-align: center; padding: 20px; color: var(--mute); font-style: italic; }
-.loading.active { display: block; }
-.api-key-warning { color: var(--warn); font-size: 0.9rem; margin-bottom: 10px; display: none; }
-.api-key-warning.active { display: block; }
-.gen-count-badge { display:inline-block; background:var(--acc); color:#fff; font-size:0.8rem; padding:2px 8px; border-radius:10px; margin-left:8px; vertical-align:middle;}
-
-/* POPUP HIASAN 1 */
-#popupHiasan { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); z-index: 9999; background: rgba(0,0,0,0.85); padding: 20px; border-radius: 16px; text-align: center; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 3px solid var(--acc); }
-#popupHiasan.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-#popupHiasan img { width: 200px; border-radius: 8px; margin-bottom: 10px; }
-#popupHiasan h1 { margin: 0; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; }
-#popupHiasan h1.ok { color: var(--ok); text-shadow: 0 0 20px var(--ok); }
-#popupHiasan h1.err { color: var(--err); text-shadow: 0 0 20px var(--err); }
-
-/* STATISTIK BAB (BARS) */
-.stat-summary .bar-row { display: grid; grid-template-columns: minmax(140px, 1.8fr) 3fr 50px; gap: 10px; align-items: center; margin: 6px 0; font-size: 0.9rem; }
-.stat-summary .bar-label { font-weight: bold; }
-.stat-summary .bar-track { height: 18px; background: var(--line); border-radius: 4px; overflow: hidden; position: relative; }
-.stat-summary .bar-fill { height: 100%; background: linear-gradient(90deg, var(--acc), var(--acc2)); border-radius: 4px; transition: width 0.6s ease-out; }
-.stat-summary .bar-count { text-align: right; font-weight: bold; color: var(--acc); }
-.stat-summary .source-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.stat-summary .source-badge { background: var(--acc2); color: var(--ink); border: 1px solid var(--line); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; }
-.stat-summary .recommend { background: var(--acc2); border-left: 4px solid var(--acc); padding: 10px 14px; border-radius: 6px; margin-top: 12px; }
-.stat-summary .recommend ol { margin: 6px 0 0 0; padding-left: 22px; }
-.stat-summary .recommend li { margin: 4px 0; }
-.stat-summary table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.88rem; }
-.stat-summary th, .stat-summary td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; }
-.stat-summary th { background: var(--acc2); }
-.stat-summary td.num { text-align: right; font-weight: bold; }
-
-/* UI EDITOR INTERAKTIF */
-.editor-panel { background: var(--bg); border: 2px solid var(--acc); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-.tab-container { display: flex; border-bottom: 1px solid var(--line); margin-bottom: 12px; flex-wrap: wrap; gap: 4px; }
-.tab-btn { background: transparent; border: 1px solid transparent; border-bottom: none; padding: 8px 16px; border-radius: 6px 6px 0 0; cursor: pointer; font-weight: bold; color: var(--mute); transition: 0.2s; }
-.tab-btn:hover { background: var(--acc2); color: var(--acc); }
-.tab-btn.active { background: var(--card); color: var(--acc); border-color: var(--line); border-bottom: 2px solid var(--acc); margin-bottom: -1px; }
-.tab-content { display: none; animation: fadeInUp 0.3s ease-out; }
-.tab-content.active { display: block; }
-
-.file-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-.file-item { display: flex; justify-content: space-between; align-items: center; background: var(--card); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--line); font-size: 0.9rem;}
-.file-item button { padding: 4px 8px; font-size: 0.8rem; border-color: var(--err); color: var(--err); }
-.file-item button:hover { background: var(--err); color: #fff; }
-
-.json-editor-container { position: relative; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); margin-top: 10px; }
-.json-editor-lines { position: absolute; left: 0; top: 0; bottom: 0; width: 35px; background: #2d2d2d; color: #858585; text-align: right; padding: 10px 5px; font-family: monospace; font-size: 0.85rem; line-height: 1.5; user-select: none; overflow: hidden; }
-.json-editor-area { width: 100%; min-height: 150px; background: #1e1e1e; color: #d4d4d4; padding: 10px 10px 10px 45px; font-family: monospace; font-size: 0.85rem; line-height: 1.5; border: none; resize: vertical; white-space: pre; overflow-wrap: normal; overflow-x: auto; }
-.json-editor-area:focus { outline: none; }
-.json-status { font-size: 0.8rem; margin-top: 4px; }
-.json-status.ok { color: var(--ok); }
-.json-status.err { color: var(--err); }
-#genTopicSearch { width: 100%; margin-bottom: 4px; padding: 6px 10px; font-size: 0.9rem; }
+/* statistik bab */
+.sb{display:grid;grid-template-columns:minmax(140px,1.8fr) 3fr 40px;gap:10px;align-items:center;margin:6px 0;font-size:.9rem}
+.sb .tr{height:16px;background:var(--line);border-radius:4px;overflow:hidden}.sb .tr i{display:block;height:100%;background:var(--acc)}
+.sb .n{text-align:right;font-weight:bold;color:var(--acc)}
+.rec{background:var(--acc2);border-left:4px solid var(--acc);padding:10px 14px;border-radius:6px;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}th{background:var(--acc2)}td.num,th.num{text-align:right}
+/* editor */
+.editor{border:2px solid var(--acc)}
+.tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:12px;flex-wrap:wrap;gap:4px}
+.tabs button{border:1px solid transparent;border-radius:6px 6px 0 0;font-weight:bold;color:var(--mute)}
+.tabs button.active{background:var(--acc2);color:var(--acc);border-color:var(--line)}
+.tc{display:none}.tc.active{display:block}
+.fi{display:flex;justify-content:space-between;align-items:center;background:var(--card);padding:6px 12px;border-radius:6px;border:1px solid var(--line);margin-top:6px;font-size:.9rem}
+.fi button{border-color:var(--err);color:var(--err);padding:3px 8px}
+.js{width:100%;min-height:150px;background:#1e1e1e;color:#d4d4d4;font:.85rem/1.5 monospace;white-space:pre;overflow-x:auto}
+.jst{font-size:.8rem;margin-top:4px}.jst.ok{color:var(--ok)}.jst.err{color:var(--err)}
+/* generator */
+.gs{background:var(--acc2);border-left:4px solid var(--acc);padding:12px 16px;border-radius:6px;margin-bottom:12px;overflow-wrap:anywhere}
+.gs h3{margin:0 0 8px;font-size:1.1rem}
+.go{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.ob{text-align:left;background:var(--bg)}.ob:hover{background:var(--acc2)}
+.ob.correct{background:var(--ok);color:#fff;border-color:var(--ok)}.ob.wrong{background:var(--err);color:#fff;border-color:var(--err)}
+.ans{display:none;background:var(--bg);padding:8px;border-radius:4px;border:1px dashed var(--line);margin-top:8px}.ans.show{display:block}
+#popupHiasan{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);z-index:9999;background:rgba(0,0,0,.85);padding:20px;border-radius:16px;text-align:center;opacity:0;pointer-events:none;transition:.3s;border:3px solid var(--acc)}
+#popupHiasan.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#popupHiasan img{width:200px;border-radius:8px}
+#popupHiasan h1{margin:6px 0 0;font-size:2.2rem}#popupHiasan h1.ok{color:var(--ok)}#popupHiasan h1.err{color:var(--err)}
 </style>
 </head>
 <body>
-
-<!-- DEKORASI & POPUP -->
-<img src="Hiasan_3.jpg" class="deco-cat cat1" alt="Decorative Cat 1">
-<img src="Hiasan_2.jpg" class="deco-cat cat2" alt="Decorative Cat 2">
-<img src="Hiasan_1.jpg" alt="Decorative Cat 3">
-<div id="popupHiasan">
-  <img src="Hiasan_1.jpg" alt="Hiasan Popup">
-  <h1 id="popupText">SELAMAT!</h1>
-</div>
+<img src="Hiasan_3.jpg" class="deco-cat cat1" alt="" onerror="this.remove()">
+<img src="Hiasan_2.jpg" class="deco-cat cat2" alt="" onerror="this.remove()">
+<img src="Hiasan_1.jpg" class="deco-cat cat3" alt="" onerror="this.remove()">
+<div id="popupHiasan"><img src="Hiasan_1.jpg" alt="" onerror="this.remove()"><h1 id="popupText"></h1></div>
 
 <main>
-<!-- ============================================================
-     [PANEL EDITOR KURIKULUM]
-     ============================================================ -->
-<div class="card editor-panel" id="configEditor">
-  <div class="row" style="justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 12px;">
-    <h2 style="margin:0;">⚙️ Pengaturan Kurikulum</h2>
-    <div>
-      <span id="userStatus" style="font-size: 0.85rem; margin-right: 10px; font-weight:bold; color:var(--warn);">Tamu (Default)</span>
-      <label>User: <input type="text" id="cfgUser" placeholder="Nama..." style="width: 100px;"></label>
+<!-- EDITOR KURIKULUM -->
+<div class="card editor">
+  <div class="row" style="justify-content:space-between">
+    <h2 style="margin:0">⚙️ Pengaturan Kurikulum</h2>
+    <div class="row" style="margin:0">
+      <span id="userStatus" style="font-size:.85rem;font-weight:bold"></span>
+      <input type="text" id="cfgUser" placeholder="Nama..." style="width:110px" aria-label="Username">
       <button class="p" id="btnSaveUser">Masuk</button>
-      <button id="btnResetConfig" style="border-color: var(--err); color: var(--err);">Reset</button>
+      <button id="btnResetConfig" style="border-color:var(--err);color:var(--err)">Reset</button>
     </div>
   </div>
-
-  <!-- Area Upload & AI -->
-  <div style="background: var(--acc2); padding: 12px; border-radius: 6px; margin-bottom: 16px;">
-    <b>📚 Tambah Sumber Materi Baru (AI)</b>
-    <div class="row" style="margin-top: 8px;">
-      <label style="flex:1;">Link Referensi: <input type="text" id="cfgFileLink" placeholder="https://..." style="width:100%;"></label>
-      <label style="flex:1;">Upload File (.txt): <input type="file" id="cfgFileUpload"></label>
-      <button class="p" id="btnAddFile" style="align-self: flex-end;">+ Tambah File</button>
+  <div style="background:var(--acc2);padding:12px;border-radius:6px;margin:12px 0">
+    <b>📚 Sumber Materi (AI)</b>
+    <div class="row">
+      <label style="flex:1">Teks/Link referensi: <input type="text" id="cfgFileLink" placeholder="Catatan: link tidak dibaca, upload .txt saja" style="width:100%"></label>
+      <label style="flex:1">Upload (.txt): <input type="file" id="cfgFileUpload" accept=".txt,.md,.csv"></label>
+      <button class="p" id="btnAddFile">+ Tambah</button>
     </div>
-    
-    <div style="margin-top: 12px; border-top: 1px dashed var(--line); padding-top: 12px;">
-      <b>File yang Sedang Aktif:</b>
-      <div class="file-list" id="activeFileList"></div>
-      <button class="p" id="btnGenerateRoadmap" style="margin-top: 12px; width: 100%;">✨ Generate Ulang Kurikulum dari File Aktif</button>
-      <div id="genStatus" style="font-size:0.85rem; font-weight: bold; margin-top: 8px; text-align: center;"></div>
-    </div>
+    <div id="activeFileList"></div>
+    <button class="p" id="btnGenerateRoadmap" style="margin-top:12px;width:100%">✨ Generate Ulang Kurikulum dari File Aktif</button>
+    <div id="genStatus" style="font-size:.85rem;font-weight:bold;margin-top:8px;text-align:center"></div>
   </div>
-
-  <!-- Tab Editor -->
-  <div class="tab-container">
-    <button class="tab-btn active" data-target="tab-topics">Daftar Bab</button>
-    <button class="tab-btn" data-target="tab-referensi">Referensi Teks</button>
-    <button class="tab-btn" data-target="tab-statistik">Statistik</button>
-    <button class="tab-btn" data-target="tab-roadmap">Jadwal (JSON)</button>
+  <div class="tabs">
+    <button class="active" data-target="tab-topics">Daftar Bab</button>
+    <button data-target="tab-ref">Referensi Teks</button>
+    <button data-target="tab-stat">Statistik</button>
+    <button data-target="tab-road">Jadwal (JSON)</button>
   </div>
-
-  <div class="tab-content active" id="tab-topics">
-    <p class="sub">Pisahkan setiap bab dengan koma (contoh: T1 Fondasi, T2 Aljabar).</p>
-    <textarea id="cfgTopics" style="min-height: 80px; font-family: monospace;"></textarea>
-  </div>
-
-  <div class="tab-content" id="tab-referensi">
-    <p class="sub">Teks ini dikirim ke Gemini sebagai "contekan" saat membuat soal.</p>
-    <textarea id="cfgRef" style="min-height: 120px; font-family: monospace;"></textarea>
-  </div>
-
-  <div class="tab-content" id="tab-statistik">
-    <p class="sub">Format JSON Array: <code>[{"topik":"Aljabar", "jumlah":48}]</code></p>
-    <div class="json-editor-container">
-      <div class="json-editor-lines" id="linesStats"></div>
-      <textarea class="json-editor-area" id="cfgStats" spellcheck="false"></textarea>
-    </div>
-    <div class="json-status" id="statusStats">JSON Valid</div>
-  </div>
-
-  <div class="tab-content" id="tab-roadmap">
-    <p class="sub">Format JSON Array: <code>[{"title":"T1", "desc":"Minggu 1-10", "items":["Pecahan", "Aljabar"]}]</code></p>
-    <div class="json-editor-container">
-      <div class="json-editor-lines" id="linesRoadmap"></div>
-      <textarea class="json-editor-area" id="cfgRoadmap" spellcheck="false"></textarea>
-    </div>
-    <div class="json-status" id="statusRoadmap">JSON Valid</div>
-  </div>
-
-  <div class="row" style="margin-top: 16px; justify-content: flex-end;">
-    <button class="p" id="btnApplyConfig" style="padding: 10px 24px; font-size: 1.1rem;">💾 Simpan Perubahan Manual</button>
-  </div>
+  <div class="tc active" id="tab-topics"><p class="sub">Pisahkan bab dengan koma.</p><textarea id="cfgTopics" style="min-height:80px"></textarea></div>
+  <div class="tc" id="tab-ref"><p class="sub">Dikirim ke Gemini sebagai contekan saat membuat soal.</p><textarea id="cfgRef" style="min-height:120px"></textarea></div>
+  <div class="tc" id="tab-stat"><p class="sub">JSON: <code>[{"topik":"Aljabar","jumlah":48}]</code></p><textarea class="js" id="cfgStats" spellcheck="false"></textarea><div class="jst" id="stStats"></div></div>
+  <div class="tc" id="tab-road"><p class="sub">JSON: <code>[{"title":"T1","desc":"Minggu 1-10","items":["Pecahan"]}]</code></p><textarea class="js" id="cfgRoad" spellcheck="false"></textarea><div class="jst" id="stRoad"></div></div>
+  <div class="row" style="justify-content:flex-end"><button class="p" id="btnApplyConfig" style="padding:10px 24px">💾 Simpan Perubahan Manual</button></div>
 </div>
 
-<!-- [HEADER] -->
 <h1>Roadmap Teknik Mesin: Matematika, Fisika, MEXT</h1>
-<p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin, dengan fokus ke fundamental. Matematika Lanjut (kalkulus salah satu targetnya) berjalan bersama Fisika, Kimia, serta bahasa Inggris dan Jepang. Soal lomba dari 10 berkas hanya pendamping.</p>
+<p class="sub">Kelas 10 SMA, Indonesia. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin, fokus fundamental. Soal lomba hanya pendamping.</p>
 <div class="bar"><i id="bar" style="width:0"></i></div>
 <p class="sub" id="pct"></p>
 
-<!-- [RANGKUMAN STATISTIK BAB] -->
-<div class="card stat-summary" id="statSummary">
+<div class="card">
   <h2>📊 Rangkuman Bab Paling Sering Keluar</h2>
-  <p class="sub">Analisis dari file referensi terbaru.</p>
   <div id="statBars"></div>
-  <div class="recommend" id="statRecommend"></div>
-  <details style="margin-top:12px;">
-    <summary style="cursor:pointer;font-weight:bold;">Lihat tabel detail per bab</summary>
-    <div id="statTable"></div>
-  </details>
+  <div class="rec" id="statRecommend"></div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:bold">Lihat tabel detail per bab</summary><div id="statTable"></div></details>
 </div>
 
-<!-- ============================================================
-     [HTML ROADMAP MINGGUAN (TAMPIL DI HALAMAN UTAMA)]
-     ============================================================ -->
-<div class="card" id="roadmapPanel">
-  <h2>🗓️ Jadwal Belajar Mingguan</h2>
-  <p class="sub">Jadwal ini dihasilkan dari file referensi. Centang jika sudah selesai.</p>
-  <div id="mods"></div>
-</div>
+<div class="card"><h2>🗓️ Jadwal Belajar Mingguan</h2><p class="sub">Centang jika sudah selesai.</p><div id="mods"></div></div>
 
-<!-- [STATISTIK BELAJAR & KUIS] -->
 <div class="card">
-<h2>Statistik belajar</h2>
-<div class="kpi" id="kpi"></div>
-<p class="sub" style="margin-bottom:2px">Peta kebiasaan, tiap kolom satu minggu (Senin di atas).</p>
-<div class="hm"><div class="hg" id="hm"></div></div>
-<div class="two" style="margin-top:14px">
-  <div><b>Menit belajar 14 hari terakhir</b><div class="bars" id="bars"></div><div class="lab" id="blab"></div></div>
-  <div><b>Pembagian waktu per topik</b><div class="row"><div class="pie" id="pie"></div><div class="lg" id="lg"></div></div></div>
-</div>
-<p class="sub" style="margin-top:12px"><b>Sesi terakhir</b></p><div id="rec"></div>
-
-<h2 style="margin-top:24px; border-top: 1px solid var(--line); padding-top: 16px;">🧠 Statistik Kuis AI</h2>
-<div class="kpi" id="aiStatKpi"></div>
-<div id="aiStatTable"></div>
+  <h2>Catat belajar hari ini</h2>
+  <div class="row"><input type="date" id="ld" aria-label="Tanggal"><input type="number" id="lm" min="1" max="600" placeholder="menit"><select id="lmod" aria-label="Topik"></select><button class="p" id="addL">Simpan sesi</button></div>
+  <div class="row"><label>Target <input type="number" id="tD" min="1" max="7"> hari/minggu</label><label>Target <input type="number" id="tM" min="10" max="600"> menit/hari</label><label>Mulai Senin <input type="date" id="start"></label></div>
+  <p class="sub" id="wkst"></p>
 </div>
 
-<!-- [CATATAN KESULITAN] -->
 <div class="card">
-<h2>Catatan kesulitan</h2>
-<div class="row"><select id="nmod" aria-label="Topik catatan"></select><input type="date" id="nd" aria-label="Tanggal"></div>
-<textarea id="nt" placeholder="Contoh: L34 No. 14 bingung..."></textarea>
-<div class="row"><button class="p" id="addN">Simpan catatan</button><label><input type="checkbox" id="onlyOpen"> tampilkan yang belum paham saja</label></div>
-<div id="notes"></div>
+  <h2>Statistik belajar</h2>
+  <div class="kpi" id="kpi"></div>
+  <p class="sub" style="margin-bottom:2px">Tiap kolom satu minggu (Senin di atas). Kotak putus-putus = hari bolong.</p>
+  <div class="hm"><div class="hg" id="hm"></div></div>
+  <div class="two" style="margin-top:14px">
+    <div><b>Menit belajar 14 hari terakhir</b><div class="bars" id="bars"></div><div class="lab" id="blab"></div></div>
+    <div><b>Pembagian waktu per topik</b><div class="row"><div class="pie" id="pie"></div><div class="lg" id="lg"></div></div></div>
+  </div>
+  <p class="sub" style="margin-top:12px"><b>Sesi terakhir</b></p><div id="rec"></div>
+  <h2 style="margin-top:24px;border-top:1px solid var(--line);padding-top:16px">🧠 Statistik Kuis AI</h2>
+  <div class="kpi" id="aiKpi"></div><div id="aiTable"></div>
 </div>
 
-<!-- [GENERATOR SOAL AI] -->
-<div class="card" id="geminiSection">
+<div class="card">
+  <h2>Catatan kesulitan</h2>
+  <div class="row"><select id="nmod" aria-label="Topik catatan"></select><input type="date" id="nd" aria-label="Tanggal"></div>
+  <textarea id="nt" placeholder="Contoh: L34 No. 14 bingung..."></textarea>
+  <div class="row"><button class="p" id="addN">Simpan catatan</button><label><input type="checkbox" id="onlyOpen"> belum paham saja</label></div>
+  <div id="notes"></div>
+</div>
+
+<div class="card">
   <h2>🤖 Generator Soal AI (Gemini)</h2>
-  <p class="sub">Buat soal latihan baru. Pilih bab, tingkat kesulitan, dan jumlah soal.</p>
-  <div id="apiKeyWarning" class="api-key-warning">⚠️ API Key belum diatur.</div>
-  <div class="row" style="margin-bottom: 12px;">
-    <input type="password" id="geminiApiKey" placeholder="Masukkan Gemini API Key..." style="flex: 1; min-width: 200px;">
-    <button id="saveApiKey" class="p">Simpan Key</button>
-  </div>
+  <p class="sub" id="apiWarn" style="color:var(--warn)">⚠️ API Key belum diatur.</p>
+  <div class="row"><input type="password" id="geminiApiKey" placeholder="Gemini API Key..." style="flex:1;min-width:200px"><button class="p" id="saveApiKey">Simpan Key</button></div>
   <div class="row">
-    <div style="flex: 1; min-width: 220px;">
-      <label style="display:block; font-size:0.9rem;">Cari Bab:</label>
-      <input type="search" id="genTopicSearch" placeholder="Ketik nama bab...">
-      <select id="genTopic" style="width:100%;"></select>
-    </div>
-    <div>
-      <label style="display:block; font-size:0.9rem;">Level (1-5):</label>
-      <input type="number" id="genDifficulty" min="1" max="5" value="3">
-    </div>
-    <div>
-      <label style="display:block; font-size:0.9rem;">Jumlah:</label>
-      <input type="number" id="genCount" min="1" max="10" value="1">
-    </div>
-    <div style="align-self: flex-end;">
-      <button id="genBtn" class="p" style="height: 38px;">Buat Soal</button>
-    </div>
+    <div style="flex:1;min-width:220px"><label>Cari Bab:</label><input type="search" id="genTopicSearch" placeholder="Ketik nama bab..." style="width:100%;margin-bottom:4px"><select id="genTopic" style="width:100%"></select></div>
+    <div><label>Level (1-5)</label><br><input type="number" id="genDifficulty" min="1" max="5" value="3"></div>
+    <div><label>Jumlah</label><br><input type="number" id="genCount" min="1" max="10" value="1"></div>
+    <button id="genBtn" class="p" style="align-self:flex-end">Buat Soal</button>
   </div>
-  <div id="genLoading" class="loading">⏳ Sedang meracik soal...</div>
   <div id="genResult"></div>
 </div>
 
-<p><button id="reset">Hapus semua data</button></p>
+<p><button id="reset">Hapus semua progres</button></p>
 <footer>Data tersimpan di browser perangkat ini saja.</footer>
 </main>
 
 <script>
-// ============================================================
-// [1. DEFAULT CONFIG (DATA MTK ASLI LENGKAP)]
-// ============================================================
-const DEFAULT_CONFIG = {
-  topics: ["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A","Fisika","Kimia","Bahasa Jepang","Bahasa Inggris"],
-  referensi: "Contoh soal kompetisi:\n- Tentukan bilangan bulat positif terbesar n sehingga 2^n habis membagi 10^20 - 2^20.\n- Jika a+b=11 dan ab=48, nilai a^2+b^2...",
-  activeFiles: [{ name: "Data Soal MTK Bawaan", type: "system" }],
-  statistik: [
-    { topik: "Aljabar (persamaan, pertidaksamaan, sistem)", jumlah: 48, sumber: ["K22","K23","L33","L34","L35","KSR25","K-PENY","K-SF"] },
-    { topik: "Geometri bidang (sudut, segitiga, lingkaran)", jumlah: 35, sumber: ["K22","K23","L33","L34","L35","KSR25","K22-SF","K-SF"] },
-    { topik: "Trigonometri (identitas, aturan, persamaan)", jumlah: 30, sumber: ["K22","K23","L34","L35","KSR25","K-PENY","K-SF"] },
-    { topik: "Barisan & deret (aritmetika, geometri, tak hingga)", jumlah: 24, sumber: ["K22","K23","L33","L35","KSR25","K-SF"] },
-    { topik: "Fungsi (kuadrat, komposisi, invers, grafik)", jumlah: 22, sumber: ["K22","K23","L33","KSR25","K-PENY","K-SF"] },
-    { topik: "Teori bilangan (modulo, faktor, FPB/KPK)", jumlah: 20, sumber: ["K22","K23","L33","L35","KSR25","K-PENY"] },
-    { topik: "Kombinatorik (permutasi, kombinasi, peluang)", jumlah: 18, sumber: ["K22","K23","L34","L35","KSR25","K-SF"] },
-    { topik: "Geometri ruang (volume, jarak, sudut)", jumlah: 14, sumber: ["K22","K23","L34","L35","K-SF"] },
-    { topik: "Matriks & vektor", jumlah: 12, sumber: ["OMI","K23","L34","KSR25"] },
-    { topik: "Eksponen, akar, logaritma", jumlah: 12, sumber: ["K22","K23","KSR25","K-PENY"] },
-    { topik: "Ketaksamaan (QM-AM-GM-HM, Cauchy-Schwarz)", jumlah: 10, sumber: ["KETAKS","L35","K-SF"] },
-    { topik: "Statistika (rata-rata, median, kuartil)", jumlah: 8, sumber: ["K22","K23","L34","K-SF"] },
-    { topik: "Polinomial (teorema sisa, Vieta)", jumlah: 8, sumber: ["K23","L33","L35","KSR25"] },
-    { topik: "Bilangan kompleks", jumlah: 6, sumber: ["L33","L34","KSR25"] },
-    { topik: "Irisan kerucut (lingkaran, elips, parabola)", jumlah: 5, sumber: ["K23","L35","K-SF"] },
-    { topik: "Limit & kalkulus dasar", jumlah: 4, sumber: ["KETAKS","L35","K-SF"] }
-  ],
-  roadmap: [
-    { 
-      title: "T1 Fondasi", 
-      desc: "Minggu 1–10 · Okt 2026 - Jan 2027", 
-      items: ["Pecahan, desimal, persen, bilangan negatif","Bentuk aljabar: sederhanakan dan faktorkan","Persamaan linear dan soal cerita","Sistem persamaan dua variabel","Pertidaksamaan linear dan nilai mutlak dasar","Eksponen dan bentuk akar","Persamaan kuadrat: faktorisasi dan rumus ABC","Diskriminan dan rumus Vieta","Fungsi: nilai fungsi, komposisi, invers","Tes fondasi 30 soal, 45 menit"] 
-    },
-    { 
-      title: "T2 Aljabar & Fungsi", 
-      desc: "Minggu 11–22 · Jan - Mar 2027", 
-      items: ["Fungsi kuadrat dan grafik parabola","Pertidaksamaan kuadrat dan rasional","Eksponen dan logaritma","Persamaan eksponen dan logaritma","Polinomial dan teorema sisa","Barisan dan deret aritmetika, geometri","Deret tak hingga dan sigma dasar","Sistem persamaan linear dan kuadrat","Transformasi grafik fungsi","Rasio, persen, laju, dan satuan","Pertumbuhan eksponensial dan soal cerita fungsi","Review T2 dan Bluebook practice test Math 1"] 
-    },
-    { 
-      title: "T3 Geometri & Trigonometri", 
-      desc: "Minggu 23–37 · Mar - Jul 2027", 
-      items: ["Geometri bidang: sudut, segitiga, Pythagoras","Luas dan keliling bangun datar","Lingkaran: sudut, busur, persamaan lingkaran","Geometri koordinat: garis, jarak, titik tengah","Geometri ruang: volume dan luas permukaan","Sin, cos, tan di segitiga siku-siku","Sudut istimewa 30°, 45°, 60°","Radian dan lingkaran satuan","Kuadran dan sudut berelasi","Identitas sin²+cos²=1","Persamaan trigonometri sederhana","Aturan sinus dan kosinus","Luas ½ab sin C dan segi-n beraturan","Rumus jumlah, selisih, sudut ganda, grafik sin dan cos","Review T3 dan Bluebook practice test Math 2"] 
-    },
-    { 
-      title: "T4 Data & Pra-Kalkulus", 
-      desc: "Minggu 38–48 · Jul - Sep 2027", 
-      items: ["Statistik: rata-rata, median, simpangan baku","Peluang dasar dan peluang bersyarat","Aturan hitung, permutasi, kombinasi","Diagram pencar, garis regresi, margin kesalahan","Bilangan kompleks dasar","Matriks: operasi, determinan, invers","Vektor di bidang dan ruang","Irisan kerucut: lingkaran, elips, parabola","Pengantar limit: nilai yang mendekati","Soal campur gaya SAT","Review T4 dan Bluebook practice test Math 3"] 
-    }
-  ]
-};
-
-var CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG)); 
-var T = CONFIG.topics; 
-var allTopicOptions = [];
-var currentUser = null;
-
-// State lokal untuk statistik belajar, dsb
+// ===== DATA DEFAULT =====
+var DEF={
+ topics:["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A","Fisika","Kimia","Bahasa Jepang","Bahasa Inggris"],
+ referensi:"Contoh soal kompetisi:\n- Tentukan bilangan bulat positif terbesar n sehingga 2^n habis membagi 10^20 - 2^20.\n- Jika a+b=11 dan ab=48, nilai a^2+b^2...",
+ activeFiles:[{name:"Data Soal MTK Bawaan"}],
+ statistik:[["Aljabar (persamaan, pertidaksamaan, sistem)",48],["Geometri bidang (sudut, segitiga, lingkaran)",35],["Trigonometri (identitas, aturan, persamaan)",30],["Barisan & deret",24],["Fungsi (kuadrat, komposisi, invers, grafik)",22],["Teori bilangan (modulo, faktor, FPB/KPK)",20],["Kombinatorik (permutasi, kombinasi, peluang)",18],["Geometri ruang (volume, jarak, sudut)",14],["Matriks & vektor",12],["Eksponen, akar, logaritma",12],["Ketaksamaan (QM-AM-GM-HM, Cauchy-Schwarz)",10],["Statistika",8],["Polinomial (teorema sisa, Vieta)",8],["Bilangan kompleks",6],["Irisan kerucut",5],["Limit & kalkulus dasar",4]].map(function(a){return{topik:a[0],jumlah:a[1]};}),
+ roadmap:[
+  {title:"T1 Fondasi",desc:"Minggu 1–10 · Okt 2026 - Jan 2027",items:["Pecahan, desimal, persen, bilangan negatif","Bentuk aljabar: sederhanakan dan faktorkan","Persamaan linear dan soal cerita","Sistem persamaan dua variabel","Pertidaksamaan linear dan nilai mutlak dasar","Eksponen dan bentuk akar","Persamaan kuadrat: faktorisasi dan rumus ABC","Diskriminan dan rumus Vieta","Fungsi: nilai fungsi, komposisi, invers","Tes fondasi 30 soal, 45 menit"]},
+  {title:"T2 Aljabar & Fungsi",desc:"Minggu 11–22 · Jan - Mar 2027",items:["Fungsi kuadrat dan grafik parabola","Pertidaksamaan kuadrat dan rasional","Eksponen dan logaritma","Persamaan eksponen dan logaritma","Polinomial dan teorema sisa","Barisan dan deret aritmetika, geometri","Deret tak hingga dan sigma dasar","Sistem persamaan linear dan kuadrat","Transformasi grafik fungsi","Rasio, persen, laju, dan satuan","Pertumbuhan eksponensial dan soal cerita fungsi","Review T2 dan Bluebook practice test Math 1"]},
+  {title:"T3 Geometri & Trigonometri",desc:"Minggu 23–37 · Mar - Jul 2027",items:["Geometri bidang: sudut, segitiga, Pythagoras","Luas dan keliling bangun datar","Lingkaran: sudut, busur, persamaan lingkaran","Geometri koordinat: garis, jarak, titik tengah","Geometri ruang: volume dan luas permukaan","Sin, cos, tan di segitiga siku-siku","Sudut istimewa 30°, 45°, 60°","Radian dan lingkaran satuan","Kuadran dan sudut berelasi","Identitas sin²+cos²=1","Persamaan trigonometri sederhana","Aturan sinus dan kosinus","Luas ½ab sin C dan segi-n beraturan","Rumus jumlah, selisih, sudut ganda, grafik sin dan cos","Review T3 dan Bluebook practice test Math 2"]},
+  {title:"T4 Data & Pra-Kalkulus",desc:"Minggu 38–48 · Jul - Sep 2027",items:["Statistik: rata-rata, median, simpangan baku","Peluang dasar dan peluang bersyarat","Aturan hitung, permutasi, kombinasi","Diagram pencar, garis regresi, margin kesalahan","Bilangan kompleks dasar","Matriks: operasi, determinan, invers","Vektor di bidang dan ruang","Irisan kerucut: lingkaran, elips, parabola","Pengantar limit: nilai yang mendekati","Soal campur gaya SAT","Review T4 dan Bluebook practice test Math 3"]}
+ ]};
 var HUE=[170,265,25,330,60,0,200,120,300,350];
-var KEY="rencana48-v5",st={start:"",tD:5,tM:60,w:{},rm:{},log:[],notes:[],aiStats:{}};
-try{var o=JSON.parse(localStorage.getItem(KEY)||"{}");for(var k in o)st[k]=o[k];}catch(e){}
-if(!st.aiStats) st.aiStats = {};
 
+// ===== STATE & HELPER =====
+function $(i){return document.getElementById(i);}
+function clone(o){return JSON.parse(JSON.stringify(o));}
+var CONFIG=clone(DEF),T=CONFIG.topics,cur=null,allOpts=[];
+var KEY="rencana48-v5",st={start:"",tD:5,tM:60,w:{},log:[],notes:[],aiStats:{}};
+try{var o=JSON.parse(localStorage.getItem(KEY)||"{}");for(var k in o)st[k]=o[k];}catch(e){}
 function sv(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
 function iso(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
 function pd(s){return new Date(s+"T00:00:00");}
 function ad(d,n){var x=new Date(d.getTime());x.setDate(x.getDate()+n);return x;}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 function fmt(d){return d.toLocaleDateString("id-ID",{day:"numeric",month:"short"});}
+function tn(i){return T[i]||("Topik "+(+i+1));}
+function dayMap(){var r={};st.log.forEach(function(l){r[l.d]=(r[l.d]||0)+l.m;});return r;}
 var now=new Date(),today=iso(now);
 function monOf(d){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x;}
-if(!st.start){var n=monOf(now);if(now.getDay()!==1)n=ad(n,7);st.start=iso(n);}
+if(!st.start){var n0=monOf(now);if(now.getDay()!==1)n0=ad(n0,7);st.start=iso(n0);}
+if(!st.aiStats)st.aiStats={};
 
-// ============================================================
-// [2. SISTEM AKUN & PENYIMPANAN CONFIG]
-// ============================================================
-function getStorageKey(username) { return "daigaku_config_" + username.toLowerCase().trim(); }
+// ===== AKUN & CONFIG =====
+function skey(u){return"daigaku_config_"+u.toLowerCase().trim();}
+function loadCfg(u){if(u){try{var s=localStorage.getItem(skey(u));if(s){var c=JSON.parse(s);if(c&&c.topics&&c.roadmap&&c.statistik)return c;}}catch(e){}}return clone(DEF);}
+function saveCfg(){if(cur)try{localStorage.setItem(skey(cur),JSON.stringify(CONFIG));}catch(e){}}
 
-function loadConfigForUser(username) {
-  if (!username) return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
-  const saved = localStorage.getItem(getStorageKey(username));
-  if (saved) {
-    try { return JSON.parse(saved); } catch(e) { return JSON.parse(JSON.stringify(DEFAULT_CONFIG)); }
-  }
-  return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+// ===== EDITOR =====
+document.querySelectorAll(".tabs button").forEach(function(b){b.onclick=function(){
+  document.querySelectorAll(".tabs button").forEach(function(x){x.classList.remove("active");});
+  document.querySelectorAll(".tc").forEach(function(x){x.classList.remove("active");});
+  b.classList.add("active");$(b.dataset.target).classList.add("active");};});
+function vj(id,sid){var s=$(sid);try{JSON.parse($(id).value);s.textContent="JSON Valid";s.className="jst ok";return true;}catch(e){s.textContent="JSON Invalid: "+e.message;s.className="jst err";return false;}}
+$("cfgStats").oninput=function(){vj("cfgStats","stStats");};
+$("cfgRoad").oninput=function(){vj("cfgRoad","stRoad");};
+function fileList(){
+  var f=CONFIG.activeFiles||[];
+  $("activeFileList").innerHTML=f.length?f.map(function(x,i){return'<div class="fi"><span>📄 '+esc(x.name)+'</span><button data-df="'+i+'">Hapus</button></div>';}).join(""):'<div class="sub">Belum ada file aktif.</div>';
+  document.querySelectorAll("[data-df]").forEach(function(b){b.onclick=function(){
+    if(!cur)return alert("Silakan masuk dulu.");
+    CONFIG.activeFiles.splice(+b.dataset.df,1);saveCfg();fileList();};});
+}
+function initEditor(){
+  $("cfgUser").value=cur||"";
+  $("cfgTopics").value=CONFIG.topics.join(", ");
+  $("cfgRef").value=CONFIG.referensi;
+  $("cfgStats").value=JSON.stringify(CONFIG.statistik,null,2);
+  $("cfgRoad").value=JSON.stringify(CONFIG.roadmap,null,2);
+  vj("cfgStats","stStats");vj("cfgRoad","stRoad");fileList();
+  var s=$("userStatus");
+  if(cur){var c=localStorage.getItem(skey(cur))!==null;s.style.color=c?"var(--ok)":"var(--warn)";s.textContent=(c?"Custom: ":"Baru: ")+cur;}
+  else{s.style.color="var(--warn)";s.textContent="Tamu (Default)";}
 }
 
-function saveConfigForUser(username) {
-  if (!username) return;
-  localStorage.setItem(getStorageKey(username), JSON.stringify(CONFIG));
+// ===== GEMINI =====
+async function gem(prompt,max){
+  var key=localStorage.getItem("gemini-api-key");
+  if(!key)throw new Error("API Key Gemini belum diatur.");
+  var r=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",{
+    method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":key},
+    body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:.5,maxOutputTokens:max,responseMimeType:"application/json",thinkingConfig:{thinkingBudget:0}}})});
+  if(!r.ok)throw new Error("API error "+r.status);
+  var d=await r.json(),t="";
+  try{t=d.candidates[0].content.parts[0].text;}catch(e){}
+  return t.replace(/```json|```/g,"").trim();
 }
-
-// ============================================================
-// [3. FUNGSI UI EDITOR & TAB]
-// ============================================================
-document.querySelectorAll(".tab-btn").forEach(btn => {
-  btn.onclick = function() {
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-    this.classList.add("active");
-    document.getElementById(this.dataset.target).classList.add("active");
-  };
-});
-
-function updateLineNumbers(textareaId, linesId) {
-  const ta = document.getElementById(textareaId);
-  const lines = document.getElementById(linesId);
-  const count = ta.value.split('\n').length;
-  lines.innerHTML = Array(count).fill(0).map((_, i) => i + 1).join('<br>');
-  lines.scrollTop = ta.scrollTop;
-}
-
-function validateJson(textareaId, statusId) {
-  const ta = document.getElementById(textareaId);
-  const status = document.getElementById(statusId);
-  try {
-    JSON.parse(ta.value);
-    status.textContent = "JSON Valid";
-    status.className = "json-status ok";
-    return true;
-  } catch (e) {
-    status.textContent = "JSON Invalid: " + e.message;
-    status.className = "json-status err";
-    return false;
-  }
-}
-
-['cfgStats', 'cfgRoadmap'].forEach(id => {
-  const el = document.getElementById(id);
-  el.addEventListener('input', function() {
-    updateLineNumbers(id, id === 'cfgStats' ? 'linesStats' : 'linesRoadmap');
-    validateJson(id, id === 'cfgStats' ? 'statusStats' : 'statusRoadmap');
-  });
-  el.addEventListener('scroll', function() {
-    document.getElementById(id === 'cfgStats' ? 'linesStats' : 'linesRoadmap').scrollTop = this.scrollTop;
-  });
-});
-
-function updateFileListUI() {
-  const list = document.getElementById("activeFileList");
-  if (!CONFIG.activeFiles || CONFIG.activeFiles.length === 0) {
-    list.innerHTML = `<div style="color:var(--mute); font-size:0.9rem;">Belum ada file referensi aktif.</div>`;
-    return;
-  }
-  let html = "";
-  CONFIG.activeFiles.forEach((f, idx) => {
-    html += `<div class="file-item">
-      <span>📄 ${esc(f.name)}</span>
-      <button onclick="deleteFile(${idx})">Hapus</button>
-    </div>`;
-  });
-  list.innerHTML = html;
-}
-
-window.deleteFile = function(idx) {
-  if(!currentUser) return alert("Silakan login dulu.");
-  CONFIG.activeFiles.splice(idx, 1);
-  saveConfigForUser(currentUser);
-  updateFileListUI();
+$("btnAddFile").onclick=async function(){
+  if(!cur)return alert("Isi Username dan klik 'Masuk' dulu.");
+  var link=$("cfgFileLink").value.trim(),file=$("cfgFileUpload").files[0];
+  if(!link&&!file)return alert("Isi teks/link atau pilih file!");
+  var name=file?file.name:link.substring(0,30),content=file?await file.text():link;
+  if(!CONFIG.activeFiles)CONFIG.activeFiles=[];
+  CONFIG.activeFiles.push({name:name,content:content});
+  $("cfgFileLink").value="";$("cfgFileUpload").value="";saveCfg();fileList();
+};
+$("btnGenerateRoadmap").onclick=async function(){
+  var btn=this,s=$("genStatus");
+  if(!cur)return alert("Isi Username dan klik 'Masuk' dulu.");
+  if(!CONFIG.activeFiles||!CONFIG.activeFiles.length)return alert("Tambahkan minimal 1 file!");
+  btn.disabled=true;s.style.color="var(--warn)";s.textContent="AI sedang menganalisis...";
+  var txt=CONFIG.activeFiles.map(function(f){return f.content||CONFIG.referensi;}).join("\n\n").substring(0,15000);
+  var prompt='Kamu ahli kurikulum. Berdasarkan konten berikut:\n"""'+txt+'"""\nBuat JSON valid murni dengan bentuk: {"topics":["..."],"statistik":[{"topik":"...","jumlah":30}],"roadmap":[{"title":"...","desc":"Minggu 1-4","items":["..."]}],"referensi":"ringkasan soal untuk prompt AI"}. Escape setiap backslash sebagai \\\\.';
+  try{
+    var p=JSON.parse(await gem(prompt,8192));
+    if(Array.isArray(p.topics)&&p.topics.length)CONFIG.topics=p.topics;
+    if(Array.isArray(p.statistik))CONFIG.statistik=p.statistik;
+    if(Array.isArray(p.roadmap))CONFIG.roadmap=p.roadmap;
+    if(p.referensi)CONFIG.referensi=p.referensi;
+    T=CONFIG.topics;saveCfg();initEditor();refreshApp();render();
+    s.style.color="var(--ok)";s.textContent="✅ Berhasil diperbarui!";
+  }catch(e){alert("Gagal: "+e.message);s.style.color="var(--err)";s.textContent="❌ Error.";}
+  finally{btn.disabled=false;setTimeout(function(){s.textContent="";},4000);}
 };
 
-function initConfigEditor() {
-  document.getElementById("cfgUser").value = currentUser || "";
-  document.getElementById("cfgTopics").value = CONFIG.topics.join(", ");
-  document.getElementById("cfgRef").value = CONFIG.referensi;
-  
-  document.getElementById("cfgStats").value = JSON.stringify(CONFIG.statistik, null, 2);
-  document.getElementById("cfgRoadmap").value = JSON.stringify(CONFIG.roadmap, null, 2);
-  
-  updateLineNumbers('cfgStats', 'linesStats');
-  updateLineNumbers('cfgRoadmap', 'linesRoadmap');
-  validateJson('cfgStats', 'statusStats');
-  validateJson('cfgRoadmap', 'statusRoadmap');
-  updateFileListUI();
-  
-  const statusDiv = document.getElementById("userStatus");
-  if (currentUser) {
-    const isCustom = localStorage.getItem(getStorageKey(currentUser)) !== null;
-    statusDiv.innerHTML = isCustom ? `<span style="color:var(--ok)">Custom: ${esc(currentUser)}</span>` : `<span style="color:var(--warn)">Baru: ${esc(currentUser)}</span>`;
-  } else {
-    statusDiv.innerHTML = `<span style="color:var(--warn)">Tamu (Default)</span>`;
-  }
+// ===== RENDER STATISTIK BAB & DROPDOWN =====
+function fillSel(){
+  var h=T.map(function(t,i){return'<option value="'+i+'">'+esc(t)+'</option>';}).join("");
+  var a=$("lmod").value,b=$("nmod").value;
+  $("lmod").innerHTML=h;$("nmod").innerHTML=h;
+  if(a)$("lmod").value=a;if(b)$("nmod").value=b;
+}
+function topicOpts(q){
+  if(!allOpts.length){allOpts.push({v:"all",t:"🌟 Semua Bab (campur)"});T.forEach(function(t,i){allOpts.push({v:"big:"+i,t:t});});}
+  q=(q||"").toLowerCase().trim();
+  var f=allOpts.filter(function(o){return o.t.toLowerCase().indexOf(q)>-1;});
+  $("genTopic").innerHTML=f.length?f.map(function(o){return'<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join(""):'<option value="">-- Tidak ditemukan --</option>';
+}
+$("genTopicSearch").oninput=function(){topicOpts(this.value);};
+function refreshApp(){
+  allOpts=[];topicOpts();fillSel();
+  var sorted=(CONFIG.statistik||[]).slice().sort(function(a,b){return b.jumlah-a.jumlah;});
+  var max=sorted[0]?sorted[0].jumlah:1;
+  $("statBars").innerHTML=sorted.slice(0,10).map(function(b,i){return'<div class="sb"><div><b>'+(i+1)+'. '+esc(b.topik)+'</b></div><div class="tr"><i style="width:'+Math.round(100*b.jumlah/max)+'%"></i></div><div class="n">'+b.jumlah+'</div></div>';}).join("")||"<p>Belum ada data.</p>";
+  $("statRecommend").innerHTML="<b>Prioritas belajar:</b><ol>"+sorted.slice(0,3).map(function(b){return"<li>"+esc(b.topik)+" ("+b.jumlah+" soal)</li>";}).join("")+"</ol>";
+  $("statTable").innerHTML='<table><thead><tr><th>No</th><th>Topik</th><th class="num">Jumlah</th></tr></thead><tbody>'+sorted.map(function(b,i){return"<tr><td>"+(i+1)+"</td><td>"+esc(b.topik)+'</td><td class="num">'+b.jumlah+"</td></tr>";}).join("")+"</tbody></table>";
 }
 
-// ============================================================
-// [4. RENDER UI STATISTIK & ROADMAP]
-// ============================================================
-function refreshAppFromConfig() {
-  allTopicOptions = [];
-  buildTopicOptions();
-
-  // Render Statistik (Bar)
-  const statBars = document.getElementById("statBars");
-  const statTable = document.getElementById("statTable");
-  statBars.innerHTML = ""; statTable.innerHTML = "";
-  
-  const sorted = CONFIG.statistik.slice().sort((a,b) => b.jumlah - a.jumlah);
-  const max = sorted[0] ? sorted[0].jumlah : 1;
-  
-  let barsHtml = "";
-  sorted.slice(0, 10).forEach(function(b, i) {
-    const pct = Math.round(100 * b.jumlah / max);
-    barsHtml += `
-      <div class="bar-row">
-        <div class="bar-label">${i+1}. ${esc(b.topik)}</div>
-        <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
-        <div class="bar-count">${b.jumlah}</div>
-      </div>
-    `;
-  });
-  statBars.innerHTML = barsHtml || "<p>Belum ada data.</p>";
-
-  let tableHtml = `<table><thead><tr><th>No</th><th>Topik</th><th class="num">Jumlah</th></tr></thead><tbody>`;
-  sorted.forEach(function(b, i) {
-    tableHtml += `<tr><td>${i+1}</td><td>${esc(b.topik)}</td><td class="num">${b.jumlah}</td></tr>`;
-  });
-  tableHtml += `</tbody></table>`;
-  statTable.innerHTML = tableHtml;
-
-  // Render Roadmap Mingguan (M)
-  const modsEl = document.getElementById("mods");
-  if (CONFIG.roadmap && Array.isArray(CONFIG.roadmap)) {
-    let roadHtml = "";
-    CONFIG.roadmap.forEach((m, mi) => {
-      let itemsHtml = "";
-      m.items.forEach((item, ii) => {
-        itemsHtml += `<div class="wk"><div><div class="t"><b>Minggu ${ii+1}:</b> ${esc(item)}</div></div></div>`;
-      });
-      roadHtml += `
-        <details class="mod" ${mi === 0 ? 'open' : ''}>
-          <summary>${esc(m.title)}<small>${esc(m.desc)}</small></summary>
-          <div class="in">${itemsHtml}</div>
-        </details>
-      `;
-    });
-    modsEl.innerHTML = roadHtml;
-  } else {
-    modsEl.innerHTML = "<p>Belum ada roadmap.</p>";
-  }
-}
-
-// ============================================================
-// [5. SISTEM GENERATE AI (FILE / LINK)]
-// ============================================================
-document.getElementById("btnAddFile").onclick = async function() {
-  if (!currentUser) return alert("Silakan isi Username dan klik 'Masuk' terlebih dahulu.");
-  const link = document.getElementById("cfgFileLink").value.trim();
-  const file = document.getElementById("cfgFileUpload").files[0];
-  
-  if (!link && !file) return alert("Masukkan Link atau Pilih File!");
-  
-  let name = link ? link.substring(0, 30) + "..." : file.name;
-  let content = link ? "Konten link disimulasikan." : await file.text();
-  
-  if(!CONFIG.activeFiles) CONFIG.activeFiles = [];
-  CONFIG.activeFiles.push({ name: name, content: content });
-  
-  document.getElementById("cfgFileLink").value = "";
-  document.getElementById("cfgFileUpload").value = "";
-  
-  saveConfigForUser(currentUser);
-  updateFileListUI();
-};
-
-document.getElementById("btnGenerateRoadmap").onclick = async function() {
-  const btn = this;
-  const statusSpan = document.getElementById("genStatus");
-  
-  if (!currentUser) return alert("Silakan isi Username dan klik 'Masuk' terlebih dahulu.");
-  if (!CONFIG.activeFiles || CONFIG.activeFiles.length === 0) return alert("Tambahkan minimal 1 file referensi!");
-
-  btn.disabled = true;
-  statusSpan.textContent = "AI sedang menganalisis file...";
-  statusSpan.style.color = "var(--warn)";
-  
-  // Gabungkan semua konten file
-  let combinedContent = CONFIG.activeFiles.map(f => f.content).join("\n\n").substring(0, 3000);
-
-  const apiKey = localStorage.getItem("gemini-api-key");
-  if (!apiKey) {
-    alert("API Key Gemini belum diatur.");
-    btn.disabled = false; statusSpan.textContent = "API Key tidak ditemukan."; statusSpan.style.color = "var(--err)";
-    return;
-  }
-
-  const prompt = `Kamu adalah ahli kurikulum. Berdasarkan konten berikut:
-"${combinedContent}"
-
-Buat format JSON valid murni (tanpa markdown):
-{
-  "topics": ["Topik 1", "Topik 2"],
-  "statistik": [{"topik": "Topik 1", "jumlah": 30}],
-  "roadmap": [{"title": "Bab 1", "desc": "Minggu 1-4", "items": ["Materi A", "Materi B"]}],
-  "referensi": "Ringkasan soal untuk prompt AI..."
-}`;
-
-  const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey;
-
-  try {
-    const res = await fetch(GEMINI_API_URL, {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.5, maxOutputTokens: 2048 } })
-    });
-    
-    if (!res.ok) throw new Error("Gagal memanggil AI.");
-    const data = await res.json();
-    let txt = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-    txt = txt.replace(/```json/g, "").replace(/```/g, "").trim();
-    
-    const parsed = JSON.parse(txt);
-    
-    CONFIG.topics = parsed.topics || DEFAULT_CONFIG.topics;
-    CONFIG.statistik = parsed.statistik || DEFAULT_CONFIG.statistik;
-    CONFIG.roadmap = parsed.roadmap || DEFAULT_CONFIG.roadmap;
-    CONFIG.referensi = parsed.referensi || DEFAULT_CONFIG.referensi;
-    
-    T = CONFIG.topics;
-    saveConfigForUser(currentUser);
-    
-    initConfigEditor();
-    refreshAppFromConfig();
-    statusSpan.textContent = "✅ Berhasil diperbarui!";
-    statusSpan.style.color = "var(--ok)";
-    
-  } catch (err) {
-    alert("Gagal memproses AI: " + err.message);
-    statusSpan.textContent = "❌ Error saat memproses.";
-    statusSpan.style.color = "var(--err)";
-  } finally {
-    btn.disabled = false;
-    setTimeout(() => { statusSpan.textContent = ""; }, 4000);
-  }
-};
-
-// ============================================================
-// [6. SISTEM DROPDOWN & SEARCH BAB]
-// ============================================================
-function buildTopicOptions(searchQuery = "") {
-  var el = document.getElementById("genTopic");
-  
-  if (allTopicOptions.length === 0) {
-    allTopicOptions.push({ value: "all", text: "🌟 Semua Bab (campur)", group: "" });
-    T.forEach(function(t,i){ allTopicOptions.push({ value: "big:"+i, text: t, group: "Topik Besar" }); });
-  }
-
-  var q = searchQuery.toLowerCase().trim();
-  var filtered = allTopicOptions.filter(function(o) { return o.text.toLowerCase().includes(q); });
-
-  var h = "";
-  var currentGroup = "";
-  filtered.forEach(function(o) {
-    if (o.group !== currentGroup) {
-      if (currentGroup !== "") h += '</optgroup>';
-      if (o.group !== "") h += '<optgroup label="'+o.group+'">';
-      currentGroup = o.group;
-    }
-    h += '<option value="'+esc(o.value)+'">'+esc(o.text)+'</option>';
-  });
-  if (currentGroup !== "") h += '</optgroup>';
-  
-  el.innerHTML = h || '<option value="">-- Tidak ditemukan --</option>';
-}
-
-document.getElementById("genTopicSearch").addEventListener("input", function(e) {
-  buildTopicOptions(e.target.value);
-});
-
-// ============================================================
-// [7. FUNGSI UTAMA (RENDER, STATISTIK, DLL)]
-// ============================================================
+// ===== RENDER UTAMA =====
 function render(){
   var S=pd(st.start),cw=Math.floor((now-S)/604800000)+1,h="",n=0,done=0,all=0;
-  
-  // Render Roadmap Mingguan Lokal (st.w)
-  if (CONFIG.roadmap && Array.isArray(CONFIG.roadmap)) {
-    CONFIG.roadmap.forEach((m, mi) => {
-      let itemsHtml = "";
-      m.items.forEach((item, ii) => {
-        n++; all++;
-        var id = "w" + mi + "_" + ii;
-        var on = !!st.w[id];
-        if(on) done++;
-        itemsHtml += `<div class="wk ${on?'done':''}">
-          <input type="checkbox" data-id="${id}" ${on?'checked':''}>
-          <div><div class="t"><b>Minggu ${ii+1}:</b> ${esc(item)}</div></div>
-        </div>`;
-      });
-      h += `<details class="mod" ${mi===0?'open':''}><summary>${esc(m.title)}<small>${esc(m.desc)}</small></summary><div class="in">${itemsHtml}</div></details>`;
+  (CONFIG.roadmap||[]).forEach(function(m,mi){
+    var first=n+1,b="";
+    (m.items||[]).forEach(function(item,ii){
+      n++;all++;var id="w"+mi+"_"+ii,on=!!st.w[id];if(on)done++;var d0=ad(S,7*(n-1));
+      b+='<div class="wk'+(on?" done":"")+(n===cw?" now":"")+'"><input type="checkbox" data-id="'+id+'"'+(on?" checked":"")+' aria-label="Selesai minggu '+n+'"><div><div class="t"><b>Minggu '+n+':</b> '+esc(item)+'</div><div class="d">'+fmt(d0)+" sampai "+fmt(ad(d0,6))+"</div></div></div>";
     });
-    document.getElementById("mods").innerHTML = h;
-  }
-
-  // Event listener checkbox roadmap
-  document.querySelectorAll("#mods input[type='checkbox']").forEach(function(c) {
-    c.onchange = function() {
-      if (c.checked) st.w[c.dataset.id] = 1;
-      else delete st.w[c.dataset.id];
-      sv(); render();
-    };
+    h+='<details class="mod"'+(((cw>=first&&cw<=n)||(cw<1&&mi===0))?" open":"")+"><summary>"+esc(m.title)+"<small>"+esc(m.desc)+'</small></summary><div class="in">'+b+"</div></details>";
   });
-
-  var p = all ? Math.round(100*done/all) : 0;
-  document.getElementById("bar").style.width=p+"%";
-  document.getElementById("pct").textContent=done+" dari "+all+" minggu selesai ("+p+"%).";
-  
-  stats(); notes();
+  $("mods").innerHTML=h||"<p>Belum ada roadmap.</p>";
+  document.querySelectorAll("#mods input[type=checkbox]").forEach(function(c){c.onchange=function(){
+    if(c.checked)st.w[c.dataset.id]=1;else delete st.w[c.dataset.id];sv();render();};});
+  var p=all?Math.round(100*done/all):0;
+  $("bar").style.width=p+"%";
+  $("pct").textContent=done+" dari "+all+" minggu selesai ("+p+"%)"+(cw<1?". Minggu 1 dimulai "+fmt(S)+".":cw>all?". Rencana selesai.":". Sekarang minggu ke-"+cw+".");
+  stats();notes();
 }
-
 function stats(){
-  var dm=dayMap(),tot=0,days=0,gaps=0,perMod=[0,0,0,0,0,0,0,0,0,0];
+  var dm=dayMap(),tot=0,gaps=0,perMod=[];
   st.log.forEach(function(l){tot+=l.m;perMod[l.mod]=(perMod[l.mod]||0)+l.m;});
-  var S=pd(st.start),first=S,keys=Object.keys(dm).sort();if(keys.length&&pd(keys[0])<first)first=pd(keys[0]);
+  var S=pd(st.start),first=S,keys=Object.keys(dm).sort();
+  if(keys.length&&pd(keys[0])<first)first=pd(keys[0]);
   for(var d=new Date(first);iso(d)<today;d=ad(d,1)){if(d.getDay()!==0&&!dm[iso(d)])gaps++;}
-  days=keys.length;
-  var stk=0,d2=pd(today);if(!dm[today])d2=ad(d2,-1);
+  var days=keys.length,stk=0,d2=pd(today);if(!dm[today])d2=ad(d2,-1);
   while(true){if(d2.getDay()===0){d2=ad(d2,-1);continue;}if(dm[iso(d2)]){stk++;d2=ad(d2,-1);}else break;}
-  var mo=monOf(now),wd=0,wm=0;for(var i=0;i<7;i++){var k=iso(ad(mo,i));if(dm[k]){wd++;wm+=dm[k];}}
-  
-  document.getElementById("kpi").innerHTML='<div><b>'+(tot/60).toFixed(1)+' jam</b>total belajar</div><div><b>'+days+'</b>hari belajar</div><div><b>'+(days?Math.round(tot/days):0)+' menit</b>rata-rata</div>';
-  
-  var hm="";for(var c=0;c<48;c++)for(var r=0;r<7;r++){var dt=ad(S,7*c+r),k=iso(dt),m=dm[k],cl="";
-    if(k>today)cl="f";else if(m){var q=m/st.tM;cl=q<.5?"l1":q<1?"l2":q<1.5?"l3":"l4";}else if(r<6&&dt>=first)cl="g";else cl="z";
-    if(k===today)cl+=" t";hm+='<i class="'+cl+'" title="'+fmt(dt)+': '+(m||0)+' menit"></i>';}
-  document.getElementById("hm").innerHTML=hm;
-
-  var mx=st.tM*1.5,bs="",lb="";for(var i=13;i>=0;i--){var dd=ad(now,-i),v=dm[iso(dd)]||0;if(v>mx)mx=v;}
-  for(i=13;i>=0;i--){dd=ad(now,-i);v=dm[iso(dd)]||0;bs+='<div style="height:'+Math.round(100*v/mx)+'%" title="'+fmt(dd)+': '+v+' menit"></div>';lb+='<span>'+dd.getDate()+'</span>';}
-  document.getElementById("bars").innerHTML=bs+'<div class="tl" style="bottom:'+Math.round(100*st.tM/mx)+'%" title="Target"></div>';
-  document.getElementById("blab").innerHTML=lb;
-
-  var g=[],a=0,lg="";perMod.forEach(function(v,i){if(!v)return;var b=a+100*v/tot;g.push("hsl("+HUE[i]+" 55% 50%) "+a+"% "+b+"%");a=b;lg+='<div><i style="background:hsl('+HUE[i]+' 55% 50%)"></i>'+T[i]+': '+v+' menit</div>';});
-  document.getElementById("pie").style.background=tot?"conic-gradient("+g.join(",")+")":"var(--line)";
-  document.getElementById("lg").innerHTML=lg||"Belum ada sesi.";
-
-  var rc="";st.log.slice(-5).reverse().forEach(function(l){var ix=st.log.indexOf(l);rc+='<div class="nt"><div class="tx" style="flex:1">'+fmt(pd(l.d))+': '+l.m+' menit, '+esc(T[l.mod])+'</div><button data-del="'+ix+'">Hapus</button></div>';});
-  document.getElementById("rec").innerHTML=rc||'<span class="sub">Belum ada sesi.</span>';
-  document.querySelectorAll("[data-del]").forEach(function(b){b.onclick=function(){st.log.splice(+b.dataset.del,1);sv();render();};});
-
-  renderAiStats();
-}
-
-function renderAiStats() {
-  var totBenar = 0, totSalah = 0, totAttempts = 0;
-  var tableHtml = `<table><thead><tr><th>Bab</th><th class="num">Benar</th><th class="num">Salah</th><th class="num">Akurasi</th></tr></thead><tbody>`;
-
-  for (var topic in st.aiStats) {
-    var s = st.aiStats[topic];
-    totBenar += s.benar || 0;
-    totSalah += s.salah || 0;
-    var att = (s.benar || 0) + (s.salah || 0);
-    totAttempts += att;
-    var akurasi = att > 0 ? Math.round(100 * (s.benar || 0) / att) : 0;
-    tableHtml += `<tr><td>${esc(topic)}</td><td class="num" style="color:var(--ok);">${s.benar || 0}</td><td class="num" style="color:var(--err);">${s.salah || 0}</td><td class="num">${akurasi}%</td></tr>`;
+  var mo=monOf(now),wd=0,wm=0;
+  for(var i=0;i<7;i++){var k=iso(ad(mo,i));if(dm[k]){wd++;wm+=dm[k];}}
+  $("wkst").innerHTML="Minggu ini: <b>"+wd+" dari "+st.tD+" hari</b> target, "+wm+" menit. "+(wd>=st.tD?"Target hari tercapai.":"Kurang "+(st.tD-wd)+" hari lagi.");
+  $("kpi").innerHTML="<div><b>"+(tot/60).toFixed(1)+" jam</b>total belajar</div><div><b>"+days+"</b>hari belajar</div><div><b>"+(days?Math.round(tot/days):0)+" menit</b>rata-rata/hari</div><div><b>"+stk+" hari</b>beruntun</div><div><b>"+gaps+"</b>hari bolong</div>";
+  var hm="";
+  for(var c=0;c<48;c++)for(var r=0;r<7;r++){
+    var dt=ad(S,7*c+r),kk=iso(dt),m=dm[kk],cl="";
+    if(kk>today)cl="f";else if(m){var q=m/st.tM;cl=q<.5?"l1":q<1?"l2":q<1.5?"l3":"l4";}else if(r<6&&dt>=first)cl="g";else cl="z";
+    if(kk===today)cl+=" t";
+    hm+='<i class="'+cl+'" title="'+fmt(dt)+": "+(m||0)+' menit"></i>';
   }
-  if (Object.keys(st.aiStats).length === 0) tableHtml += `<tr><td colspan="4" style="text-align:center;">Belum ada data.</td></tr>`;
-  tableHtml += `</tbody></table>`;
-
-  var overallAkurasi = totAttempts > 0 ? Math.round(100 * totBenar / totAttempts) : 0;
-
-  document.getElementById("aiStatKpi").innerHTML = `
-    <div><b>${totBenar}</b>Soal Benar</div>
-    <div><b>${overallAkurasi}%</b>Akurasi</div>
-    <div><b>${totSalah}</b>Salah</div>
-  `;
-  document.getElementById("aiStatTable").innerHTML = tableHtml;
+  $("hm").innerHTML=hm;
+  var mx=st.tM*1.5,bs="",lb="",dd,v;
+  for(i=13;i>=0;i--){v=dm[iso(ad(now,-i))]||0;if(v>mx)mx=v;}
+  for(i=13;i>=0;i--){dd=ad(now,-i);v=dm[iso(dd)]||0;bs+='<div style="height:'+Math.round(100*v/mx)+'%" title="'+fmt(dd)+": "+v+' menit"></div>';lb+="<span>"+dd.getDate()+"</span>";}
+  $("bars").innerHTML=bs+'<div class="tl" style="bottom:'+Math.round(100*st.tM/mx)+'%"></div>';
+  $("blab").innerHTML=lb;
+  var g=[],a=0,lg="";
+  perMod.forEach(function(v,i){if(!v)return;var b=a+100*v/tot,hu=HUE[i%HUE.length];g.push("hsl("+hu+" 55% 50%) "+a+"% "+b+"%");a=b;lg+='<div><i style="background:hsl('+hu+' 55% 50%)"></i>'+esc(tn(i))+": "+v+" menit ("+Math.round(100*v/tot)+"%)</div>";});
+  $("pie").style.background=tot?"conic-gradient("+g.join(",")+")":"var(--line)";
+  $("lg").innerHTML=lg||"Belum ada sesi tercatat.";
+  var rc="";
+  st.log.slice(-5).reverse().forEach(function(l){rc+='<div class="nt"><div class="tx" style="flex:1">'+fmt(pd(l.d))+": "+l.m+" menit, "+esc(tn(l.mod))+'</div><button data-del="'+st.log.indexOf(l)+'">Hapus</button></div>';});
+  $("rec").innerHTML=rc||'<span class="sub">Belum ada sesi.</span>';
+  document.querySelectorAll("[data-del]").forEach(function(b){b.onclick=function(){st.log.splice(+b.dataset.del,1);sv();render();};});
+  aiStats();
 }
-
-function notes(){var oo=document.getElementById("onlyOpen").checked,h="";
-  st.notes.slice().reverse().forEach(function(x){if(oo&&x.ok)return;h+='<div class="nt'+(x.ok?' ok':'')+'"><input type="checkbox" data-ok="'+x.id+'"'+(x.ok?' checked':'')+'><div style="flex:1"><div class="tx">'+esc(x.t)+'</div><small>'+fmt(pd(x.d))+' · '+esc(T[x.mod])+'</small></div><button data-nd="'+x.id+'">Hapus</button></div>';});
-  document.getElementById("notes").innerHTML=h||'<p class="sub">Belum ada catatan.</p>';
+function aiStats(){
+  var tb=0,ts=0,rows="";
+  for(var t in st.aiStats){var s=st.aiStats[t],b=s.benar||0,x=s.salah||0;tb+=b;ts+=x;
+    rows+="<tr><td>"+esc(t)+'</td><td class="num" style="color:var(--ok)">'+b+'</td><td class="num" style="color:var(--err)">'+x+'</td><td class="num">'+((b+x)?Math.round(100*b/(b+x)):0)+"%</td></tr>";}
+  if(!rows)rows='<tr><td colspan="4" style="text-align:center">Belum ada data.</td></tr>';
+  $("aiKpi").innerHTML="<div><b>"+tb+"</b>Soal Benar</div><div><b>"+((tb+ts)?Math.round(100*tb/(tb+ts)):0)+"%</b>Akurasi</div><div><b>"+ts+"</b>Salah</div>";
+  $("aiTable").innerHTML='<table><thead><tr><th>Bab</th><th class="num">Benar</th><th class="num">Salah</th><th class="num">Akurasi</th></tr></thead><tbody>'+rows+"</tbody></table>";
+}
+function notes(){
+  var oo=$("onlyOpen").checked,h="";
+  st.notes.slice().reverse().forEach(function(x){if(oo&&x.ok)return;
+    h+='<div class="nt'+(x.ok?" ok":"")+'"><input type="checkbox" data-ok="'+x.id+'"'+(x.ok?" checked":"")+'><div style="flex:1"><div class="tx">'+esc(x.t)+"</div><small>"+fmt(pd(x.d))+" · "+esc(tn(x.mod))+'</small></div><button data-nd="'+x.id+'">Hapus</button></div>';});
+  $("notes").innerHTML=h||'<p class="sub">Belum ada catatan.</p>';
   document.querySelectorAll("[data-ok]").forEach(function(c){c.onchange=function(){st.notes.forEach(function(x){if(x.id==c.dataset.ok)x.ok=c.checked;});sv();notes();};});
   document.querySelectorAll("[data-nd]").forEach(function(b){b.onclick=function(){st.notes=st.notes.filter(function(x){return x.id!=b.dataset.nd;});sv();notes();};});
 }
 
-// ============================================================
-// [8. INIT & EVENT LISTENERS]
-// ============================================================
-function $(i){return document.getElementById(i);}
-
-$("ld").value=today;$("nd").value=today;
-$("addL").onclick=function(){var m=parseInt($("lm").value,10);if(!(m>0)){return;}st.log.push({d:$("ld").value,m:m,mod:0});sv();render();};
-$("addN").onclick=function(){var t=$("nt").value.trim();if(!t)return;st.notes.push({id:Date.now(),d:$("nd").value||today,mod:0,t:t,ok:false});$("nt").value="";sv();notes();};
+// ===== EVENT HANDLER =====
+$("ld").value=today;$("nd").value=today;$("tD").value=st.tD;$("tM").value=st.tM;$("start").value=st.start;
+$("addL").onclick=function(){
+  var m=parseInt($("lm").value,10);if(!(m>0)||!$("ld").value){$("lm").focus();return;}
+  st.log.push({d:$("ld").value,m:m,mod:parseInt($("lmod").value,10)||0});
+  st.log.sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0;});$("lm").value="";sv();render();};
+$("addN").onclick=function(){
+  var t=$("nt").value.trim();if(!t){$("nt").focus();return;}
+  st.notes.push({id:Date.now(),d:$("nd").value||today,mod:parseInt($("nmod").value,10)||0,t:t,ok:false});$("nt").value="";sv();notes();};
 $("onlyOpen").onchange=notes;
-$("reset").onclick=function(){if(confirm("Hapus semua progres?")){localStorage.clear();location.reload();}};
+$("tD").onchange=function(){st.tD=Math.min(7,Math.max(1,+$("tD").value||5));sv();render();};
+$("tM").onchange=function(){st.tM=Math.max(10,+$("tM").value||60);sv();render();};
+$("start").onchange=function(){if($("start").value){st.start=$("start").value;sv();render();}};
+$("reset").onclick=function(){if(confirm("Hapus semua progres, sesi, dan catatan? (Akun & API key tetap aman)")){try{localStorage.removeItem(KEY);}catch(e){}location.reload();}};
 
-// TOMBOL MASUK
-$("btnSaveUser").onclick = function() {
-  const u = $("cfgUser").value.trim();
-  if (!u) return alert("Username tidak boleh kosong!");
-  
-  currentUser = u;
-  localStorage.setItem("daigaku_last_user", currentUser);
-  CONFIG = loadConfigForUser(currentUser);
-  T = CONFIG.topics;
-  
-  alert("Berhasil masuk sebagai: " + currentUser);
-  initConfigEditor();
-  refreshAppFromConfig();
-  render();
-};
+$("btnSaveUser").onclick=function(){
+  var u=$("cfgUser").value.trim();if(!u)return alert("Username tidak boleh kosong!");
+  cur=u;localStorage.setItem("daigaku_last_user",u);CONFIG=loadCfg(u);T=CONFIG.topics;
+  initEditor();refreshApp();render();alert("Berhasil masuk sebagai: "+u);};
+$("btnApplyConfig").onclick=function(){
+  if(!cur)return alert("Isi Username dan klik 'Masuk' dulu.");
+  if(!vj("cfgStats","stStats")||!vj("cfgRoad","stRoad"))return alert("Perbaiki format JSON dulu!");
+  var tp=$("cfgTopics").value.split(",").map(function(s){return s.trim();}).filter(Boolean);
+  if(!tp.length)return alert("Daftar bab tidak boleh kosong.");
+  CONFIG.topics=tp;CONFIG.referensi=$("cfgRef").value;
+  CONFIG.statistik=JSON.parse($("cfgStats").value);CONFIG.roadmap=JSON.parse($("cfgRoad").value);
+  T=CONFIG.topics;saveCfg();initEditor();refreshApp();render();alert("✅ Data berhasil disimpan.");};
+$("btnResetConfig").onclick=function(){
+  if(!cur)return alert("Anda belum masuk.");
+  if(confirm('Hapus data kustom "'+cur+'" dan kembali ke default?')){
+    localStorage.removeItem(skey(cur));CONFIG=loadCfg(cur);T=CONFIG.topics;initEditor();refreshApp();render();alert("Data berhasil di-reset.");}};
 
-// TOMBOL SIMPAN MANUAL
-$("btnApplyConfig").onclick = function() {
-  if (!currentUser) return alert("Silakan isi Username dan klik 'Masuk' terlebih dahulu.");
+function apiUI(){var k=localStorage.getItem("gemini-api-key");$("apiWarn").style.display=k?"none":"block";if(k)$("geminiApiKey").value=k;}
+$("saveApiKey").onclick=function(){var k=$("geminiApiKey").value.trim();if(k){localStorage.setItem("gemini-api-key",k);apiUI();alert("API Key disimpan!");}};
 
-  const isStatsValid = validateJson('cfgStats', 'statusStats');
-  const isRoadValid = validateJson('cfgRoadmap', 'statusRoadmap');
-  
-  if (!isStatsValid || !isRoadValid) return alert("Perbaiki format JSON terlebih dahulu!");
+function popup(ok){var p=$("popupHiasan"),t=$("popupText");t.textContent=ok?"SELAMAT!":"SALAHHH!";t.className=ok?"ok":"err";p.classList.add("show");setTimeout(function(){p.classList.remove("show");},2000);}
+function bump(topic,ok){if(!st.aiStats[topic])st.aiStats[topic]={benar:0,salah:0};st.aiStats[topic][ok?"benar":"salah"]++;sv();aiStats();}
 
-  try {
-    CONFIG.topics = $("cfgTopics").value.split(",").map(s => s.trim()).filter(s => s);
-    CONFIG.referensi = $("cfgRef").value;
-    CONFIG.statistik = JSON.parse($("cfgStats").value);
-    CONFIG.roadmap = JSON.parse($("cfgRoadmap").value);
-    
-    T = CONFIG.topics;
-    saveConfigForUser(currentUser);
-    alert("✅ Data berhasil disimpan.");
-    refreshAppFromConfig();
-    render();
-  } catch (e) {
-    alert("Gagal menyimpan: " + e.message);
-  }
-};
-
-// TOMBOL RESET AKUN
-$("btnResetConfig").onclick = function() {
-  if (!currentUser) return alert("Anda belum masuk.");
-  if(confirm(`Hapus data kustom untuk "${currentUser}" dan kembalikan ke soal MTK dasar?`)) {
-    localStorage.removeItem(getStorageKey(currentUser));
-    CONFIG = loadConfigForUser(currentUser);
-    T = CONFIG.topics;
-    initConfigEditor();
-    refreshAppFromConfig();
-    render();
-    alert("Data berhasil di-reset.");
-  }
-};
-
-function updateApiKeyUI() {
-  const key = localStorage.getItem("gemini-api-key");
-  const warning = document.getElementById("apiKeyWarning");
-  if (key) { warning.classList.remove("active"); document.getElementById("geminiApiKey").value = key; }
-  else { warning.classList.add("active"); }
-}
-$("saveApiKey").onclick = function() {
-  const key = $("geminiApiKey").value.trim();
-  if (key) { localStorage.setItem("gemini-api-key", key); alert("API Key disimpan!"); updateApiKeyUI(); }
-};
-
-$("genBtn").onclick = async function() {
-  const apiKey = localStorage.getItem("gemini-api-key");
-  if (!apiKey) return alert("Masukkan API Key Gemini!");
-
-  const rawTopic = $("genTopic").value;
-  const difficulty = parseInt($("genDifficulty").value);
-  const count = parseInt($("genCount").value);
-  const resultDiv = $("genResult");
-  const btn = this;
-  
-  if (!rawTopic) return alert("Pilih bab!");
-  let topicName = rawTopic === "all" ? "Semua Bab" : T[parseInt(rawTopic.split(":")[1])] || "Bab";
-  
-  btn.disabled = true;
-  resultDiv.innerHTML = `<div class="loading active">⏳ Memuat ${count} soal...</div>`;
-
-  const prompt = `Buat ${count} soal pilihan ganda (A-E) untuk topik "${topicName}", level ${difficulty}.
-Referensi: ${CONFIG.referensi}
-Format JSON array: [{"soal":"...","opsi":{"A":"...","B":"...","C":"...","D":"...","E":"..."},"jawaban_benar":"A","cara_menjawab":"...","rumus":"..."}]`;
-
-  try {
-    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey, {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+$("genBtn").onclick=async function(){
+  var raw=$("genTopic").value,diff=parseInt($("genDifficulty").value,10)||3,count=Math.min(10,Math.max(1,parseInt($("genCount").value,10)||1));
+  var out=$("genResult"),btn=this;
+  if(!raw)return alert("Pilih bab!");
+  if(!localStorage.getItem("gemini-api-key"))return alert("Masukkan API Key Gemini!");
+  var topic=raw==="all"?"Semua Bab":tn(parseInt(raw.split(":")[1],10));
+  btn.disabled=true;out.innerHTML='<p class="sub">⏳ Memuat '+count+" soal...</p>";
+  var prompt="Buat "+count+' soal pilihan ganda (A-E) topik "'+topic+'", level '+diff+" dari 5.\nReferensi: "+CONFIG.referensi+'\nRumus pakai LaTeX dengan $...$ dan escape backslash sebagai \\\\.\nBalas JSON array: [{"soal":"...","opsi":{"A":"...","B":"...","C":"...","D":"...","E":"..."},"jawaban_benar":"A","cara_menjawab":"..."}]';
+  try{
+    var txt=await gem(prompt,8192);txt=txt.substring(txt.indexOf("["),txt.lastIndexOf("]")+1);
+    var qs=JSON.parse(txt);
+    out.innerHTML=qs.map(function(q,i){
+      var op=Object.keys(q.opsi).map(function(k){return'<button class="ob" data-o="'+esc(k)+'">'+esc(k)+". "+esc(q.opsi[k])+"</button>";}).join("");
+      return'<div class="gs" data-q="'+i+'"><h3>Soal '+(i+1)+"</h3><p>"+esc(q.soal)+'</p><div class="go">'+op+'</div><div class="ans"><p><b>Jawaban:</b> '+esc(q.jawaban_benar)+"</p><p><b>Cara:</b> "+esc(q.cara_menjawab)+"</p></div></div>";}).join("");
+    if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([out]);
+    qs.forEach(function(q,i){
+      var box=out.querySelector('.gs[data-q="'+i+'"]'),got=false;
+      box.querySelectorAll(".ob").forEach(function(b){b.onclick=function(){
+        if(got||b.disabled)return;
+        if(b.dataset.o===q.jawaban_benar){got=true;b.classList.add("correct");box.querySelector(".ans").classList.add("show");popup(true);bump(topic,true);}
+        else{b.classList.add("wrong");b.disabled=true;popup(false);bump(topic,false);}};});
     });
-    const data = await res.json();
-    let txt = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-    txt = txt.substring(txt.indexOf('['), txt.lastIndexOf(']')+1);
-    const parsed = JSON.parse(txt);
-
-    let html = "";
-    parsed.forEach((q, i) => {
-      let opts = "";
-      for (let [k,v] of Object.entries(q.opsi)) opts += `<button class="gen-opt-btn" data-opt="${k}" data-qid="${i}">${k}. ${v}</button>`;
-      html += `<div class="gen-soal" data-qid="${i}"><h3>Soal ${i+1}</h3><p>${q.soal}</p><div class="gen-options">${opts}</div><div class="answer" id="ans-${i}"><p><b>Jawaban:</b> ${q.jawaban_benar}</p><p><b>Cara:</b> ${q.cara_menjawab}</p></div></div>`;
-    });
-    resultDiv.innerHTML = html;
-
-    if(window.MathJax) MathJax.typesetPromise([resultDiv]);
-
-    parsed.forEach((q, i) => {
-      const container = resultDiv.querySelector(`.gen-soal[data-qid="${i}"]`);
-      const btns = container.querySelectorAll(".gen-opt-btn");
-      const ansDiv = document.getElementById(`ans-${i}`);
-      let isCorrect = false;
-      btns.forEach(b => {
-        b.onclick = function() {
-          if(isCorrect) return;
-          if(this.dataset.opt === q.jawaban_benar) {
-            this.classList.add("correct"); isCorrect = true; ansDiv.classList.add("show");
-            showPopup(true);
-            if(!st.aiStats[topicName]) st.aiStats[topicName] = {benar:0, salah:0};
-            st.aiStats[topicName].benar++;
-            sv(); renderAiStats();
-          } else {
-            this.classList.add("wrong"); this.disabled = true;
-            showPopup(false);
-            if(!st.aiStats[topicName]) st.aiStats[topicName] = {benar:0, salah:0};
-            st.aiStats[topicName].salah++;
-            sv(); renderAiStats();
-          }
-        };
-      });
-    });
-  } catch(e) { alert("Error: " + e.message); resultDiv.innerHTML = "Gagal memuat."; }
-  finally { btn.disabled = false; }
+  }catch(e){alert("Error: "+e.message);out.innerHTML='<p class="sub">Gagal memuat.</p>';}
+  finally{btn.disabled=false;}
 };
 
-function showPopup(isCorrect) {
-  const p = $("popupHiasan"), t = $("popupText");
-  t.textContent = isCorrect ? "SELAMAT!" : "SALAHHH!";
-  t.className = isCorrect ? "ok" : "err";
-  p.classList.add("show");
-  setTimeout(() => p.classList.remove("show"), 2000);
-}
-
-window.onload = function() {
-  updateApiKeyUI();
-  const lastUser = localStorage.getItem("daigaku_last_user");
-  if (lastUser) {
-    currentUser = lastUser;
-    CONFIG = loadConfigForUser(currentUser);
-  } else {
-    currentUser = null;
-    CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
-  }
-  T = CONFIG.topics;
-  
-  initConfigEditor(); 
-  refreshAppFromConfig(); 
-  buildTopicOptions();
-  render();
-};
+// ===== INIT =====
+(function(){
+  apiUI();
+  var u=localStorage.getItem("daigaku_last_user");
+  if(u){cur=u;CONFIG=loadCfg(u);}
+  T=CONFIG.topics;
+  initEditor();refreshApp();render();
+})();
 </script>
 </body>
 </html>
