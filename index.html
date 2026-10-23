@@ -4,14 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DAIGAKU HERE I COME</title>
+
+<!-- ============================================================
+     [CSS UTAMA]
+     Variabel warna, layout, komponen, animasi, search bar,
+     generator soal, dan popup.
+     ============================================================ -->
 <style>
-:root{--bg:#f5f7f4;--card:#fff;--ink:#1d2b2a;--mute:#5d6e6c;--line:#d5dedb;--acc:#0b6e66;--acc2:#e8f3f1;--warn:#b4531a;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;color-scheme:dark}
+:root{--bg:#f5f7f4;--card:#fff;--ink:#1d2b2a;--mute:#5d6e6c;--line:#d5dedb;--acc:#0b6e66;--acc2:#e8f3f1;--warn:#b4531a;--ok:#1a8c5a;--err:#c0392b;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;--ok:#4fd1c0;--err:#f0a36b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;--ok:#4fd1c0;--err:#f0a36b;color-scheme:dark}
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 
-/* --- WALLPAPER & DECORATIVE ANIMATIONS --- */
+/* ------------------------------------------------------------
+   [CSS WALLPAPER & DEKORASI KUCING]
+   Background Wallpaper.jpg + overlay gelap + animasi float.
+   File gambar: Hiasan_1.jpg, Hiasan_2.jpg, Hiasan_3.jpg
+   ------------------------------------------------------------ */
 body::before {
   content: "";
   position: fixed;
@@ -25,7 +35,7 @@ body::after {
   content: "";
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(17, 26, 25, 0.6); /* Dimming overlay so text remains readable */
+  background: rgba(17, 26, 25, 0.6);
   backdrop-filter: blur(3px);
   z-index: -1;
 }
@@ -41,21 +51,9 @@ body::after {
   animation: float 8s ease-in-out infinite;
 }
 
-.cat1 {
-  top: 10%; left: 4%;
-  width: 140px;
-  animation-delay: 0s;
-}
-.cat2 {
-  bottom: 15%; right: 5%;
-  width: 180px;
-  animation-delay: 2s;
-}
-.cat3 {
-  top: 45%; left: 8%;
-  width: 130px;
-  animation-delay: 4s;
-}
+.cat1 { top: 10%; left: 4%; width: 140px; animation-delay: 0s; }
+.cat2 { bottom: 15%; right: 5%; width: 180px; animation-delay: 2s; }
+.cat3 { top: 45%; left: 8%; width: 130px; animation-delay: 4s; }
 
 @keyframes float {
   0% { transform: translateY(0px) rotate(0deg); }
@@ -64,10 +62,13 @@ body::after {
 }
 
 @media (max-width: 900px) {
-  .deco-cat { display: none; } /* Hide on mobile so it doesn't block UI */
+  .deco-cat { display: none; }
 }
-/* ------------------------------------------ */
 
+/* ------------------------------------------------------------
+   [CSS LAYOUT UTAMA]
+   Body, main, card, bar, grid KPI, heatmap, bar, pie, notes.
+   ------------------------------------------------------------ */
 body{margin:0;background:transparent;color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
 main{max-width:880px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1;background:rgba(245,247,244,0.95);backdrop-filter:blur(10px);border-radius:16px;margin-top:30px;box-shadow:0 20px 40px rgba(0,0,0,0.2)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) main{background:rgba(17,26,25,0.95)}}
@@ -75,7 +76,8 @@ main{max-width:880px;margin:0 auto;padding:20px 16px 60px;position:relative;z-in
 
 h1{font-size:1.7rem;margin:.2em 0}h2{font-size:1.2rem;margin:0 0 6px}
 .sub{color:var(--mute);margin:.2em 0 10px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;margin:14px 0; animation: fadeInUp 0.5s ease-out forwards; opacity: 0;}
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 .bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
 .pr{display:grid;grid-template-columns:minmax(110px,1.2fr) 2fr 44px;gap:8px;align-items:center;margin:.5em 0;font-size:.95rem}
@@ -87,8 +89,10 @@ h1{font-size:1.7rem;margin:.2em 0}h2{font-size:1.2rem;margin:0 0 6px}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
 input,select,textarea{font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);max-width:100%}
 input[type=number]{width:80px}textarea{width:100%;min-height:60px}
-button{font:inherit;background:none;border:1px solid var(--line);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer}
+button{font:inherit;background:none;border:1px solid var(--line);color:var(--ink);padding:6px 12px;border-radius:6px;cursor:pointer; transition: transform 0.1s;}
+button:active { transform: scale(0.96); }
 button.p{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+button:disabled{opacity:.5;cursor:not-allowed}
 .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:8px 0}
 .kpi div{background:var(--acc2);border-radius:6px;padding:8px 10px;font-size:.9rem}.kpi b{display:block;font-size:1.3rem}
 .hm{overflow-x:auto;padding-bottom:6px}
@@ -120,18 +124,119 @@ details.mod .in{padding:0 16px 12px}
 ul{padding-left:20px;margin:.3em 0}
 footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+/* ------------------------------------------------------------
+   [CSS SEARCH BAR PER BAB]
+   ------------------------------------------------------------ */
+.search-box {
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+.search-box:focus {
+  outline: 2px solid var(--acc);
+  border-color: var(--acc);
+}
+
+/* ------------------------------------------------------------
+   [CSS GENERATOR SOAL GEMINI]
+   ------------------------------------------------------------ */
+#genResult { margin-top: 16px; }
+.gen-soal {
+  background: var(--acc2);
+  border-left: 4px solid var(--acc);
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  animation: fadeInUp 0.4s ease-out;
+}
+.gen-soal h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
+.gen-soal p { margin: 6px 0; }
+.gen-soal .label { font-weight: bold; color: var(--acc); }
+.gen-soal .answer { background: var(--bg); padding: 8px; border-radius: 4px; border: 1px dashed var(--line); margin-top: 8px; display: none; }
+.gen-soal .answer.show { display: block; animation: fadeInUp 0.4s ease-out; }
+.gen-options { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+.gen-opt-btn {
+  text-align: left;
+  padding: 8px 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.gen-opt-btn:hover { background: var(--acc2); }
+.gen-opt-btn.correct { background: var(--ok); color: #fff; border-color: var(--ok); }
+.gen-opt-btn.wrong { background: var(--err); color: #fff; border-color: var(--err); }
+.gen-opt-btn:disabled { cursor: default; opacity: 0.8; }
+.loading { display: none; text-align: center; padding: 20px; color: var(--mute); font-style: italic; }
+.loading.active { display: block; }
+.api-key-warning { color: var(--warn); font-size: 0.9rem; margin-bottom: 10px; display: none; }
+.api-key-warning.active { display: block; }
+
+/* ------------------------------------------------------------
+   [CSS POPUP HIASAN 1]
+   ------------------------------------------------------------ */
+#popupHiasan {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  z-index: 9999;
+  background: rgba(0,0,0,0.85);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  border: 3px solid var(--acc);
+}
+#popupHiasan.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+#popupHiasan img {
+  width: 200px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+#popupHiasan h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+#popupHiasan h1.ok { color: var(--ok); text-shadow: 0 0 20px var(--ok); }
+#popupHiasan h1.err { color: var(--err); text-shadow: 0 0 20px var(--err); }
 </style>
 </head>
 <body>
 
-<!-- Decorative Cat Images -->
+<!-- ============================================================
+     [HTML DEKORASI & POPUP]
+     File: Hiasan_1.jpg, Hiasan_2.jpg, Hiasan_3.jpg, Wallpaper.jpg
+     ============================================================ -->
 <img src="Hiasan_3.jpg" class="deco-cat cat1" alt="Decorative Cat 1">
 <img src="Hiasan_2.jpg" class="deco-cat cat2" alt="Decorative Cat 2">
 <img src="Hiasan_1.jpg" alt="Decorative Cat 3">
 
+<div id="popupHiasan">
+  <img src="Hiasan_1.jpg" alt="Hiasan Popup">
+  <h1 id="popupText">SELAMAT!</h1>
+</div>
+
 <main>
+<!-- ============================================================
+     [HTML HEADER & ROADMAP]
+     ============================================================ -->
 <h1>Roadmap Teknik Mesin: Matematika, Fisika, MEXT</h1>
-<p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin, dengan fokus ke fundamental. Matematika Lanjut (kalkulus salah satu targetnya) berjalan bersama Fisika, Kimia, serta bahasa Inggris dan Jepang. Soal lomba dari 8 berkas hanya pendamping.</p>
+<p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin, dengan fokus ke fundamental. Matematika Lanjut (kalkulus salah satu targetnya) berjalan bersama Fisika, Kimia, serta bahasa Inggris dan Jepang. Soal lomba dari 10 berkas hanya pendamping.</p>
 <div class="bar"><i id="bar" style="width:0"></i></div>
 <p class="sub" id="pct"></p>
 
@@ -142,6 +247,9 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 <p class="cut">Fakta dari halaman Kedutaan Jepang di Indonesia (program Gakubu): Teknik Mesin termasuk IPA-A. Halaman 2020 menyebut mata uji IPA-A: bahasa Inggris, Matematika (B), Kimia, Fisika, dan bahasa Jepang, jadi matematika hanya salah satu bagian. Halaman 2025 menyatakan pelamar IPA tidak bisa mendaftar kalau salah satu nilai rapor yang disebutkan kurang dari 84, dan pemberitaan 2027 menyebut Matematika, Inggris, dan Fisika untuk IPA-A. Aturan bisa berubah, jadi cek id.emb-japan.go.jp untuk tahun yang dibidik. Pendaftar adalah siswa tingkat akhir atau lulusan baru, berkas sekitar April sampai Mei dan ujian tulis sekitar Juni. Contoh soal resmi ada di studyinjapan.go.jp. SAT tidak dipakai MEXT, jadi di sini hanya jalur cadangan. Fokus fundamental: pahami konsep dan kerjakan soal buku sekolah dulu. Aturan naik minggu: lanjut hanya kalau cek benar 80%. Kalau belum, ulang minggu itu.</p>
 </div>
 
+<!-- ============================================================
+     [HTML CATAT BELAJAR]
+     ============================================================ -->
 <div class="card">
 <h2>Catat belajar hari ini</h2>
 <div class="row"><input type="date" id="ld" aria-label="Tanggal"><input type="number" id="lm" min="1" max="600" placeholder="menit" aria-label="Lama belajar (menit)"><select id="lmod" aria-label="Topik"></select><button class="p" id="addL">Simpan sesi</button></div>
@@ -150,6 +258,9 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 <p class="sub"><b>Pola mingguan yang disarankan (5 sampai 6 hari):</b> Senin dan Rabu Matematika (konsep dan 5 sampai 8 soal). Selasa dan Kamis Fisika mulai Juni 2027 (konsep, lalu soal hitungan); sebelum itu pakai untuk bahasa Jepang dan Inggris. Bahasa Jepang sebaiknya juga 20 sampai 30 menit hampir tiap hari. Jumat Kimia atau bahasa Inggris dan Jepang, bergantian. Sabtu ulang soal yang salah dan cek mingguan. Minggu istirahat (tidak dihitung bolong). Kalau sulit tiap hari, cukup capai target hari per minggu.</p>
 </div>
 
+<!-- ============================================================
+     [HTML STATISTIK BELAJAR]
+     ============================================================ -->
 <div class="card">
 <h2>Statistik belajar</h2>
 <div class="kpi" id="kpi"></div>
@@ -162,6 +273,9 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 <p class="sub" style="margin-top:12px"><b>Sesi terakhir</b></p><div id="rec"></div>
 </div>
 
+<!-- ============================================================
+     [HTML CATATAN KESULITAN]
+     ============================================================ -->
 <div class="card">
 <h2>Catatan kesulitan</h2>
 <div class="row"><select id="nmod" aria-label="Topik catatan"></select><input type="date" id="nd" aria-label="Tanggal"></div>
@@ -171,10 +285,48 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 </div>
 
 <div id="mods"></div>
+
+<!-- ============================================================
+     [HTML GENERATOR SOAL GEMINI]
+     ============================================================ -->
+<div class="card" id="geminiSection">
+  <h2>🤖 Generator Soal AI (Gemini)</h2>
+  <p class="sub">Buat soal latihan baru sesuai bab dan tingkat kesulitan. Soal berbentuk pilihan ganda (A-E). Kunci jawaban akan terbuka setelah kamu menjawab.</p>
+  
+  <div id="apiKeyWarning" class="api-key-warning">
+    ⚠️ API Key belum diatur. Silakan masukkan API Key Gemini Anda di bawah ini (disimpan di browser Anda).
+  </div>
+
+  <div class="row" style="margin-bottom: 12px;">
+    <input type="password" id="geminiApiKey" placeholder="Masukkan Gemini API Key..." style="flex: 1; min-width: 200px;">
+    <button id="saveApiKey" class="p">Simpan Key</button>
+  </div>
+
+  <div class="row">
+    <label>Bab Dasar:
+      <select id="genTopic" aria-label="Pilih Bab"></select>
+    </label>
+    <label>Tingkat Kesulitan (1-5):
+      <input type="number" id="genDifficulty" min="1" max="5" value="3" style="width: 60px;">
+    </label>
+    <button id="genBtn" class="p">Buat Soal</button>
+  </div>
+
+  <div id="genLoading" class="loading">⏳ Sedang meracik soal... Mohon tunggu.</div>
+  <div id="genResult"></div>
+</div>
+
 <p><button id="reset">Hapus semua data</button></p>
-<footer>Label soal: L33, L34, L35 = LMNas 33 (2022), 34 (2023), 35 (2024), UGM SMA Penyisihan; angka = nomor pilihan ganda, "IS" = isian singkat (misal L33 IS2). KSM21 = KSM 2021, K22 dan K23 = KoSSMI 2022 dan 2023, KSR25 = Kompetisi Sains Ruangguru 2025, OMI = berkas OMI 2026 Matriks. Pengelompokan topik adalah perkiraan, satu soal bisa masuk dua bidang. Soal yang dianulir di L34 (No. 20, 25) dan salah (IS4) sebaiknya dilewati. Soal lomba bersifat opsional dan umumnya lebih sulit dari materi kelas 10; utamakan buku sekolah dan contoh ujian MEXT, dan kerjakan soal lomba hanya setelah cek minggu itu lulus. Berkas tidak berisi kunci jawaban. Data tersimpan di browser perangkat ini saja.</footer>
+<footer>Label soal: L33, L34, L35 = LMNas 33 (2022), 34 (2023), 35 (2024), UGM SMA Penyisihan; angka = nomor pilihan ganda, "IS" = isian singkat (misal L33 IS2). KSM21 = KSM 2021, K22 dan K23 = KoSSMI 2022 dan 2023, K22-SF = Semifinal KoSSMI 2022, KSR25 = Kompetisi Sains Ruangguru 2025, OMI = berkas OMI 2026 Matriks, K-PENY = Penyisihan Level 4 KOSSMI, K-SF = Semifinal Level 4 KOSSMI, KETAKS = Ketaksamaan OSN (QM, AM, GM, HM, CS). Pengelompokan topik adalah perkiraan, satu soal bisa masuk dua bidang. Soal yang dianulir di L34 (No. 20, 25) dan salah (IS4) sebaiknya dilewati. Soal lomba bersifat opsional dan umumnya lebih sulit dari materi kelas 10; utamakan buku sekolah dan contoh ujian MEXT, dan kerjakan soal lomba hanya setelah cek minggu itu lulus. Berkas tidak berisi kunci jawaban. Data tersimpan di browser perangkat ini saja.</footer>
 </main>
+
 <script>
+/* ============================================================
+   [JS DATA ROADMAP & TOPIK]
+   T = daftar topik (dipakai untuk dropdown)
+   R = roadmap besar (10 target)
+   M = materi mingguan T1-T4 (48 minggu)
+   ============================================================ */
 var T=["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A","Fisika","Kimia","Bahasa Jepang","Bahasa Inggris"];
 var R=[
 ["T1 Fondasi","Minggu 1–10 · Okt 2026 sampai Jan 2027","Hitung, bentuk aljabar, persamaan dan pertidaksamaan, kuadrat, fungsi dasar","dasar semua target; nilai rapor Matematika harus naik","benar 25 dari 30 soal tes fondasi tanpa kalkulator"],
@@ -192,11 +344,15 @@ var R=[
 ["E1 Bahasa Inggris","Paralel · Nov 2026 sampai Mei 2029","Membaca, tata bahasa, menulis esai, kosakata akademik","ujian Inggris MEXT dan nilai rapor Inggris","simulasi Inggris lulus 80% dan nilai rapor memenuhi syarat"]
 ];
 var M=[
-["T1 Fondasi",0,["Pecahan, desimal, persen, bilangan negatif|Bisa: 12 soal hitung tanpa kalkulator, benar 10 · Latihan: K22 23, 24","Bentuk aljabar: sederhanakan dan faktorkan|Bisa: (x+3)(x−2) dan x²−9 tanpa ragu · Latihan: K23 1, 3","Persamaan linear dan soal cerita|Bisa: ubah cerita jadi persamaan · Latihan: KSM21 6, 10 · K22 10","Sistem persamaan dua variabel|Bisa: eliminasi dan substitusi · Latihan: K22 3 · KSM21 10","Pertidaksamaan linear dan nilai mutlak dasar|Bisa: gambar garis bilangan · Latihan: KSR25 8 · K23 7","Eksponen dan bentuk akar|Bisa: sederhanakan √50 dan 2³·2⁴ · Latihan: K23 2, 4","Persamaan kuadrat: faktorisasi dan rumus ABC|Bisa: selesaikan 5 persamaan kuadrat · Latihan: K22 6 · K23 5","Diskriminan dan rumus Vieta|Bisa: jumlah dan hasil kali akar · Latihan: K23 5, 30 · OMI-P 2023","Fungsi: nilai fungsi, komposisi, invers|Bisa: hitung f(g(x)) · Latihan: KSR25 2 · K22 9","Tes fondasi 30 soal, 45 menit|Lulus jika benar 25. Ulang soal yang salah"]],
-["T2 Aljabar dan Fungsi",1,["Fungsi kuadrat dan grafik parabola|Bisa: titik puncak dan akar · Latihan: K22 14 · K23 6","Pertidaksamaan kuadrat dan rasional|Bisa: tanda tiap interval · Latihan: KSR25 1 · K23 8","Eksponen dan logaritma|Bisa: log₂8 dan sifat log · Latihan: KSR25 20","Persamaan eksponen dan logaritma|Bisa: samakan basis","Polinomial dan teorema sisa|Bisa: pembagian dan sisa · Latihan: KSR25 5 · KSM21 15","Barisan dan deret aritmetika, geometri|Bisa: Un dan Sn · Latihan: K22 13, 20 · KSR25 13","Deret tak hingga dan sigma dasar|Bisa: jumlah 1+r+r²+… · Latihan: K22 15 · L35 5, 9","Sistem persamaan linear dan kuadrat|Gaya SAT: cari titik potong garis dan parabola","Transformasi grafik fungsi|Bisa: geser, rentang, cermin","Rasio, persen, laju, dan satuan|Gaya SAT: soal cerita data · Latihan: K22 10, 24","Pertumbuhan eksponensial dan soal cerita fungsi|Latihan: K22 23","Review T2 dan Bluebook practice test Math 1|Target sekitar 550. Catat semua soal salah"]],
-["T3 Geometri dan Trigonometri",2,["Geometri bidang: sudut, segitiga, Pythagoras|Bisa: sudut segitiga dan segi-n · Latihan: KSR25 29 · K23 14","Luas dan keliling bangun datar|Bisa: rumus luas dari ingatan · Latihan: K23 18 · KSM21 12","Lingkaran: sudut, busur, persamaan lingkaran|Latihan: KSM21 13 · KSR25 21","Geometri koordinat: garis, jarak, titik tengah|Latihan: K23 9, 15, 17 · KSR25 24","Geometri ruang: volume dan luas permukaan|Latihan: K22 5, 12","Sin, cos, tan di segitiga siku-siku|Bisa: cari sisi yang hilang","Sudut istimewa 30°, 45°, 60°|Bisa: tulis tabel dari ingatan","Radian dan lingkaran satuan|Bisa: ubah derajat ke radian","Kuadran dan sudut berelasi|Bisa: sin(180°−x), cos(90°−x)","Identitas sin²+cos²=1|Bisa: buktikan 3 identitas · Latihan: KSR25 25, 28","Persamaan trigonometri sederhana|Bisa: sin x = ½ pada 0° sampai 360°","Aturan sinus dan kosinus|Bisa: pilih aturan yang tepat · Latihan: K22 17","Luas ½ab sin C dan segi-n beraturan|Latihan: K23 14 · L34 4","Rumus jumlah, selisih, sudut ganda, grafik sin dan cos|Latihan: L35 IS4 (sulit, coba saja)","Review T3 dan Bluebook practice test Math 2|Target sekitar 650"]],
-["T4 Data dan Pra-kalkulus",3,["Statistik: rata-rata, median, simpangan baku|Bisa: bandingkan dua sebaran data · Latihan: K22 2 · KSM21 24","Peluang dasar dan peluang bersyarat|Bisa: tabel dua arah · Latihan: KSM21 5 · K23 22","Aturan hitung, permutasi, kombinasi|Latihan: KSM21 3 · K23 16","Diagram pencar, garis regresi, margin kesalahan|Gaya SAT: baca kemiringan dan titik potong","Bilangan kompleks dasar|Bisa: (a+bi)(c+di) dan modulus","Matriks: operasi, determinan, invers|Latihan: OMI UI 2018, UI 2019 · KSM21 21","Vektor di bidang dan ruang|Bisa: jumlah, panjang, hasil kali titik","Irisan kerucut: lingkaran, elips, parabola|Bisa: dari persamaan ke grafik","Pengantar limit: nilai yang mendekati|Bisa: isi tabel nilai mendekati","Soal campur gaya SAT|Aljabar, data, dan geometri dalam satu set","Review T4 dan Bluebook practice test Math 3|Target sekitar 700. Lanjut ke T5 (Kalkulus)"]]
+["T1 Fondasi",0,["Pecahan, desimal, persen, bilangan negatif|Bisa: 12 soal hitung tanpa kalkulator, benar 10 · Latihan: K22 23, 24 · K-PENY 1, 3","Bentuk aljabar: sederhanakan dan faktorkan|Bisa: (x+3)(x−2) dan x²−9 tanpa ragu · Latihan: K23 1, 3","Persamaan linear dan soal cerita|Bisa: ubah cerita jadi persamaan · Latihan: KSM21 6, 10 · K22 10 · K-PENY 4","Sistem persamaan dua variabel|Bisa: eliminasi dan substitusi · Latihan: K22 3 · KSM21 10 · K-SF 5","Pertidaksamaan linear dan nilai mutlak dasar|Bisa: gambar garis bilangan · Latihan: KSR25 8 · K23 7 · K-SF 14","Eksponen dan bentuk akar|Bisa: sederhanakan √50 dan 2³·2⁴ · Latihan: K23 2, 4 · K-PENY 5","Persamaan kuadrat: faktorisasi dan rumus ABC|Bisa: selesaikan 5 persamaan kuadrat · Latihan: K22 6 · K23 5 · K-PENY 6","Diskriminan dan rumus Vieta|Bisa: jumlah dan hasil kali akar · Latihan: K23 5, 30 · OMI-P 2023 · K-SF 6","Fungsi: nilai fungsi, komposisi, invers|Bisa: hitung f(g(x)) · Latihan: KSR25 2 · K22 9 · K-PENY 7","Tes fondasi 30 soal, 45 menit|Lulus jika benar 25. Ulang soal yang salah"]],
+["T2 Aljabar dan Fungsi",1,["Fungsi kuadrat dan grafik parabola|Bisa: titik puncak dan akar · Latihan: K22 14 · K23 6 · K-PENY 8","Pertidaksamaan kuadrat dan rasional|Bisa: tanda tiap interval · Latihan: KSR25 1 · K23 8 · K-SF 15","Eksponen dan logaritma|Bisa: log₂8 dan sifat log · Latihan: KSR25 20 · K-SF 7","Persamaan eksponen dan logaritma|Bisa: samakan basis · Latihan: K-PENY 9","Polinomial dan teorema sisa|Bisa: pembagian dan sisa · Latihan: KSR25 5 · KSM21 15 · K-PENY 10","Barisan dan deret aritmetika, geometri|Bisa: Un dan Sn · Latihan: K22 13, 20 · KSR25 13 · K-SF 8","Deret tak hingga dan sigma dasar|Bisa: jumlah 1+r+r²+… · Latihan: K22 15 · L35 5, 9 · K-PENY 13","Sistem persamaan linear dan kuadrat|Gaya SAT: cari titik potong garis dan parabola · Latihan: K-SF 5","Transformasi grafik fungsi|Bisa: geser, rentang, cermin · Latihan: K-PENY 11","Rasio, persen, laju, dan satuan|Gaya SAT: soal cerita data · Latihan: K22 10, 24 · K-PENY 21","Pertumbuhan eksponensial dan soal cerita fungsi|Latihan: K22 23 · K-PENY 22","Review T2 dan Bluebook practice test Math 1|Target sekitar 550. Catat semua soal salah"]],
+["T3 Geometri dan Trigonometri",2,["Geometri bidang: sudut, segitiga, Pythagoras|Bisa: sudut segitiga dan segi-n · Latihan: KSR25 29 · K23 14 · K-SF 10","Luas dan keliling bangun datar|Bisa: rumus luas dari ingatan · Latihan: K23 18 · KSM21 12 · K-SF 4","Lingkaran: sudut, busur, persamaan lingkaran|Latihan: KSM21 13 · KSR25 21 · K-SF 6","Geometri koordinat: garis, jarak, titik tengah|Latihan: K23 9, 15, 17 · KSR25 24 · K-SF 15","Geometri ruang: volume dan luas permukaan|Latihan: K22 5, 12 · K-SF 4","Sin, cos, tan di segitiga siku-siku|Bisa: cari sisi yang hilang · Latihan: K-PENY 12","Sudut istimewa 30°, 45°, 60°|Bisa: tulis tabel dari ingatan","Radian dan lingkaran satuan|Bisa: ubah derajat ke radian","Kuadran dan sudut berelasi|Bisa: sin(180°−x), cos(90°−x) · Latihan: K-SF 8","Identitas sin²+cos²=1|Bisa: buktikan 3 identitas · Latihan: KSR25 25, 28 · K-PENY 1","Persamaan trigonometri sederhana|Bisa: sin x = ½ pada 0° sampai 360° · Latihan: K-PENY 7","Aturan sinus dan kosinus|Bisa: pilih aturan yang tepat · Latihan: K22 17 · K-SF 10","Luas ½ab sin C dan segi-n beraturan|Latihan: K23 14 · L34 4 · K-SF 2","Rumus jumlah, selisih, sudut ganda, grafik sin dan cos|Latihan: L35 IS4 (sulit, coba saja) · K-PENY 10","Review T3 dan Bluebook practice test Math 2|Target sekitar 650"]],
+["T4 Data dan Pra-kalkulus",3,["Statistik: rata-rata, median, simpangan baku|Bisa: bandingkan dua sebaran data · Latihan: K22 2 · KSM21 24 · K-SF 7","Peluang dasar dan peluang bersyarat|Bisa: tabel dua arah · Latihan: KSM21 5 · K23 22 · K-SF 10","Aturan hitung, permutasi, kombinasi|Latihan: KSM21 3 · K23 16 · K-SF 9","Diagram pencar, garis regresi, margin kesalahan|Gaya SAT: baca kemiringan dan titik potong","Bilangan kompleks dasar|Bisa: (a+bi)(c+di) dan modulus","Matriks: operasi, determinan, invers|Latihan: OMI UI 2018, UI 2019 · KSM21 21 · K-PENY 1","Vektor di bidang dan ruang|Bisa: jumlah, panjang, hasil kali titik","Irisan kerucut: lingkaran, elips, parabola|Bisa: dari persamaan ke grafik · Latihan: K-SF 6","Pengantar limit: nilai yang mendekati|Bisa: isi tabel nilai mendekati · Latihan: KETAKS (definisi limit)","Soal campur gaya SAT|Aljabar, data, dan geometri dalam satu set","Review T4 dan Bluebook practice test Math 3|Target sekitar 700. Lanjut ke T5 (Kalkulus)"]]
 ];
+
+/* ============================================================
+   [JS STATE & UTILITAS]
+   ============================================================ */
 var HUE=[170,265,25,330,60,0,200,120,300,350];
 var KEY="rencana48-v5",st={start:"",tD:5,tM:60,w:{},rm:{},log:[],notes:[]};
 try{var o=JSON.parse(localStorage.getItem(KEY)||"{}");for(var k in o)st[k]=o[k];}catch(e){}
@@ -209,21 +365,74 @@ function fmt(d){return d.toLocaleDateString("id-ID",{day:"numeric",month:"short"
 var now=new Date(),today=iso(now);
 function monOf(d){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x;}
 if(!st.start){var n=monOf(now);if(now.getDay()!==1)n=ad(n,7);st.start=iso(n);}
+
+/* ============================================================
+   [JS FUNGSI PARETO & DROPDOWN]
+   ============================================================ */
 function pareto(){var h="";R.forEach(function(r,i){var on=!!st.rm["r"+i];h+='<div class="wk'+(on?' done':'')+'"><input type="checkbox" data-rm="r'+i+'"'+(on?' checked':'')+' aria-label="Target tercapai"><div><div class="t"><b>'+r[0]+'</b> <span class="d">'+r[1]+'</span></div><div>'+r[2]+'</div><div class="d">Dipakai untuk: '+r[3]+'</div><div class="r">Tercapai jika: '+r[4]+'</div></div></div>';});var el=document.getElementById("pareto");el.innerHTML=h;el.querySelectorAll("[data-rm]").forEach(function(c){c.onchange=function(){if(c.checked)st.rm[c.dataset.rm]=1;else delete st.rm[c.dataset.rm];sv();pareto();};});}
 function opts(id){var h="";T.forEach(function(m,i){h+='<option value="'+i+'">'+m+'</option>';});document.getElementById(id).innerHTML=h;}
-function dayMap(){var r={};st.log.forEach(function(l){r[l.d]=(r[l.d]||0)+l.m;});return r;}
+
+/* ============================================================
+   [JS FUNGSI RENDER UTAMA]
+   ============================================================ */
 function render(){
   var S=pd(st.start),cw=Math.floor((now-S)/604800000)+1,h="",n=0,done=0,all=0;
-  M.forEach(function(m,mi){var ws=m[2].slice();if(m[3])ws.push(m[3]+"|Ulang soal salah dan catat pola kesalahan");var f=n+1,b="";
-    ws.forEach(function(w){n++;all++;var p=w.split("|"),id="w"+n,on=!!st.w[id];if(on)done++;var d0=ad(S,7*(n-1));
-      b+='<div class="wk'+(on?' done':'')+(n===cw?' now':'')+'"><input type="checkbox" data-id="'+id+'"'+(on?' checked':'')+' aria-label="Selesai minggu '+n+'"><div><div class="t"><b>Minggu '+n+':</b> '+p[0]+'</div><div class="d">'+fmt(d0)+' sampai '+fmt(ad(d0,6))+'</div><div class="r">Cek dan latihan: '+p[1]+'</div></div></div>';});
-    h+='<details class="mod"'+((cw>=f&&cw<=n)||(cw<1&&mi===0)?' open':'')+'><summary>'+m[0]+'<small>Minggu '+f+' sampai '+n+' · jalur '+T[m[1]]+'</small></summary><div class="in">'+b+'</div></details>';});
+  M.forEach(function(m,mi){
+    var ws=m[2].slice();
+    if(m[3])ws.push(m[3]+"|Ulang soal salah dan catat pola kesalahan");
+    var f=n+1,b="";
+    
+    b += '<input type="search" class="search-box" placeholder="Cari materi atau soal di bab ini..." aria-label="Cari materi">';
+
+    ws.forEach(function(w){
+      n++;all++;
+      var p=w.split("|"),id="w"+n,on=!!st.w[id];
+      if(on)done++;
+      var d0=ad(S,7*(n-1));
+      var searchText = (p[0] + " " + p[1]).toLowerCase();
+      b+='<div class="wk'+(on?' done':'')+(n===cw?' now':'')+'" data-search="'+esc(searchText)+'"><input type="checkbox" data-id="'+id+'"'+(on?' checked':'')+' aria-label="Selesai minggu '+n+'"><div><div class="t"><b>Minggu '+n+':</b> '+p[0]+'</div><div class="d">'+fmt(d0)+' sampai '+fmt(ad(d0,6))+'</div><div class="r">Cek dan latihan: '+p[1]+'</div></div></div>';
+    });
+    
+    h+='<details class="mod"'+((cw>=f&&cw<=n)||(cw<1&&mi===0)?' open':'')+'><summary>'+m[0]+'<small>Minggu '+f+' sampai '+n+' · jalur '+T[m[1]]+'</small></summary><div class="in">'+b+'</div></details>';
+  });
+  
   document.getElementById("mods").innerHTML=h;
+  
+  document.querySelectorAll("#mods details.mod").forEach(function(details) {
+    var searchInput = details.querySelector(".search-box");
+    var items = details.querySelectorAll(".wk");
+
+    searchInput.addEventListener("input", function(e) {
+      var keyword = e.target.value.toLowerCase().trim();
+      items.forEach(function(item) {
+        var text = item.getAttribute("data-search") || item.textContent.toLowerCase();
+        if (keyword === "" || text.includes(keyword)) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+
+    details.querySelectorAll("input[type='checkbox']").forEach(function(c) {
+      c.onchange = function() {
+        if (c.checked) st.w[c.dataset.id] = 1;
+        else delete st.w[c.dataset.id];
+        sv();
+        render();
+      };
+    });
+  });
+
   var p=Math.round(100*done/all);document.getElementById("bar").style.width=p+"%";
   document.getElementById("pct").textContent=done+" dari "+all+" minggu selesai ("+p+"%)"+(cw<1?". Minggu 1 dimulai "+fmt(S)+".":cw>all?". Rencana selesai.":". Sekarang minggu ke-"+cw+".");
-  document.querySelectorAll("#mods input").forEach(function(c){c.onchange=function(){if(c.checked)st.w[c.dataset.id]=1;else delete st.w[c.dataset.id];sv();render();};});
+  
   stats();notes();
 }
+
+/* ============================================================
+   [JS FUNGSI STATISTIK]
+   ============================================================ */
 function stats(){
   var dm=dayMap(),tot=0,days=0,gaps=0,perMod=[0,0,0,0,0,0,0,0,0,0];
   st.log.forEach(function(l){tot+=l.m;perMod[l.mod]=(perMod[l.mod]||0)+l.m;});
@@ -250,14 +459,22 @@ function stats(){
   document.getElementById("rec").innerHTML=rc||'<span class="sub">Belum ada sesi.</span>';
   document.querySelectorAll("[data-del]").forEach(function(b){b.onclick=function(){st.log.splice(+b.dataset.del,1);sv();render();};});
 }
+
+/* ============================================================
+   [JS FUNGSI CATATAN KESULITAN]
+   ============================================================ */
 function notes(){var oo=document.getElementById("onlyOpen").checked,h="";
   st.notes.slice().reverse().forEach(function(x){if(oo&&x.ok)return;h+='<div class="nt'+(x.ok?' ok':'')+'"><input type="checkbox" data-ok="'+x.id+'"'+(x.ok?' checked':'')+' aria-label="Sudah paham"><div style="flex:1"><div class="tx">'+esc(x.t)+'</div><small>'+fmt(pd(x.d))+' · '+esc(T[x.mod])+'</small></div><button data-nd="'+x.id+'">Hapus</button></div>';});
   document.getElementById("notes").innerHTML=h||'<p class="sub">Belum ada catatan.</p>';
   document.querySelectorAll("[data-ok]").forEach(function(c){c.onchange=function(){st.notes.forEach(function(x){if(x.id==c.dataset.ok)x.ok=c.checked;});sv();notes();};});
   document.querySelectorAll("[data-nd]").forEach(function(b){b.onclick=function(){st.notes=st.notes.filter(function(x){return x.id!=b.dataset.nd;});sv();notes();};});
 }
+
+/* ============================================================
+   [JS INISIALISASI & EVENT FORM]
+   ============================================================ */
 function $(i){return document.getElementById(i);}
-pareto();opts("lmod");opts("nmod");
+pareto();opts("lmod");opts("nmod");opts("genTopic");
 $("ld").value=today;$("nd").value=today;$("tD").value=st.tD;$("tM").value=st.tM;$("start").value=st.start;
 $("addL").onclick=function(){var m=parseInt($("lm").value,10);if(!(m>0)||!$("ld").value){$("lm").focus();return;}st.log.push({d:$("ld").value,m:m,mod:+$("lmod").value});st.log.sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0;});$("lm").value="";sv();render();};
 $("addN").onclick=function(){var t=$("nt").value.trim();if(!t){$("nt").focus();return;}st.notes.push({id:Date.now(),d:$("nd").value||today,mod:+$("nmod").value,t:t,ok:false});$("nt").value="";sv();notes();};
@@ -266,6 +483,270 @@ $("tD").onchange=function(){st.tD=Math.min(7,Math.max(1,+$("tD").value||5));sv()
 $("tM").onchange=function(){st.tM=Math.max(10,+$("tM").value||60);sv();render();};
 $("start").onchange=function(){if($("start").value){st.start=$("start").value;sv();render();}};
 $("reset").onclick=function(){if(confirm("Hapus semua progres, sesi, dan catatan?")){try{localStorage.removeItem(KEY);}catch(e){}location.reload();}};
+
+/* ============================================================
+   [JS GENERATOR SOAL GEMINI]
+   Referensi dari SEMUA file yang dilampirkan (10 berkas).
+   ============================================================ */
+const GEMINI_KEY_STORAGE = "gemini-api-key";
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=";
+
+/* [REFERENSI SOAL KOMPETISI]
+   Sumber: KoSSMI 2022 penyisihan, KoSSMI 2022 semifinal, KoSSMI 2023,
+   LMNas 33, LMNas 34, LMNas 35, KSR 2025, OMI 2026, KOSSMI penyisihan,
+   KOSSMI semifinal, dan Ketaksamaan OSN.
+   Dicampur pilihan ganda, isian singkat, dan uraian. */
+const REFERENSI_LANJUT = `
+Contoh soal tingkat tinggi dari berbagai kompetisi:
+
+[KoSSMI 2022 Penyisihan]
+- Diketahui persamaan x + y + z = 12 maka x <= 5, y > 4, dan 0 <= z <= 3. Banyak solusi yang mungkin adalah...
+- Tentukan bilangan bulat positif terbesar n sehingga 2^n habis membagi 10^20 - 2^20.
+- Jumlah 2022 suku pertama suatu deret geometri adalah 2022 dan jumlah 4044 suku pertamanya adalah -2022. Tentukan jumlah 8088 suku pertamanya.
+- Diberikan kubus PQRS.TUVW dengan rusuk 8 cm. Titik A potong PW dan ST, B potong UW dan TV. Jarak Q ke garis AB adalah...
+
+[KoSSMI 2022 Semifinal]
+- Jika angka 1, 2, 3, 4 dipakai sekali untuk membentuk bilangan 4 digit, banyak bilangan habis dibagi 11 adalah...
+- Jumlah semua tripel bilangan riil (x, y, z) yang memenuhi x + y = 12 dan xy = z^2 + 36 adalah...
+- Tiga digit terakhir dari 9^100 - 1 adalah...
+- Dua angka terakhir dari 43^2022 adalah...
+
+[KoSSMI 2023 Penyisihan]
+- Jika a + b = 11 dan ab = 48, nilai a^2 + b^2 adalah...
+- Bentuk sederhana dari (sqrt(10) - sqrt(2))^(1/3) (sqrt(10) + sqrt(2))^(7/3) adalah...
+- Banyaknya solusi bilangan bulat dari 19x + 93y = 4xy adalah...
+- Sisa pembagian 10^43 dengan 126 adalah...
+
+[LMNas 33 UGM 2022]
+- Diketahui bilangan real a dan b solusi berbeda dari x^2 + x - 1 = 0. Nilai a^3 + b^3 + a^2 + b^2 - a^5 - b^5 - a^4 - b^4 adalah...
+- Diberikan segitiga ABC dengan AB = 10. Titik D, E, F titik tengah AB, BC, AC. Diketahui CD tegak lurus AE dan CD = 9. Nilai (BF + BC)^2 = a + b sqrt(c). Nilai a + b + c adalah...
+- Dua digit terakhir dari 2022^2022 * S_2022 (barisan Fibonacci-like) adalah...
+
+[LMNas 34 UGM 2023]
+- Diberikan segitiga ABC dengan AB = 13, BC = 14, CA = 15. Garis singgung lingkaran dalam memotong AB dan AC di X dan Y sehingga XY = 5. Nilai 7(AX - AY)^2 adalah...
+- Diberikan himpunan G = {(a,b,c,d) : a,b,c,d in {0,...,10} dan 11 tidak membagi ad - bc}. Banyak anggota G adalah...
+- Diberikan segitiga ABC dengan AB = 12, BC = 5, AC = 13. m bilangan riil terbesar sehingga AP + BP + CP >= m untuk sebarang titik P. Jika m^2 = a + b sqrt(c), nilai a - b + c adalah...
+
+[LMNas 35 UGM 2024]
+- Diberikan polinom P(x) = x^2 - 4x + 6. Q(x) = P(P(x)) - x. Jumlahan semua akar real Q adalah...
+- Bilangan n asli memenuhi FPB(n, 2024) * KPK(n, 2024) = 99176. Nilai n terkecil adalah...
+- Diberikan 2024 bola dengan 46 warna berbeda, 44 bola per warna. n terkecil sehingga saat bola diletakkan melingkar selalu ada n bola bersebelahan dengan setidaknya 35 warna berbeda. Nilai n adalah...
+
+[KSR 2025 Regional SMA]
+- Penyelesaian sqrt(2x+1) >= 2x - 2 adalah a <= x <= b. Nilai b - a adalah...
+- Banyaknya pasangan bilangan bulat (x,y) dengan -2025 < x,y < 2025 yang memenuhi 8x^2 + 10xy - 3y^2 = 0 adalah...
+- Hasil dari [sqrt(1)] + [sqrt(2)] + ... + [sqrt(2025)] adalah...
+- Diketahui tan theta = 5. Nilai (3 sin theta + cos theta)/(sin theta - 3 cos theta) adalah...
+
+[OMI 2026 Matrik]
+- Jika A = [[x,2],[1,1]] matriks yang mempunyai invers dan det(B) = 2, hasil kali semua nilai x sehingga det(A) = 4 det((AB)^-1) adalah...
+- Jika A = [[1,1],[-3,2]] dan B = [[-1,1],[-2,1]], jumlah kuadrat semua nilai t yang memenuhi det(A + 2tB)^-1 = 10 adalah...
+- Suatu fungsi f: Z -> Q dengan f(m+1) = (1 + f(m))/(1 - f(m)). Jika f(2) = n, nilai f(2021) adalah...
+
+[KOSSMI Penyisihan Level 4]
+- Manakah ekspresi yang sama dengan cos^3 theta - sin^3 theta?
+- Nilai x yang memenuhi (x+1)(x^2+1)(x^4+1)(x^8+1)(x^16+1) = 27x^32 - 27 adalah...
+- Nilai terbesar f(x) = sqrt(10x - x^2) - sqrt(16x - x^2 - 60) adalah...
+
+[KOSSMI Semifinal Level 4]
+- Berapa sisa 3^2021 + 7^2021 dibagi 100?
+- Banyak pasangan bilangan bulat positif m < n <= 50 yang memenuhi (m+n)/2 - sqrt(mn) = 1 adalah...
+- Misalkan x, y memenuhi x + xy + y = 2 + 3 sqrt(2) dan x^2 + y^2 = 6. Nilai |x + y + 1| adalah...
+
+[Ketaksamaan OSN]
+- Ketaksamaan QM >= AM >= GM >= HM untuk bilangan real nonnegatif.
+- Ketaksamaan Cauchy-Schwarz: (sum a_k b_k)^2 <= (sum a_k^2)(sum b_k^2).
+- Ketaksamaan CS bentuk pecahan: sum t_i^2/w_i >= (sum t_i)^2 / (sum w_i) untuk w_i > 0.
+- Nilai minimum x + 50y + 625/(xy^2) tercapai saat x = a, y = b. Tentukan a + b + ab.
+`;
+
+/* [API KEY UI] Cek dan simpan API key di localStorage. */
+function updateApiKeyUI() {
+  const key = localStorage.getItem(GEMINI_KEY_STORAGE);
+  const warning = document.getElementById("apiKeyWarning");
+  if (key) {
+    warning.classList.remove("active");
+    document.getElementById("geminiApiKey").value = key;
+  } else {
+    warning.classList.add("active");
+  }
+}
+
+document.getElementById("saveApiKey").onclick = function() {
+  const key = document.getElementById("geminiApiKey").value.trim();
+  if (key) {
+    localStorage.setItem(GEMINI_KEY_STORAGE, key);
+    alert("API Key berhasil disimpan!");
+    updateApiKeyUI();
+  } else {
+    alert("API Key tidak boleh kosong.");
+  }
+};
+
+/* [POPUP BENAR/SALAH]
+   Menampilkan Hiasan_1.jpg + teks H1 "SELAMAT!" / "SALAHHH!" selama 2 detik. */
+function showPopup(isCorrect) {
+  const popup = document.getElementById("popupHiasan");
+  const text = document.getElementById("popupText");
+  
+  if (isCorrect) {
+    text.textContent = "SELAMAT!";
+    text.className = "ok";
+  } else {
+    text.textContent = "SALAHHH!";
+    text.className = "err";
+  }
+  
+  popup.classList.add("show");
+  
+  setTimeout(() => {
+    popup.classList.remove("show");
+  }, 2000);
+}
+
+/* [TOMBOL BUAT SOAL]
+   Memanggil Gemini API, parsing JSON, render opsi A-E.
+   Kunci jawaban hanya terbuka jika jawaban benar. */
+document.getElementById("genBtn").onclick = async function() {
+  const apiKey = localStorage.getItem(GEMINI_KEY_STORAGE);
+  if (!apiKey) {
+    alert("Silakan masukkan API Key Gemini terlebih dahulu.");
+    document.getElementById("geminiApiKey").focus();
+    return;
+  }
+
+  const topicIndex = document.getElementById("genTopic").value;
+  const topicName = T[topicIndex];
+  const difficulty = parseInt(document.getElementById("genDifficulty").value);
+  const resultDiv = document.getElementById("genResult");
+  const loading = document.getElementById("genLoading");
+  const btn = this;
+
+  if (difficulty < 1 || difficulty > 5) {
+    alert("Tingkat kesulitan harus antara 1 sampai 5.");
+    return;
+  }
+
+  resultDiv.innerHTML = "";
+  loading.classList.add("active");
+  btn.disabled = true;
+
+  // Tambahkan referensi jika level tinggi
+  let refText = "";
+  if (difficulty >= 4) {
+    refText = `\n\nGunakan gaya dan tingkat kesulitan yang mirip dengan contoh soal kompetisi berikut:\n${REFERENSI_LANJUT}`;
+  }
+
+  const prompt = `Kamu adalah guru matematika dan fisika yang ahli. Buatkan 1 soal pilihan ganda (A-E) baru dengan spesifikasi berikut:
+- Bab/Topik: ${topicName}
+- Tingkat Kesulitan: ${difficulty} dari 5 (1 = sangat mudah, 5 = sangat sulit/olimpiade)${refText}
+
+Format output HARUS berupa JSON valid dengan struktur berikut (tanpa markdown tambahan, hanya JSON murni):
+{
+  "soal": "Teks soal lengkap di sini",
+  "opsi": {
+    "A": "Pilihan A",
+    "B": "Pilihan B",
+    "C": "Pilihan C",
+    "D": "Pilihan D",
+    "E": "Pilihan E"
+  },
+  "jawaban_benar": "A" (atau B/C/D/E),
+  "cara_menjawab": "Langkah demi langkah penyelesaian secara detail",
+  "rumus": "Nama rumus atau teorema yang digunakan, pisahkan dengan koma jika lebih dari satu"
+}
+
+Pastikan soal relevan dengan kurikulum SMA dan topik yang diminta. Jangan sertakan teks lain selain JSON.`;
+
+  try {
+    const response = await fetch(GEMINI_API_URL + apiKey, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1500 }
+      })
+    });
+
+    if (!response.ok) {
+      const errData = await response.json();
+      throw new Error(errData.error?.message || "Gagal memanggil API");
+    }
+
+    const data = await response.json();
+    let textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    
+    // Bersihkan jika ada markdown block
+    textResponse = textResponse.replace(/```json/g, "").replace(/```/g, "").trim();
+
+    let parsed;
+    try {
+      parsed = JSON.parse(textResponse);
+    } catch (e) {
+      resultDiv.innerHTML = `<div class="gen-soal"><p>Gagal memparsing JSON. Respons mentah:</p><pre>${esc(textResponse)}</pre></div>`;
+      return;
+    }
+
+    // Render Soal Pilihan Ganda
+    let optionsHtml = "";
+    for (const [key, val] of Object.entries(parsed.opsi)) {
+      optionsHtml += `<button class="gen-opt-btn" data-opt="${key}">${key}. ${esc(val)}</button>`;
+    }
+
+    resultDiv.innerHTML = `
+      <div class="gen-soal" id="activeSoal">
+        <h3>📝 Soal (${esc(topicName)} - Level ${difficulty})</h3>
+        <p>${esc(parsed.soal).replace(/\n/g, "<br>")}</p>
+        <div class="gen-options">
+          ${optionsHtml}
+        </div>
+        <div class="answer" id="soalAnswer">
+          <p><span class="label">✅ Kunci Jawaban:</span> ${esc(parsed.jawaban_benar)}</p>
+          <p><span class="label">📖 Cara Menjawab:</span><br>${esc(parsed.cara_menjawab).replace(/\n/g, "<br>")}</p>
+          <p><span class="label">🧮 Rumus Digunakan:</span> ${esc(parsed.rumus)}</p>
+        </div>
+      </div>
+    `;
+
+    // [EVENT OPSI JAWABAN A-E]
+    const optButtons = resultDiv.querySelectorAll(".gen-opt-btn");
+    const answerDiv = document.getElementById("soalAnswer");
+    let isAnsweredCorrectly = false;
+
+    optButtons.forEach(btn => {
+      btn.addEventListener("click", function() {
+        if (isAnsweredCorrectly) return; // Jika sudah benar, abaikan klik lain
+
+        const selected = this.dataset.opt;
+        const correct = parsed.jawaban_benar;
+
+        if (selected === correct) {
+          this.classList.add("correct");
+          isAnsweredCorrectly = true;
+          answerDiv.classList.add("show");
+          showPopup(true);
+          optButtons.forEach(b => b.disabled = true);
+        } else {
+          this.classList.add("wrong");
+          this.disabled = true;
+          showPopup(false);
+        }
+      });
+    });
+
+  } catch (error) {
+    resultDiv.innerHTML = `<div class="gen-soal" style="border-left-color: var(--warn);"><p>❌ Error: ${esc(error.message)}</p></div>`;
+  } finally {
+    loading.classList.remove("active");
+    btn.disabled = false;
+  }
+};
+
+updateApiKeyUI();
+
+/* ============================================================
+   [JS RENDER AWAL]
+   ============================================================ */
 render();
 </script>
 </body>
