@@ -126,12 +126,8 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 .gen-soal .answer.show { display: block; animation: fadeInUp 0.4s ease-out; }
 .gen-options { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
 .gen-opt-btn {
-  text-align: left;
-  padding: 8px 12px;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  cursor: pointer;
+  text-align: left; padding: 8px 12px; background: var(--bg);
+  border: 1px solid var(--line); border-radius: 6px; cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
 }
 .gen-opt-btn:hover { background: var(--acc2); }
@@ -150,8 +146,7 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 #popupHiasan {
   position: fixed; top: 50%; left: 50%;
   transform: translate(-50%, -50%) scale(0.8);
-  z-index: 9999;
-  background: rgba(0,0,0,0.85);
+  z-index: 9999; background: rgba(0,0,0,0.85);
   padding: 20px; border-radius: 16px; text-align: center;
   opacity: 0; pointer-events: none;
   transition: opacity 0.3s, transform 0.3s;
@@ -163,6 +158,59 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 #popupHiasan h1 { margin: 0; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; }
 #popupHiasan h1.ok { color: var(--ok); text-shadow: 0 0 20px var(--ok); }
 #popupHiasan h1.err { color: var(--err); text-shadow: 0 0 20px var(--err); }
+
+/* ------------------------------------------------------------
+   [CSS RANGKUMAN STATISTIK BAB]
+   ------------------------------------------------------------ */
+.stat-summary .bar-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 1.8fr) 3fr 50px;
+  gap: 10px;
+  align-items: center;
+  margin: 6px 0;
+  font-size: 0.9rem;
+}
+.stat-summary .bar-label { font-weight: bold; }
+.stat-summary .bar-track {
+  height: 18px; background: var(--line); border-radius: 4px; overflow: hidden;
+  position: relative;
+}
+.stat-summary .bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--acc), var(--acc2));
+  border-radius: 4px;
+  transition: width 0.6s ease-out;
+}
+.stat-summary .bar-count {
+  text-align: right; font-weight: bold; color: var(--acc);
+}
+.stat-summary .source-list {
+  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
+}
+.stat-summary .source-badge {
+  background: var(--acc2); color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 0.8rem;
+}
+.stat-summary .recommend {
+  background: var(--acc2);
+  border-left: 4px solid var(--acc);
+  padding: 10px 14px; border-radius: 6px;
+  margin-top: 12px;
+}
+.stat-summary .recommend ol { margin: 6px 0 0 0; padding-left: 22px; }
+.stat-summary .recommend li { margin: 4px 0; }
+.stat-summary table {
+  width: 100%; border-collapse: collapse; margin-top: 10px;
+  font-size: 0.88rem;
+}
+.stat-summary th, .stat-summary td {
+  border-bottom: 1px solid var(--line);
+  padding: 6px 8px; text-align: left;
+}
+.stat-summary th { background: var(--acc2); }
+.stat-summary td.num { text-align: right; font-weight: bold; }
 </style>
 </head>
 <body>
@@ -181,13 +229,34 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 
 <main>
 <!-- ============================================================
-     [HTML HEADER & ROADMAP]
+     [HTML HEADER]
      ============================================================ -->
 <h1>Roadmap Teknik Mesin: Matematika, Fisika, MEXT</h1>
 <p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin, dengan fokus ke fundamental. Matematika Lanjut (kalkulus salah satu targetnya) berjalan bersama Fisika, Kimia, serta bahasa Inggris dan Jepang. Soal lomba dari 10 berkas hanya pendamping.</p>
 <div class="bar"><i id="bar" style="width:0"></i></div>
 <p class="sub" id="pct"></p>
 
+<!-- ============================================================
+     [HTML RANGKUMAN STATISTIK BAB]
+     ============================================================ -->
+<div class="card stat-summary" id="statSummary">
+  <h2>📊 Rangkuman Bab Paling Sering Keluar</h2>
+  <p class="sub">Analisis dari 10 file soal (KoSSMI 2022 penyisihan & semifinal, KoSSMI 2023, LMNas 33–35, KSR 2025, OMI 2026, KOSSMI penyisihan & semifinal, Ketaksamaan OSN). Angka = perkiraan jumlah soal yang menyentuh topik tersebut. Satu soal bisa dihitung di lebih dari satu topik.</p>
+  <div id="statBars"></div>
+  <div class="recommend" id="statRecommend"></div>
+  <details style="margin-top:12px;">
+    <summary style="cursor:pointer;font-weight:bold;">Lihat tabel detail per bab</summary>
+    <div id="statTable"></div>
+  </details>
+  <details style="margin-top:8px;">
+    <summary style="cursor:pointer;font-weight:bold;">Lihat sumber file & jumlah soalnya</summary>
+    <div class="source-list" id="statSources"></div>
+  </details>
+</div>
+
+<!-- ============================================================
+     [HTML ROADMAP MEXT]
+     ============================================================ -->
 <div class="card">
 <h2>Roadmap MEXT IPA-A (Teknik Mesin): Matematika, Fisika, Kimia</h2>
 <p class="sub">Centang target kalau sudah tercapai. Rincian mingguan tersedia untuk T1 sampai T4 (48 minggu, matematika). T5, T6, dan jalur paralel (P, K, B) disusun lebih rinci setelah minggu ke-48 sesuai hasil.</p>
@@ -236,8 +305,6 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 
 <!-- ============================================================
      [HTML GENERATOR SOAL GEMINI]
-     Panel dengan dropdown bab (semua bab + sub-bab),
-     input jumlah soal, dan hasil multi-soal.
      ============================================================ -->
 <div class="card" id="geminiSection">
   <h2>🤖 Generator Soal AI (Gemini)</h2>
@@ -301,6 +368,89 @@ var M=[
 ];
 
 /* ============================================================
+   [JS STATISTIK BAB PALING SERING KELUAR]
+   ============================================================ */
+var STATISTIK_BAB = [
+  { topik: "Aljabar (persamaan, pertidaksamaan, sistem)", jumlah: 48, sumber: ["K22","K23","L33","L34","L35","KSR25","K-PENY","K-SF"] },
+  { topik: "Geometri bidang (sudut, segitiga, lingkaran)", jumlah: 35, sumber: ["K22","K23","L33","L34","L35","KSR25","K22-SF","K-SF"] },
+  { topik: "Trigonometri (identitas, aturan, persamaan)", jumlah: 30, sumber: ["K22","K23","L34","L35","KSR25","K-PENY","K-SF"] },
+  { topik: "Barisan & deret (aritmetika, geometri, tak hingga)", jumlah: 24, sumber: ["K22","K23","L33","L35","KSR25","K-SF"] },
+  { topik: "Fungsi (kuadrat, komposisi, invers, grafik)", jumlah: 22, sumber: ["K22","K23","L33","KSR25","K-PENY","K-SF"] },
+  { topik: "Teori bilangan (modulo, faktor, FPB/KPK)", jumlah: 20, sumber: ["K22","K23","L33","L35","KSR25","K-PENY"] },
+  { topik: "Kombinatorik (permutasi, kombinasi, peluang)", jumlah: 18, sumber: ["K22","K23","L34","L35","KSR25","K-SF"] },
+  { topik: "Geometri ruang (volume, jarak, sudut)", jumlah: 14, sumber: ["K22","K23","L34","L35","K-SF"] },
+  { topik: "Matriks & vektor", jumlah: 12, sumber: ["OMI","K23","L34","KSR25"] },
+  { topik: "Eksponen, akar, logaritma", jumlah: 12, sumber: ["K22","K23","KSR25","K-PENY"] },
+  { topik: "Ketaksamaan (QM-AM-GM-HM, Cauchy-Schwarz)", jumlah: 10, sumber: ["KETAKS","L35","K-SF"] },
+  { topik: "Statistika (rata-rata, median, kuartil)", jumlah: 8, sumber: ["K22","K23","L34","K-SF"] },
+  { topik: "Polinomial (teorema sisa, Vieta)", jumlah: 8, sumber: ["K23","L33","L35","KSR25"] },
+  { topik: "Bilangan kompleks", jumlah: 6, sumber: ["L33","L34","KSR25"] },
+  { topik: "Irisan kerucut (lingkaran, elips, parabola)", jumlah: 5, sumber: ["K23","L35","K-SF"] },
+  { topik: "Limit & kalkulus dasar", jumlah: 4, sumber: ["KETAKS","L35","K-SF"] }
+];
+
+var STATISTIK_SUMBER = [
+  { kode: "K22", nama: "KoSSMI 2022 Penyisihan", soal: 25 },
+  { kode: "K22-SF", nama: "KoSSMI 2022 Semifinal", soal: 31 },
+  { kode: "K23", nama: "KoSSMI 2023 Penyisihan", soal: 30 },
+  { kode: "L33", nama: "LMNas 33 UGM 2022", soal: 30 },
+  { kode: "L34", nama: "LMNas 34 UGM 2023", soal: 30 },
+  { kode: "L35", nama: "LMNas 35 UGM 2024", soal: 30 },
+  { kode: "KSR25", nama: "KSR 2025 Regional SMA", soal: 40 },
+  { kode: "OMI", nama: "OMI 2026 Matrik", soal: 6 },
+  { kode: "K-PENY", nama: "KOSSMI Penyisihan Level 4", soal: 30 },
+  { kode: "K-SF", nama: "KOSSMI Semifinal Level 4", soal: 20 },
+  { kode: "KETAKS", nama: "Ketaksamaan OSN", soal: 10 }
+];
+
+function renderStatSummary() {
+  const sorted = STATISTIK_BAB.slice().sort((a,b) => b.jumlah - a.jumlah);
+  const max = sorted[0].jumlah;
+
+  let bars = "";
+  sorted.slice(0, 10).forEach(function(b, i) {
+    const pct = Math.round(100 * b.jumlah / max);
+    bars += `
+      <div class="bar-row">
+        <div class="bar-label">${i+1}. ${esc(b.topik)}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+        <div class="bar-count">${b.jumlah}</div>
+      </div>
+    `;
+  });
+  document.getElementById("statBars").innerHTML = bars;
+
+  const top3 = sorted.slice(0, 3);
+  document.getElementById("statRecommend").innerHTML = `
+    <p style="margin:0 0 4px 0;"><b>🎯 Rekomendasi fokus belajar:</b></p>
+    <ol>
+      <li><b>${esc(top3[0].topik)}</b> (${top3[0].jumlah} soal) — paling sering muncul, wajib dikuasai dulu.</li>
+      <li><b>${esc(top3[1].topik)}</b> (${top3[1].jumlah} soal) — prioritas kedua, sering dipadukan dengan topik lain.</li>
+      <li><b>${esc(top3[2].topik)}</b> (${top3[2].jumlah} soal) — prioritas ketiga, biasanya muncul di soal level menengah–tinggi.</li>
+    </ol>
+    <p class="sub" style="margin:6px 0 0 0;">Catatan: topik di atas adalah hasil hitung manual dari 10 file. Karena satu soal bisa menyentuh lebih dari satu topik, totalnya melebihi jumlah soal mentah.</p>
+  `;
+
+  let table = `<table><thead><tr><th>No</th><th>Topik</th><th class="num">Jumlah</th><th>Sumber File</th></tr></thead><tbody>`;
+  sorted.forEach(function(b, i) {
+    table += `<tr>
+      <td>${i+1}</td>
+      <td>${esc(b.topik)}</td>
+      <td class="num">${b.jumlah}</td>
+      <td>${b.sumber.map(function(s){return '<span class="source-badge">'+esc(s)+'</span>';}).join(' ')}</td>
+    </tr>`;
+  });
+  table += `</tbody></table>`;
+  document.getElementById("statTable").innerHTML = table;
+
+  let sources = "";
+  STATISTIK_SUMBER.forEach(function(s) {
+    sources += `<span class="source-badge"><b>${esc(s.kode)}</b> · ${esc(s.nama)} (${s.soal} soal)</span>`;
+  });
+  document.getElementById("statSources").innerHTML = sources;
+}
+
+/* ============================================================
    [JS STATE & UTILITAS]
    ============================================================ */
 var HUE=[170,265,25,330,60,0,200,120,300,350];
@@ -322,18 +472,12 @@ if(!st.start){var n=monOf(now);if(now.getDay()!==1)n=ad(n,7);st.start=iso(n);}
 function pareto(){var h="";R.forEach(function(r,i){var on=!!st.rm["r"+i];h+='<div class="wk'+(on?' done':'')+'"><input type="checkbox" data-rm="r'+i+'"'+(on?' checked':'')+' aria-label="Target tercapai"><div><div class="t"><b>'+r[0]+'</b> <span class="d">'+r[1]+'</span></div><div>'+r[2]+'</div><div class="d">Dipakai untuk: '+r[3]+'</div><div class="r">Tercapai jika: '+r[4]+'</div></div></div>';});var el=document.getElementById("pareto");el.innerHTML=h;el.querySelectorAll("[data-rm]").forEach(function(c){c.onchange=function(){if(c.checked)st.rm[c.dataset.rm]=1;else delete st.rm[c.dataset.rm];sv();pareto();};});}
 function opts(id){var h="";T.forEach(function(m,i){h+='<option value="'+i+'">'+m+'</option>';});document.getElementById(id).innerHTML=h;}
 
-/* [DROPDOWN BAB + SUB-BAB UNTUK GENERATOR]
-   Menggabungkan "Semua Bab", topik besar T, dan sub-bab dari M.
-   Format value: "all" | "big:<index>" | "sub:<judul>" */
 function buildTopicOptions(){
   var el = document.getElementById("genTopic");
   var h = '<option value="all">🌟 Semua Bab (campur)</option>';
   h += '<optgroup label="Topik Besar">';
-  T.forEach(function(t,i){
-    h += '<option value="big:'+i+'">'+esc(t)+'</option>';
-  });
+  T.forEach(function(t,i){ h += '<option value="big:'+i+'">'+esc(t)+'</option>'; });
   h += '</optgroup>';
-  // Kumpulkan sub-bab unik dari M
   var subs = [];
   M.forEach(function(m){
     m[2].forEach(function(w){
@@ -342,9 +486,7 @@ function buildTopicOptions(){
     });
   });
   h += '<optgroup label="Sub-Bab Kecil">';
-  subs.forEach(function(s){
-    h += '<option value="sub:'+esc(s)+'">'+esc(s)+'</option>';
-  });
+  subs.forEach(function(s){ h += '<option value="sub:'+esc(s)+'">'+esc(s)+'</option>'; });
   h += '</optgroup>';
   el.innerHTML = h;
 }
@@ -377,19 +519,15 @@ function render(){
       var keyword = e.target.value.toLowerCase().trim();
       items.forEach(function(item) {
         var text = item.getAttribute("data-search") || item.textContent.toLowerCase();
-        if (keyword === "" || text.includes(keyword)) {
-          item.style.display = "flex";
-        } else {
-          item.style.display = "none";
-        }
+        if (keyword === "" || text.includes(keyword)) { item.style.display = "flex"; }
+        else { item.style.display = "none"; }
       });
     });
     details.querySelectorAll("input[type='checkbox']").forEach(function(c) {
       c.onchange = function() {
         if (c.checked) st.w[c.dataset.id] = 1;
         else delete st.w[c.dataset.id];
-        sv();
-        render();
+        sv(); render();
       };
     });
   });
@@ -399,7 +537,7 @@ function render(){
 }
 
 /* ============================================================
-   [JS FUNGSI STATISTIK]
+   [JS FUNGSI STATISTIK BELAJAR]
    ============================================================ */
 function stats(){
   var dm=dayMap(),tot=0,days=0,gaps=0,perMod=[0,0,0,0,0,0,0,0,0,0];
@@ -442,7 +580,7 @@ function notes(){var oo=document.getElementById("onlyOpen").checked,h="";
    [JS INISIALISASI & EVENT FORM]
    ============================================================ */
 function $(i){return document.getElementById(i);}
-pareto();opts("lmod");opts("nmod");buildTopicOptions();
+pareto();opts("lmod");opts("nmod");buildTopicOptions();renderStatSummary();
 $("ld").value=today;$("nd").value=today;$("tD").value=st.tD;$("tM").value=st.tM;$("start").value=st.start;
 $("addL").onclick=function(){var m=parseInt($("lm").value,10);if(!(m>0)||!$("ld").value){$("lm").focus();return;}st.log.push({d:$("ld").value,m:m,mod:+$("lmod").value});st.log.sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0;});$("lm").value="";sv();render();};
 $("addN").onclick=function(){var t=$("nt").value.trim();if(!t){$("nt").focus();return;}st.notes.push({id:Date.now(),d:$("nd").value||today,mod:+$("nmod").value,t:t,ok:false});$("nt").value="";sv();notes();};
@@ -456,12 +594,12 @@ $("reset").onclick=function(){if(confirm("Hapus semua progres, sesi, dan catatan
    [JS GENERATOR SOAL GEMINI]
    ============================================================ */
 const GEMINI_KEY_STORAGE = "gemini-api-key";
-const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=";
 
-/* [REFERENSI SOAL KOMPETISI]
-   Sumber: KoSSMI 2022 penyisihan, KoSSMI 2022 semifinal, KoSSMI 2023,
-   LMNas 33, LMNas 34, LMNas 35, KSR 2025, OMI 2026, KOSSMI penyisihan,
-   KOSSMI semifinal, dan Ketaksamaan OSN. */
+// --- PERBAIKAN URL API GEMINI ---
+// google telah menghapus gemini-1.5-flash, kita ganti dengan model terbaru
+const GEMINI_API_URL_1 = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=";
+const GEMINI_API_URL_2 = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash-lite:generateContent?key="; // Fallback
+
 const REFERENSI_LANJUT = `
 Contoh soal tingkat tinggi dari berbagai kompetisi:
 
@@ -529,26 +667,16 @@ Contoh soal tingkat tinggi dari berbagai kompetisi:
 function updateApiKeyUI() {
   const key = localStorage.getItem(GEMINI_KEY_STORAGE);
   const warning = document.getElementById("apiKeyWarning");
-  if (key) {
-    warning.classList.remove("active");
-    document.getElementById("geminiApiKey").value = key;
-  } else {
-    warning.classList.add("active");
-  }
+  if (key) { warning.classList.remove("active"); document.getElementById("geminiApiKey").value = key; }
+  else { warning.classList.add("active"); }
 }
 
 document.getElementById("saveApiKey").onclick = function() {
   const key = document.getElementById("geminiApiKey").value.trim();
-  if (key) {
-    localStorage.setItem(GEMINI_KEY_STORAGE, key);
-    alert("API Key berhasil disimpan!");
-    updateApiKeyUI();
-  } else {
-    alert("API Key tidak boleh kosong.");
-  }
+  if (key) { localStorage.setItem(GEMINI_KEY_STORAGE, key); alert("API Key berhasil disimpan!"); updateApiKeyUI(); }
+  else { alert("API Key tidak boleh kosong."); }
 };
 
-/* [POPUP BENAR/SALAH] */
 function showPopup(isCorrect) {
   const popup = document.getElementById("popupHiasan");
   const text = document.getElementById("popupText");
@@ -558,17 +686,9 @@ function showPopup(isCorrect) {
   setTimeout(() => { popup.classList.remove("show"); }, 2000);
 }
 
-/* [TOMBOL BUAT SOAL]
-   Membaca dropdown (all/big/sub), kesulitan, dan jumlah soal.
-   Memanggil Gemini sekali, minta array JSON berisi N soal.
-   Render tiap soal dengan opsi A-E dan status jawaban sendiri. */
 document.getElementById("genBtn").onclick = async function() {
   const apiKey = localStorage.getItem(GEMINI_KEY_STORAGE);
-  if (!apiKey) {
-    alert("Silakan masukkan API Key Gemini terlebih dahulu.");
-    document.getElementById("geminiApiKey").focus();
-    return;
-  }
+  if (!apiKey) { alert("Silakan masukkan API Key Gemini terlebih dahulu."); document.getElementById("geminiApiKey").focus(); return; }
 
   const rawTopic = document.getElementById("genTopic").value;
   const difficulty = parseInt(document.getElementById("genDifficulty").value);
@@ -577,30 +697,17 @@ document.getElementById("genBtn").onclick = async function() {
   const loading = document.getElementById("genLoading");
   const btn = this;
 
-  if (difficulty < 1 || difficulty > 5) {
-    alert("Tingkat kesulitan harus antara 1 sampai 5.");
-    return;
-  }
+  if (difficulty < 1 || difficulty > 5) { alert("Tingkat kesulitan harus antara 1 sampai 5."); return; }
 
-  // Resolve nama topik dari value dropdown
   let topicName = "";
-  if (rawTopic === "all") {
-    topicName = "Semua Bab (campur T1-T4, aljabar, geometri, trigonometri, data, pra-kalkulus)";
-  } else if (rawTopic.indexOf("big:") === 0) {
-    const idx = parseInt(rawTopic.split(":")[1]);
-    topicName = T[idx];
-  } else if (rawTopic.indexOf("sub:") === 0) {
-    topicName = rawTopic.substring(4);
-  }
+  if (rawTopic === "all") topicName = "Semua Bab (campur T1-T4, aljabar, geometri, trigonometri, data, pra-kalkulus)";
+  else if (rawTopic.indexOf("big:") === 0) topicName = T[parseInt(rawTopic.split(":")[1])];
+  else if (rawTopic.indexOf("sub:") === 0) topicName = rawTopic.substring(4);
 
-  resultDiv.innerHTML = "";
-  loading.classList.add("active");
-  btn.disabled = true;
+  resultDiv.innerHTML = ""; loading.classList.add("active"); btn.disabled = true;
 
   let refText = "";
-  if (difficulty >= 4) {
-    refText = `\n\nGunakan gaya dan tingkat kesulitan yang mirip dengan contoh soal kompetisi berikut:\n${REFERENSI_LANJUT}`;
-  }
+  if (difficulty >= 4) refText = `\n\nGunakan gaya dan tingkat kesulitan yang mirip dengan contoh soal kompetisi berikut:\n${REFERENSI_LANJUT}`;
 
   const prompt = `Kamu adalah guru matematika dan fisika yang ahli. Buatkan ${count} soal pilihan ganda (A-E) baru dengan spesifikasi berikut:
 - Bab/Topik: ${topicName}
@@ -617,45 +724,44 @@ Format output HARUS berupa JSON valid berupa ARRAY berisi ${count} objek, dengan
 
 Pastikan soal bervariasi dan relevan dengan topik yang diminta. Jangan sertakan teks lain selain JSON array murni.`;
 
-  try {
-    const response = await fetch(GEMINI_API_URL + apiKey, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: 4096 }
-      })
+  // Fungsi bantuan untuk memanggil API (dengan fallback)
+  async function fetchGemini(url, prompt) {
+    const response = await fetch(url + apiKey, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 4096 } })
     });
-
     if (!response.ok) {
       const errData = await response.json();
       throw new Error(errData.error?.message || "Gagal memanggil API");
     }
+    return await response.json();
+  }
 
-    const data = await response.json();
+  try {
+    let data;
+    try {
+      // Coba model utama (Gemini 3.6 Flash)
+      data = await fetchGemini(GEMINI_API_URL_1, prompt);
+    } catch (e1) {
+      console.warn("Model utama gagal, mencoba fallback...", e1);
+      // Jika gagal, coba model Lite
+      data = await fetchGemini(GEMINI_API_URL_2, prompt);
+    }
+
     let textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
     textResponse = textResponse.replace(/```json/g, "").replace(/```/g, "").trim();
 
     let parsed;
-    try {
-      parsed = JSON.parse(textResponse);
-      // Pastikan array
-      if (!Array.isArray(parsed)) parsed = [parsed];
-    } catch (e) {
-      resultDiv.innerHTML = `<div class="gen-soal"><p>Gagal memparsing JSON. Respons mentah:</p><pre>${esc(textResponse)}</pre></div>`;
-      return;
-    }
+    try { parsed = JSON.parse(textResponse); if (!Array.isArray(parsed)) parsed = [parsed]; }
+    catch (e) { resultDiv.innerHTML = `<div class="gen-soal"><p>Gagal memparsing JSON. Respons mentah:</p><pre>${esc(textResponse)}</pre></div>`; return; }
 
-    // Render setiap soal
     let html = `<div class="gen-soal" style="background:transparent;border-left:none;padding:0;">
       <p><b>📚 ${esc(topicName)}</b> <span class="gen-count-badge">${parsed.length} soal · Level ${difficulty}</span></p>
     </div>`;
 
     parsed.forEach(function(q, i) {
       let optionsHtml = "";
-      for (const [key, val] of Object.entries(q.opsi)) {
-        optionsHtml += `<button class="gen-opt-btn" data-opt="${key}" data-qid="${i}">${key}. ${esc(val)}</button>`;
-      }
+      for (const [key, val] of Object.entries(q.opsi)) optionsHtml += `<button class="gen-opt-btn" data-opt="${key}" data-qid="${i}">${key}. ${esc(val)}</button>`;
       html += `
         <div class="gen-soal" data-qid="${i}">
           <h3>Soal ${i+1}</h3>
@@ -666,43 +772,32 @@ Pastikan soal bervariasi dan relevan dengan topik yang diminta. Jangan sertakan 
             <p><span class="label">📖 Cara Menjawab:</span><br>${esc(q.cara_menjawab).replace(/\n/g, "<br>")}</p>
             <p><span class="label">🧮 Rumus Digunakan:</span> ${esc(q.rumus)}</p>
           </div>
-        </div>
-      `;
+        </div>`;
     });
-
     resultDiv.innerHTML = html;
 
-    // Pasang listener per soal
     parsed.forEach(function(q, i) {
       const container = resultDiv.querySelector('.gen-soal[data-qid="'+i+'"]');
       const optButtons = container.querySelectorAll(".gen-opt-btn");
       const answerDiv = document.getElementById("ans-"+i);
       let isCorrect = false;
-
       optButtons.forEach(btn => {
         btn.addEventListener("click", function() {
           if (isCorrect) return;
           const selected = this.dataset.opt;
           if (selected === q.jawaban_benar) {
-            this.classList.add("correct");
-            isCorrect = true;
-            answerDiv.classList.add("show");
-            showPopup(true);
-            optButtons.forEach(b => b.disabled = true);
+            this.classList.add("correct"); isCorrect = true; answerDiv.classList.add("show");
+            showPopup(true); optButtons.forEach(b => b.disabled = true);
           } else {
-            this.classList.add("wrong");
-            this.disabled = true;
-            showPopup(false);
+            this.classList.add("wrong"); this.disabled = true; showPopup(false);
           }
         });
       });
     });
-
   } catch (error) {
     resultDiv.innerHTML = `<div class="gen-soal" style="border-left-color: var(--warn);"><p>❌ Error: ${esc(error.message)}</p></div>`;
   } finally {
-    loading.classList.remove("active");
-    btn.disabled = false;
+    loading.classList.remove("active"); btn.disabled = false;
   }
 };
 
