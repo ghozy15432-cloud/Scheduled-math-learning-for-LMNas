@@ -6,6 +6,25 @@
 <title>DAIGAKU HERE I COME</title>
 
 <!-- ============================================================
+     [SCRIPT MATHJAX]
+     Library untuk merender rumus matematika (LaTeX)
+     ============================================================ -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<!-- ============================================================ -->
+
+<!-- ============================================================
      [CSS UTAMA]
      ============================================================ -->
 <style>
@@ -597,15 +616,10 @@ $("reset").onclick=function(){if(confirm("Hapus semua progres, sesi, dan catatan
 /* ============================================================
    [JS GENERATOR SOAL GEMINI]
    ============================================================ */
-/* ============================================================
-   [JS GENERATOR SOAL GEMINI]
-   ============================================================ */
 const GEMINI_KEY_STORAGE = "gemini-api-key";
-
-// Gunakan model yang masih kompatibel dengan :generateContent
 const GEMINI_API_URL_1 = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=";
-// Fallback ke model Lite yang valid
 const GEMINI_API_URL_2 = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=";
+
 const REFERENSI_LANJUT = `
 Contoh soal tingkat tinggi dari berbagai kompetisi:
 
@@ -753,14 +767,12 @@ Pastikan soal bervariasi dan relevan dengan topik yang diminta. Jangan sertakan 
 
     let textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
     
-    // PERBAIKAN PARSING: Cari kurung siku pertama '[' dan terakhir ']' untuk mengekstrak JSON
     const firstBracket = textResponse.indexOf('[');
     const lastBracket = textResponse.lastIndexOf(']');
     
     if (firstBracket !== -1 && lastBracket !== -1 && lastBracket > firstBracket) {
       textResponse = textResponse.substring(firstBracket, lastBracket + 1);
     } else {
-      // Jika AI mengembalikan objek tunggal (bukan array), bungkus dalam array
       const firstBrace = textResponse.indexOf('{');
       const lastBrace = textResponse.lastIndexOf('}');
       if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
@@ -784,20 +796,30 @@ Pastikan soal bervariasi dan relevan dengan topik yang diminta. Jangan sertakan 
 
     parsed.forEach(function(q, i) {
       let optionsHtml = "";
-      for (const [key, val] of Object.entries(q.opsi)) optionsHtml += `<button class="gen-opt-btn" data-opt="${key}" data-qid="${i}">${key}. ${esc(val)}</button>`;
+      for (const [key, val] of Object.entries(q.opsi)) {
+        // JANGAN gunakan esc() di sini agar MathJax bisa membaca format LaTeX (contoh: \sqrt)
+        optionsHtml += `<button class="gen-opt-btn" data-opt="${key}" data-qid="${i}">${key}. ${val}</button>`;
+      }
       html += `
         <div class="gen-soal" data-qid="${i}">
           <h3>Soal ${i+1}</h3>
-          <p>${esc(q.soal).replace(/\n/g, "<br>")}</p>
+          <p>${q.soal.replace(/\n/g, "<br>")}</p>
           <div class="gen-options">${optionsHtml}</div>
           <div class="answer" id="ans-${i}">
-            <p><span class="label">✅ Kunci Jawaban:</span> ${esc(q.jawaban_benar)}</p>
-            <p><span class="label">📖 Cara Menjawab:</span><br>${esc(q.cara_menjawab).replace(/\n/g, "<br>")}</p>
-            <p><span class="label">🧮 Rumus Digunakan:</span> ${esc(q.rumus)}</p>
+            <p><span class="label">✅ Kunci Jawaban:</span> ${q.jawaban_benar}</p>
+            <p><span class="label">📖 Cara Menjawab:</span><br>${q.cara_menjawab.replace(/\n/g, "<br>")}</p>
+            <p><span class="label">🧮 Rumus Digunakan:</span> ${q.rumus}</p>
           </div>
         </div>`;
     });
     resultDiv.innerHTML = html;
+
+    // Render rumus matematika menggunakan MathJax
+    if (window.MathJax) {
+      MathJax.typesetPromise([resultDiv]).catch(function (err) {
+        console.log('MathJax error: ', err.message);
+      });
+    }
 
     parsed.forEach(function(q, i) {
       const container = resultDiv.querySelector('.gen-soal[data-qid="'+i+'"]');
