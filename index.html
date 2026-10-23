@@ -118,9 +118,12 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
   border-radius: 6px;
   margin-bottom: 12px;
   animation: fadeInUp 0.4s ease-out;
+  /* Tambahan agar soal tidak keluar dari tabel/kotak */
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 .gen-soal h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
-.gen-soal p { margin: 6px 0; }
+.gen-soal p { margin: 6px 0; line-height: 1.6; }
 .gen-soal .label { font-weight: bold; color: var(--acc); }
 .gen-soal .answer { background: var(--bg); padding: 8px; border-radius: 4px; border: 1px dashed var(--line); margin-top: 8px; display: none; }
 .gen-soal .answer.show { display: block; animation: fadeInUp 0.4s ease-out; }
@@ -129,6 +132,7 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
   text-align: left; padding: 8px 12px; background: var(--bg);
   border: 1px solid var(--line); border-radius: 6px; cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
+  word-break: break-word; /* Tambahan untuk opsi */
 }
 .gen-opt-btn:hover { background: var(--acc2); }
 .gen-opt-btn.correct { background: var(--ok); color: #fff; border-color: var(--ok); }
@@ -594,11 +598,8 @@ $("reset").onclick=function(){if(confirm("Hapus semua progres, sesi, dan catatan
    [JS GENERATOR SOAL GEMINI]
    ============================================================ */
 const GEMINI_KEY_STORAGE = "gemini-api-key";
-
-// --- PERBAIKAN URL API GEMINI ---
-// google telah menghapus gemini-1.5-flash, kita ganti dengan model terbaru
 const GEMINI_API_URL_1 = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=";
-const GEMINI_API_URL_2 = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash-lite:generateContent?key="; // Fallback
+const GEMINI_API_URL_2 = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash-lite:generateContent?key=";
 
 const REFERENSI_LANJUT = `
 Contoh soal tingkat tinggi dari berbagai kompetisi:
@@ -724,11 +725,10 @@ Format output HARUS berupa JSON valid berupa ARRAY berisi ${count} objek, dengan
 
 Pastikan soal bervariasi dan relevan dengan topik yang diminta. Jangan sertakan teks lain selain JSON array murni.`;
 
-  // Fungsi bantuan untuk memanggil API (dengan fallback)
   async function fetchGemini(url, prompt) {
     const response = await fetch(url + apiKey, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 4096 } })
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 8192 } })
     });
     if (!response.ok) {
       const errData = await response.json();
@@ -740,20 +740,38 @@ Pastikan soal bervariasi dan relevan dengan topik yang diminta. Jangan sertakan 
   try {
     let data;
     try {
-      // Coba model utama (Gemini 3.6 Flash)
       data = await fetchGemini(GEMINI_API_URL_1, prompt);
     } catch (e1) {
       console.warn("Model utama gagal, mencoba fallback...", e1);
-      // Jika gagal, coba model Lite
       data = await fetchGemini(GEMINI_API_URL_2, prompt);
     }
 
     let textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-    textResponse = textResponse.replace(/```json/g, "").replace(/```/g, "").trim();
+    
+    // PERBAIKAN PARSING: Cari kurung siku pertama '[' dan terakhir ']' untuk mengekstrak JSON
+    const firstBracket = textResponse.indexOf('[');
+    const lastBracket = textResponse.lastIndexOf(']');
+    
+    if (firstBracket !== -1 && lastBracket !== -1 && lastBracket > firstBracket) {
+      textResponse = textResponse.substring(firstBracket, lastBracket + 1);
+    } else {
+      // Jika AI mengembalikan objek tunggal (bukan array), bungkus dalam array
+      const firstBrace = textResponse.indexOf('{');
+      const lastBrace = textResponse.lastIndexOf('}');
+      if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+        textResponse = '[' + textResponse.substring(firstBrace, lastBrace + 1) + ']';
+      }
+    }
 
     let parsed;
-    try { parsed = JSON.parse(textResponse); if (!Array.isArray(parsed)) parsed = [parsed]; }
-    catch (e) { resultDiv.innerHTML = `<div class="gen-soal"><p>Gagal memparsing JSON. Respons mentah:</p><pre>${esc(textResponse)}</pre></div>`; return; }
+    try { 
+      parsed = JSON.parse(textResponse); 
+      if (!Array.isArray(parsed)) parsed = [parsed]; 
+    }
+    catch (e) { 
+      resultDiv.innerHTML = `<div class="gen-soal"><p>Gagal memparsing JSON. Respons mentah:</p><pre style="white-space:pre-wrap;word-break:break-all;">${esc(textResponse)}</pre></div>`; 
+      return; 
+    }
 
     let html = `<div class="gen-soal" style="background:transparent;border-left:none;padding:0;">
       <p><b>📚 ${esc(topicName)}</b> <span class="gen-count-badge">${parsed.length} soal · Level ${difficulty}</span></p>
