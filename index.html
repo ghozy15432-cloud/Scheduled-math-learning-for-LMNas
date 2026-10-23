@@ -59,6 +59,7 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 
 .search-box {width:100%;padding:8px 12px;margin-bottom:12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-size:0.95rem;}
 
+/* Kustomisasi Generator */
 #genResult { margin-top: 16px; }
 .gen-soal {background: var(--acc2);border-left: 4px solid var(--acc);padding: 12px 16px;border-radius: 6px;margin-bottom: 12px;animation: fadeInUp 0.4s ease-out;word-break: break-word;overflow-wrap: anywhere;}
 .gen-soal h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
@@ -73,6 +74,7 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 .gen-opt-btn.wrong { background: var(--err); color: #fff; border-color: var(--err); }
 .gen-opt-btn:disabled { cursor: default; opacity: 0.8; }
 
+/* POPUP HIASAN 1 */
 #popupHiasan {position: fixed; top: 50%; left: 50%;transform: translate(-50%, -50%) scale(0.8);z-index: 9999; background: rgba(0,0,0,0.85);padding: 20px; border-radius: 16px; text-align: center;opacity: 0; pointer-events: none;transition: opacity 0.3s, transform 0.3s;box-shadow: 0 10px 40px rgba(0,0,0,0.5);border: 3px solid var(--acc);}
 #popupHiasan.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 #popupHiasan img { width: 200px; border-radius: 8px; margin-bottom: 10px; }
@@ -80,6 +82,7 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 #popupHiasan h1.ok { color: var(--ok); text-shadow: 0 0 20px var(--ok); }
 #popupHiasan h1.err { color: var(--err); text-shadow: 0 0 20px var(--err); }
 
+/* Panel Editor & Konfigurasi */
 .editor-panel { background: var(--bg); border: 2px dashed var(--acc); }
 .json-preview { background: #1e1e1e; color: #d4d4d4; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 0.8rem; overflow-x: auto; max-height: 200px; margin-top: 10px;}
 .status-box { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; }
@@ -100,55 +103,72 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 
 <main>
 <!-- ============================================================
-     [PANEL EDITOR KONFIGURASI AKUN]
+     [PANEL EDITOR & GENERATOR KURIKULUM]
      ============================================================ -->
 <div class="card editor-panel" id="configEditor">
-  <h2>⚙️ Pengaturan Akun & Data Dasar</h2>
-  <p class="sub">Masukkan nama unik Anda. Jika namanya sama, sistem akan otomatis memuat data yang pernah Anda ubah sebelumnya.</p>
+  <h2>⚙️ Pengaturan Kurikulum (Dinamis)</h2>
+  <p class="sub">Masukkan nama Anda. Unggah file soal atau berikan link, lalu biarkan AI menyusun Roadmap, Statistik, dan Referensi Soal secara otomatis.</p>
   
   <div class="row" style="background: var(--acc2); padding: 12px; border-radius: 6px; margin-bottom: 12px; align-items: center;">
     <label style="flex: 1; font-weight: bold;">Username: 
       <input type="text" id="cfgUser" placeholder="Ketik nama unik Anda..." style="width: 60%;">
     </label>
-    <button class="p" id="btnSaveUser">Masuk / Terapkan</button>
-    <button id="btnResetConfig" style="margin-left: auto; border-color: var(--err); color: var(--err);">Reset Akun Ini</button>
+    <button class="p" id="btnSaveUser">Masuk</button>
+    <button id="btnResetConfig" style="margin-left: auto; border-color: var(--err); color: var(--err);">Reset Kurikulum</button>
   </div>
-  <div id="userStatus" style="margin-bottom: 12px; font-size: 0.9rem;"></div>
   
-  <details>
-    <summary style="cursor:pointer;font-weight:bold;margin-bottom:10px;">Buka Editor File Dasar</summary>
+  <div id="userStatus" style="margin-bottom: 12px; font-size: 0.9rem;"></div>
+
+  <!-- AREA FILE & GEMINI -->
+  <div style="border-top: 1px solid var(--line); padding-top: 12px; margin-top: 12px;">
+    <h3 style="margin-top:0;">1. Masukkan Sumber Materi</h3>
+    <div class="row">
+      <label style="flex:1;">Dari Link (URL): <input type="text" id="cfgFileLink" placeholder="https://..." style="width:100%;"></label>
+    </div>
+    <div class="row">
+      <label style="flex:1;">Atau Upload File (.txt/.pdf): <input type="file" id="cfgFileUpload"></label>
+    </div>
+    <div class="row">
+      <button class="p" id="btnGenerateRoadmap">✨ Buat Roadmap & Statistik dengan AI</button>
+      <span id="genStatus" style="font-size:0.9rem; color:var(--mute);"></span>
+    </div>
+    <p class="sub" style="margin-top:4px; font-size:0.8rem;">*Catatan: AI akan menganalisis file/link tersebut dan membuat struktur kurikulum baru secara otomatis.</p>
+  </div>
+
+  <details style="margin-top: 16px;">
+    <summary style="cursor:pointer;font-weight:bold;margin-bottom:10px;">Lihat / Edit File Dasar (JSON)</summary>
     <div class="row" style="flex-direction: column; align-items: stretch;">
       <label>Daftar Topik (Pisahkan dengan koma):</label>
       <textarea id="cfgTopics" style="min-height: 80px;"></textarea>
 
-      <label style="margin-top:10px;">Referensi Soal (Teks bebas untuk prompt AI):</label>
-      <textarea id="cfgRef" style="min-height: 120px;"></textarea>
+      <label style="margin-top:10px;">Referensi Soal AI:</label>
+      <textarea id="cfgRef" style="min-height: 100px;"></textarea>
 
-      <label style="margin-top:10px;">Statistik Bab (Format JSON Array):</label>
+      <label style="margin-top:10px;">Statistik & Roadmap Bab (JSON):</label>
       <textarea id="cfgStats" style="min-height: 100px; font-family: monospace;"></textarea>
       
       <div class="row">
-        <button class="p" id="btnApplyConfig">Simpan Perubahan Data</button>
+        <button class="p" id="btnApplyConfig">Simpan Manual</button>
       </div>
     </div>
   </details>
 
   <div style="margin-top: 15px;">
-    <b>Data JSON yang sedang aktif saat ini:</b>
+    <b>File JSON yang sedang aktif:</b>
     <pre class="json-preview" id="jsonPreview"></pre>
   </div>
 </div>
 
 <!-- [HEADER] -->
 <h1>Roadmap Teknik Mesin: Matematika, Fisika, MEXT</h1>
-<p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin, dengan fokus ke fundamental. Matematika Lanjut (kalkulus salah satu targetnya) berjalan bersama Fisika, Kimia, serta bahasa Inggris dan Jepang. Soal lomba dari 10 berkas hanya pendamping.</p>
+<p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin.</p>
 <div class="bar"><i id="bar" style="width:0"></i></div>
 <p class="sub" id="pct"></p>
 
 <!-- [RANGKUMAN STATISTIK BAB] -->
 <div class="card stat-summary" id="statSummary">
   <h2>📊 Rangkuman Bab Paling Sering Keluar</h2>
-  <p class="sub">Analisis dari 10 file soal. Angka = perkiraan jumlah soal yang menyentuh topik tersebut.</p>
+  <p class="sub">Analisis dari file referensi terbaru.</p>
   <div id="statBars"></div>
   <div class="recommend" id="statRecommend"></div>
   <details style="margin-top:12px;">
@@ -157,7 +177,13 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
   </details>
 </div>
 
-<!-- [ROADMAP & STATISTIK BELAJAR] -->
+<!-- [ROADMAP MINGGUAN (M)] -->
+<div class="card" id="roadmapPanel">
+  <h2>🗓️ Jadwal Belajar Mingguan</h2>
+  <div id="mods"></div>
+</div>
+
+<!-- [STATISTIK BELAJAR & KUIS] -->
 <div class="card">
 <h2>Statistik belajar</h2>
 <div class="kpi" id="kpi"></div>
@@ -167,9 +193,10 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 </div>
 </div>
 
-<!-- [GENERATOR SOAL] -->
+<!-- [GENERATOR SOAL AI] -->
 <div class="card" id="geminiSection">
   <h2>🤖 Generator Soal AI (Gemini)</h2>
+  <p class="sub">Buat soal latihan baru sesuai bab dan referensi kustom Anda.</p>
   <div class="row">
     <div style="flex: 1; min-width: 220px;">
       <label style="display:block; margin-bottom:2px; font-size:0.9rem;">Cari Bab:</label>
@@ -196,17 +223,21 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 <script>
 // === [KONFIGURASI DEFAULT] ===
 const DEFAULT_CONFIG = {
-  topics: ["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A","Fisika","Kimia","Bahasa Jepang","Bahasa Inggris"],
-  referensi: "Contoh soal kompetisi:\n- Tentukan bilangan bulat positif terbesar n sehingga 2^n habis membagi 10^20 - 2^20.\n- Diketahui persamaan x + y + z = 12 maka x <= 5, y > 4, dan 0 <= z <= 3. Banyak solusi yang mungkin adalah...",
+  topics: ["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A"],
+  referensi: "Contoh soal kompetisi:\n- Tentukan bilangan bulat positif terbesar n sehingga 2^n habis membagi 10^20 - 2^20.\n- Diketahui persamaan x + y + z = 12 maka x <= 5...",
   statistik: [
-    { topik: "Aljabar (persamaan, pertidaksamaan, sistem)", jumlah: 48, sumber: ["K22","K23","L33"] },
-    { topik: "Geometri bidang (sudut, segitiga, lingkaran)", jumlah: 35, sumber: ["K22","K23"] },
-    { topik: "Trigonometri (identitas, aturan, persamaan)", jumlah: 30, sumber: ["K22","K23"] }
+    { topik: "Aljabar (persamaan, pertidaksamaan)", jumlah: 48, sumber: ["K22","K23"] },
+    { topik: "Geometri bidang (sudut, segitiga)", jumlah: 35, sumber: ["K22","K23"] },
+    { topik: "Trigonometri (identitas, aturan)", jumlah: 30, sumber: ["K22","K23"] }
+  ],
+  roadmap: [
+    { title: "T1 Fondasi", desc: "Minggu 1-10", items: ["Pecahan, desimal, persen", "Bentuk aljabar sederhana"] },
+    { title: "T2 Aljabar", desc: "Minggu 11-22", items: ["Fungsi kuadrat", "Eksponen dan logaritma"] }
   ]
 };
 
-let CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG)); // Default awal
-let T = []; // Akan diisi dari CONFIG.topics
+let CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG)); 
+let T = []; 
 let allTopicOptions = [];
 let currentUser = null;
 
@@ -214,9 +245,7 @@ let currentUser = null;
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 
 // === [SISTEM AKUN & PENYIMPANAN] ===
-function getStorageKey(username) {
-  return "daigaku_config_" + username.toLowerCase().trim();
-}
+function getStorageKey(username) { return "daigaku_config_" + username.toLowerCase().trim(); }
 
 function loadConfigForUser(username) {
   if (!username) return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
@@ -224,7 +253,7 @@ function loadConfigForUser(username) {
   if (saved) {
     try { return JSON.parse(saved); } catch(e) { return JSON.parse(JSON.stringify(DEFAULT_CONFIG)); }
   }
-  return JSON.parse(JSON.stringify(DEFAULT_CONFIG)); // Default jika user baru
+  return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
 }
 
 function saveConfigForUser(username) {
@@ -243,13 +272,12 @@ function updateUserStatus() {
       statusDiv.innerHTML = `Status: Masuk sebagai <b>${esc(currentUser)}</b> <span class="status-box warn">Pengguna Baru (Data Default)</span>`;
     }
   } else {
-    statusDiv.innerHTML = `Status: <b>Belum Masuk</b> <span class="status-box warn">Mode Tamu (Data Default)</span>`;
+    statusDiv.innerHTML = `Status: <b>Belum Masuk</b> <span class="status-box warn">Mode Tamu</span>`;
   }
 }
 
 function initConfigEditor() {
   document.getElementById("cfgUser").value = currentUser || "";
-  
   document.getElementById("cfgTopics").value = CONFIG.topics.join(", ");
   document.getElementById("cfgRef").value = CONFIG.referensi;
   document.getElementById("cfgStats").value = JSON.stringify(CONFIG.statistik, null, 2);
@@ -262,81 +290,15 @@ function renderConfigPreview() {
   document.getElementById("jsonPreview").textContent = JSON.stringify(CONFIG, null, 2);
 }
 
-// Event: Login / Ganti User
-document.getElementById("btnSaveUser").onclick = function() {
-  const u = document.getElementById("cfgUser").value.trim();
-  if (!u) {
-    alert("Username tidak boleh kosong!");
-    return;
-  }
-  
-  currentUser = u;
-  localStorage.setItem("daigaku_last_user", currentUser); // Simpan agar auto-login next time
-  
-  // Tarik data berdasarkan nama
-  CONFIG = loadConfigForUser(currentUser);
-  T = CONFIG.topics;
-  
-  alert("Berhasil masuk sebagai: " + currentUser);
-  initConfigEditor();
-  refreshAppFromConfig();
-};
-
-// Event: Terapkan Perubahan
-document.getElementById("btnApplyConfig").onclick = function() {
-  if (!currentUser) {
-    alert("Silakan isi Username dan klik 'Masuk' terlebih dahulu sebelum menyimpan data.");
-    return;
-  }
-
-  try {
-    const topicsStr = document.getElementById("cfgTopics").value;
-    const refStr = document.getElementById("cfgRef").value;
-    const statsStr = document.getElementById("cfgStats").value;
-
-    CONFIG.topics = topicsStr.split(",").map(s => s.trim()).filter(s => s);
-    CONFIG.referensi = refStr;
-    CONFIG.statistik = JSON.parse(statsStr);
-
-    T = CONFIG.topics; 
-    saveConfigForUser(currentUser);
-    
-    alert("Data berhasil disimpan untuk akun: " + currentUser);
-    renderConfigPreview();
-    updateUserStatus();
-    refreshAppFromConfig();
-  } catch (e) {
-    alert("Gagal menyimpan: Pastikan format statistik adalah JSON yang valid.");
-  }
-};
-
-// Event: Reset Akun Ini
-document.getElementById("btnResetConfig").onclick = function() {
-  if (!currentUser) {
-    alert("Anda belum masuk.");
-    return;
-  }
-  
-  if(confirm(`Hapus semua data kustom untuk akun "${currentUser}" dan kembalikan ke default?`)) {
-    localStorage.removeItem(getStorageKey(currentUser));
-    CONFIG = loadConfigForUser(currentUser); // Akan load default
-    T = CONFIG.topics;
-    
-    initConfigEditor();
-    refreshAppFromConfig();
-    alert("Data akun telah di-reset ke default.");
-  }
-};
-
-// === [FUNGSI REFRESH UI] ===
+// === [FUNGSI REFRESH UI KESELURUHAN] ===
 function refreshAppFromConfig() {
   allTopicOptions = [];
   buildTopicOptions();
 
+  // Render Statistik
   const statBars = document.getElementById("statBars");
   const statTable = document.getElementById("statTable");
-  statBars.innerHTML = "";
-  statTable.innerHTML = "";
+  statBars.innerHTML = ""; statTable.innerHTML = "";
   
   const sorted = CONFIG.statistik.slice().sort((a,b) => b.jumlah - a.jumlah);
   const max = sorted[0] ? sorted[0].jumlah : 1;
@@ -360,18 +322,182 @@ function refreshAppFromConfig() {
   });
   tableHtml += `</tbody></table>`;
   statTable.innerHTML = tableHtml;
+
+  // Render Roadmap Mingguan (M)
+  const modsEl = document.getElementById("mods");
+  if (CONFIG.roadmap && Array.isArray(CONFIG.roadmap)) {
+    let roadHtml = "";
+    CONFIG.roadmap.forEach((m, mi) => {
+      let itemsHtml = "";
+      m.items.forEach((item, ii) => {
+        itemsHtml += `<div class="wk" style="padding:8px 6px; border-top:1px solid var(--line);"><div><div class="t"><b>Minggu ${ii+1}:</b> ${esc(item)}</div></div></div>`;
+      });
+      roadHtml += `
+        <details class="mod" ${mi === 0 ? 'open' : ''}>
+          <summary>${esc(m.title)}<small>${esc(m.desc)}</small></summary>
+          <div class="in">${itemsHtml}</div>
+        </details>
+      `;
+    });
+    modsEl.innerHTML = roadHtml;
+  } else {
+    modsEl.innerHTML = "<p>Belum ada roadmap.</p>";
+  }
 }
 
-// === [DROPDOWN & SEARCH] ===
+// === [SISTEM GENERATE AI (FILE / LINK)] ===
+document.getElementById("btnGenerateRoadmap").onclick = async function() {
+  const btn = this;
+  const statusSpan = document.getElementById("genStatus");
+  const linkInput = document.getElementById("cfgFileLink").value.trim();
+  const fileInput = document.getElementById("cfgFileUpload").files[0];
+  
+  let fileContent = "";
+
+  if (!linkInput && !fileInput) {
+    alert("Masukkan Link atau Upload File terlebih dahulu!");
+    return;
+  }
+
+  if (!currentUser) {
+    alert("Silakan isi Username dan klik 'Masuk' terlebih dahulu.");
+    return;
+  }
+
+  btn.disabled = true;
+  statusSpan.textContent = "Membaca sumber file...";
+  
+  // 1. Ambil Konten
+  if (fileInput) {
+    fileContent = await fileInput.text(); // Asumsi file txt/json/teks yang bisa dibaca langsung
+  } else if (linkInput) {
+    // Simulasi membaca link (dalam produksi, Anda butuh backend/proxy untuk scraping link)
+    fileContent = `Ini adalah konten simulasi dari link: ${linkInput}. \nTopik utama meliputi Aljabar Linear, Kalkulus, dan Fisika Dasar.`; 
+  }
+
+  statusSpan.textContent = "AI sedang menyusun Roadmap...";
+  
+  // 2. Siapkan Prompt
+  const apiKey = localStorage.getItem("gemini-api-key");
+  if (!apiKey) {
+    alert("API Key Gemini belum diatur di kode. Harap masukkan API Key Anda di variabel kode.");
+    btn.disabled = false;
+    statusSpan.textContent = "API Key tidak ditemukan.";
+    return;
+  }
+
+  const prompt = `Kamu adalah seorang ahli kurikulum pendidikan. Berdasarkan konten file/referensi berikut:
+"${fileContent.substring(0, 2000)}"
+
+Tugasmu:
+1. Buat daftar Topik Utama (array string sederhana, maksimal 10). Contoh: ["T1 Fondasi", "T2 Aljabar", "T3 Geometri"].
+2. Buat daftar Statistik Bab (Array objek JSON). Isinya perkiraan frekuensi kemunculan topik dari teks di atas. Format: [{"topik": "Nama Topik", "jumlah": 30}].
+3. Buat Roadmap Mingguan (Array objek JSON). Isinya pembagian materi per minggu. Format: [{"title": "BAB 1", "desc": "Minggu 1-4", "items": ["Materi A", "Materi B"]}].
+4. Rangkum referensi soal menjadi satu paragraf untuk prompt AI.
+
+Hasilkan HANYA format JSON valid murni dengan struktur:
+{
+  "topics": [...],
+  "statistik": [...],
+  "roadmap": [...],
+  "referensi": "..."
+}
+Jangan tambahkan teks markdown lain seperti \`\`\`json.`;
+
+  // 3. Fetch API
+  const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey;
+
+  try {
+    const res = await fetch(GEMINI_API_URL, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 2048 } })
+    });
+    
+    if (!res.ok) throw new Error("Gagal memanggil AI.");
+    const data = await res.json();
+    let txt = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    
+    // Bersihkan format markdown jika ada
+    txt = txt.replace(/```json/g, "").replace(/```/g, "").trim();
+    
+    const parsed = JSON.parse(txt);
+    
+    // 4. Simpan ke CONFIG
+    CONFIG.topics = parsed.topics || DEFAULT_CONFIG.topics;
+    CONFIG.statistik = parsed.statistik || DEFAULT_CONFIG.statistik;
+    CONFIG.roadmap = parsed.roadmap || DEFAULT_CONFIG.roadmap;
+    CONFIG.referensi = parsed.referensi || DEFAULT_CONFIG.referensi;
+    
+    T = CONFIG.topics;
+    saveConfigForUser(currentUser);
+    
+    initConfigEditor();
+    refreshAppFromConfig();
+    statusSpan.textContent = "Berhasil diperbarui oleh AI!";
+    
+  } catch (err) {
+    alert("Gagal memproses AI: " + err.message);
+    statusSpan.textContent = "Error.";
+  } finally {
+    btn.disabled = false;
+    setTimeout(() => { statusSpan.textContent = ""; }, 3000);
+  }
+};
+
+// === [LOGIKA UI LAINNYA] ===
+document.getElementById("btnSaveUser").onclick = function() {
+  const u = document.getElementById("cfgUser").value.trim();
+  if (!u) return alert("Username tidak boleh kosong!");
+  
+  currentUser = u;
+  localStorage.setItem("daigaku_last_user", currentUser);
+  CONFIG = loadConfigForUser(currentUser);
+  T = CONFIG.topics;
+  
+  alert("Berhasil masuk sebagai: " + currentUser);
+  initConfigEditor();
+  refreshAppFromConfig();
+};
+
+document.getElementById("btnApplyConfig").onclick = function() {
+  if (!currentUser) return alert("Silakan isi Username dan klik 'Masuk' terlebih dahulu.");
+
+  try {
+    CONFIG.topics = document.getElementById("cfgTopics").value.split(",").map(s => s.trim()).filter(s => s);
+    CONFIG.referensi = document.getElementById("cfgRef").value;
+    CONFIG.statistik = JSON.parse(document.getElementById("cfgStats").value);
+    
+    // Jika mau edit roadmap manual, bisa tambahkan textarea JSON M di form
+    
+    T = CONFIG.topics;
+    saveConfigForUser(currentUser);
+    alert("Data berhasil disimpan.");
+    renderConfigPreview();
+    updateUserStatus();
+    refreshAppFromConfig();
+  } catch (e) {
+    alert("Gagal menyimpan: Pastikan format statistik JSON valid.");
+  }
+};
+
+document.getElementById("btnResetConfig").onclick = function() {
+  if (!currentUser) return alert("Anda belum masuk.");
+  if(confirm(`Hapus semua data kustom untuk "${currentUser}"?`)) {
+    localStorage.removeItem(getStorageKey(currentUser));
+    CONFIG = loadConfigForUser(currentUser);
+    T = CONFIG.topics;
+    initConfigEditor();
+    refreshAppFromConfig();
+  }
+};
+
+// Setup Dropdown Bab & Search
 function buildTopicOptions(searchQuery = "") {
   var el = document.getElementById("genTopic");
   
   if (allTopicOptions.length === 0) {
     allTopicOptions.push({ value: "all", text: "🌟 Semua Bab (campur)", group: "" });
     T.forEach(function(t,i){ allTopicOptions.push({ value: "big:"+i, text: t, group: "Topik Besar" }); });
-    
-    var subs = ["Eksponen dan bentuk akar", "Persamaan kuadrat", "Trigonometri dasar", "Vektor", "Peluang"];
-    subs.forEach(function(s){ allTopicOptions.push({ value: "sub:"+s, text: s, group: "Sub-Bab Kecil" }); });
   }
 
   var q = searchQuery.toLowerCase().trim();
@@ -396,42 +522,14 @@ document.getElementById("genTopicSearch").addEventListener("input", function(e) 
   buildTopicOptions(e.target.value);
 });
 
-// === [SIMULASI AI] ===
-document.getElementById("genBtn").onclick = async function() {
-  const btn = this;
-  const rawTopic = document.getElementById("genTopic").value;
-  const count = parseInt(document.getElementById("genCount").value) || 1;
-  const resultDiv = document.getElementById("genResult");
-  
-  if (!rawTopic) return alert("Pilih bab terlebih dahulu!");
-  
-  btn.disabled = true;
-  btn.textContent = "Memuat...";
-  resultDiv.innerHTML = `<p>⏳ Sedang membuat ${count} soal... (Menggunakan Referensi: "${CONFIG.referensi.substring(0, 30)}...")</p>`;
-
-  setTimeout(() => {
-    let html = "";
-    for(let i=0; i<count; i++) {
-      html += `
-        <div class="gen-soal">
-          <h3>Soal ${i+1}</h3>
-          <p>Ini adalah soal simulasi untuk topik <b>${rawTopic}</b> berdasarkan referensi kustom yang Anda atur.</p>
-          <div class="gen-options">
-            <button class="gen-opt-btn">A. Pilihan A</button>
-            <button class="gen-opt-btn">B. Pilihan B</button>
-          </div>
-        </div>
-      `;
-    }
-    resultDiv.innerHTML = html;
-    btn.disabled = false;
-    btn.textContent = "Buat Soal";
-  }, 1000);
-};
-
-// === [INISIALISASI SAAT HALAMAN DIMUAT] ===
+// === [INISIALISASI] ===
 window.onload = function() {
-  // Cek jika ada user yang terakhir login
+  // Tarik API Key dari storage
+  if(!localStorage.getItem("gemini-api-key")){
+    // Peringatan jika belum ada
+    console.warn("API Key Gemini belum diatur.");
+  }
+
   const lastUser = localStorage.getItem("daigaku_last_user");
   if (lastUser) {
     currentUser = lastUser;
