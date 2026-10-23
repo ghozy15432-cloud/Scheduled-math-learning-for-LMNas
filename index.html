@@ -15,9 +15,7 @@
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-<!-- ============================================================
-     [CSS UTAMA ASLI ANDA + TAMBAHAN UI EDITOR]
-     ============================================================ -->
+<!-- [CSS UTAMA ASLI ANDA + TAMBAHAN UI EDITOR] -->
 <style>
 :root{--bg:#f5f7f4;--card:#fff;--ink:#1d2b2a;--mute:#5d6e6c;--line:#d5dedb;--acc:#0b6e66;--acc2:#e8f3f1;--warn:#b4531a;--ok:#1a8c5a;--err:#c0392b;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;--ok:#4fd1c0;--err:#f0a36b;color-scheme:dark}}
@@ -312,25 +310,102 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 
 <script>
 // ============================================================
-// [1. DEFAULT CONFIG & STATE]
+// [1. DEFAULT CONFIG (DATA MTK ASLI LENGKAP 16 BARIS)]
 // ============================================================
 const DEFAULT_CONFIG = {
   topics: ["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A","Fisika","Kimia","Bahasa Jepang","Bahasa Inggris"],
   referensi: "Contoh soal kompetisi:\n- Tentukan bilangan bulat positif terbesar n sehingga 2^n habis membagi 10^20 - 2^20.\n- Jika a+b=11 dan ab=48, nilai a^2+b^2...",
   statistik: [
-    { topik: "Aljabar (Persamaan, Sistem)", jumlah: 48, sumber: ["K22","K23","L33","L34","L35"] },
-    { topik: "Geometri Bidang (Sudut, Segitiga)", jumlah: 35, sumber: ["K22","K23","L33","L34"] },
-    { topik: "Trigonometri (Identitas, Aturan)", jumlah: 30, sumber: ["K22","K23","L34","KSR25"] },
-    { topik: "Barisan & Deret", jumlah: 24, sumber: ["K22","L33","KSR25"] },
-    { topik: "Teori Bilangan (Modulo)", jumlah: 20, sumber: ["K22","K23","L35"] },
-    { topik: "Kombinatorik & Peluang", jumlah: 18, sumber: ["K22","L34","L35"] },
-    { topik: "Matriks & Vektor", jumlah: 12, sumber: ["OMI","K23"] }
+    { topik: "Aljabar (persamaan, pertidaksamaan, sistem)", jumlah: 48, sumber: ["K22","K23","L33","L34","L35","KSR25","K-PENY","K-SF"] },
+    { topik: "Geometri bidang (sudut, segitiga, lingkaran)", jumlah: 35, sumber: ["K22","K23","L33","L34","L35","KSR25","K22-SF","K-SF"] },
+    { topik: "Trigonometri (identitas, aturan, persamaan)", jumlah: 30, sumber: ["K22","K23","L34","L35","KSR25","K-PENY","K-SF"] },
+    { topik: "Barisan & deret (aritmetika, geometri, tak hingga)", jumlah: 24, sumber: ["K22","K23","L33","L35","KSR25","K-SF"] },
+    { topik: "Fungsi (kuadrat, komposisi, invers, grafik)", jumlah: 22, sumber: ["K22","K23","L33","KSR25","K-PENY","K-SF"] },
+    { topik: "Teori bilangan (modulo, faktor, FPB/KPK)", jumlah: 20, sumber: ["K22","K23","L33","L35","KSR25","K-PENY"] },
+    { topik: "Kombinatorik (permutasi, kombinasi, peluang)", jumlah: 18, sumber: ["K22","K23","L34","L35","KSR25","K-SF"] },
+    { topik: "Geometri ruang (volume, jarak, sudut)", jumlah: 14, sumber: ["K22","K23","L34","L35","K-SF"] },
+    { topik: "Matriks & vektor", jumlah: 12, sumber: ["OMI","K23","L34","KSR25"] },
+    { topik: "Eksponen, akar, logaritma", jumlah: 12, sumber: ["K22","K23","KSR25","K-PENY"] },
+    { topik: "Ketaksamaan (QM-AM-GM-HM, Cauchy-Schwarz)", jumlah: 10, sumber: ["KETAKS","L35","K-SF"] },
+    { topik: "Statistika (rata-rata, median, kuartil)", jumlah: 8, sumber: ["K22","K23","L34","K-SF"] },
+    { topik: "Polinomial (teorema sisa, Vieta)", jumlah: 8, sumber: ["K23","L33","L35","KSR25"] },
+    { topik: "Bilangan kompleks", jumlah: 6, sumber: ["L33","L34","KSR25"] },
+    { topik: "Irisan kerucut (lingkaran, elips, parabola)", jumlah: 5, sumber: ["K23","L35","K-SF"] },
+    { topik: "Limit & kalkulus dasar", jumlah: 4, sumber: ["KETAKS","L35","K-SF"] }
   ],
   roadmap: [
-    { title: "T1 Fondasi", desc: "Minggu 1–10 · Okt 2026 - Jan 2027", items: ["Pecahan, desimal, persen", "Bentuk aljabar & pemfaktoran", "Persamaan & pertidaksamaan linear"] },
-    { title: "T2 Aljabar & Fungsi", desc: "Minggu 11–22 · Jan - Mar 2027", items: ["Fungsi kuadrat & parabola", "Eksponen dan logaritma", "Barisan & deret (Aritmetika/Geometri)"] },
-    { title: "T3 Geometri & Trigonometri", desc: "Minggu 23–37 · Mar - Jul 2027", items: ["Geometri bidang & Pythagoras", "Lingkaran & garis singgung", "Identitas Trigonometri & Aturan Sinus/Kosinus"] },
-    { title: "T4 Data & Pra-Kalkulus", desc: "Minggu 38–48 · Jul - Sep 2027", items: ["Statistika & Peluang", "Matriks & Determinan", "Vektor & Irisan Kerucut"] }
+    { 
+      title: "T1 Fondasi", 
+      desc: "Minggu 1–10 · Okt 2026 - Jan 2027", 
+      items: [
+        "Pecahan, desimal, persen, bilangan negatif",
+        "Bentuk aljabar: sederhanakan dan faktorkan",
+        "Persamaan linear dan soal cerita",
+        "Sistem persamaan dua variabel",
+        "Pertidaksamaan linear dan nilai mutlak dasar",
+        "Eksponen dan bentuk akar",
+        "Persamaan kuadrat: faktorisasi dan rumus ABC",
+        "Diskriminan dan rumus Vieta",
+        "Fungsi: nilai fungsi, komposisi, invers",
+        "Tes fondasi 30 soal, 45 menit"
+      ] 
+    },
+    { 
+      title: "T2 Aljabar & Fungsi", 
+      desc: "Minggu 11–22 · Jan - Mar 2027", 
+      items: [
+        "Fungsi kuadrat dan grafik parabola",
+        "Pertidaksamaan kuadrat dan rasional",
+        "Eksponen dan logaritma",
+        "Persamaan eksponen dan logaritma",
+        "Polinomial dan teorema sisa",
+        "Barisan dan deret aritmetika, geometri",
+        "Deret tak hingga dan sigma dasar",
+        "Sistem persamaan linear dan kuadrat",
+        "Transformasi grafik fungsi",
+        "Rasio, persen, laju, dan satuan",
+        "Pertumbuhan eksponensial dan soal cerita fungsi",
+        "Review T2 dan Bluebook practice test Math 1"
+      ] 
+    },
+    { 
+      title: "T3 Geometri & Trigonometri", 
+      desc: "Minggu 23–37 · Mar - Jul 2027", 
+      items: [
+        "Geometri bidang: sudut, segitiga, Pythagoras",
+        "Luas dan keliling bangun datar",
+        "Lingkaran: sudut, busur, persamaan lingkaran",
+        "Geometri koordinat: garis, jarak, titik tengah",
+        "Geometri ruang: volume dan luas permukaan",
+        "Sin, cos, tan di segitiga siku-siku",
+        "Sudut istimewa 30°, 45°, 60°",
+        "Radian dan lingkaran satuan",
+        "Kuadran dan sudut berelasi",
+        "Identitas sin²+cos²=1",
+        "Persamaan trigonometri sederhana",
+        "Aturan sinus dan kosinus",
+        "Luas ½ab sin C dan segi-n beraturan",
+        "Rumus jumlah, selisih, sudut ganda, grafik sin dan cos",
+        "Review T3 dan Bluebook practice test Math 2"
+      ] 
+    },
+    { 
+      title: "T4 Data & Pra-Kalkulus", 
+      desc: "Minggu 38–48 · Jul - Sep 2027", 
+      items: [
+        "Statistik: rata-rata, median, simpangan baku",
+        "Peluang dasar dan peluang bersyarat",
+        "Aturan hitung, permutasi, kombinasi",
+        "Diagram pencar, garis regresi, margin kesalahan",
+        "Bilangan kompleks dasar",
+        "Matriks: operasi, determinan, invers",
+        "Vektor di bidang dan ruang",
+        "Irisan kerucut: lingkaran, elips, parabola",
+        "Pengantar limit: nilai yang mendekati",
+        "Soal campur gaya SAT",
+        "Review T4 dan Bluebook practice test Math 3"
+      ] 
+    }
   ]
 };
 
