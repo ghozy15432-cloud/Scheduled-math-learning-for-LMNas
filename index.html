@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DAIGAKU HERE I COME</title>
 
-<!-- [SCRIPT MATHJAX] -->
+<!-- ============================================================
+     [SCRIPT MATHJAX]
+     ============================================================ -->
 <script>
   window.MathJax = {
     tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true, processEnvironments: true },
@@ -15,7 +17,9 @@
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-<!-- [CSS UTAMA ASLI ANDA + TAMBAHAN UI EDITOR] -->
+<!-- ============================================================
+     [CSS UTAMA]
+     ============================================================ -->
 <style>
 :root{--bg:#f5f7f4;--card:#fff;--ink:#1d2b2a;--mute:#5d6e6c;--line:#d5dedb;--acc:#0b6e66;--acc2:#e8f3f1;--warn:#b4531a;--ok:#1a8c5a;--err:#c0392b;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;--ok:#4fd1c0;--err:#f0a36b;color-scheme:dark}}
@@ -23,9 +27,26 @@
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 
-/* WALLPAPER & KUCING */
-body::before {content: "";position: fixed;top: 0; left: 0; width: 100vw; height: 100vh;background-image: url('Wallpaper.jpg');background-size: cover;background-position: center;z-index: -2;}
-body::after {content: "";position: fixed;top: 0; left: 0; width: 100vw; height: 100vh;background: rgba(17, 26, 25, 0.6);backdrop-filter: blur(3px);z-index: -1;}
+/* ------------------------------------------------------------
+   [CSS WALLPAPER & DEKORASI KUCING]
+   ------------------------------------------------------------ */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-image: url('Wallpaper.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(17, 26, 25, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: -1;
+}
 .deco-cat{position:fixed;z-index:0;pointer-events:none;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.2);opacity:0.85;animation:float 8s ease-in-out infinite;}
 .cat1 { top: 10%; left: 4%; width: 140px; animation-delay: 0s; }
 .cat2 { bottom: 15%; right: 5%; width: 180px; animation-delay: 2s; }
@@ -33,7 +54,9 @@ body::after {content: "";position: fixed;top: 0; left: 0; width: 100vw; height: 
 @keyframes float {0%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(-25px) rotate(3deg);}100%{transform:translateY(0px) rotate(0deg);}}
 @media (max-width: 900px){.deco-cat{display:none;}}
 
-/* LAYOUT UTAMA */
+/* ------------------------------------------------------------
+   [CSS LAYOUT UTAMA]
+   ------------------------------------------------------------ */
 body{margin:0;background:transparent;color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
 main{max-width:880px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1;background:rgba(245,247,244,0.95);backdrop-filter:blur(10px);border-radius:16px;margin-top:30px;box-shadow:0 20px 40px rgba(0,0,0,0.2)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) main{background:rgba(17,26,25,0.95)}}
@@ -84,11 +107,15 @@ ul{padding-left:20px;margin:.3em 0}
 footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 
-/* SEARCH BAR */
+/* ------------------------------------------------------------
+   [CSS SEARCH BAR PER BAB]
+   ------------------------------------------------------------ */
 .search-box {width:100%;padding:8px 12px;margin-bottom:12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-size:0.95rem;}
 .search-box:focus {outline:2px solid var(--acc);border-color:var(--acc);}
 
-/* GENERATOR SOAL GEMINI */
+/* ------------------------------------------------------------
+   [CSS GENERATOR SOAL GEMINI]
+   ------------------------------------------------------------ */
 #genResult { margin-top: 16px; }
 .gen-soal { background: var(--acc2); border-left: 4px solid var(--acc); padding: 12px 16px; border-radius: 6px; margin-bottom: 12px; animation: fadeInUp 0.4s ease-out; word-break: break-word; overflow-wrap: anywhere;}
 .gen-soal h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
@@ -108,7 +135,9 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 .api-key-warning.active { display: block; }
 .gen-count-badge { display:inline-block; background:var(--acc); color:#fff; font-size:0.8rem; padding:2px 8px; border-radius:10px; margin-left:8px; vertical-align:middle;}
 
-/* POPUP HIASAN 1 */
+/* ------------------------------------------------------------
+   [CSS POPUP HIASAN 1]
+   ------------------------------------------------------------ */
 #popupHiasan { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); z-index: 9999; background: rgba(0,0,0,0.85); padding: 20px; border-radius: 16px; text-align: center; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 3px solid var(--acc); }
 #popupHiasan.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 #popupHiasan img { width: 200px; border-radius: 8px; margin-bottom: 10px; }
@@ -116,7 +145,9 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 #popupHiasan h1.ok { color: var(--ok); text-shadow: 0 0 20px var(--ok); }
 #popupHiasan h1.err { color: var(--err); text-shadow: 0 0 20px var(--err); }
 
-/* STATISTIK BAB (BARS) */
+/* ------------------------------------------------------------
+   [CSS RANGKUMAN STATISTIK BAB]
+   ------------------------------------------------------------ */
 .stat-summary .bar-row { display: grid; grid-template-columns: minmax(140px, 1.8fr) 3fr 50px; gap: 10px; align-items: center; margin: 6px 0; font-size: 0.9rem; }
 .stat-summary .bar-label { font-weight: bold; }
 .stat-summary .bar-track { height: 18px; background: var(--line); border-radius: 4px; overflow: hidden; position: relative; }
@@ -146,7 +177,9 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 </head>
 <body>
 
-<!-- DEKORASI & POPUP -->
+<!-- ============================================================
+     [HTML DEKORASI & POPUP]
+     ============================================================ -->
 <img src="Hiasan_3.jpg" class="deco-cat cat1" alt="Decorative Cat 1">
 <img src="Hiasan_2.jpg" class="deco-cat cat2" alt="Decorative Cat 2">
 <img src="Hiasan_1.jpg" alt="Decorative Cat 3">
@@ -223,13 +256,17 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
   </div>
 </div>
 
-<!-- [HEADER] -->
+<!-- ============================================================
+     [HTML HEADER]
+     ============================================================ -->
 <h1>Roadmap Teknik Mesin: Matematika, Fisika, MEXT</h1>
 <p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin, dengan fokus ke fundamental. Matematika Lanjut (kalkulus salah satu targetnya) berjalan bersama Fisika, Kimia, serta bahasa Inggris dan Jepang. Soal lomba dari 10 berkas hanya pendamping.</p>
 <div class="bar"><i id="bar" style="width:0"></i></div>
 <p class="sub" id="pct"></p>
 
-<!-- [RANGKUMAN STATISTIK BAB] -->
+<!-- ============================================================
+     [HTML RANGKUMAN STATISTIK BAB]
+     ============================================================ -->
 <div class="card stat-summary" id="statSummary">
   <h2>📊 Rangkuman Bab Paling Sering Keluar</h2>
   <p class="sub">Analisis dari file referensi terbaru.</p>
@@ -241,76 +278,108 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
   </details>
 </div>
 
-<!-- [ROADMAP MINGGUAN] -->
-<div class="card" id="roadmapPanel">
-  <h2>🗓️ Jadwal Belajar Mingguan</h2>
-  <div id="mods"></div>
+<!-- ============================================================
+     [HTML ROADMAP MEXT]
+     ============================================================ -->
+<div class="card">
+<h2>Roadmap MEXT IPA-A (Teknik Mesin): Matematika, Fisika, Kimia</h2>
+<p class="sub">Centang target kalau sudah tercapai. Rincian mingguan tersedia untuk T1 sampai T4 (48 minggu, matematika).</p>
+<div id="pareto"></div>
+<p class="cut">Fakta dari halaman Kedutaan Jepang di Indonesia (program Gakubu): Teknik Mesin termasuk IPA-A. Fokus fundamental: pahami konsep dan kerjakan soal buku sekolah dulu. Aturan naik minggu: lanjut hanya kalau cek benar 80%. Kalau belum, ulang minggu itu.</p>
 </div>
 
-<!-- [STATISTIK BELAJAR & KUIS] -->
+<!-- ============================================================
+     [HTML CATAT BELAJAR]
+     ============================================================ -->
+<div class="card">
+<h2>Catat belajar hari ini</h2>
+<div class="row"><input type="date" id="ld" aria-label="Tanggal"><input type="number" id="lm" min="1" max="600" placeholder="menit" aria-label="Lama belajar (menit)"><select id="lmod" aria-label="Topik"></select><button class="p" id="addL">Simpan sesi</button></div>
+<div class="row"><label>Target <input type="number" id="tD" min="1" max="7"> hari per minggu</label><label>Target <input type="number" id="tM" min="10" max="600"> menit per hari</label><label>Mulai Senin <input type="date" id="start"></label></div>
+<p class="sub" id="wkst"></p>
+</div>
+
+<!-- ============================================================
+     [HTML STATISTIK BELAJAR & STATISTIK KUIS AI]
+     ============================================================ -->
 <div class="card">
 <h2>Statistik belajar</h2>
 <div class="kpi" id="kpi"></div>
-<p class="sub" style="margin-bottom:2px">Peta kebiasaan, tiap kolom satu minggu (Senin di atas).</p>
+<p class="sub" style="margin-bottom:2px">Peta kebiasaan, tiap kolom satu minggu (Senin di atas). Kotak putus-putus oranye = hari bolong.</p>
 <div class="hm"><div class="hg" id="hm"></div></div>
 <div class="two" style="margin-top:14px">
-  <div><b>Menit belajar 14 hari terakhir</b><div class="bars" id="bars"></div><div class="lab" id="blab"></div></div>
-  <div><b>Pembagian waktu per topik</b><div class="row"><div class="pie" id="pie"></div><div class="lg" id="lg"></div></div></div>
+<div><b>Menit belajar 14 hari terakhir</b><div class="bars" id="bars"></div><div class="lab" id="blab"></div></div>
+<div><b>Pembagian waktu per topik</b><div class="row"><div class="pie" id="pie"></div><div class="lg" id="lg"></div></div></div>
 </div>
 <p class="sub" style="margin-top:12px"><b>Sesi terakhir</b></p><div id="rec"></div>
 
+<!-- PANEL STATISTIK KUIS AI BARU -->
 <h2 style="margin-top:24px; border-top: 1px solid var(--line); padding-top: 16px;">🧠 Statistik Kuis AI</h2>
 <div class="kpi" id="aiStatKpi"></div>
 <div id="aiStatTable"></div>
 </div>
 
-<!-- [CATATAN KESULITAN] -->
+<!-- ============================================================
+     [HTML CATATAN KESULITAN]
+     ============================================================ -->
 <div class="card">
 <h2>Catatan kesulitan</h2>
 <div class="row"><select id="nmod" aria-label="Topik catatan"></select><input type="date" id="nd" aria-label="Tanggal"></div>
-<textarea id="nt" placeholder="Contoh: L34 No. 14 bingung..."></textarea>
+<textarea id="nt" placeholder="Contoh: L34 No. 14 bingung kenapa σ(2a) dipecah begitu"></textarea>
 <div class="row"><button class="p" id="addN">Simpan catatan</button><label><input type="checkbox" id="onlyOpen"> tampilkan yang belum paham saja</label></div>
 <div id="notes"></div>
 </div>
 
-<!-- [GENERATOR SOAL AI] -->
+<!-- ============================================================
+     [HTML JADWAL MINGGUAN (M)]
+     ============================================================ -->
+<div id="mods"></div>
+
+<!-- ============================================================
+     [HTML GENERATOR SOAL GEMINI]
+     ============================================================ -->
 <div class="card" id="geminiSection">
   <h2>🤖 Generator Soal AI (Gemini)</h2>
-  <p class="sub">Buat soal latihan baru. Pilih bab, tingkat kesulitan, dan jumlah soal.</p>
-  <div id="apiKeyWarning" class="api-key-warning">⚠️ API Key belum diatur.</div>
+  <p class="sub">Buat soal latihan baru. Pilih bab (besar atau sub-bab kecil), tingkat kesulitan, dan jumlah soal. Soal berbentuk pilihan ganda (A-E). Kunci jawaban akan terbuka setelah kamu menjawab.</p>
+  
+  <div id="apiKeyWarning" class="api-key-warning">
+    ⚠️ API Key belum diatur. Silakan masukkan API Key Gemini Anda di bawah ini (disimpan di browser Anda).
+  </div>
+
   <div class="row" style="margin-bottom: 12px;">
     <input type="password" id="geminiApiKey" placeholder="Masukkan Gemini API Key..." style="flex: 1; min-width: 200px;">
     <button id="saveApiKey" class="p">Simpan Key</button>
   </div>
-  <div class="row">
+
+  <div class="row" style="align-items: flex-start;">
     <div style="flex: 1; min-width: 220px;">
-      <label style="display:block; font-size:0.9rem;">Cari Bab:</label>
-      <input type="search" id="genTopicSearch" placeholder="Ketik nama bab...">
-      <select id="genTopic" style="width:100%;"></select>
+      <label style="display:block; margin-bottom:2px; font-size:0.9rem;">Cari Bab:</label>
+      <input type="search" id="genTopicSearch" placeholder="Ketik nama bab (misal: eksponen)...">
+      <select id="genTopic" aria-label="Pilih Bab" style="width:100%;"></select>
     </div>
     <div>
-      <label style="display:block; font-size:0.9rem;">Level (1-5):</label>
-      <input type="number" id="genDifficulty" min="1" max="5" value="3">
+      <label style="display:block; margin-bottom:2px; font-size:0.9rem;">Tingkat Kesulitan (1-5):</label>
+      <input type="number" id="genDifficulty" min="1" max="5" value="3" style="width: 80px;">
     </div>
     <div>
-      <label style="display:block; font-size:0.9rem;">Jumlah:</label>
-      <input type="number" id="genCount" min="1" max="10" value="1">
+      <label style="display:block; margin-bottom:2px; font-size:0.9rem;">Jumlah Soal (1-10):</label>
+      <input type="number" id="genCount" min="1" max="10" value="3" style="width: 80px;">
     </div>
     <div style="align-self: flex-end;">
       <button id="genBtn" class="p" style="height: 38px;">Buat Soal</button>
     </div>
   </div>
-  <div id="genLoading" class="loading">⏳ Sedang meracik soal...</div>
+
+  <div id="genLoading" class="loading">⏳ Sedang meracik soal... Mohon tunggu.</div>
   <div id="genResult"></div>
 </div>
 
 <p><button id="reset">Hapus semua data</button></p>
-<footer>Data tersimpan di browser perangkat ini saja.</footer>
+<footer>Label soal: L33, L34, L35 = LMNas 33 (2022), 34 (2023), 35 (2024), UGM SMA Penyisihan; angka = nomor pilihan ganda, "IS" = isian singkat (misal L33 IS2). KSM21 = KSM 2021, K22 dan K23 = KoSSMI 2022 dan 2023, K22-SF = Semifinal KoSSMI 2022, KSR25 = Kompetisi Sains Ruangguru 2025, OMI = berkas OMI 2026 Matriks, K-PENY = Penyisihan Level 4 KOSSMI, K-SF = Semifinal Level 4 KOSSMI, KETAKS = Ketaksamaan OSN (QM, AM, GM, HM, CS). Pengelompokan topik adalah perkiraan, satu soal bisa masuk dua bidang. Soal yang dianulir di L34 (No. 20, 25) dan salah (IS4) sebaiknya dilewati. Soal lomba bersifat opsional dan umumnya lebih sulit dari materi kelas 10; utamakan buku sekolah dan contoh ujian MEXT, dan kerjakan soal lomba hanya setelah cek minggu itu lulus. Berkas tidak berisi kunci jawaban. Data tersimpan di browser perangkat ini saja.</footer>
 </main>
 
 <script>
 // ============================================================
-// [1. DEFAULT CONFIG (DATA MTK ASLI LENGKAP 16 BARIS)]
+// [1. DEFAULT CONFIG (DATA MTK ASLI LENGKAP)]
 // ============================================================
 const DEFAULT_CONFIG = {
   topics: ["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A","Fisika","Kimia","Bahasa Jepang","Bahasa Inggris"],
@@ -460,7 +529,6 @@ document.querySelectorAll("[data-target]").forEach(btn => {
     document.getElementById(this.dataset.target).style.display = "block";
   };
 });
-// Set default tab
 document.querySelector("[data-target='tab-topics']").style.fontWeight = "bold";
 
 function updateLineNumbers(textareaId, linesId) {
@@ -745,9 +813,18 @@ function stats(){
     if(k===today)cl+=" t";hm+='<i class="'+cl+'" title="'+fmt(dt)+': '+(m||0)+' menit"></i>';}
   document.getElementById("hm").innerHTML=hm;
 
+  var mx=st.tM*1.5,bs="",lb="";for(var i=13;i>=0;i--){var dd=ad(now,-i),v=dm[iso(dd)]||0;if(v>mx)mx=v;}
+  for(i=13;i>=0;i--){dd=ad(now,-i);v=dm[iso(dd)]||0;bs+='<div style="height:'+Math.round(100*v/mx)+'%" title="'+fmt(dd)+': '+v+' menit"></div>';lb+='<span>'+dd.getDate()+'</span>';}
+  document.getElementById("bars").innerHTML=bs+'<div class="tl" style="bottom:'+Math.round(100*st.tM/mx)+'%" title="Target"></div>';
+  document.getElementById("blab").innerHTML=lb;
+
   var g=[],a=0,lg="";perMod.forEach(function(v,i){if(!v)return;var b=a+100*v/tot;g.push("hsl("+HUE[i]+" 55% 50%) "+a+"% "+b+"%");a=b;lg+='<div><i style="background:hsl('+HUE[i]+' 55% 50%)"></i>'+T[i]+': '+v+' menit</div>';});
   document.getElementById("pie").style.background=tot?"conic-gradient("+g.join(",")+")":"var(--line)";
   document.getElementById("lg").innerHTML=lg||"Belum ada sesi.";
+
+  var rc="";st.log.slice(-5).reverse().forEach(function(l){var ix=st.log.indexOf(l);rc+='<div class="nt"><div class="tx" style="flex:1">'+fmt(pd(l.d))+': '+l.m+' menit, '+esc(T[l.mod])+'</div><button data-del="'+ix+'">Hapus</button></div>';});
+  document.getElementById("rec").innerHTML=rc||'<span class="sub">Belum ada sesi.</span>';
+  document.querySelectorAll("[data-del]").forEach(function(b){b.onclick=function(){st.log.splice(+b.dataset.del,1);sv();render();};});
 
   renderAiStats();
 }
