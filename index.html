@@ -15,7 +15,9 @@
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-<!-- [CSS UTAMA] -->
+<!-- ============================================================
+     [CSS UTAMA ASLI ANDA + TAMBAHAN UI EDITOR]
+     ============================================================ -->
 <style>
 :root{--bg:#f5f7f4;--card:#fff;--ink:#1d2b2a;--mute:#5d6e6c;--line:#d5dedb;--acc:#0b6e66;--acc2:#e8f3f1;--warn:#b4531a;--ok:#1a8c5a;--err:#c0392b;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;--ok:#4fd1c0;--err:#f0a36b;color-scheme:dark}}
@@ -23,7 +25,7 @@
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 
-/* Background & Kucing */
+/* WALLPAPER & KUCING */
 body::before {content: "";position: fixed;top: 0; left: 0; width: 100vw; height: 100vh;background-image: url('Wallpaper.jpg');background-size: cover;background-position: center;z-index: -2;}
 body::after {content: "";position: fixed;top: 0; left: 0; width: 100vw; height: 100vh;background: rgba(17, 26, 25, 0.6);backdrop-filter: blur(3px);z-index: -1;}
 .deco-cat{position:fixed;z-index:0;pointer-events:none;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.2);opacity:0.85;animation:float 8s ease-in-out infinite;}
@@ -33,6 +35,7 @@ body::after {content: "";position: fixed;top: 0; left: 0; width: 100vw; height: 
 @keyframes float {0%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(-25px) rotate(3deg);}100%{transform:translateY(0px) rotate(0deg);}}
 @media (max-width: 900px){.deco-cat{display:none;}}
 
+/* LAYOUT UTAMA */
 body{margin:0;background:transparent;color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
 main{max-width:880px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1;background:rgba(245,247,244,0.95);backdrop-filter:blur(10px);border-radius:16px;margin-top:30px;box-shadow:0 20px 40px rgba(0,0,0,0.2)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) main{background:rgba(17,26,25,0.95)}}
@@ -53,112 +56,102 @@ button.p{background:var(--acc);color:var(--bg);border-color:var(--acc)}
 button:disabled{opacity:.5;cursor:not-allowed}
 .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:8px 0}
 .kpi div{background:var(--acc2);border-radius:6px;padding:8px 10px;font-size:.9rem}.kpi b{display:block;font-size:1.3rem}
+.hm{overflow-x:auto;padding-bottom:6px}
+.hg{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,13px);grid-auto-columns:13px;gap:3px;width:max-content}
+.hg i{border-radius:3px;background:var(--line);opacity:.35}
+.hg i.f{opacity:.15}.hg i.z{opacity:.15}
+.hg i.g{background:none;border:1px dashed var(--warn);opacity:1}
+.hg i.l1,.hg i.l2,.hg i.l3,.hg i.l4{background:var(--acc)}
+.hg i.l1{opacity:.3}.hg i.l2{opacity:.55}.hg i.l3{opacity:.8}.hg i.l4{opacity:1}
+.hg i.t{outline:2px solid var(--ink)}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;align-items:start}
+.bars{display:flex;gap:4px;align-items:flex-end;height:110px;position:relative;border-bottom:1px solid var(--line);margin-top:8px}
+.bars div{flex:1;background:var(--acc);border-radius:3px 3px 0 0;min-height:1px;position:relative}
+.bars .tl{position:absolute;left:0;right:0;border-top:2px dashed var(--warn);flex:none;background:none;min-height:0}
+.lab{display:flex;gap:4px;font-size:.65rem;color:var(--mute)}.lab span{flex:1;text-align:center}
+.pie{width:140px;height:140px;border-radius:50%;flex:none}
+.lg{font-size:.85rem}.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
 .nt{border-top:1px solid var(--line);padding:8px 0;display:flex;gap:10px;align-items:flex-start}
-.nt small{color:var(--mute)}
+.nt.ok .tx{color:var(--mute);text-decoration:line-through}.nt small{color:var(--mute)}
+details.mod{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:12px 0}
+details.mod>summary{cursor:pointer;padding:12px 16px;font-weight:bold;list-style:none}
+details.mod>summary small{display:block;font-weight:normal;color:var(--mute)}
+details.mod .in{padding:0 16px 12px}
+.wk{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-top:1px solid var(--line)}
+.wk input{margin-top:.4em;width:18px;height:18px;flex:none}
+.wk.now{background:var(--acc2);border-left:4px solid var(--acc);border-radius:4px}
+.wk.done .t{color:var(--mute);text-decoration:line-through}
+.wk .d{color:var(--mute);font-size:.85rem}.wk .r{font-size:.9rem;color:var(--acc)}
+ul{padding-left:20px;margin:.3em 0}
 footer{color:var(--mute);font-size:.85rem;margin-top:24px}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 
-/* CSS STATISTIK BAB (BARS) */
-.stat-summary .bar-row {
-  display: grid;
-  grid-template-columns: minmax(140px, 1.8fr) 3fr 50px;
-  gap: 10px;
-  align-items: center;
-  margin: 6px 0;
-  font-size: 0.9rem;
-}
-.stat-summary .bar-label { font-weight: bold; }
-.stat-summary .bar-track {
-  height: 18px; background: var(--line); border-radius: 4px; overflow: hidden;
-  position: relative;
-}
-.stat-summary .bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--acc), var(--acc2));
-  border-radius: 4px;
-  transition: width 0.6s ease-out;
-}
-.stat-summary .bar-count {
-  text-align: right; font-weight: bold; color: var(--acc);
-}
-.stat-summary .recommend {
-  background: var(--acc2);
-  border-left: 4px solid var(--acc);
-  padding: 10px 14px; border-radius: 6px;
-  margin-top: 12px;
-}
-.stat-summary .recommend ol { margin: 6px 0 0 0; padding-left: 22px; }
-.stat-summary .recommend li { margin: 4px 0; }
-.stat-summary table {
-  width: 100%; border-collapse: collapse; margin-top: 10px;
-  font-size: 0.88rem;
-}
-.stat-summary th, .stat-summary td {
-  border-bottom: 1px solid var(--line);
-  padding: 6px 8px; text-align: left;
-}
-.stat-summary th { background: var(--acc2); }
-.stat-summary td.num { text-align: right; font-weight: bold; }
+/* SEARCH BAR */
+.search-box {width:100%;padding:8px 12px;margin-bottom:12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-size:0.95rem;}
+.search-box:focus {outline:2px solid var(--acc);border-color:var(--acc);}
 
-/* CSS ROADMAP (MINGGUAN) */
-details.mod{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:12px 0;}
-details.mod>summary{cursor:pointer;padding:12px 16px;font-weight:bold;list-style:none;}
-details.mod>summary small{display:block;font-weight:normal;color:var(--mute);margin-top:4px;}
-details.mod .in{padding:0 16px 12px;}
-.wk{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-top:1px solid var(--line);}
-.wk .t { font-size: 0.95rem; }
-.wk .d { color:var(--mute); font-size:.85rem; }
-
-/* UI EDITOR INTERAKTIF */
-.editor-panel { background: var(--bg); border: 2px solid var(--acc); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-.editor-tabs { display: flex; gap: 4px; margin-bottom: 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; overflow-x: auto; }
-.tab-btn { background: transparent; border: none; padding: 8px 16px; border-radius: 6px 6px 0 0; cursor: pointer; font-weight: bold; color: var(--mute); }
-.tab-btn.active { background: var(--acc2); color: var(--acc); border-bottom: 2px solid var(--acc); }
-.tab-content { display: none; }
-.tab-content.active { display: block; animation: fadeInUp 0.3s ease-out; }
-
-.json-editor-container { position: relative; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); }
-.json-editor-lines { position: absolute; left: 0; top: 0; bottom: 0; width: 35px; background: #2d2d2d; color: #858585; text-align: right; padding: 10px 5px; font-family: monospace; font-size: 0.85rem; line-height: 1.5; user-select: none; overflow: hidden; }
-.json-editor-area { width: 100%; min-height: 200px; background: #1e1e1e; color: #d4d4d4; padding: 10px 10px 10px 45px; font-family: monospace; font-size: 0.85rem; line-height: 1.5; border: none; resize: vertical; white-space: pre; overflow-wrap: normal; overflow-x: auto; }
-.json-editor-area:focus { outline: none; }
-.json-status { font-size: 0.8rem; margin-top: 4px; display: flex; justify-content: space-between; }
-.json-status.ok { color: var(--ok); }
-.json-status.err { color: var(--err); }
-
-.status-box { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; }
-.status-box.ok { background: var(--ok); color: white; }
-.status-box.warn { background: var(--warn); color: white; }
-
-/* CSS POPUP HIASAN 1 */
-#popupHiasan {position: fixed; top: 50%; left: 50%;transform: translate(-50%, -50%) scale(0.8);z-index: 9999; background: rgba(0,0,0,0.85);padding: 20px; border-radius: 16px; text-align: center;opacity: 0; pointer-events: none;transition: opacity 0.3s, transform 0.3s;box-shadow: 0 10px 40px rgba(0,0,0,0.5);border: 3px solid var(--acc);}
-#popupHiasan.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-#popupHiasan img { width: 200px; border-radius: 8px; margin-bottom: 10px; }
-#popupHiasan h1 { margin: 0; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; }
-#popupHiasan h1.ok { color: var(--ok); text-shadow: 0 0 20px var(--ok); }
-#popupHiasan h1.err { color: var(--err); text-shadow: 0 0 20px var(--err); }
-
-/* CSS GENERATOR SOAL */
+/* GENERATOR SOAL GEMINI */
 #genResult { margin-top: 16px; }
-.gen-soal {background: var(--acc2);border-left: 4px solid var(--acc);padding: 12px 16px;border-radius: 6px;margin-bottom: 12px;animation: fadeInUp 0.4s ease-out;word-break: break-word;overflow-wrap: anywhere;}
+.gen-soal { background: var(--acc2); border-left: 4px solid var(--acc); padding: 12px 16px; border-radius: 6px; margin-bottom: 12px; animation: fadeInUp 0.4s ease-out; word-break: break-word; overflow-wrap: anywhere;}
 .gen-soal h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
 .gen-soal p { margin: 6px 0; line-height: 1.6; }
 .gen-soal .label { font-weight: bold; color: var(--acc); }
 .gen-soal .answer { background: var(--bg); padding: 8px; border-radius: 4px; border: 1px dashed var(--line); margin-top: 8px; display: none; }
 .gen-soal .answer.show { display: block; animation: fadeInUp 0.4s ease-out; }
 .gen-options { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
-.gen-opt-btn {text-align: left; padding: 8px 12px; background: var(--bg);border: 1px solid var(--line); border-radius: 6px; cursor: pointer;transition: background 0.2s, border-color 0.2s;word-break: break-word;}
+.gen-opt-btn { text-align: left; padding: 8px 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; cursor: pointer; transition: background 0.2s, border-color 0.2s; word-break: break-word; }
 .gen-opt-btn:hover { background: var(--acc2); }
 .gen-opt-btn.correct { background: var(--ok); color: #fff; border-color: var(--ok); }
 .gen-opt-btn.wrong { background: var(--err); color: #fff; border-color: var(--err); }
 .gen-opt-btn:disabled { cursor: default; opacity: 0.8; }
+.loading { display: none; text-align: center; padding: 20px; color: var(--mute); font-style: italic; }
+.loading.active { display: block; }
+.api-key-warning { color: var(--warn); font-size: 0.9rem; margin-bottom: 10px; display: none; }
+.api-key-warning.active { display: block; }
+.gen-count-badge { display:inline-block; background:var(--acc); color:#fff; font-size:0.8rem; padding:2px 8px; border-radius:10px; margin-left:8px; vertical-align:middle;}
+
+/* POPUP HIASAN 1 */
+#popupHiasan { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8); z-index: 9999; background: rgba(0,0,0,0.85); padding: 20px; border-radius: 16px; text-align: center; opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s; box-shadow: 0 10px 40px rgba(0,0,0,0.5); border: 3px solid var(--acc); }
+#popupHiasan.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+#popupHiasan img { width: 200px; border-radius: 8px; margin-bottom: 10px; }
+#popupHiasan h1 { margin: 0; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; }
+#popupHiasan h1.ok { color: var(--ok); text-shadow: 0 0 20px var(--ok); }
+#popupHiasan h1.err { color: var(--err); text-shadow: 0 0 20px var(--err); }
+
+/* STATISTIK BAB (BARS) */
+.stat-summary .bar-row { display: grid; grid-template-columns: minmax(140px, 1.8fr) 3fr 50px; gap: 10px; align-items: center; margin: 6px 0; font-size: 0.9rem; }
+.stat-summary .bar-label { font-weight: bold; }
+.stat-summary .bar-track { height: 18px; background: var(--line); border-radius: 4px; overflow: hidden; position: relative; }
+.stat-summary .bar-fill { height: 100%; background: linear-gradient(90deg, var(--acc), var(--acc2)); border-radius: 4px; transition: width 0.6s ease-out; }
+.stat-summary .bar-count { text-align: right; font-weight: bold; color: var(--acc); }
+.stat-summary .source-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.stat-summary .source-badge { background: var(--acc2); color: var(--ink); border: 1px solid var(--line); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; }
+.stat-summary .recommend { background: var(--acc2); border-left: 4px solid var(--acc); padding: 10px 14px; border-radius: 6px; margin-top: 12px; }
+.stat-summary .recommend ol { margin: 6px 0 0 0; padding-left: 22px; }
+.stat-summary .recommend li { margin: 4px 0; }
+.stat-summary table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.88rem; }
+.stat-summary th, .stat-summary td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; }
+.stat-summary th { background: var(--acc2); }
+.stat-summary td.num { text-align: right; font-weight: bold; }
+
+/* UI EDITOR INTERAKTIF */
+.editor-panel { background: var(--bg); border: 2px solid var(--acc); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.json-editor-container { position: relative; border-radius: 6px; overflow: hidden; border: 1px solid var(--line); margin-top: 10px; }
+.json-editor-lines { position: absolute; left: 0; top: 0; bottom: 0; width: 35px; background: #2d2d2d; color: #858585; text-align: right; padding: 10px 5px; font-family: monospace; font-size: 0.85rem; line-height: 1.5; user-select: none; overflow: hidden; }
+.json-editor-area { width: 100%; min-height: 150px; background: #1e1e1e; color: #d4d4d4; padding: 10px 10px 10px 45px; font-family: monospace; font-size: 0.85rem; line-height: 1.5; border: none; resize: vertical; white-space: pre; overflow-wrap: normal; overflow-x: auto; }
+.json-editor-area:focus { outline: none; }
+.json-status { font-size: 0.8rem; margin-top: 4px; }
+.json-status.ok { color: var(--ok); }
+.json-status.err { color: var(--err); }
+#genTopicSearch { width: 100%; margin-bottom: 4px; padding: 6px 10px; font-size: 0.9rem; }
 </style>
 </head>
 <body>
 
+<!-- DEKORASI & POPUP -->
 <img src="Hiasan_3.jpg" class="deco-cat cat1" alt="Decorative Cat 1">
 <img src="Hiasan_2.jpg" class="deco-cat cat2" alt="Decorative Cat 2">
 <img src="Hiasan_1.jpg" alt="Decorative Cat 3">
-
 <div id="popupHiasan">
   <img src="Hiasan_1.jpg" alt="Hiasan Popup">
   <h1 id="popupText">SELAMAT!</h1>
@@ -166,13 +159,13 @@ details.mod .in{padding:0 16px 12px;}
 
 <main>
 <!-- ============================================================
-     [PANEL EDITOR KURIKULUM INTERAKTIF]
+     [PANEL EDITOR KURIKULUM]
      ============================================================ -->
 <div class="card editor-panel" id="configEditor">
   <div class="row" style="justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 12px;">
     <h2 style="margin:0;">⚙️ Pengaturan Kurikulum</h2>
     <div>
-      <span id="userStatus" style="font-size: 0.85rem; margin-right: 10px;"></span>
+      <span id="userStatus" style="font-size: 0.85rem; margin-right: 10px; font-weight:bold; color:var(--warn);">Tamu (Default)</span>
       <label>User: <input type="text" id="cfgUser" placeholder="Nama..." style="width: 100px;"></label>
       <button class="p" id="btnSaveUser">Masuk</button>
       <button id="btnResetConfig" style="border-color: var(--err); color: var(--err);">Reset</button>
@@ -185,31 +178,31 @@ details.mod .in{padding:0 16px 12px;}
     <div class="row" style="margin-top: 8px;">
       <label style="flex:1;">Link Referensi: <input type="text" id="cfgFileLink" placeholder="https://..." style="width:100%;"></label>
       <label style="flex:1;">Upload File (.txt): <input type="file" id="cfgFileUpload"></label>
-      <button class="p" id="btnGenerateRoadmap" style="align-self: flex-end;">✨ Generate dengan AI</button>
+      <button class="p" id="btnGenerateRoadmap" style="align-self: flex-end;">✨ Generate AI</button>
     </div>
     <p class="sub" style="margin-top:4px; font-size:0.8rem;">Biarkan AI menyusun ulang Topik, Statistik, dan Roadmap berdasarkan file/link yang Anda berikan.</p>
     <div id="genStatus" style="font-size:0.85rem; font-weight: bold; margin-top: 4px;"></div>
   </div>
 
-  <!-- JSON Editor Interaktif -->
-  <div class="editor-tabs">
-    <button class="tab-btn active" data-target="tab-topics">Daftar Topik</button>
-    <button class="tab-btn" data-target="tab-referensi">Referensi Soal AI</button>
-    <button class="tab-btn" data-target="tab-statistik">Statistik Bab</button>
-    <button class="tab-btn" data-target="tab-roadmap">Jadwal Roadmap</button>
+  <!-- Tab Editor -->
+  <div style="margin-bottom:12px; border-bottom:1px solid var(--line);">
+    <button class="p" data-target="tab-topics" style="background:transparent;color:var(--acc);border:none;font-weight:bold;">Daftar Topik</button>
+    <button data-target="tab-referensi" style="background:transparent;border:none;">Referensi AI</button>
+    <button data-target="tab-statistik" style="background:transparent;border:none;">Statistik Bab</button>
+    <button data-target="tab-roadmap" style="background:transparent;border:none;">Jadwal Roadmap</button>
   </div>
 
-  <div class="tab-content active" id="tab-topics">
+  <div class="tab-content" id="tab-topics">
     <p class="sub">Pisahkan setiap topik dengan koma (contoh: T1 Fondasi, T2 Aljabar).</p>
     <textarea id="cfgTopics" style="min-height: 80px; font-family: monospace;"></textarea>
   </div>
 
-  <div class="tab-content" id="tab-referensi">
+  <div class="tab-content" id="tab-referensi" style="display:none;">
     <p class="sub">Teks ini dikirim ke Gemini sebagai "contekan" saat membuat soal.</p>
     <textarea id="cfgRef" style="min-height: 120px; font-family: monospace;"></textarea>
   </div>
 
-  <div class="tab-content" id="tab-statistik">
+  <div class="tab-content" id="tab-statistik" style="display:none;">
     <p class="sub">Format JSON Array: <code>[{"topik":"Aljabar", "jumlah":48}]</code></p>
     <div class="json-editor-container">
       <div class="json-editor-lines" id="linesStats"></div>
@@ -218,7 +211,7 @@ details.mod .in{padding:0 16px 12px;}
     <div class="json-status" id="statusStats">JSON Valid</div>
   </div>
 
-  <div class="tab-content" id="tab-roadmap">
+  <div class="tab-content" id="tab-roadmap" style="display:none;">
     <p class="sub">Format JSON Array: <code>[{"title":"T1 Fondasi", "desc":"Minggu 1-10", "items":["Pecahan", "Aljabar"]}]</code></p>
     <div class="json-editor-container">
       <div class="json-editor-lines" id="linesRoadmap"></div>
@@ -234,7 +227,7 @@ details.mod .in{padding:0 16px 12px;}
 
 <!-- [HEADER] -->
 <h1>Roadmap Teknik Mesin: Matematika, Fisika, MEXT</h1>
-<p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin.</p>
+<p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin, dengan fokus ke fundamental. Matematika Lanjut (kalkulus salah satu targetnya) berjalan bersama Fisika, Kimia, serta bahasa Inggris dan Jepang. Soal lomba dari 10 berkas hanya pendamping.</p>
 <div class="bar"><i id="bar" style="width:0"></i></div>
 <p class="sub" id="pct"></p>
 
@@ -250,7 +243,7 @@ details.mod .in{padding:0 16px 12px;}
   </details>
 </div>
 
-<!-- [ROADMAP MINGGUAN (M)] -->
+<!-- [ROADMAP MINGGUAN] -->
 <div class="card" id="roadmapPanel">
   <h2>🗓️ Jadwal Belajar Mingguan</h2>
   <div id="mods"></div>
@@ -260,53 +253,70 @@ details.mod .in{padding:0 16px 12px;}
 <div class="card">
 <h2>Statistik belajar</h2>
 <div class="kpi" id="kpi"></div>
+<p class="sub" style="margin-bottom:2px">Peta kebiasaan, tiap kolom satu minggu (Senin di atas).</p>
+<div class="hm"><div class="hg" id="hm"></div></div>
 <div class="two" style="margin-top:14px">
-  <div><b>Sesi terakhir</b><div id="rec"></div></div>
-  <div><b>Statistik Kuis AI</b><div id="aiStatKpi" class="kpi" style="grid-template-columns:1fr 1fr;"></div></div>
+  <div><b>Menit belajar 14 hari terakhir</b><div class="bars" id="bars"></div><div class="lab" id="blab"></div></div>
+  <div><b>Pembagian waktu per topik</b><div class="row"><div class="pie" id="pie"></div><div class="lg" id="lg"></div></div></div>
 </div>
+<p class="sub" style="margin-top:12px"><b>Sesi terakhir</b></p><div id="rec"></div>
+
+<h2 style="margin-top:24px; border-top: 1px solid var(--line); padding-top: 16px;">🧠 Statistik Kuis AI</h2>
+<div class="kpi" id="aiStatKpi"></div>
+<div id="aiStatTable"></div>
+</div>
+
+<!-- [CATATAN KESULITAN] -->
+<div class="card">
+<h2>Catatan kesulitan</h2>
+<div class="row"><select id="nmod" aria-label="Topik catatan"></select><input type="date" id="nd" aria-label="Tanggal"></div>
+<textarea id="nt" placeholder="Contoh: L34 No. 14 bingung..."></textarea>
+<div class="row"><button class="p" id="addN">Simpan catatan</button><label><input type="checkbox" id="onlyOpen"> tampilkan yang belum paham saja</label></div>
+<div id="notes"></div>
 </div>
 
 <!-- [GENERATOR SOAL AI] -->
 <div class="card" id="geminiSection">
   <h2>🤖 Generator Soal AI (Gemini)</h2>
-  <p class="sub">Buat soal latihan baru sesuai bab dan referensi kustom Anda.</p>
+  <p class="sub">Buat soal latihan baru. Pilih bab, tingkat kesulitan, dan jumlah soal.</p>
+  <div id="apiKeyWarning" class="api-key-warning">⚠️ API Key belum diatur.</div>
+  <div class="row" style="margin-bottom: 12px;">
+    <input type="password" id="geminiApiKey" placeholder="Masukkan Gemini API Key..." style="flex: 1; min-width: 200px;">
+    <button id="saveApiKey" class="p">Simpan Key</button>
+  </div>
   <div class="row">
     <div style="flex: 1; min-width: 220px;">
-      <label style="display:block; margin-bottom:2px; font-size:0.9rem;">Cari Bab:</label>
+      <label style="display:block; font-size:0.9rem;">Cari Bab:</label>
       <input type="search" id="genTopicSearch" placeholder="Ketik nama bab...">
       <select id="genTopic" style="width:100%;"></select>
     </div>
     <div>
-      <label>Tingkat Kesulitan:</label>
+      <label style="display:block; font-size:0.9rem;">Level (1-5):</label>
       <input type="number" id="genDifficulty" min="1" max="5" value="3">
     </div>
     <div>
-      <label>Jumlah:</label>
+      <label style="display:block; font-size:0.9rem;">Jumlah:</label>
       <input type="number" id="genCount" min="1" max="10" value="1">
     </div>
     <div style="align-self: flex-end;">
-      <button id="genBtn" class="p">Buat Soal</button>
+      <button id="genBtn" class="p" style="height: 38px;">Buat Soal</button>
     </div>
   </div>
+  <div id="genLoading" class="loading">⏳ Sedang meracik soal...</div>
   <div id="genResult"></div>
 </div>
 
+<p><button id="reset">Hapus semua data</button></p>
+<footer>Data tersimpan di browser perangkat ini saja.</footer>
 </main>
 
 <script>
-// === [KONFIGURASI DEFAULT (BERDASARKAN 8 FILE SOAL MTK ASLI)] ===
+// ============================================================
+// [1. DEFAULT CONFIG & STATE]
+// ============================================================
 const DEFAULT_CONFIG = {
-  topics: [
-    "T1 Fondasi", "T2 Aljabar & Fungsi", "T3 Geometri & Trigonometri", 
-    "T4 Data & Pra-Kalkulus", "T5 Kalkulus", "T6 Simulasi MEXT"
-  ],
-  referensi: `Referensi Soal Asli (KoSSMI, LMNas, KSR, OMI):
-1. (K22) Tentukan bilangan bulat terbesar n sehingga 2^n habis membagi 10^20 - 2^20.
-2. (K23) Jika a+b=11 dan ab=48, nilai a^2+b^2 adalah...
-3. (L33) Diketahui a,b solusi x^2+x-1=0. Nilai a^3+b^3+a^2+b^2... 
-4. (L34) Segitiga ABC, AB=13, BC=14, CA=15. Garis singgung lingkaran dalam memotong AB, AC di X, Y. XY=5. Nilai 7(AX-AY)^2.
-5. (KSR) Penyelesaian sqrt(2x+1) >= 2x-2 adalah a <= x <= b. Nilai b-a.
-6. (OMI) A = [[x,2],[1,1]], det(B)=2. Hasil kali x sehingga det(A)=4det((AB)^-1).`,
+  topics: ["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A","Fisika","Kimia","Bahasa Jepang","Bahasa Inggris"],
+  referensi: "Contoh soal kompetisi:\n- Tentukan bilangan bulat positif terbesar n sehingga 2^n habis membagi 10^20 - 2^20.\n- Jika a+b=11 dan ab=48, nilai a^2+b^2...",
   statistik: [
     { topik: "Aljabar (Persamaan, Sistem)", jumlah: 48, sumber: ["K22","K23","L33","L34","L35"] },
     { topik: "Geometri Bidang (Sudut, Segitiga)", jumlah: 35, sumber: ["K22","K23","L33","L34"] },
@@ -324,15 +334,30 @@ const DEFAULT_CONFIG = {
   ]
 };
 
-let CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG)); 
-let T = []; 
-let allTopicOptions = [];
-let currentUser = null;
+var CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG)); 
+var T = CONFIG.topics; 
+var allTopicOptions = [];
+var currentUser = null;
 
-// === [UTILITAS] ===
+// State lokal untuk statistik belajar, dsb
+var HUE=[170,265,25,330,60,0,200,120,300,350];
+var KEY="rencana48-v5",st={start:"",tD:5,tM:60,w:{},rm:{},log:[],notes:[],aiStats:{}};
+try{var o=JSON.parse(localStorage.getItem(KEY)||"{}");for(var k in o)st[k]=o[k];}catch(e){}
+if(!st.aiStats) st.aiStats = {};
+
+function sv(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
+function iso(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
+function pd(s){return new Date(s+"T00:00:00");}
+function ad(d,n){var x=new Date(d.getTime());x.setDate(x.getDate()+n);return x;}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function fmt(d){return d.toLocaleDateString("id-ID",{day:"numeric",month:"short"});}
+var now=new Date(),today=iso(now);
+function monOf(d){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x;}
+if(!st.start){var n=monOf(now);if(now.getDay()!==1)n=ad(n,7);st.start=iso(n);}
 
-// === [SISTEM AKUN & PENYIMPANAN] ===
+// ============================================================
+// [2. SISTEM AKUN & PENYIMPANAN CONFIG]
+// ============================================================
 function getStorageKey(username) { return "daigaku_config_" + username.toLowerCase().trim(); }
 
 function loadConfigForUser(username) {
@@ -349,15 +374,19 @@ function saveConfigForUser(username) {
   localStorage.setItem(getStorageKey(username), JSON.stringify(CONFIG));
 }
 
-// === [INTERAKSI TAB & JSON EDITOR] ===
-document.querySelectorAll(".tab-btn").forEach(btn => {
+// ============================================================
+// [3. FUNGSI UI EDITOR & TAB]
+// ============================================================
+document.querySelectorAll("[data-target]").forEach(btn => {
   btn.onclick = function() {
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-    this.classList.add("active");
-    document.getElementById(this.dataset.target).classList.add("active");
+    document.querySelectorAll("[data-target]").forEach(b => b.style.fontWeight = "normal");
+    document.querySelectorAll(".tab-content").forEach(c => c.style.display = "none");
+    this.style.fontWeight = "bold";
+    document.getElementById(this.dataset.target).style.display = "block";
   };
 });
+// Set default tab
+document.querySelector("[data-target='tab-topics']").style.fontWeight = "bold";
 
 function updateLineNumbers(textareaId, linesId) {
   const ta = document.getElementById(textareaId);
@@ -393,16 +422,6 @@ function validateJson(textareaId, statusId) {
   });
 });
 
-function updateUserStatus() {
-  const statusDiv = document.getElementById("userStatus");
-  if (currentUser) {
-    const isCustom = localStorage.getItem(getStorageKey(currentUser)) !== null;
-    statusDiv.innerHTML = isCustom ? `<span class="status-box ok">Custom: ${esc(currentUser)}</span>` : `<span class="status-box warn">Baru: ${esc(currentUser)}</span>`;
-  } else {
-    statusDiv.innerHTML = `<span class="status-box warn">Tamu (Default)</span>`;
-  }
-}
-
 function initConfigEditor() {
   document.getElementById("cfgUser").value = currentUser || "";
   document.getElementById("cfgTopics").value = CONFIG.topics.join(", ");
@@ -416,15 +435,23 @@ function initConfigEditor() {
   validateJson('cfgStats', 'statusStats');
   validateJson('cfgRoadmap', 'statusRoadmap');
   
-  updateUserStatus();
+  const statusDiv = document.getElementById("userStatus");
+  if (currentUser) {
+    const isCustom = localStorage.getItem(getStorageKey(currentUser)) !== null;
+    statusDiv.innerHTML = isCustom ? `<span style="color:var(--ok)">Custom: ${esc(currentUser)}</span>` : `<span style="color:var(--warn)">Baru: ${esc(currentUser)}</span>`;
+  } else {
+    statusDiv.innerHTML = `<span style="color:var(--warn)">Tamu (Default)</span>`;
+  }
 }
 
-// === [FUNGSI REFRESH UI KESELURUHAN] ===
+// ============================================================
+// [4. RENDER UI STATISTIK & ROADMAP]
+// ============================================================
 function refreshAppFromConfig() {
   allTopicOptions = [];
   buildTopicOptions();
 
-  // Render Statistik
+  // Render Statistik (Bar)
   const statBars = document.getElementById("statBars");
   const statTable = document.getElementById("statTable");
   statBars.innerHTML = ""; statTable.innerHTML = "";
@@ -459,7 +486,6 @@ function refreshAppFromConfig() {
     CONFIG.roadmap.forEach((m, mi) => {
       let itemsHtml = "";
       m.items.forEach((item, ii) => {
-        // Di sini diterapkan class .wk dan .t agar rapi
         itemsHtml += `<div class="wk"><div><div class="t"><b>Minggu ${ii+1}:</b> ${esc(item)}</div></div></div>`;
       });
       roadHtml += `
@@ -475,7 +501,9 @@ function refreshAppFromConfig() {
   }
 }
 
-// === [SISTEM GENERATE AI (FILE / LINK)] ===
+// ============================================================
+// [5. SISTEM GENERATE AI (FILE / LINK)]
+// ============================================================
 document.getElementById("btnGenerateRoadmap").onclick = async function() {
   const btn = this;
   const statusSpan = document.getElementById("genStatus");
@@ -551,58 +579,9 @@ Buat format JSON valid murni (tanpa markdown):
   }
 };
 
-// === [LOGIKA UI LAINNYA] ===
-document.getElementById("btnSaveUser").onclick = function() {
-  const u = document.getElementById("cfgUser").value.trim();
-  if (!u) return alert("Username tidak boleh kosong!");
-  
-  currentUser = u;
-  localStorage.setItem("daigaku_last_user", currentUser);
-  CONFIG = loadConfigForUser(currentUser);
-  T = CONFIG.topics;
-  
-  alert("Berhasil masuk sebagai: " + currentUser);
-  initConfigEditor();
-  refreshAppFromConfig();
-};
-
-document.getElementById("btnApplyConfig").onclick = function() {
-  if (!currentUser) return alert("Silakan isi Username dan klik 'Masuk' terlebih dahulu.");
-
-  const isStatsValid = validateJson('cfgStats', 'statusStats');
-  const isRoadValid = validateJson('cfgRoadmap', 'statusRoadmap');
-  
-  if (!isStatsValid || !isRoadValid) {
-    alert("Perbaiki format JSON terlebih dahulu sebelum menyimpan!");
-    return;
-  }
-
-  try {
-    CONFIG.topics = document.getElementById("cfgTopics").value.split(",").map(s => s.trim()).filter(s => s);
-    CONFIG.referensi = document.getElementById("cfgRef").value;
-    CONFIG.statistik = JSON.parse(document.getElementById("cfgStats").value);
-    CONFIG.roadmap = JSON.parse(document.getElementById("cfgRoadmap").value);
-    
-    T = CONFIG.topics;
-    saveConfigForUser(currentUser);
-    alert("✅ Data berhasil disimpan.");
-    refreshAppFromConfig();
-  } catch (e) {
-    alert("Gagal menyimpan: " + e.message);
-  }
-};
-
-document.getElementById("btnResetConfig").onclick = function() {
-  if (!currentUser) return alert("Anda belum masuk.");
-  if(confirm(`Hapus semua data kustom untuk "${currentUser}" dan kembalikan ke soal MTK dasar?`)) {
-    localStorage.removeItem(getStorageKey(currentUser));
-    CONFIG = loadConfigForUser(currentUser);
-    T = CONFIG.topics;
-    initConfigEditor();
-    refreshAppFromConfig();
-  }
-};
-
+// ============================================================
+// [6. SISTEM DROPDOWN & SEARCH BAB]
+// ============================================================
 function buildTopicOptions(searchQuery = "") {
   var el = document.getElementById("genTopic");
   
@@ -633,7 +612,263 @@ document.getElementById("genTopicSearch").addEventListener("input", function(e) 
   buildTopicOptions(e.target.value);
 });
 
+// ============================================================
+// [7. FUNGSI UTAMA (RENDER, STATISTIK, DLL)]
+// ============================================================
+function render(){
+  var S=pd(st.start),cw=Math.floor((now-S)/604800000)+1,h="",n=0,done=0,all=0;
+  
+  // Render Roadmap Mingguan Lokal (st.w)
+  if (CONFIG.roadmap && Array.isArray(CONFIG.roadmap)) {
+    CONFIG.roadmap.forEach((m, mi) => {
+      let itemsHtml = "";
+      m.items.forEach((item, ii) => {
+        n++; all++;
+        var id = "w" + mi + "_" + ii;
+        var on = !!st.w[id];
+        if(on) done++;
+        itemsHtml += `<div class="wk ${on?'done':''}">
+          <input type="checkbox" data-id="${id}" ${on?'checked':''}>
+          <div><div class="t"><b>Minggu ${ii+1}:</b> ${esc(item)}</div></div>
+        </div>`;
+      });
+      h += `<details class="mod" ${mi===0?'open':''}><summary>${esc(m.title)}<small>${esc(m.desc)}</small></summary><div class="in">${itemsHtml}</div></details>`;
+    });
+    document.getElementById("mods").innerHTML = h;
+  }
+
+  // Event listener checkbox roadmap
+  document.querySelectorAll("#mods input[type='checkbox']").forEach(function(c) {
+    c.onchange = function() {
+      if (c.checked) st.w[c.dataset.id] = 1;
+      else delete st.w[c.dataset.id];
+      sv(); render();
+    };
+  });
+
+  var p = all ? Math.round(100*done/all) : 0;
+  document.getElementById("bar").style.width=p+"%";
+  document.getElementById("pct").textContent=done+" dari "+all+" minggu selesai ("+p+"%).";
+  
+  stats(); notes();
+}
+
+function stats(){
+  var dm=dayMap(),tot=0,days=0,gaps=0,perMod=[0,0,0,0,0,0,0,0,0,0];
+  st.log.forEach(function(l){tot+=l.m;perMod[l.mod]=(perMod[l.mod]||0)+l.m;});
+  var S=pd(st.start),first=S,keys=Object.keys(dm).sort();if(keys.length&&pd(keys[0])<first)first=pd(keys[0]);
+  for(var d=new Date(first);iso(d)<today;d=ad(d,1)){if(d.getDay()!==0&&!dm[iso(d)])gaps++;}
+  days=keys.length;
+  var stk=0,d2=pd(today);if(!dm[today])d2=ad(d2,-1);
+  while(true){if(d2.getDay()===0){d2=ad(d2,-1);continue;}if(dm[iso(d2)]){stk++;d2=ad(d2,-1);}else break;}
+  var mo=monOf(now),wd=0,wm=0;for(var i=0;i<7;i++){var k=iso(ad(mo,i));if(dm[k]){wd++;wm+=dm[k];}}
+  
+  document.getElementById("kpi").innerHTML='<div><b>'+(tot/60).toFixed(1)+' jam</b>total belajar</div><div><b>'+days+'</b>hari belajar</div><div><b>'+(days?Math.round(tot/days):0)+' menit</b>rata-rata</div>';
+  
+  var hm="";for(var c=0;c<48;c++)for(var r=0;r<7;r++){var dt=ad(S,7*c+r),k=iso(dt),m=dm[k],cl="";
+    if(k>today)cl="f";else if(m){var q=m/st.tM;cl=q<.5?"l1":q<1?"l2":q<1.5?"l3":"l4";}else if(r<6&&dt>=first)cl="g";else cl="z";
+    if(k===today)cl+=" t";hm+='<i class="'+cl+'" title="'+fmt(dt)+': '+(m||0)+' menit"></i>';}
+  document.getElementById("hm").innerHTML=hm;
+
+  var g=[],a=0,lg="";perMod.forEach(function(v,i){if(!v)return;var b=a+100*v/tot;g.push("hsl("+HUE[i]+" 55% 50%) "+a+"% "+b+"%");a=b;lg+='<div><i style="background:hsl('+HUE[i]+' 55% 50%)"></i>'+T[i]+': '+v+' menit</div>';});
+  document.getElementById("pie").style.background=tot?"conic-gradient("+g.join(",")+")":"var(--line)";
+  document.getElementById("lg").innerHTML=lg||"Belum ada sesi.";
+
+  renderAiStats();
+}
+
+function renderAiStats() {
+  var totBenar = 0, totSalah = 0, totAttempts = 0;
+  var tableHtml = `<table><thead><tr><th>Bab</th><th class="num">Benar</th><th class="num">Salah</th><th class="num">Akurasi</th></tr></thead><tbody>`;
+
+  for (var topic in st.aiStats) {
+    var s = st.aiStats[topic];
+    totBenar += s.benar || 0;
+    totSalah += s.salah || 0;
+    var att = (s.benar || 0) + (s.salah || 0);
+    totAttempts += att;
+    var akurasi = att > 0 ? Math.round(100 * (s.benar || 0) / att) : 0;
+    tableHtml += `<tr><td>${esc(topic)}</td><td class="num" style="color:var(--ok);">${s.benar || 0}</td><td class="num" style="color:var(--err);">${s.salah || 0}</td><td class="num">${akurasi}%</td></tr>`;
+  }
+  if (Object.keys(st.aiStats).length === 0) tableHtml += `<tr><td colspan="4" style="text-align:center;">Belum ada data.</td></tr>`;
+  tableHtml += `</tbody></table>`;
+
+  var overallAkurasi = totAttempts > 0 ? Math.round(100 * totBenar / totAttempts) : 0;
+
+  document.getElementById("aiStatKpi").innerHTML = `
+    <div><b>${totBenar}</b>Soal Benar</div>
+    <div><b>${overallAkurasi}%</b>Akurasi</div>
+    <div><b>${totSalah}</b>Salah</div>
+  `;
+  document.getElementById("aiStatTable").innerHTML = tableHtml;
+}
+
+function notes(){var oo=document.getElementById("onlyOpen").checked,h="";
+  st.notes.slice().reverse().forEach(function(x){if(oo&&x.ok)return;h+='<div class="nt'+(x.ok?' ok':'')+'"><input type="checkbox" data-ok="'+x.id+'"'+(x.ok?' checked':'')+'><div style="flex:1"><div class="tx">'+esc(x.t)+'</div><small>'+fmt(pd(x.d))+' · '+esc(T[x.mod])+'</small></div><button data-nd="'+x.id+'">Hapus</button></div>';});
+  document.getElementById("notes").innerHTML=h||'<p class="sub">Belum ada catatan.</p>';
+  document.querySelectorAll("[data-ok]").forEach(function(c){c.onchange=function(){st.notes.forEach(function(x){if(x.id==c.dataset.ok)x.ok=c.checked;});sv();notes();};});
+  document.querySelectorAll("[data-nd]").forEach(function(b){b.onclick=function(){st.notes=st.notes.filter(function(x){return x.id!=b.dataset.nd;});sv();notes();};});
+}
+
+// ============================================================
+// [8. INIT & EVENT LISTENERS]
+// ============================================================
+function $(i){return document.getElementById(i);}
+
+// UI form dasar
+$("ld").value=today;$("nd").value=today;
+$("addL").onclick=function(){var m=parseInt($("lm").value,10);if(!(m>0)){return;}st.log.push({d:$("ld").value,m:m,mod:0});sv();render();};
+$("addN").onclick=function(){var t=$("nt").value.trim();if(!t)return;st.notes.push({id:Date.now(),d:$("nd").value||today,mod:0,t:t,ok:false});$("nt").value="";sv();notes();};
+$("onlyOpen").onchange=notes;
+$("reset").onclick=function(){if(confirm("Hapus semua progres?")){localStorage.clear();location.reload();}};
+
+// Simpan User
+$("btnSaveUser").onclick = function() {
+  const u = $("cfgUser").value.trim();
+  if (!u) return alert("Username tidak boleh kosong!");
+  
+  currentUser = u;
+  localStorage.setItem("daigaku_last_user", currentUser);
+  CONFIG = loadConfigForUser(currentUser);
+  T = CONFIG.topics;
+  
+  alert("Berhasil masuk sebagai: " + currentUser);
+  initConfigEditor();
+  refreshAppFromConfig();
+  render();
+};
+
+// Terapkan Perubahan JSON
+$("btnApplyConfig").onclick = function() {
+  if (!currentUser) return alert("Silakan isi Username dan klik 'Masuk' terlebih dahulu.");
+
+  const isStatsValid = validateJson('cfgStats', 'statusStats');
+  const isRoadValid = validateJson('cfgRoadmap', 'statusRoadmap');
+  
+  if (!isStatsValid || !isRoadValid) return alert("Perbaiki format JSON terlebih dahulu!");
+
+  try {
+    CONFIG.topics = $("cfgTopics").value.split(",").map(s => s.trim()).filter(s => s);
+    CONFIG.referensi = $("cfgRef").value;
+    CONFIG.statistik = JSON.parse($("cfgStats").value);
+    CONFIG.roadmap = JSON.parse($("cfgRoadmap").value);
+    
+    T = CONFIG.topics;
+    saveConfigForUser(currentUser);
+    alert("✅ Data berhasil disimpan.");
+    refreshAppFromConfig();
+    render();
+  } catch (e) {
+    alert("Gagal menyimpan: " + e.message);
+  }
+};
+
+// Reset
+$("btnResetConfig").onclick = function() {
+  if (!currentUser) return alert("Anda belum masuk.");
+  if(confirm(`Hapus data kustom untuk "${currentUser}"?`)) {
+    localStorage.removeItem(getStorageKey(currentUser));
+    CONFIG = loadConfigForUser(currentUser);
+    T = CONFIG.topics;
+    initConfigEditor();
+    refreshAppFromConfig();
+    render();
+  }
+};
+
+// AI & API Key
+function updateApiKeyUI() {
+  const key = localStorage.getItem("gemini-api-key");
+  const warning = document.getElementById("apiKeyWarning");
+  if (key) { warning.classList.remove("active"); document.getElementById("geminiApiKey").value = key; }
+  else { warning.classList.add("active"); }
+}
+$("saveApiKey").onclick = function() {
+  const key = $("geminiApiKey").value.trim();
+  if (key) { localStorage.setItem("gemini-api-key", key); alert("API Key disimpan!"); updateApiKeyUI(); }
+};
+
+// AI Generator Soal
+$("genBtn").onclick = async function() {
+  const apiKey = localStorage.getItem("gemini-api-key");
+  if (!apiKey) return alert("Masukkan API Key Gemini!");
+
+  const rawTopic = $("genTopic").value;
+  const difficulty = parseInt($("genDifficulty").value);
+  const count = parseInt($("genCount").value);
+  const resultDiv = $("genResult");
+  const btn = this;
+  
+  if (!rawTopic) return alert("Pilih bab!");
+  let topicName = rawTopic === "all" ? "Semua Bab" : T[parseInt(rawTopic.split(":")[1])] || "Bab";
+  
+  btn.disabled = true;
+  resultDiv.innerHTML = `<div class="loading active">⏳ Memuat ${count} soal...</div>`;
+
+  const prompt = `Buat ${count} soal pilihan ganda (A-E) untuk topik "${topicName}", level ${difficulty}.
+Referensi: ${CONFIG.referensi}
+Format JSON array: [{"soal":"...","opsi":{"A":"...","B":"...","C":"...","D":"...","E":"..."},"jawaban_benar":"A","cara_menjawab":"...","rumus":"..."}]`;
+
+  try {
+    const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+    });
+    const data = await res.json();
+    let txt = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    txt = txt.substring(txt.indexOf('['), txt.lastIndexOf(']')+1);
+    const parsed = JSON.parse(txt);
+
+    let html = "";
+    parsed.forEach((q, i) => {
+      let opts = "";
+      for (let [k,v] of Object.entries(q.opsi)) opts += `<button class="gen-opt-btn" data-opt="${k}" data-qid="${i}">${k}. ${v}</button>`;
+      html += `<div class="gen-soal" data-qid="${i}"><h3>Soal ${i+1}</h3><p>${q.soal}</p><div class="gen-options">${opts}</div><div class="answer" id="ans-${i}"><p><b>Jawaban:</b> ${q.jawaban_benar}</p><p><b>Cara:</b> ${q.cara_menjawab}</p></div></div>`;
+    });
+    resultDiv.innerHTML = html;
+
+    if(window.MathJax) MathJax.typesetPromise([resultDiv]);
+
+    parsed.forEach((q, i) => {
+      const container = resultDiv.querySelector(`.gen-soal[data-qid="${i}"]`);
+      const btns = container.querySelectorAll(".gen-opt-btn");
+      const ansDiv = document.getElementById(`ans-${i}`);
+      let isCorrect = false;
+      btns.forEach(b => {
+        b.onclick = function() {
+          if(isCorrect) return;
+          if(this.dataset.opt === q.jawaban_benar) {
+            this.classList.add("correct"); isCorrect = true; ansDiv.classList.add("show");
+            showPopup(true);
+            // Simpan Statistik AI
+            if(!st.aiStats[topicName]) st.aiStats[topicName] = {benar:0, salah:0};
+            st.aiStats[topicName].benar++;
+            sv(); renderAiStats();
+          } else {
+            this.classList.add("wrong"); this.disabled = true;
+            showPopup(false);
+            if(!st.aiStats[topicName]) st.aiStats[topicName] = {benar:0, salah:0};
+            st.aiStats[topicName].salah++;
+            sv(); renderAiStats();
+          }
+        };
+      });
+    });
+  } catch(e) { alert("Error: " + e.message); resultDiv.innerHTML = "Gagal memuat."; }
+  finally { btn.disabled = false; }
+};
+
+function showPopup(isCorrect) {
+  const p = $("popupHiasan"), t = $("popupText");
+  t.textContent = isCorrect ? "SELAMAT!" : "SALAHHH!";
+  t.className = isCorrect ? "ok" : "err";
+  p.classList.add("show");
+  setTimeout(() => p.classList.remove("show"), 2000);
+}
+
+// Initialize App
 window.onload = function() {
+  updateApiKeyUI();
   const lastUser = localStorage.getItem("daigaku_last_user");
   if (lastUser) {
     currentUser = lastUser;
@@ -646,6 +881,8 @@ window.onload = function() {
   
   initConfigEditor(); 
   refreshAppFromConfig(); 
+  buildTopicOptions();
+  render();
 };
 </script>
 </body>
