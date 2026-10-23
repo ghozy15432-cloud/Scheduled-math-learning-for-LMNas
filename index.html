@@ -5,28 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DAIGAKU HERE I COME</title>
 
-<!-- ============================================================
-     [SCRIPT MATHJAX]
-     Library untuk merender rumus matematika (LaTeX)
-     ============================================================ -->
+<!-- [SCRIPT MATHJAX] -->
 <script>
   window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true
-    },
-    svg: {
-      fontCache: 'global'
-    }
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true, processEnvironments: true },
+    options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'], ignoreHtmlClass: 'tex2jax_ignore', processHtmlClass: 'tex2jax_process' },
+    svg: { fontCache: 'global' }
   };
 </script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<!-- ============================================================ -->
 
-<!-- ============================================================
-     [CSS UTAMA]
-     ============================================================ -->
+<!-- [CSS UTAMA] -->
 <style>
 :root{--bg:#f5f7f4;--card:#fff;--ink:#1d2b2a;--mute:#5d6e6c;--line:#d5dedb;--acc:#0b6e66;--acc2:#e8f3f1;--warn:#b4531a;--ok:#1a8c5a;--err:#c0392b;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111a19;--card:#18242a;--ink:#e6efed;--mute:#9db1ae;--line:#2b3b3f;--acc:#4fd1c0;--acc2:#16312f;--warn:#f0a36b;--ok:#4fd1c0;--err:#f0a36b;color-scheme:dark}}
@@ -34,26 +23,8 @@
 *{box-sizing:border-box}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 
-/* ------------------------------------------------------------
-   [CSS WALLPAPER & DEKORASI KUCING]
-   ------------------------------------------------------------ */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background-image: url('Wallpaper.jpg');
-  background-size: cover;
-  background-position: center;
-  z-index: -2;
-}
-body::after {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(17, 26, 25, 0.6);
-  backdrop-filter: blur(3px);
-  z-index: -1;
-}
+body::before {content: "";position: fixed;top: 0; left: 0; width: 100vw; height: 100vh;background-image: url('Wallpaper.jpg');background-size: cover;background-position: center;z-index: -2;}
+body::after {content: "";position: fixed;top: 0; left: 0; width: 100vw; height: 100vh;background: rgba(17, 26, 25, 0.6);backdrop-filter: blur(3px);z-index: -1;}
 .deco-cat{position:fixed;z-index:0;pointer-events:none;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.4);border:2px solid rgba(255,255,255,0.2);opacity:0.85;animation:float 8s ease-in-out infinite;}
 .cat1 { top: 10%; left: 4%; width: 140px; animation-delay: 0s; }
 .cat2 { bottom: 15%; right: 5%; width: 180px; animation-delay: 2s; }
@@ -61,9 +32,6 @@ body::after {
 @keyframes float {0%{transform:translateY(0px) rotate(0deg);}50%{transform:translateY(-25px) rotate(3deg);}100%{transform:translateY(0px) rotate(0deg);}}
 @media (max-width: 900px){.deco-cat{display:none;}}
 
-/* ------------------------------------------------------------
-   [CSS LAYOUT UTAMA]
-   ------------------------------------------------------------ */
 body{margin:0;background:transparent;color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
 main{max-width:880px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1;background:rgba(245,247,244,0.95);backdrop-filter:blur(10px);border-radius:16px;margin-top:30px;box-shadow:0 20px 40px rgba(0,0,0,0.2)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) main{background:rgba(17,26,25,0.95)}}
@@ -75,12 +43,6 @@ h1{font-size:1.7rem;margin:.2em 0}h2{font-size:1.2rem;margin:0 0 6px}
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 .bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--acc);transition:width .3s}
-.pr{display:grid;grid-template-columns:minmax(110px,1.2fr) 2fr 44px;gap:8px;align-items:center;margin:.5em 0;font-size:.95rem}
-.pr .b{height:14px;background:var(--line);border-radius:4px;position:relative;overflow:hidden}
-.pr .b i{position:absolute;left:0;top:0;bottom:0;background:var(--acc)}
-.pr .b u{position:absolute;left:0;top:0;bottom:0;border-right:2px solid var(--warn)}
-.pr.low .b i{background:var(--mute)}
-.cut{color:var(--warn);font-size:.9rem;margin:.4em 0}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
 input,select,textarea{font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);max-width:100%}
 input[type=number]{width:80px}textarea{width:100%;min-height:60px}
@@ -90,157 +52,43 @@ button.p{background:var(--acc);color:var(--bg);border-color:var(--acc)}
 button:disabled{opacity:.5;cursor:not-allowed}
 .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin:8px 0}
 .kpi div{background:var(--acc2);border-radius:6px;padding:8px 10px;font-size:.9rem}.kpi b{display:block;font-size:1.3rem}
-.hm{overflow-x:auto;padding-bottom:6px}
-.hg{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,13px);grid-auto-columns:13px;gap:3px;width:max-content}
-.hg i{border-radius:3px;background:var(--line);opacity:.35}
-.hg i.f{opacity:.15}.hg i.z{opacity:.15}
-.hg i.g{background:none;border:1px dashed var(--warn);opacity:1}
-.hg i.l1,.hg i.l2,.hg i.l3,.hg i.l4{background:var(--acc)}
-.hg i.l1{opacity:.3}.hg i.l2{opacity:.55}.hg i.l3{opacity:.8}.hg i.l4{opacity:1}
-.hg i.t{outline:2px solid var(--ink)}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;align-items:start}
-.bars{display:flex;gap:4px;align-items:flex-end;height:110px;position:relative;border-bottom:1px solid var(--line);margin-top:8px}
-.bars div{flex:1;background:var(--acc);border-radius:3px 3px 0 0;min-height:1px;position:relative}
-.bars .tl{position:absolute;left:0;right:0;border-top:2px dashed var(--warn);flex:none;background:none;min-height:0}
-.lab{display:flex;gap:4px;font-size:.65rem;color:var(--mute)}.lab span{flex:1;text-align:center}
-.pie{width:140px;height:140px;border-radius:50%;flex:none}
-.lg{font-size:.85rem}.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px}
 .nt{border-top:1px solid var(--line);padding:8px 0;display:flex;gap:10px;align-items:flex-start}
-.nt.ok .tx{color:var(--mute);text-decoration:line-through}.nt small{color:var(--mute)}
-details.mod{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:12px 0}
-details.mod>summary{cursor:pointer;padding:12px 16px;font-weight:bold;list-style:none}
-details.mod>summary small{display:block;font-weight:normal;color:var(--mute)}
-details.mod .in{padding:0 16px 12px}
-.wk{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-top:1px solid var(--line)}
-.wk input{margin-top:.4em;width:18px;height:18px;flex:none}
-.wk.now{background:var(--acc2);border-left:4px solid var(--acc);border-radius:4px}
-.wk.done .t{color:var(--mute);text-decoration:line-through}
-.wk .d{color:var(--mute);font-size:.85rem}.wk .r{font-size:.9rem;color:var(--acc)}
-ul{padding-left:20px;margin:.3em 0}
+.nt small{color:var(--mute)}
 footer{color:var(--mute);font-size:.85rem;margin-top:24px}
-:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 
-/* ------------------------------------------------------------
-   [CSS SEARCH BAR PER BAB]
-   ------------------------------------------------------------ */
 .search-box {width:100%;padding:8px 12px;margin-bottom:12px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font-size:0.95rem;}
-.search-box:focus {outline:2px solid var(--acc);border-color:var(--acc);}
 
-/* ------------------------------------------------------------
-   [CSS GENERATOR SOAL GEMINI]
-   ------------------------------------------------------------ */
 #genResult { margin-top: 16px; }
-.gen-soal {
-  background: var(--acc2);
-  border-left: 4px solid var(--acc);
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin-bottom: 12px;
-  animation: fadeInUp 0.4s ease-out;
-  /* Tambahan agar soal tidak keluar dari tabel/kotak */
-  word-break: break-word;
-  overflow-wrap: anywhere;
-}
+.gen-soal {background: var(--acc2);border-left: 4px solid var(--acc);padding: 12px 16px;border-radius: 6px;margin-bottom: 12px;animation: fadeInUp 0.4s ease-out;word-break: break-word;overflow-wrap: anywhere;}
 .gen-soal h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
 .gen-soal p { margin: 6px 0; line-height: 1.6; }
 .gen-soal .label { font-weight: bold; color: var(--acc); }
 .gen-soal .answer { background: var(--bg); padding: 8px; border-radius: 4px; border: 1px dashed var(--line); margin-top: 8px; display: none; }
 .gen-soal .answer.show { display: block; animation: fadeInUp 0.4s ease-out; }
 .gen-options { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
-.gen-opt-btn {
-  text-align: left; padding: 8px 12px; background: var(--bg);
-  border: 1px solid var(--line); border-radius: 6px; cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
-  word-break: break-word; /* Tambahan untuk opsi */
-}
+.gen-opt-btn {text-align: left; padding: 8px 12px; background: var(--bg);border: 1px solid var(--line); border-radius: 6px; cursor: pointer;transition: background 0.2s, border-color 0.2s;word-break: break-word;}
 .gen-opt-btn:hover { background: var(--acc2); }
 .gen-opt-btn.correct { background: var(--ok); color: #fff; border-color: var(--ok); }
 .gen-opt-btn.wrong { background: var(--err); color: #fff; border-color: var(--err); }
 .gen-opt-btn:disabled { cursor: default; opacity: 0.8; }
-.loading { display: none; text-align: center; padding: 20px; color: var(--mute); font-style: italic; }
-.loading.active { display: block; }
-.api-key-warning { color: var(--warn); font-size: 0.9rem; margin-bottom: 10px; display: none; }
-.api-key-warning.active { display: block; }
-.gen-count-badge { display:inline-block; background:var(--acc); color:#fff; font-size:0.8rem; padding:2px 8px; border-radius:10px; margin-left:8px; vertical-align:middle;}
 
-/* ------------------------------------------------------------
-   [CSS POPUP HIASAN 1]
-   ------------------------------------------------------------ */
-#popupHiasan {
-  position: fixed; top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  z-index: 9999; background: rgba(0,0,0,0.85);
-  padding: 20px; border-radius: 16px; text-align: center;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.3s, transform 0.3s;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-  border: 3px solid var(--acc);
-}
+#popupHiasan {position: fixed; top: 50%; left: 50%;transform: translate(-50%, -50%) scale(0.8);z-index: 9999; background: rgba(0,0,0,0.85);padding: 20px; border-radius: 16px; text-align: center;opacity: 0; pointer-events: none;transition: opacity 0.3s, transform 0.3s;box-shadow: 0 10px 40px rgba(0,0,0,0.5);border: 3px solid var(--acc);}
 #popupHiasan.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 #popupHiasan img { width: 200px; border-radius: 8px; margin-bottom: 10px; }
 #popupHiasan h1 { margin: 0; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; }
 #popupHiasan h1.ok { color: var(--ok); text-shadow: 0 0 20px var(--ok); }
 #popupHiasan h1.err { color: var(--err); text-shadow: 0 0 20px var(--err); }
 
-/* ------------------------------------------------------------
-   [CSS RANGKUMAN STATISTIK BAB]
-   ------------------------------------------------------------ */
-.stat-summary .bar-row {
-  display: grid;
-  grid-template-columns: minmax(140px, 1.8fr) 3fr 50px;
-  gap: 10px;
-  align-items: center;
-  margin: 6px 0;
-  font-size: 0.9rem;
-}
-.stat-summary .bar-label { font-weight: bold; }
-.stat-summary .bar-track {
-  height: 18px; background: var(--line); border-radius: 4px; overflow: hidden;
-  position: relative;
-}
-.stat-summary .bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--acc), var(--acc2));
-  border-radius: 4px;
-  transition: width 0.6s ease-out;
-}
-.stat-summary .bar-count {
-  text-align: right; font-weight: bold; color: var(--acc);
-}
-.stat-summary .source-list {
-  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px;
-}
-.stat-summary .source-badge {
-  background: var(--acc2); color: var(--ink);
-  border: 1px solid var(--line);
-  padding: 4px 10px; border-radius: 20px;
-  font-size: 0.8rem;
-}
-.stat-summary .recommend {
-  background: var(--acc2);
-  border-left: 4px solid var(--acc);
-  padding: 10px 14px; border-radius: 6px;
-  margin-top: 12px;
-}
-.stat-summary .recommend ol { margin: 6px 0 0 0; padding-left: 22px; }
-.stat-summary .recommend li { margin: 4px 0; }
-.stat-summary table {
-  width: 100%; border-collapse: collapse; margin-top: 10px;
-  font-size: 0.88rem;
-}
-.stat-summary th, .stat-summary td {
-  border-bottom: 1px solid var(--line);
-  padding: 6px 8px; text-align: left;
-}
-.stat-summary th { background: var(--acc2); }
-.stat-summary td.num { text-align: right; font-weight: bold; }
+.editor-panel { background: var(--bg); border: 2px dashed var(--acc); }
+.json-preview { background: #1e1e1e; color: #d4d4d4; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 0.8rem; overflow-x: auto; max-height: 200px; margin-top: 10px;}
+.status-box { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; }
+.status-box.ok { background: var(--ok); color: white; }
+.status-box.warn { background: var(--warn); color: white; }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     [HTML DEKORASI & POPUP]
-     ============================================================ -->
 <img src="Hiasan_3.jpg" class="deco-cat cat1" alt="Decorative Cat 1">
 <img src="Hiasan_2.jpg" class="deco-cat cat2" alt="Decorative Cat 2">
 <img src="Hiasan_1.jpg" alt="Decorative Cat 3">
@@ -252,188 +100,251 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 
 <main>
 <!-- ============================================================
-     [HTML HEADER]
+     [PANEL EDITOR KONFIGURASI AKUN]
      ============================================================ -->
+<div class="card editor-panel" id="configEditor">
+  <h2>⚙️ Pengaturan Akun & Data Dasar</h2>
+  <p class="sub">Masukkan nama unik Anda. Jika namanya sama, sistem akan otomatis memuat data yang pernah Anda ubah sebelumnya.</p>
+  
+  <div class="row" style="background: var(--acc2); padding: 12px; border-radius: 6px; margin-bottom: 12px; align-items: center;">
+    <label style="flex: 1; font-weight: bold;">Username: 
+      <input type="text" id="cfgUser" placeholder="Ketik nama unik Anda..." style="width: 60%;">
+    </label>
+    <button class="p" id="btnSaveUser">Masuk / Terapkan</button>
+    <button id="btnResetConfig" style="margin-left: auto; border-color: var(--err); color: var(--err);">Reset Akun Ini</button>
+  </div>
+  <div id="userStatus" style="margin-bottom: 12px; font-size: 0.9rem;"></div>
+  
+  <details>
+    <summary style="cursor:pointer;font-weight:bold;margin-bottom:10px;">Buka Editor File Dasar</summary>
+    <div class="row" style="flex-direction: column; align-items: stretch;">
+      <label>Daftar Topik (Pisahkan dengan koma):</label>
+      <textarea id="cfgTopics" style="min-height: 80px;"></textarea>
+
+      <label style="margin-top:10px;">Referensi Soal (Teks bebas untuk prompt AI):</label>
+      <textarea id="cfgRef" style="min-height: 120px;"></textarea>
+
+      <label style="margin-top:10px;">Statistik Bab (Format JSON Array):</label>
+      <textarea id="cfgStats" style="min-height: 100px; font-family: monospace;"></textarea>
+      
+      <div class="row">
+        <button class="p" id="btnApplyConfig">Simpan Perubahan Data</button>
+      </div>
+    </div>
+  </details>
+
+  <div style="margin-top: 15px;">
+    <b>Data JSON yang sedang aktif saat ini:</b>
+    <pre class="json-preview" id="jsonPreview"></pre>
+  </div>
+</div>
+
+<!-- [HEADER] -->
 <h1>Roadmap Teknik Mesin: Matematika, Fisika, MEXT</h1>
 <p class="sub">Kelas 10 SMA, Indonesia. Titik awal: dasar masih lemah. Tujuan: beasiswa MEXT jalur IPA-A untuk Teknik Mesin, dengan fokus ke fundamental. Matematika Lanjut (kalkulus salah satu targetnya) berjalan bersama Fisika, Kimia, serta bahasa Inggris dan Jepang. Soal lomba dari 10 berkas hanya pendamping.</p>
 <div class="bar"><i id="bar" style="width:0"></i></div>
 <p class="sub" id="pct"></p>
 
-<!-- ============================================================
-     [HTML RANGKUMAN STATISTIK BAB]
-     ============================================================ -->
+<!-- [RANGKUMAN STATISTIK BAB] -->
 <div class="card stat-summary" id="statSummary">
   <h2>📊 Rangkuman Bab Paling Sering Keluar</h2>
-  <p class="sub">Analisis dari 10 file soal (KoSSMI 2022 penyisihan & semifinal, KoSSMI 2023, LMNas 33–35, KSR 2025, OMI 2026, KOSSMI penyisihan & semifinal, Ketaksamaan OSN). Angka = perkiraan jumlah soal yang menyentuh topik tersebut. Satu soal bisa dihitung di lebih dari satu topik.</p>
+  <p class="sub">Analisis dari 10 file soal. Angka = perkiraan jumlah soal yang menyentuh topik tersebut.</p>
   <div id="statBars"></div>
   <div class="recommend" id="statRecommend"></div>
   <details style="margin-top:12px;">
     <summary style="cursor:pointer;font-weight:bold;">Lihat tabel detail per bab</summary>
     <div id="statTable"></div>
   </details>
-  <details style="margin-top:8px;">
-    <summary style="cursor:pointer;font-weight:bold;">Lihat sumber file & jumlah soalnya</summary>
-    <div class="source-list" id="statSources"></div>
-  </details>
 </div>
 
-<!-- ============================================================
-     [HTML ROADMAP MEXT]
-     ============================================================ -->
-<div class="card">
-<h2>Roadmap MEXT IPA-A (Teknik Mesin): Matematika, Fisika, Kimia</h2>
-<p class="sub">Centang target kalau sudah tercapai. Rincian mingguan tersedia untuk T1 sampai T4 (48 minggu, matematika). T5, T6, dan jalur paralel (P, K, B) disusun lebih rinci setelah minggu ke-48 sesuai hasil.</p>
-<div id="pareto"></div>
-<p class="cut">Fakta dari halaman Kedutaan Jepang di Indonesia (program Gakubu): Teknik Mesin termasuk IPA-A. Halaman 2020 menyebut mata uji IPA-A: bahasa Inggris, Matematika (B), Kimia, Fisika, dan bahasa Jepang, jadi matematika hanya salah satu bagian. Halaman 2025 menyatakan pelamar IPA tidak bisa mendaftar kalau salah satu nilai rapor yang disebutkan kurang dari 84, dan pemberitaan 2027 menyebut Matematika, Inggris, dan Fisika untuk IPA-A. Aturan bisa berubah, jadi cek id.emb-japan.go.jp untuk tahun yang dibidik. Pendaftar adalah siswa tingkat akhir atau lulusan baru, berkas sekitar April sampai Mei dan ujian tulis sekitar Juni. Contoh soal resmi ada di studyinjapan.go.jp. SAT tidak dipakai MEXT, jadi di sini hanya jalur cadangan. Fokus fundamental: pahami konsep dan kerjakan soal buku sekolah dulu. Aturan naik minggu: lanjut hanya kalau cek benar 80%. Kalau belum, ulang minggu itu.</p>
-</div>
-
-<!-- ============================================================
-     [HTML CATAT BELAJAR]
-     ============================================================ -->
-<div class="card">
-<h2>Catat belajar hari ini</h2>
-<div class="row"><input type="date" id="ld" aria-label="Tanggal"><input type="number" id="lm" min="1" max="600" placeholder="menit" aria-label="Lama belajar (menit)"><select id="lmod" aria-label="Topik"></select><button class="p" id="addL">Simpan sesi</button></div>
-<div class="row"><label>Target <input type="number" id="tD" min="1" max="7"> hari per minggu</label><label>Target <input type="number" id="tM" min="10" max="600"> menit per hari</label><label>Mulai Senin <input type="date" id="start"></label></div>
-<p class="sub" id="wkst"></p>
-<p class="sub"><b>Pola mingguan yang disarankan (5 sampai 6 hari):</b> Senin dan Rabu Matematika (konsep dan 5 sampai 8 soal). Selasa dan Kamis Fisika mulai Juni 2027 (konsep, lalu soal hitungan); sebelum itu pakai untuk bahasa Jepang dan Inggris. Bahasa Jepang sebaiknya juga 20 sampai 30 menit hampir tiap hari. Jumat Kimia atau bahasa Inggris dan Jepang, bergantian. Sabtu ulang soal yang salah dan cek mingguan. Minggu istirahat (tidak dihitung bolong). Kalau sulit tiap hari, cukup capai target hari per minggu.</p>
-</div>
-
-<!-- ============================================================
-     [HTML STATISTIK BELAJAR]
-     ============================================================ -->
+<!-- [ROADMAP & STATISTIK BELAJAR] -->
 <div class="card">
 <h2>Statistik belajar</h2>
 <div class="kpi" id="kpi"></div>
-<p class="sub" style="margin-bottom:2px">Peta kebiasaan, tiap kolom satu minggu (Senin di atas). Kotak putus-putus oranye = hari bolong.</p>
-<div class="hm"><div class="hg" id="hm"></div></div>
 <div class="two" style="margin-top:14px">
-<div><b>Menit belajar 14 hari terakhir</b><div class="bars" id="bars"></div><div class="lab" id="blab"></div></div>
-<div><b>Pembagian waktu per topik</b><div class="row"><div class="pie" id="pie"></div><div class="lg" id="lg"></div></div></div>
+  <div><b>Sesi terakhir</b><div id="rec"></div></div>
+  <div><b>Statistik Kuis AI</b><div id="aiStatKpi" class="kpi" style="grid-template-columns:1fr 1fr;"></div></div>
 </div>
-<p class="sub" style="margin-top:12px"><b>Sesi terakhir</b></p><div id="rec"></div>
-</div>
-
-<!-- ============================================================
-     [HTML CATATAN KESULITAN]
-     ============================================================ -->
-<div class="card">
-<h2>Catatan kesulitan</h2>
-<div class="row"><select id="nmod" aria-label="Topik catatan"></select><input type="date" id="nd" aria-label="Tanggal"></div>
-<textarea id="nt" placeholder="Contoh: L34 No. 14 bingung kenapa σ(2a) dipecah begitu"></textarea>
-<div class="row"><button class="p" id="addN">Simpan catatan</button><label><input type="checkbox" id="onlyOpen"> tampilkan yang belum paham saja</label></div>
-<div id="notes"></div>
 </div>
 
-<div id="mods"></div>
-
-<!-- ============================================================
-     [HTML GENERATOR SOAL GEMINI]
-     ============================================================ -->
+<!-- [GENERATOR SOAL] -->
 <div class="card" id="geminiSection">
   <h2>🤖 Generator Soal AI (Gemini)</h2>
-  <p class="sub">Buat soal latihan baru. Pilih bab (besar atau sub-bab kecil), tingkat kesulitan, dan jumlah soal. Soal berbentuk pilihan ganda (A-E). Kunci jawaban akan terbuka setelah kamu menjawab.</p>
-  
-  <div id="apiKeyWarning" class="api-key-warning">
-    ⚠️ API Key belum diatur. Silakan masukkan API Key Gemini Anda di bawah ini (disimpan di browser Anda).
-  </div>
-
-  <div class="row" style="margin-bottom: 12px;">
-    <input type="password" id="geminiApiKey" placeholder="Masukkan Gemini API Key..." style="flex: 1; min-width: 200px;">
-    <button id="saveApiKey" class="p">Simpan Key</button>
-  </div>
-
   <div class="row">
-    <label>Bab Dasar:
-      <select id="genTopic" aria-label="Pilih Bab" style="min-width: 220px; max-width: 100%;"></select>
-    </label>
-    <label>Tingkat Kesulitan (1-5):
-      <input type="number" id="genDifficulty" min="1" max="5" value="3" style="width: 60px;">
-    </label>
-    <label>Jumlah Soal (1-10):
-      <input type="number" id="genCount" min="1" max="10" value="3" style="width: 60px;">
-    </label>
-    <button id="genBtn" class="p">Buat Soal</button>
+    <div style="flex: 1; min-width: 220px;">
+      <label style="display:block; margin-bottom:2px; font-size:0.9rem;">Cari Bab:</label>
+      <input type="search" id="genTopicSearch" placeholder="Ketik nama bab...">
+      <select id="genTopic" style="width:100%;"></select>
+    </div>
+    <div>
+      <label>Tingkat Kesulitan:</label>
+      <input type="number" id="genDifficulty" min="1" max="5" value="3">
+    </div>
+    <div>
+      <label>Jumlah:</label>
+      <input type="number" id="genCount" min="1" max="10" value="1">
+    </div>
+    <div style="align-self: flex-end;">
+      <button id="genBtn" class="p">Buat Soal</button>
+    </div>
   </div>
-
-  <div id="genLoading" class="loading">⏳ Sedang meracik soal... Mohon tunggu.</div>
   <div id="genResult"></div>
 </div>
 
-<p><button id="reset">Hapus semua data</button></p>
-<footer>Label soal: L33, L34, L35 = LMNas 33 (2022), 34 (2023), 35 (2024), UGM SMA Penyisihan; angka = nomor pilihan ganda, "IS" = isian singkat (misal L33 IS2). KSM21 = KSM 2021, K22 dan K23 = KoSSMI 2022 dan 2023, K22-SF = Semifinal KoSSMI 2022, KSR25 = Kompetisi Sains Ruangguru 2025, OMI = berkas OMI 2026 Matriks, K-PENY = Penyisihan Level 4 KOSSMI, K-SF = Semifinal Level 4 KOSSMI, KETAKS = Ketaksamaan OSN (QM, AM, GM, HM, CS). Pengelompokan topik adalah perkiraan, satu soal bisa masuk dua bidang. Soal yang dianulir di L34 (No. 20, 25) dan salah (IS4) sebaiknya dilewati. Soal lomba bersifat opsional dan umumnya lebih sulit dari materi kelas 10; utamakan buku sekolah dan contoh ujian MEXT, dan kerjakan soal lomba hanya setelah cek minggu itu lulus. Berkas tidak berisi kunci jawaban. Data tersimpan di browser perangkat ini saja.</footer>
 </main>
 
 <script>
-/* ============================================================
-   [JS DATA ROADMAP & TOPIK]
-   ============================================================ */
-var T=["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A","Fisika","Kimia","Bahasa Jepang","Bahasa Inggris"];
-var R=[
-["T1 Fondasi","Minggu 1–10 · Okt 2026 sampai Jan 2027","Hitung, bentuk aljabar, persamaan dan pertidaksamaan, kuadrat, fungsi dasar","dasar semua target; nilai rapor Matematika harus naik","benar 25 dari 30 soal tes fondasi tanpa kalkulator"],
-["T2 Aljabar dan Fungsi","Minggu 11–22 · Jan sampai Mar 2027","Eksponen, logaritma, polinomial, barisan, sistem persamaan","Matematika MEXT IPA-A; bahasa matematika untuk fisika dan teknik (SAT opsional)","80% soal bab di buku sekolah (opsional: Bluebook Math sekitar 550)"],
-["T3 Geometri dan Trigonometri","Minggu 23–37 · Mar sampai Jul 2027","Geometri bidang dan ruang, lingkaran, koordinat, seluruh trigonometri","komponen gaya dan vektor di mekanika; Matematika MEXT","80% soal bab; bisa menguraikan gaya miring dengan sin dan cos"],
-["T4 Data dan Pra-kalkulus","Minggu 38–48 · Jul sampai Sep 2027","Statistik, peluang, bilangan kompleks, matriks, vektor, irisan kerucut, limit intuitif","vektor dan matriks dipakai di mekanika dan rekayasa; materi MTL kelas 11","80% soal bab; bisa menghitung hasil kali titik dan determinan"],
-["T5 Kalkulus","Okt 2027 sampai Mar 2028","Limit, turunan, aplikasi turunan (maks, min, laju), integral dan luas daerah","Fisika (kecepatan, usaha, energi) dan teknik mesin tahun pertama","80% soal buku MTL dan soal kalkulus contoh ujian MEXT"],
-["T6 Simulasi MEXT IPA-A","Apr 2028 sampai Mei 2029 (perkiraan)","Simulasi ujian MEXT: Inggris, Matematika, Kimia, Fisika, Jepang; siapkan berkas dan wawancara","pendaftaran MEXT; SAT hanya jalur cadangan","simulasi tiap mata uji lulus 80% dan nilai rapor memenuhi syarat"],
-["P1 Fisika 1: Mekanika dasar","Paralel · mulai Jun 2027 sampai Okt 2027 · 2 hari per minggu","Besaran dan satuan, gerak lurus, hukum Newton, gaya gesek, diagram benda bebas, gerak parabola dan komponen gaya (trigonometri dasar dari T3 sudah dipelajari)","Fisika IPA-A; dasar mekanika teknik","80% soal gerak dan Newton; bisa menggambar diagram benda bebas"],
-["P2 Fisika 2: Energi dan rotasi","Paralel · Nov 2027 sampai Mar 2028","Usaha dan energi, momentum dan tumbukan, gerak melingkar, momen gaya, kesetimbangan benda tegar, gravitasi","inti mekanika teknik mesin","80% soal energi, momentum, dan rotasi"],
-["P3 Fisika 3: Fluida dan termal","Paralel · Apr sampai Sep 2028","Tekanan dan Bernoulli, suhu dan kalor, hukum termodinamika dan siklus, getaran dan gelombang","termodinamika dan mekanika fluida di teknik mesin","80% soal; bisa menjelaskan siklus mesin kalor sederhana"],
-["P4 Fisika 4: Listrik dan modern","Paralel · Okt 2028 sampai Feb 2029","Listrik, rangkaian, magnet, optik, fisika modern; ulang semua dengan contoh ujian MEXT","Fisika IPA-A secara utuh","contoh soal MEXT Fisika benar 80%"],
-["K1 Kimia","Paralel · Okt 2027 sampai Sep 2028 · 1 hari per minggu","Stoikiometri, atom dan ikatan, gas, termokimia, laju dan kesetimbangan, asam basa, redoks, organik dasar","Kimia IPA-A (ikuti pelajaran sekolah, ulang untuk ujian)","contoh soal MEXT Kimia benar 80%"],
-["J1 Bahasa Jepang: target JLPT N2","Sedang berjalan · N2 Des 2027 (peluang sekarang sekitar 60%, perkiraan Anda) · cadangan: sesi JLPT berikutnya","Latihan 20 sampai 30 menit hampir tiap hari: kosakata, kanji, tata bahasa, membaca, menyimak. Cek tengah: mock N2 Jun dan Sep 2027. Kalau mock Sep 2027 di bawah 70%, daftar sesi cadangan","ujian bahasa Jepang MEXT (wajib diikuti) dan kuliah di Jepang","lulus N2 (Des 2027 atau sesi cadangan sebelum pendaftaran MEXT)"],
-["E1 Bahasa Inggris","Paralel · Nov 2026 sampai Mei 2029","Membaca, tata bahasa, menulis esai, kosakata akademik","ujian Inggris MEXT dan nilai rapor Inggris","simulasi Inggris lulus 80% dan nilai rapor memenuhi syarat"]
-];
-var M=[
-["T1 Fondasi",0,["Pecahan, desimal, persen, bilangan negatif|Bisa: 12 soal hitung tanpa kalkulator, benar 10 · Latihan: K22 23, 24 · K-PENY 1, 3","Bentuk aljabar: sederhanakan dan faktorkan|Bisa: (x+3)(x−2) dan x²−9 tanpa ragu · Latihan: K23 1, 3","Persamaan linear dan soal cerita|Bisa: ubah cerita jadi persamaan · Latihan: KSM21 6, 10 · K22 10 · K-PENY 4","Sistem persamaan dua variabel|Bisa: eliminasi dan substitusi · Latihan: K22 3 · KSM21 10 · K-SF 5","Pertidaksamaan linear dan nilai mutlak dasar|Bisa: gambar garis bilangan · Latihan: KSR25 8 · K23 7 · K-SF 14","Eksponen dan bentuk akar|Bisa: sederhanakan √50 dan 2³·2⁴ · Latihan: K23 2, 4 · K-PENY 5","Persamaan kuadrat: faktorisasi dan rumus ABC|Bisa: selesaikan 5 persamaan kuadrat · Latihan: K22 6 · K23 5 · K-PENY 6","Diskriminan dan rumus Vieta|Bisa: jumlah dan hasil kali akar · Latihan: K23 5, 30 · OMI-P 2023 · K-SF 6","Fungsi: nilai fungsi, komposisi, invers|Bisa: hitung f(g(x)) · Latihan: KSR25 2 · K22 9 · K-PENY 7","Tes fondasi 30 soal, 45 menit|Lulus jika benar 25. Ulang soal yang salah"]],
-["T2 Aljabar dan Fungsi",1,["Fungsi kuadrat dan grafik parabola|Bisa: titik puncak dan akar · Latihan: K22 14 · K23 6 · K-PENY 8","Pertidaksamaan kuadrat dan rasional|Bisa: tanda tiap interval · Latihan: KSR25 1 · K23 8 · K-SF 15","Eksponen dan logaritma|Bisa: log₂8 dan sifat log · Latihan: KSR25 20 · K-SF 7","Persamaan eksponen dan logaritma|Bisa: samakan basis · Latihan: K-PENY 9","Polinomial dan teorema sisa|Bisa: pembagian dan sisa · Latihan: KSR25 5 · KSM21 15 · K-PENY 10","Barisan dan deret aritmetika, geometri|Bisa: Un dan Sn · Latihan: K22 13, 20 · KSR25 13 · K-SF 8","Deret tak hingga dan sigma dasar|Bisa: jumlah 1+r+r²+… · Latihan: K22 15 · L35 5, 9 · K-PENY 13","Sistem persamaan linear dan kuadrat|Gaya SAT: cari titik potong garis dan parabola · Latihan: K-SF 5","Transformasi grafik fungsi|Bisa: geser, rentang, cermin · Latihan: K-PENY 11","Rasio, persen, laju, dan satuan|Gaya SAT: soal cerita data · Latihan: K22 10, 24 · K-PENY 21","Pertumbuhan eksponensial dan soal cerita fungsi|Latihan: K22 23 · K-PENY 22","Review T2 dan Bluebook practice test Math 1|Target sekitar 550. Catat semua soal salah"]],
-["T3 Geometri dan Trigonometri",2,["Geometri bidang: sudut, segitiga, Pythagoras|Bisa: sudut segitiga dan segi-n · Latihan: KSR25 29 · K23 14 · K-SF 10","Luas dan keliling bangun datar|Bisa: rumus luas dari ingatan · Latihan: K23 18 · KSM21 12 · K-SF 4","Lingkaran: sudut, busur, persamaan lingkaran|Latihan: KSM21 13 · KSR25 21 · K-SF 6","Geometri koordinat: garis, jarak, titik tengah|Latihan: K23 9, 15, 17 · KSR25 24 · K-SF 15","Geometri ruang: volume dan luas permukaan|Latihan: K22 5, 12 · K-SF 4","Sin, cos, tan di segitiga siku-siku|Bisa: cari sisi yang hilang · Latihan: K-PENY 12","Sudut istimewa 30°, 45°, 60°|Bisa: tulis tabel dari ingatan","Radian dan lingkaran satuan|Bisa: ubah derajat ke radian","Kuadran dan sudut berelasi|Bisa: sin(180°−x), cos(90°−x) · Latihan: K-SF 8","Identitas sin²+cos²=1|Bisa: buktikan 3 identitas · Latihan: KSR25 25, 28 · K-PENY 1","Persamaan trigonometri sederhana|Bisa: sin x = ½ pada 0° sampai 360° · Latihan: K-PENY 7","Aturan sinus dan kosinus|Bisa: pilih aturan yang tepat · Latihan: K22 17 · K-SF 10","Luas ½ab sin C dan segi-n beraturan|Latihan: K23 14 · L34 4 · K-SF 2","Rumus jumlah, selisih, sudut ganda, grafik sin dan cos|Latihan: L35 IS4 (sulit, coba saja) · K-PENY 10","Review T3 dan Bluebook practice test Math 2|Target sekitar 650"]],
-["T4 Data dan Pra-kalkulus",3,["Statistik: rata-rata, median, simpangan baku|Bisa: bandingkan dua sebaran data · Latihan: K22 2 · KSM21 24 · K-SF 7","Peluang dasar dan peluang bersyarat|Bisa: tabel dua arah · Latihan: KSM21 5 · K23 22 · K-SF 10","Aturan hitung, permutasi, kombinasi|Latihan: KSM21 3 · K23 16 · K-SF 9","Diagram pencar, garis regresi, margin kesalahan|Gaya SAT: baca kemiringan dan titik potong","Bilangan kompleks dasar|Bisa: (a+bi)(c+di) dan modulus","Matriks: operasi, determinan, invers|Latihan: OMI UI 2018, UI 2019 · KSM21 21 · K-PENY 1","Vektor di bidang dan ruang|Bisa: jumlah, panjang, hasil kali titik","Irisan kerucut: lingkaran, elips, parabola|Bisa: dari persamaan ke grafik · Latihan: K-SF 6","Pengantar limit: nilai yang mendekati|Bisa: isi tabel nilai mendekati · Latihan: KETAKS (definisi limit)","Soal campur gaya SAT|Aljabar, data, dan geometri dalam satu set","Review T4 dan Bluebook practice test Math 3|Target sekitar 700. Lanjut ke T5 (Kalkulus)"]]
-];
+// === [KONFIGURASI DEFAULT] ===
+const DEFAULT_CONFIG = {
+  topics: ["T1 Fondasi","T2 Aljabar dan Fungsi","T3 Geometri dan Trigonometri","T4 Data dan Pra-kalkulus","T5 Kalkulus","T6 Simulasi MEXT IPA-A","Fisika","Kimia","Bahasa Jepang","Bahasa Inggris"],
+  referensi: "Contoh soal kompetisi:\n- Tentukan bilangan bulat positif terbesar n sehingga 2^n habis membagi 10^20 - 2^20.\n- Diketahui persamaan x + y + z = 12 maka x <= 5, y > 4, dan 0 <= z <= 3. Banyak solusi yang mungkin adalah...",
+  statistik: [
+    { topik: "Aljabar (persamaan, pertidaksamaan, sistem)", jumlah: 48, sumber: ["K22","K23","L33"] },
+    { topik: "Geometri bidang (sudut, segitiga, lingkaran)", jumlah: 35, sumber: ["K22","K23"] },
+    { topik: "Trigonometri (identitas, aturan, persamaan)", jumlah: 30, sumber: ["K22","K23"] }
+  ]
+};
 
-/* ============================================================
-   [JS STATISTIK BAB PALING SERING KELUAR]
-   ============================================================ */
-var STATISTIK_BAB = [
-  { topik: "Aljabar (persamaan, pertidaksamaan, sistem)", jumlah: 48, sumber: ["K22","K23","L33","L34","L35","KSR25","K-PENY","K-SF"] },
-  { topik: "Geometri bidang (sudut, segitiga, lingkaran)", jumlah: 35, sumber: ["K22","K23","L33","L34","L35","KSR25","K22-SF","K-SF"] },
-  { topik: "Trigonometri (identitas, aturan, persamaan)", jumlah: 30, sumber: ["K22","K23","L34","L35","KSR25","K-PENY","K-SF"] },
-  { topik: "Barisan & deret (aritmetika, geometri, tak hingga)", jumlah: 24, sumber: ["K22","K23","L33","L35","KSR25","K-SF"] },
-  { topik: "Fungsi (kuadrat, komposisi, invers, grafik)", jumlah: 22, sumber: ["K22","K23","L33","KSR25","K-PENY","K-SF"] },
-  { topik: "Teori bilangan (modulo, faktor, FPB/KPK)", jumlah: 20, sumber: ["K22","K23","L33","L35","KSR25","K-PENY"] },
-  { topik: "Kombinatorik (permutasi, kombinasi, peluang)", jumlah: 18, sumber: ["K22","K23","L34","L35","KSR25","K-SF"] },
-  { topik: "Geometri ruang (volume, jarak, sudut)", jumlah: 14, sumber: ["K22","K23","L34","L35","K-SF"] },
-  { topik: "Matriks & vektor", jumlah: 12, sumber: ["OMI","K23","L34","KSR25"] },
-  { topik: "Eksponen, akar, logaritma", jumlah: 12, sumber: ["K22","K23","KSR25","K-PENY"] },
-  { topik: "Ketaksamaan (QM-AM-GM-HM, Cauchy-Schwarz)", jumlah: 10, sumber: ["KETAKS","L35","K-SF"] },
-  { topik: "Statistika (rata-rata, median, kuartil)", jumlah: 8, sumber: ["K22","K23","L34","K-SF"] },
-  { topik: "Polinomial (teorema sisa, Vieta)", jumlah: 8, sumber: ["K23","L33","L35","KSR25"] },
-  { topik: "Bilangan kompleks", jumlah: 6, sumber: ["L33","L34","KSR25"] },
-  { topik: "Irisan kerucut (lingkaran, elips, parabola)", jumlah: 5, sumber: ["K23","L35","K-SF"] },
-  { topik: "Limit & kalkulus dasar", jumlah: 4, sumber: ["KETAKS","L35","K-SF"] }
-];
+let CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG)); // Default awal
+let T = []; // Akan diisi dari CONFIG.topics
+let allTopicOptions = [];
+let currentUser = null;
 
-var STATISTIK_SUMBER = [
-  { kode: "K22", nama: "KoSSMI 2022 Penyisihan", soal: 25 },
-  { kode: "K22-SF", nama: "KoSSMI 2022 Semifinal", soal: 31 },
-  { kode: "K23", nama: "KoSSMI 2023 Penyisihan", soal: 30 },
-  { kode: "L33", nama: "LMNas 33 UGM 2022", soal: 30 },
-  { kode: "L34", nama: "LMNas 34 UGM 2023", soal: 30 },
-  { kode: "L35", nama: "LMNas 35 UGM 2024", soal: 30 },
-  { kode: "KSR25", nama: "KSR 2025 Regional SMA", soal: 40 },
-  { kode: "OMI", nama: "OMI 2026 Matrik", soal: 6 },
-  { kode: "K-PENY", nama: "KOSSMI Penyisihan Level 4", soal: 30 },
-  { kode: "K-SF", nama: "KOSSMI Semifinal Level 4", soal: 20 },
-  { kode: "KETAKS", nama: "Ketaksamaan OSN", soal: 10 }
-];
+// === [UTILITAS] ===
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 
-function renderStatSummary() {
-  const sorted = STATISTIK_BAB.slice().sort((a,b) => b.jumlah - a.jumlah);
-  const max = sorted[0].jumlah;
+// === [SISTEM AKUN & PENYIMPANAN] ===
+function getStorageKey(username) {
+  return "daigaku_config_" + username.toLowerCase().trim();
+}
 
-  let bars = "";
+function loadConfigForUser(username) {
+  if (!username) return JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+  const saved = localStorage.getItem(getStorageKey(username));
+  if (saved) {
+    try { return JSON.parse(saved); } catch(e) { return JSON.parse(JSON.stringify(DEFAULT_CONFIG)); }
+  }
+  return JSON.parse(JSON.stringify(DEFAULT_CONFIG)); // Default jika user baru
+}
+
+function saveConfigForUser(username) {
+  if (!username) return;
+  localStorage.setItem(getStorageKey(username), JSON.stringify(CONFIG));
+}
+
+// === [FUNGSI UI EDITOR] ===
+function updateUserStatus() {
+  const statusDiv = document.getElementById("userStatus");
+  if (currentUser) {
+    const isCustom = localStorage.getItem(getStorageKey(currentUser)) !== null;
+    if (isCustom) {
+      statusDiv.innerHTML = `Status: Masuk sebagai <b>${esc(currentUser)}</b> <span class="status-box ok">Data Kustom Aktif</span>`;
+    } else {
+      statusDiv.innerHTML = `Status: Masuk sebagai <b>${esc(currentUser)}</b> <span class="status-box warn">Pengguna Baru (Data Default)</span>`;
+    }
+  } else {
+    statusDiv.innerHTML = `Status: <b>Belum Masuk</b> <span class="status-box warn">Mode Tamu (Data Default)</span>`;
+  }
+}
+
+function initConfigEditor() {
+  document.getElementById("cfgUser").value = currentUser || "";
+  
+  document.getElementById("cfgTopics").value = CONFIG.topics.join(", ");
+  document.getElementById("cfgRef").value = CONFIG.referensi;
+  document.getElementById("cfgStats").value = JSON.stringify(CONFIG.statistik, null, 2);
+  
+  renderConfigPreview();
+  updateUserStatus();
+}
+
+function renderConfigPreview() {
+  document.getElementById("jsonPreview").textContent = JSON.stringify(CONFIG, null, 2);
+}
+
+// Event: Login / Ganti User
+document.getElementById("btnSaveUser").onclick = function() {
+  const u = document.getElementById("cfgUser").value.trim();
+  if (!u) {
+    alert("Username tidak boleh kosong!");
+    return;
+  }
+  
+  currentUser = u;
+  localStorage.setItem("daigaku_last_user", currentUser); // Simpan agar auto-login next time
+  
+  // Tarik data berdasarkan nama
+  CONFIG = loadConfigForUser(currentUser);
+  T = CONFIG.topics;
+  
+  alert("Berhasil masuk sebagai: " + currentUser);
+  initConfigEditor();
+  refreshAppFromConfig();
+};
+
+// Event: Terapkan Perubahan
+document.getElementById("btnApplyConfig").onclick = function() {
+  if (!currentUser) {
+    alert("Silakan isi Username dan klik 'Masuk' terlebih dahulu sebelum menyimpan data.");
+    return;
+  }
+
+  try {
+    const topicsStr = document.getElementById("cfgTopics").value;
+    const refStr = document.getElementById("cfgRef").value;
+    const statsStr = document.getElementById("cfgStats").value;
+
+    CONFIG.topics = topicsStr.split(",").map(s => s.trim()).filter(s => s);
+    CONFIG.referensi = refStr;
+    CONFIG.statistik = JSON.parse(statsStr);
+
+    T = CONFIG.topics; 
+    saveConfigForUser(currentUser);
+    
+    alert("Data berhasil disimpan untuk akun: " + currentUser);
+    renderConfigPreview();
+    updateUserStatus();
+    refreshAppFromConfig();
+  } catch (e) {
+    alert("Gagal menyimpan: Pastikan format statistik adalah JSON yang valid.");
+  }
+};
+
+// Event: Reset Akun Ini
+document.getElementById("btnResetConfig").onclick = function() {
+  if (!currentUser) {
+    alert("Anda belum masuk.");
+    return;
+  }
+  
+  if(confirm(`Hapus semua data kustom untuk akun "${currentUser}" dan kembalikan ke default?`)) {
+    localStorage.removeItem(getStorageKey(currentUser));
+    CONFIG = loadConfigForUser(currentUser); // Akan load default
+    T = CONFIG.topics;
+    
+    initConfigEditor();
+    refreshAppFromConfig();
+    alert("Data akun telah di-reset ke default.");
+  }
+};
+
+// === [FUNGSI REFRESH UI] ===
+function refreshAppFromConfig() {
+  allTopicOptions = [];
+  buildTopicOptions();
+
+  const statBars = document.getElementById("statBars");
+  const statTable = document.getElementById("statTable");
+  statBars.innerHTML = "";
+  statTable.innerHTML = "";
+  
+  const sorted = CONFIG.statistik.slice().sort((a,b) => b.jumlah - a.jumlah);
+  const max = sorted[0] ? sorted[0].jumlah : 1;
+  
+  let barsHtml = "";
   sorted.slice(0, 10).forEach(function(b, i) {
     const pct = Math.round(100 * b.jumlah / max);
-    bars += `
+    barsHtml += `
       <div class="bar-row">
         <div class="bar-label">${i+1}. ${esc(b.topik)}</div>
         <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
@@ -441,417 +352,99 @@ function renderStatSummary() {
       </div>
     `;
   });
-  document.getElementById("statBars").innerHTML = bars;
+  statBars.innerHTML = barsHtml || "<p>Belum ada data.</p>";
 
-  const top3 = sorted.slice(0, 3);
-  document.getElementById("statRecommend").innerHTML = `
-    <p style="margin:0 0 4px 0;"><b>🎯 Rekomendasi fokus belajar:</b></p>
-    <ol>
-      <li><b>${esc(top3[0].topik)}</b> (${top3[0].jumlah} soal) — paling sering muncul, wajib dikuasai dulu.</li>
-      <li><b>${esc(top3[1].topik)}</b> (${top3[1].jumlah} soal) — prioritas kedua, sering dipadukan dengan topik lain.</li>
-      <li><b>${esc(top3[2].topik)}</b> (${top3[2].jumlah} soal) — prioritas ketiga, biasanya muncul di soal level menengah–tinggi.</li>
-    </ol>
-    <p class="sub" style="margin:6px 0 0 0;">Catatan: topik di atas adalah hasil hitung manual dari 10 file. Karena satu soal bisa menyentuh lebih dari satu topik, totalnya melebihi jumlah soal mentah.</p>
-  `;
-
-  let table = `<table><thead><tr><th>No</th><th>Topik</th><th class="num">Jumlah</th><th>Sumber File</th></tr></thead><tbody>`;
+  let tableHtml = `<table><thead><tr><th>No</th><th>Topik</th><th class="num">Jumlah</th></tr></thead><tbody>`;
   sorted.forEach(function(b, i) {
-    table += `<tr>
-      <td>${i+1}</td>
-      <td>${esc(b.topik)}</td>
-      <td class="num">${b.jumlah}</td>
-      <td>${b.sumber.map(function(s){return '<span class="source-badge">'+esc(s)+'</span>';}).join(' ')}</td>
-    </tr>`;
+    tableHtml += `<tr><td>${i+1}</td><td>${esc(b.topik)}</td><td class="num">${b.jumlah}</td></tr>`;
   });
-  table += `</tbody></table>`;
-  document.getElementById("statTable").innerHTML = table;
-
-  let sources = "";
-  STATISTIK_SUMBER.forEach(function(s) {
-    sources += `<span class="source-badge"><b>${esc(s.kode)}</b> · ${esc(s.nama)} (${s.soal} soal)</span>`;
-  });
-  document.getElementById("statSources").innerHTML = sources;
+  tableHtml += `</tbody></table>`;
+  statTable.innerHTML = tableHtml;
 }
 
-/* ============================================================
-   [JS STATE & UTILITAS]
-   ============================================================ */
-var HUE=[170,265,25,330,60,0,200,120,300,350];
-var KEY="rencana48-v5",st={start:"",tD:5,tM:60,w:{},rm:{},log:[],notes:[]};
-try{var o=JSON.parse(localStorage.getItem(KEY)||"{}");for(var k in o)st[k]=o[k];}catch(e){}
-function sv(){try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}}
-function iso(d){return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
-function pd(s){return new Date(s+"T00:00:00");}
-function ad(d,n){var x=new Date(d.getTime());x.setDate(x.getDate()+n);return x;}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
-function fmt(d){return d.toLocaleDateString("id-ID",{day:"numeric",month:"short"});}
-var now=new Date(),today=iso(now);
-function monOf(d){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-((x.getDay()+6)%7));return x;}
-if(!st.start){var n=monOf(now);if(now.getDay()!==1)n=ad(n,7);st.start=iso(n);}
-
-/* ============================================================
-   [JS FUNGSI PARETO & DROPDOWN]
-   ============================================================ */
-function pareto(){var h="";R.forEach(function(r,i){var on=!!st.rm["r"+i];h+='<div class="wk'+(on?' done':'')+'"><input type="checkbox" data-rm="r'+i+'"'+(on?' checked':'')+' aria-label="Target tercapai"><div><div class="t"><b>'+r[0]+'</b> <span class="d">'+r[1]+'</span></div><div>'+r[2]+'</div><div class="d">Dipakai untuk: '+r[3]+'</div><div class="r">Tercapai jika: '+r[4]+'</div></div></div>';});var el=document.getElementById("pareto");el.innerHTML=h;el.querySelectorAll("[data-rm]").forEach(function(c){c.onchange=function(){if(c.checked)st.rm[c.dataset.rm]=1;else delete st.rm[c.dataset.rm];sv();pareto();};});}
-function opts(id){var h="";T.forEach(function(m,i){h+='<option value="'+i+'">'+m+'</option>';});document.getElementById(id).innerHTML=h;}
-
-function buildTopicOptions(){
+// === [DROPDOWN & SEARCH] ===
+function buildTopicOptions(searchQuery = "") {
   var el = document.getElementById("genTopic");
-  var h = '<option value="all">🌟 Semua Bab (campur)</option>';
-  h += '<optgroup label="Topik Besar">';
-  T.forEach(function(t,i){ h += '<option value="big:'+i+'">'+esc(t)+'</option>'; });
-  h += '</optgroup>';
-  var subs = [];
-  M.forEach(function(m){
-    m[2].forEach(function(w){
-      var judul = w.split("|")[0];
-      if (subs.indexOf(judul) === -1) subs.push(judul);
-    });
+  
+  if (allTopicOptions.length === 0) {
+    allTopicOptions.push({ value: "all", text: "🌟 Semua Bab (campur)", group: "" });
+    T.forEach(function(t,i){ allTopicOptions.push({ value: "big:"+i, text: t, group: "Topik Besar" }); });
+    
+    var subs = ["Eksponen dan bentuk akar", "Persamaan kuadrat", "Trigonometri dasar", "Vektor", "Peluang"];
+    subs.forEach(function(s){ allTopicOptions.push({ value: "sub:"+s, text: s, group: "Sub-Bab Kecil" }); });
+  }
+
+  var q = searchQuery.toLowerCase().trim();
+  var filtered = allTopicOptions.filter(function(o) { return o.text.toLowerCase().includes(q); });
+
+  var h = "";
+  var currentGroup = "";
+  filtered.forEach(function(o) {
+    if (o.group !== currentGroup) {
+      if (currentGroup !== "") h += '</optgroup>';
+      if (o.group !== "") h += '<optgroup label="'+o.group+'">';
+      currentGroup = o.group;
+    }
+    h += '<option value="'+esc(o.value)+'">'+esc(o.text)+'</option>';
   });
-  h += '<optgroup label="Sub-Bab Kecil">';
-  subs.forEach(function(s){ h += '<option value="sub:'+esc(s)+'">'+esc(s)+'</option>'; });
-  h += '</optgroup>';
-  el.innerHTML = h;
+  if (currentGroup !== "") h += '</optgroup>';
+  
+  el.innerHTML = h || '<option value="">-- Tidak ditemukan --</option>';
 }
 
-/* ============================================================
-   [JS FUNGSI RENDER UTAMA]
-   ============================================================ */
-function render(){
-  var S=pd(st.start),cw=Math.floor((now-S)/604800000)+1,h="",n=0,done=0,all=0;
-  M.forEach(function(m,mi){
-    var ws=m[2].slice();
-    if(m[3])ws.push(m[3]+"|Ulang soal salah dan catat pola kesalahan");
-    var f=n+1,b="";
-    b += '<input type="search" class="search-box" placeholder="Cari materi atau soal di bab ini..." aria-label="Cari materi">';
-    ws.forEach(function(w){
-      n++;all++;
-      var p=w.split("|"),id="w"+n,on=!!st.w[id];
-      if(on)done++;
-      var d0=ad(S,7*(n-1));
-      var searchText = (p[0] + " " + p[1]).toLowerCase();
-      b+='<div class="wk'+(on?' done':'')+(n===cw?' now':'')+'" data-search="'+esc(searchText)+'"><input type="checkbox" data-id="'+id+'"'+(on?' checked':'')+' aria-label="Selesai minggu '+n+'"><div><div class="t"><b>Minggu '+n+':</b> '+p[0]+'</div><div class="d">'+fmt(d0)+' sampai '+fmt(ad(d0,6))+'</div><div class="r">Cek dan latihan: '+p[1]+'</div></div></div>';
-    });
-    h+='<details class="mod"'+((cw>=f&&cw<=n)||(cw<1&&mi===0)?' open':'')+'><summary>'+m[0]+'<small>Minggu '+f+' sampai '+n+' · jalur '+T[m[1]]+'</small></summary><div class="in">'+b+'</div></details>';
-  });
-  document.getElementById("mods").innerHTML=h;
-  document.querySelectorAll("#mods details.mod").forEach(function(details) {
-    var searchInput = details.querySelector(".search-box");
-    var items = details.querySelectorAll(".wk");
-    searchInput.addEventListener("input", function(e) {
-      var keyword = e.target.value.toLowerCase().trim();
-      items.forEach(function(item) {
-        var text = item.getAttribute("data-search") || item.textContent.toLowerCase();
-        if (keyword === "" || text.includes(keyword)) { item.style.display = "flex"; }
-        else { item.style.display = "none"; }
-      });
-    });
-    details.querySelectorAll("input[type='checkbox']").forEach(function(c) {
-      c.onchange = function() {
-        if (c.checked) st.w[c.dataset.id] = 1;
-        else delete st.w[c.dataset.id];
-        sv(); render();
-      };
-    });
-  });
-  var p=Math.round(100*done/all);document.getElementById("bar").style.width=p+"%";
-  document.getElementById("pct").textContent=done+" dari "+all+" minggu selesai ("+p+"%)"+(cw<1?". Minggu 1 dimulai "+fmt(S)+".":cw>all?". Rencana selesai.":". Sekarang minggu ke-"+cw+".");
-  stats();notes();
-}
+document.getElementById("genTopicSearch").addEventListener("input", function(e) {
+  buildTopicOptions(e.target.value);
+});
 
-/* ============================================================
-   [JS FUNGSI STATISTIK BELAJAR]
-   ============================================================ */
-function stats(){
-  var dm=dayMap(),tot=0,days=0,gaps=0,perMod=[0,0,0,0,0,0,0,0,0,0];
-  st.log.forEach(function(l){tot+=l.m;perMod[l.mod]=(perMod[l.mod]||0)+l.m;});
-  var S=pd(st.start),first=S,keys=Object.keys(dm).sort();if(keys.length&&pd(keys[0])<first)first=pd(keys[0]);
-  for(var d=new Date(first);iso(d)<today;d=ad(d,1)){if(d.getDay()!==0&&!dm[iso(d)])gaps++;}
-  days=keys.length;
-  var stk=0,d2=pd(today);if(!dm[today])d2=ad(d2,-1);
-  while(true){if(d2.getDay()===0){d2=ad(d2,-1);continue;}if(dm[iso(d2)]){stk++;d2=ad(d2,-1);}else break;}
-  var mo=monOf(now),wd=0,wm=0;for(var i=0;i<7;i++){var k=iso(ad(mo,i));if(dm[k]){wd++;wm+=dm[k];}}
-  document.getElementById("wkst").innerHTML='Minggu ini: <b>'+wd+' dari '+st.tD+' hari</b> target, '+wm+' menit. '+(wd>=st.tD?'Target hari tercapai.':'Kurang '+(st.tD-wd)+' hari lagi.');
-  document.getElementById("kpi").innerHTML='<div><b>'+(tot/60).toFixed(1)+' jam</b>total belajar</div><div><b>'+days+'</b>hari belajar</div><div><b>'+(days?Math.round(tot/days):0)+' menit</b>rata-rata per hari belajar</div><div><b>'+stk+' hari</b>beruntun (Minggu dilewati)</div><div><b>'+gaps+'</b>hari bolong</div>';
-  var hm="";for(var c=0;c<48;c++)for(var r=0;r<7;r++){var dt=ad(S,7*c+r),k=iso(dt),m=dm[k],cl="";
-    if(k>today)cl="f";else if(m){var q=m/st.tM;cl=q<.5?"l1":q<1?"l2":q<1.5?"l3":"l4";}else if(r<6&&dt>=first)cl="g";else cl="z";
-    if(k===today)cl+=" t";hm+='<i class="'+cl+'" title="'+fmt(dt)+': '+(m||0)+' menit"></i>';}
-  document.getElementById("hm").innerHTML=hm;
-  var mx=st.tM*1.5,bs="",lb="";for(var i=13;i>=0;i--){var dd=ad(now,-i),v=dm[iso(dd)]||0;if(v>mx)mx=v;}
-  for(i=13;i>=0;i--){dd=ad(now,-i);v=dm[iso(dd)]||0;bs+='<div style="height:'+Math.round(100*v/mx)+'%" title="'+fmt(dd)+': '+v+' menit"></div>';lb+='<span>'+dd.getDate()+'</span>';}
-  document.getElementById("bars").innerHTML=bs+'<div class="tl" style="bottom:'+Math.round(100*st.tM/mx)+'%" title="Target"></div>';
-  document.getElementById("blab").innerHTML=lb;
-  var g=[],a=0,lg="";perMod.forEach(function(v,i){if(!v)return;var b=a+100*v/tot;g.push("hsl("+HUE[i]+" 55% 50%) "+a+"% "+b+"%");a=b;lg+='<div><i style="background:hsl('+HUE[i]+' 55% 50%)"></i>'+T[i]+': '+v+' menit ('+Math.round(100*v/tot)+'%)</div>';});
-  document.getElementById("pie").style.background=tot?"conic-gradient("+g.join(",")+")":"var(--line)";
-  document.getElementById("lg").innerHTML=lg||"Belum ada sesi tercatat.";
-  var rc="";st.log.slice(-5).reverse().forEach(function(l){var ix=st.log.indexOf(l);rc+='<div class="nt"><div class="tx" style="flex:1">'+fmt(pd(l.d))+': '+l.m+' menit, '+esc(T[l.mod])+'</div><button data-del="'+ix+'" aria-label="Hapus sesi">Hapus</button></div>';});
-  document.getElementById("rec").innerHTML=rc||'<span class="sub">Belum ada sesi.</span>';
-  document.querySelectorAll("[data-del]").forEach(function(b){b.onclick=function(){st.log.splice(+b.dataset.del,1);sv();render();};});
-}
-
-/* ============================================================
-   [JS FUNGSI CATATAN KESULITAN]
-   ============================================================ */
-function notes(){var oo=document.getElementById("onlyOpen").checked,h="";
-  st.notes.slice().reverse().forEach(function(x){if(oo&&x.ok)return;h+='<div class="nt'+(x.ok?' ok':'')+'"><input type="checkbox" data-ok="'+x.id+'"'+(x.ok?' checked':'')+' aria-label="Sudah paham"><div style="flex:1"><div class="tx">'+esc(x.t)+'</div><small>'+fmt(pd(x.d))+' · '+esc(T[x.mod])+'</small></div><button data-nd="'+x.id+'">Hapus</button></div>';});
-  document.getElementById("notes").innerHTML=h||'<p class="sub">Belum ada catatan.</p>';
-  document.querySelectorAll("[data-ok]").forEach(function(c){c.onchange=function(){st.notes.forEach(function(x){if(x.id==c.dataset.ok)x.ok=c.checked;});sv();notes();};});
-  document.querySelectorAll("[data-nd]").forEach(function(b){b.onclick=function(){st.notes=st.notes.filter(function(x){return x.id!=b.dataset.nd;});sv();notes();};});
-}
-
-/* ============================================================
-   [JS INISIALISASI & EVENT FORM]
-   ============================================================ */
-function $(i){return document.getElementById(i);}
-pareto();opts("lmod");opts("nmod");buildTopicOptions();renderStatSummary();
-$("ld").value=today;$("nd").value=today;$("tD").value=st.tD;$("tM").value=st.tM;$("start").value=st.start;
-$("addL").onclick=function(){var m=parseInt($("lm").value,10);if(!(m>0)||!$("ld").value){$("lm").focus();return;}st.log.push({d:$("ld").value,m:m,mod:+$("lmod").value});st.log.sort(function(a,b){return a.d<b.d?-1:a.d>b.d?1:0;});$("lm").value="";sv();render();};
-$("addN").onclick=function(){var t=$("nt").value.trim();if(!t){$("nt").focus();return;}st.notes.push({id:Date.now(),d:$("nd").value||today,mod:+$("nmod").value,t:t,ok:false});$("nt").value="";sv();notes();};
-$("onlyOpen").onchange=notes;
-$("tD").onchange=function(){st.tD=Math.min(7,Math.max(1,+$("tD").value||5));sv();render();};
-$("tM").onchange=function(){st.tM=Math.max(10,+$("tM").value||60);sv();render();};
-$("start").onchange=function(){if($("start").value){st.start=$("start").value;sv();render();}};
-$("reset").onclick=function(){if(confirm("Hapus semua progres, sesi, dan catatan?")){try{localStorage.removeItem(KEY);}catch(e){}location.reload();}};
-
-/* ============================================================
-   [JS GENERATOR SOAL GEMINI]
-   ============================================================ */
-const GEMINI_KEY_STORAGE = "gemini-api-key";
-const GEMINI_API_URL_1 = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=";
-const GEMINI_API_URL_2 = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=";
-
-const REFERENSI_LANJUT = `
-Contoh soal tingkat tinggi dari berbagai kompetisi:
-
-[KoSSMI 2022 Penyisihan]
-- Diketahui persamaan x + y + z = 12 maka x <= 5, y > 4, dan 0 <= z <= 3. Banyak solusi yang mungkin adalah...
-- Tentukan bilangan bulat positif terbesar n sehingga 2^n habis membagi 10^20 - 2^20.
-- Jumlah 2022 suku pertama suatu deret geometri adalah 2022 dan jumlah 4044 suku pertamanya adalah -2022. Tentukan jumlah 8088 suku pertamanya.
-- Diberikan kubus PQRS.TUVW dengan rusuk 8 cm. Titik A potong PW dan ST, B potong UW dan TV. Jarak Q ke garis AB adalah...
-
-[KoSSMI 2022 Semifinal]
-- Jika angka 1, 2, 3, 4 dipakai sekali untuk membentuk bilangan 4 digit, banyak bilangan habis dibagi 11 adalah...
-- Jumlah semua tripel bilangan riil (x, y, z) yang memenuhi x + y = 12 dan xy = z^2 + 36 adalah...
-- Tiga digit terakhir dari 9^100 - 1 adalah...
-- Dua angka terakhir dari 43^2022 adalah...
-
-[KoSSMI 2023 Penyisihan]
-- Jika a + b = 11 dan ab = 48, nilai a^2 + b^2 adalah...
-- Bentuk sederhana dari (sqrt(10) - sqrt(2))^(1/3) (sqrt(10) + sqrt(2))^(7/3) adalah...
-- Banyaknya solusi bilangan bulat dari 19x + 93y = 4xy adalah...
-- Sisa pembagian 10^43 dengan 126 adalah...
-
-[LMNas 33 UGM 2022]
-- Diketahui bilangan real a dan b solusi berbeda dari x^2 + x - 1 = 0. Nilai a^3 + b^3 + a^2 + b^2 - a^5 - b^5 - a^4 - b^4 adalah...
-- Diberikan segitiga ABC dengan AB = 10. Titik D, E, F titik tengah AB, BC, AC. Diketahui CD tegak lurus AE dan CD = 9. Nilai (BF + BC)^2 = a + b sqrt(c). Nilai a + b + c adalah...
-- Dua digit terakhir dari 2022^2022 * S_2022 (barisan Fibonacci-like) adalah...
-
-[LMNas 34 UGM 2023]
-- Diberikan segitiga ABC dengan AB = 13, BC = 14, CA = 15. Garis singgung lingkaran dalam memotong AB dan AC di X dan Y sehingga XY = 5. Nilai 7(AX - AY)^2 adalah...
-- Diberikan himpunan G = {(a,b,c,d) : a,b,c,d in {0,...,10} dan 11 tidak membagi ad - bc}. Banyak anggota G adalah...
-- Diberikan segitiga ABC dengan AB = 12, BC = 5, AC = 13. m bilangan riil terbesar sehingga AP + BP + CP >= m untuk sebarang titik P. Jika m^2 = a + b sqrt(c), nilai a - b + c adalah...
-
-[LMNas 35 UGM 2024]
-- Diberikan polinom P(x) = x^2 - 4x + 6. Q(x) = P(P(x)) - x. Jumlahan semua akar real Q adalah...
-- Bilangan n asli memenuhi FPB(n, 2024) * KPK(n, 2024) = 99176. Nilai n terkecil adalah...
-- Diberikan 2024 bola dengan 46 warna berbeda, 44 bola per warna. n terkecil sehingga saat bola diletakkan melingkar selalu ada n bola bersebelahan dengan setidaknya 35 warna berbeda. Nilai n adalah...
-
-[KSR 2025 Regional SMA]
-- Penyelesaian sqrt(2x+1) >= 2x - 2 adalah a <= x <= b. Nilai b - a adalah...
-- Banyaknya pasangan bilangan bulat (x,y) dengan -2025 < x,y < 2025 yang memenuhi 8x^2 + 10xy - 3y^2 = 0 adalah...
-- Hasil dari [sqrt(1)] + [sqrt(2)] + ... + [sqrt(2025)] adalah...
-- Diketahui tan theta = 5. Nilai (3 sin theta + cos theta)/(sin theta - 3 cos theta) adalah...
-
-[OMI 2026 Matrik]
-- Jika A = [[x,2],[1,1]] matriks yang mempunyai invers dan det(B) = 2, hasil kali semua nilai x sehingga det(A) = 4 det((AB)^-1) adalah...
-- Jika A = [[1,1],[-3,2]] dan B = [[-1,1],[-2,1]], jumlah kuadrat semua nilai t yang memenuhi det(A + 2tB)^-1 = 10 adalah...
-- Suatu fungsi f: Z -> Q dengan f(m+1) = (1 + f(m))/(1 - f(m)). Jika f(2) = n, nilai f(2021) adalah...
-
-[KOSSMI Penyisihan Level 4]
-- Manakah ekspresi yang sama dengan cos^3 theta - sin^3 theta?
-- Nilai x yang memenuhi (x+1)(x^2+1)(x^4+1)(x^8+1)(x^16+1) = 27x^32 - 27 adalah...
-- Nilai terbesar f(x) = sqrt(10x - x^2) - sqrt(16x - x^2 - 60) adalah...
-
-[KOSSMI Semifinal Level 4]
-- Berapa sisa 3^2021 + 7^2021 dibagi 100?
-- Banyak pasangan bilangan bulat positif m < n <= 50 yang memenuhi (m+n)/2 - sqrt(mn) = 1 adalah...
-- Misalkan x, y memenuhi x + xy + y = 2 + 3 sqrt(2) dan x^2 + y^2 = 6. Nilai |x + y + 1| adalah...
-
-[Ketaksamaan OSN]
-- Ketaksamaan QM >= AM >= GM >= HM untuk bilangan real nonnegatif.
-- Ketaksamaan Cauchy-Schwarz: (sum a_k b_k)^2 <= (sum a_k^2)(sum b_k^2).
-- Ketaksamaan CS bentuk pecahan: sum t_i^2/w_i >= (sum t_i)^2 / (sum w_i) untuk w_i > 0.
-- Nilai minimum x + 50y + 625/(xy^2) tercapai saat x = a, y = b. Tentukan a + b + ab.
-`;
-
-function updateApiKeyUI() {
-  const key = localStorage.getItem(GEMINI_KEY_STORAGE);
-  const warning = document.getElementById("apiKeyWarning");
-  if (key) { warning.classList.remove("active"); document.getElementById("geminiApiKey").value = key; }
-  else { warning.classList.add("active"); }
-}
-
-document.getElementById("saveApiKey").onclick = function() {
-  const key = document.getElementById("geminiApiKey").value.trim();
-  if (key) { localStorage.setItem(GEMINI_KEY_STORAGE, key); alert("API Key berhasil disimpan!"); updateApiKeyUI(); }
-  else { alert("API Key tidak boleh kosong."); }
-};
-
-function showPopup(isCorrect) {
-  const popup = document.getElementById("popupHiasan");
-  const text = document.getElementById("popupText");
-  if (isCorrect) { text.textContent = "SELAMAT!"; text.className = "ok"; }
-  else { text.textContent = "SALAHHH!"; text.className = "err"; }
-  popup.classList.add("show");
-  setTimeout(() => { popup.classList.remove("show"); }, 2000);
-}
-
+// === [SIMULASI AI] ===
 document.getElementById("genBtn").onclick = async function() {
-  const apiKey = localStorage.getItem(GEMINI_KEY_STORAGE);
-  if (!apiKey) { alert("Silakan masukkan API Key Gemini terlebih dahulu."); document.getElementById("geminiApiKey").focus(); return; }
-
-  const rawTopic = document.getElementById("genTopic").value;
-  const difficulty = parseInt(document.getElementById("genDifficulty").value);
-  const count = Math.max(1, Math.min(10, parseInt(document.getElementById("genCount").value) || 1));
-  const resultDiv = document.getElementById("genResult");
-  const loading = document.getElementById("genLoading");
   const btn = this;
+  const rawTopic = document.getElementById("genTopic").value;
+  const count = parseInt(document.getElementById("genCount").value) || 1;
+  const resultDiv = document.getElementById("genResult");
+  
+  if (!rawTopic) return alert("Pilih bab terlebih dahulu!");
+  
+  btn.disabled = true;
+  btn.textContent = "Memuat...";
+  resultDiv.innerHTML = `<p>⏳ Sedang membuat ${count} soal... (Menggunakan Referensi: "${CONFIG.referensi.substring(0, 30)}...")</p>`;
 
-  if (difficulty < 1 || difficulty > 5) { alert("Tingkat kesulitan harus antara 1 sampai 5."); return; }
-
-  let topicName = "";
-  if (rawTopic === "all") topicName = "Semua Bab (campur T1-T4, aljabar, geometri, trigonometri, data, pra-kalkulus)";
-  else if (rawTopic.indexOf("big:") === 0) topicName = T[parseInt(rawTopic.split(":")[1])];
-  else if (rawTopic.indexOf("sub:") === 0) topicName = rawTopic.substring(4);
-
-  resultDiv.innerHTML = ""; loading.classList.add("active"); btn.disabled = true;
-
-  let refText = "";
-  if (difficulty >= 4) refText = `\n\nGunakan gaya dan tingkat kesulitan yang mirip dengan contoh soal kompetisi berikut:\n${REFERENSI_LANJUT}`;
-
-  const prompt = `Kamu adalah guru matematika dan fisika yang ahli. Buatkan ${count} soal pilihan ganda (A-E) baru dengan spesifikasi berikut:
-- Bab/Topik: ${topicName}
-- Tingkat Kesulitan: ${difficulty} dari 5 (1 = sangat mudah, 5 = sangat sulit/olimpiade)${refText}
-
-Format output HARUS berupa JSON valid berupa ARRAY berisi ${count} objek, dengan setiap objek berstruktur:
-{
-  "soal": "Teks soal lengkap",
-  "opsi": { "A": "...", "B": "...", "C": "...", "D": "...", "E": "..." },
-  "jawaban_benar": "A" (atau B/C/D/E),
-  "cara_menjawab": "Langkah demi langkah penyelesaian",
-  "rumus": "Nama rumus atau teorema, pisahkan koma jika lebih dari satu"
-}
-
-Pastikan soal bervariasi dan relevan dengan topik yang diminta. Jangan sertakan teks lain selain JSON array murni.`;
-
-  async function fetchGemini(url, prompt) {
-    const response = await fetch(url + apiKey, {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.7, maxOutputTokens: 8192 } })
-    });
-    if (!response.ok) {
-      const errData = await response.json();
-      throw new Error(errData.error?.message || "Gagal memanggil API");
-    }
-    return await response.json();
-  }
-
-  try {
-    let data;
-    try {
-      data = await fetchGemini(GEMINI_API_URL_1, prompt);
-    } catch (e1) {
-      console.warn("Model utama gagal, mencoba fallback...", e1);
-      data = await fetchGemini(GEMINI_API_URL_2, prompt);
-    }
-
-    let textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-    
-    const firstBracket = textResponse.indexOf('[');
-    const lastBracket = textResponse.lastIndexOf(']');
-    
-    if (firstBracket !== -1 && lastBracket !== -1 && lastBracket > firstBracket) {
-      textResponse = textResponse.substring(firstBracket, lastBracket + 1);
-    } else {
-      const firstBrace = textResponse.indexOf('{');
-      const lastBrace = textResponse.lastIndexOf('}');
-      if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-        textResponse = '[' + textResponse.substring(firstBrace, lastBrace + 1) + ']';
-      }
-    }
-
-    let parsed;
-    try { 
-      parsed = JSON.parse(textResponse); 
-      if (!Array.isArray(parsed)) parsed = [parsed]; 
-    }
-    catch (e) { 
-      resultDiv.innerHTML = `<div class="gen-soal"><p>Gagal memparsing JSON. Respons mentah:</p><pre style="white-space:pre-wrap;word-break:break-all;">${esc(textResponse)}</pre></div>`; 
-      return; 
-    }
-
-    let html = `<div class="gen-soal" style="background:transparent;border-left:none;padding:0;">
-      <p><b>📚 ${esc(topicName)}</b> <span class="gen-count-badge">${parsed.length} soal · Level ${difficulty}</span></p>
-    </div>`;
-
-    parsed.forEach(function(q, i) {
-      let optionsHtml = "";
-      for (const [key, val] of Object.entries(q.opsi)) {
-        // JANGAN gunakan esc() di sini agar MathJax bisa membaca format LaTeX (contoh: \sqrt)
-        optionsHtml += `<button class="gen-opt-btn" data-opt="${key}" data-qid="${i}">${key}. ${val}</button>`;
-      }
+  setTimeout(() => {
+    let html = "";
+    for(let i=0; i<count; i++) {
       html += `
-        <div class="gen-soal" data-qid="${i}">
+        <div class="gen-soal">
           <h3>Soal ${i+1}</h3>
-          <p>${q.soal.replace(/\n/g, "<br>")}</p>
-          <div class="gen-options">${optionsHtml}</div>
-          <div class="answer" id="ans-${i}">
-            <p><span class="label">✅ Kunci Jawaban:</span> ${q.jawaban_benar}</p>
-            <p><span class="label">📖 Cara Menjawab:</span><br>${q.cara_menjawab.replace(/\n/g, "<br>")}</p>
-            <p><span class="label">🧮 Rumus Digunakan:</span> ${q.rumus}</p>
+          <p>Ini adalah soal simulasi untuk topik <b>${rawTopic}</b> berdasarkan referensi kustom yang Anda atur.</p>
+          <div class="gen-options">
+            <button class="gen-opt-btn">A. Pilihan A</button>
+            <button class="gen-opt-btn">B. Pilihan B</button>
           </div>
-        </div>`;
-    });
-    resultDiv.innerHTML = html;
-
-    // Render rumus matematika menggunakan MathJax
-    if (window.MathJax) {
-      MathJax.typesetPromise([resultDiv]).catch(function (err) {
-        console.log('MathJax error: ', err.message);
-      });
+        </div>
+      `;
     }
-
-    parsed.forEach(function(q, i) {
-      const container = resultDiv.querySelector('.gen-soal[data-qid="'+i+'"]');
-      const optButtons = container.querySelectorAll(".gen-opt-btn");
-      const answerDiv = document.getElementById("ans-"+i);
-      let isCorrect = false;
-      optButtons.forEach(btn => {
-        btn.addEventListener("click", function() {
-          if (isCorrect) return;
-          const selected = this.dataset.opt;
-          if (selected === q.jawaban_benar) {
-            this.classList.add("correct"); isCorrect = true; answerDiv.classList.add("show");
-            showPopup(true); optButtons.forEach(b => b.disabled = true);
-          } else {
-            this.classList.add("wrong"); this.disabled = true; showPopup(false);
-          }
-        });
-      });
-    });
-  } catch (error) {
-    resultDiv.innerHTML = `<div class="gen-soal" style="border-left-color: var(--warn);"><p>❌ Error: ${esc(error.message)}</p></div>`;
-  } finally {
-    loading.classList.remove("active"); btn.disabled = false;
-  }
+    resultDiv.innerHTML = html;
+    btn.disabled = false;
+    btn.textContent = "Buat Soal";
+  }, 1000);
 };
 
-updateApiKeyUI();
-
-/* ============================================================
-   [JS RENDER AWAL]
-   ============================================================ */
-render();
+// === [INISIALISASI SAAT HALAMAN DIMUAT] ===
+window.onload = function() {
+  // Cek jika ada user yang terakhir login
+  const lastUser = localStorage.getItem("daigaku_last_user");
+  if (lastUser) {
+    currentUser = lastUser;
+    CONFIG = loadConfigForUser(currentUser);
+  } else {
+    currentUser = null;
+    CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+  }
+  T = CONFIG.topics;
+  
+  initConfigEditor(); 
+  refreshAppFromConfig(); 
+};
 </script>
 </body>
 </html>
