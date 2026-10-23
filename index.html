@@ -58,6 +58,57 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .nt small{color:var(--mute)}
 footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 
+/* CSS STATISTIK BAB (BARS) */
+.stat-summary .bar-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 1.8fr) 3fr 50px;
+  gap: 10px;
+  align-items: center;
+  margin: 6px 0;
+  font-size: 0.9rem;
+}
+.stat-summary .bar-label { font-weight: bold; }
+.stat-summary .bar-track {
+  height: 18px; background: var(--line); border-radius: 4px; overflow: hidden;
+  position: relative;
+}
+.stat-summary .bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--acc), var(--acc2));
+  border-radius: 4px;
+  transition: width 0.6s ease-out;
+}
+.stat-summary .bar-count {
+  text-align: right; font-weight: bold; color: var(--acc);
+}
+.stat-summary .recommend {
+  background: var(--acc2);
+  border-left: 4px solid var(--acc);
+  padding: 10px 14px; border-radius: 6px;
+  margin-top: 12px;
+}
+.stat-summary .recommend ol { margin: 6px 0 0 0; padding-left: 22px; }
+.stat-summary .recommend li { margin: 4px 0; }
+.stat-summary table {
+  width: 100%; border-collapse: collapse; margin-top: 10px;
+  font-size: 0.88rem;
+}
+.stat-summary th, .stat-summary td {
+  border-bottom: 1px solid var(--line);
+  padding: 6px 8px; text-align: left;
+}
+.stat-summary th { background: var(--acc2); }
+.stat-summary td.num { text-align: right; font-weight: bold; }
+
+/* CSS ROADMAP (MINGGUAN) */
+details.mod{background:var(--card);border:1px solid var(--line);border-radius:8px;margin:12px 0;}
+details.mod>summary{cursor:pointer;padding:12px 16px;font-weight:bold;list-style:none;}
+details.mod>summary small{display:block;font-weight:normal;color:var(--mute);margin-top:4px;}
+details.mod .in{padding:0 16px 12px;}
+.wk{display:flex;gap:10px;align-items:flex-start;padding:8px 6px;border-top:1px solid var(--line);}
+.wk .t { font-size: 0.95rem; }
+.wk .d { color:var(--mute); font-size:.85rem; }
+
 /* UI EDITOR INTERAKTIF */
 .editor-panel { background: var(--bg); border: 2px solid var(--acc); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 .editor-tabs { display: flex; gap: 4px; margin-bottom: 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; overflow-x: auto; }
@@ -77,6 +128,29 @@ footer{color:var(--mute);font-size:.85rem;margin-top:24px}
 .status-box { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; }
 .status-box.ok { background: var(--ok); color: white; }
 .status-box.warn { background: var(--warn); color: white; }
+
+/* CSS POPUP HIASAN 1 */
+#popupHiasan {position: fixed; top: 50%; left: 50%;transform: translate(-50%, -50%) scale(0.8);z-index: 9999; background: rgba(0,0,0,0.85);padding: 20px; border-radius: 16px; text-align: center;opacity: 0; pointer-events: none;transition: opacity 0.3s, transform 0.3s;box-shadow: 0 10px 40px rgba(0,0,0,0.5);border: 3px solid var(--acc);}
+#popupHiasan.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+#popupHiasan img { width: 200px; border-radius: 8px; margin-bottom: 10px; }
+#popupHiasan h1 { margin: 0; font-size: 2.5rem; text-transform: uppercase; letter-spacing: 2px; }
+#popupHiasan h1.ok { color: var(--ok); text-shadow: 0 0 20px var(--ok); }
+#popupHiasan h1.err { color: var(--err); text-shadow: 0 0 20px var(--err); }
+
+/* CSS GENERATOR SOAL */
+#genResult { margin-top: 16px; }
+.gen-soal {background: var(--acc2);border-left: 4px solid var(--acc);padding: 12px 16px;border-radius: 6px;margin-bottom: 12px;animation: fadeInUp 0.4s ease-out;word-break: break-word;overflow-wrap: anywhere;}
+.gen-soal h3 { margin: 0 0 8px 0; font-size: 1.1rem; }
+.gen-soal p { margin: 6px 0; line-height: 1.6; }
+.gen-soal .label { font-weight: bold; color: var(--acc); }
+.gen-soal .answer { background: var(--bg); padding: 8px; border-radius: 4px; border: 1px dashed var(--line); margin-top: 8px; display: none; }
+.gen-soal .answer.show { display: block; animation: fadeInUp 0.4s ease-out; }
+.gen-options { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+.gen-opt-btn {text-align: left; padding: 8px 12px; background: var(--bg);border: 1px solid var(--line); border-radius: 6px; cursor: pointer;transition: background 0.2s, border-color 0.2s;word-break: break-word;}
+.gen-opt-btn:hover { background: var(--acc2); }
+.gen-opt-btn.correct { background: var(--ok); color: #fff; border-color: var(--ok); }
+.gen-opt-btn.wrong { background: var(--err); color: #fff; border-color: var(--err); }
+.gen-opt-btn:disabled { cursor: default; opacity: 0.8; }
 </style>
 </head>
 <body>
@@ -285,7 +359,6 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
   };
 });
 
-// Update nomor baris JSON
 function updateLineNumbers(textareaId, linesId) {
   const ta = document.getElementById(textareaId);
   const lines = document.getElementById(linesId);
@@ -294,7 +367,6 @@ function updateLineNumbers(textareaId, linesId) {
   lines.scrollTop = ta.scrollTop;
 }
 
-// Validasi JSON real-time
 function validateJson(textareaId, statusId) {
   const ta = document.getElementById(textareaId);
   const status = document.getElementById(statusId);
@@ -310,7 +382,6 @@ function validateJson(textareaId, statusId) {
   }
 }
 
-// Setup event listener untuk textarea JSON
 ['cfgStats', 'cfgRoadmap'].forEach(id => {
   const el = document.getElementById(id);
   el.addEventListener('input', function() {
@@ -322,7 +393,6 @@ function validateJson(textareaId, statusId) {
   });
 });
 
-// === [FUNGSI UI EDITOR] ===
 function updateUserStatus() {
   const statusDiv = document.getElementById("userStatus");
   if (currentUser) {
@@ -389,7 +459,8 @@ function refreshAppFromConfig() {
     CONFIG.roadmap.forEach((m, mi) => {
       let itemsHtml = "";
       m.items.forEach((item, ii) => {
-        itemsHtml += `<div class="wk" style="padding:8px 6px; border-top:1px solid var(--line);"><div><div class="t"><b>Minggu ${ii+1}:</b> ${esc(item)}</div></div></div>`;
+        // Di sini diterapkan class .wk dan .t agar rapi
+        itemsHtml += `<div class="wk"><div><div class="t"><b>Minggu ${ii+1}:</b> ${esc(item)}</div></div></div>`;
       });
       roadHtml += `
         <details class="mod" ${mi === 0 ? 'open' : ''}>
@@ -532,7 +603,6 @@ document.getElementById("btnResetConfig").onclick = function() {
   }
 };
 
-// Setup Dropdown Bab & Search
 function buildTopicOptions(searchQuery = "") {
   var el = document.getElementById("genTopic");
   
@@ -563,7 +633,6 @@ document.getElementById("genTopicSearch").addEventListener("input", function(e) 
   buildTopicOptions(e.target.value);
 });
 
-// === [INISIALISASI] ===
 window.onload = function() {
   const lastUser = localStorage.getItem("daigaku_last_user");
   if (lastUser) {
